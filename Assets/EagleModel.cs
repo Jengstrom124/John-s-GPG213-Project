@@ -34,7 +34,23 @@ public class EagleModel : MonoBehaviour
         }
     }
 
-    //TODO: Change these into States for a state machine
+    
+    /*
+    RaycastHit CheckWhatsInFrontOfMe()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, 2f);
+
+        Physics.SphereCast(ray, 0.5f, out hit);
+
+        return hit;
+    }
+    */
+    
+
+    //Different States
     public void FlyAway()
     {
         stateManager.ChangeState(FleeState);
