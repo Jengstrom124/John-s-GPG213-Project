@@ -15,9 +15,9 @@ public class EagleModel : MonoBehaviour
 
     public StateManager stateManager;
 
-    public StateBase FlyingState;
-    public StateBase SwoopState;
-    public StateBase FleeState;
+    public StateBase flyingState;
+    public StateBase swoopState;
+    public StateBase fleeState;
 
     public bool CheckMyRadius(GameObject objectOfInterest)
     {
@@ -53,16 +53,16 @@ public class EagleModel : MonoBehaviour
     //Different States
     public void FlyAway()
     {
-        stateManager.ChangeState(FleeState);
+        stateManager.ChangeState(fleeState);
     }
 
     public void SwoopChicken()
     {
-        stateManager.ChangeState(SwoopState);
+        stateManager.ChangeState(swoopState);
     }
 
     public void Fly()
     {
-        stateManager.ChangeState(FlyingState);
+        stateManager.ChangeState(flyingState);
     }
 }
