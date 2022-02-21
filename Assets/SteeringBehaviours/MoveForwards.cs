@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoveForwards : MonoBehaviour
 {
     private Rigidbody rb;
-    public float speed = 0.5f;
+    public float speed = 10f;
+    public float maxSpeed = 15f;
     
     // Start is called before the first frame update
     void Start()

@@ -5,8 +5,16 @@ using UnityEngine;
 public class Wander : MonoBehaviour
 {
     private Rigidbody rb;
-    
-    public float xScale = 1.0f;
+
+    //public float xScale = 25f;
+    [Header("Adjust variance of the perlin value")]
+    [Tooltip("Minus perlinScale from the perlin value to allow it to reach both above & below 0")]
+    public float perlinScale;
+
+    [Header("Adjust the turn scale")]
+    public float wanderScale = 2f;
+
+    [Header("Reference Only:")]
     public float perlin;
     
     // Start is called before the first frame update
@@ -15,16 +23,10 @@ public class Wander : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
     
-    
-
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        perlin = Mathf.PerlinNoise(Time.time * xScale, 0.0f);
-        //Vector3 pos = transform.position;
-        //pos.y = height;
-        //transform.position = pos;
-        
-        rb.AddRelativeTorque(0,perlin,0);
+        perlin = Mathf.PerlinNoise(Time.time, 0.0f) - perlinScale;
+        rb.AddRelativeTorque(0,perlin * wanderScale,0);
     }
 }
