@@ -38,7 +38,7 @@ public class AvoidObstacle : MonoBehaviour
     {
         RaycastHit hitinfo;
         hitinfo = new RaycastHit();
-        Physics.Raycast(transform.position, transform.forward, out hitinfo, maxLength);
+        Physics.Raycast(transform.position, transform.forward, out hitinfo, maxLength, 255, QueryTriggerInteraction.Ignore);
 
         localVelocity = transform.InverseTransformDirection(rb.velocity);
         xVelocity = localVelocity.x;
@@ -50,6 +50,7 @@ public class AvoidObstacle : MonoBehaviour
 
             distance = hitinfo.distance;
 
+            //Adjust speed based on distance to closest collision - clamped between 1 & the max speed
             moveForwards.speed = Mathf.Clamp(moveForwards.speed - (distance / speedReductionMultiplier), 1f, moveForwards.maxSpeed);
 
             if (myTurnDirection == RayDirection.Right)
