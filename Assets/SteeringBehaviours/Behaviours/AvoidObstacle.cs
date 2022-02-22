@@ -40,6 +40,7 @@ public class AvoidObstacle : MonoBehaviour
         hitinfo = new RaycastHit();
         Physics.Raycast(transform.position, transform.forward, out hitinfo, maxLength, 255, QueryTriggerInteraction.Ignore);
 
+        //X Velocity is used to make sure we aren't turning against an already existing torque - see below
         localVelocity = transform.InverseTransformDirection(rb.velocity);
         xVelocity = localVelocity.x;
 
@@ -48,28 +49,33 @@ public class AvoidObstacle : MonoBehaviour
         {        
             Debug.DrawLine(transform.position, hitinfo.point, Color.green);
 
+            //How far the object is from us
             distance = hitinfo.distance;
 
             //Adjust speed based on distance to closest collision - clamped between 1 & the max speed
             moveForwards.speed = Mathf.Clamp(moveForwards.speed - (distance / speedReductionMultiplier), 1f, moveForwards.maxSpeed);
 
+            //Apply torque based on ray direction (if the left ray hits an object turn right to dodge it)
             if (myTurnDirection == RayDirection.Right)
             {
-                turnForce = (maxLength - distance) / -dragMultiplier;
+                //Apply Negative turnforce to turn left
+                LeftTurnForce();
             }
             else if (myTurnDirection == RayDirection.Left)
             {
-                turnForce = (maxLength - distance) / dragMultiplier;
+                //Apply Positive turnforce to turn right
+                RightTurnForce();
             }
             else if(myTurnDirection == RayDirection.Straight)
             {
+                //if we're already moving in a positive rotation (right) - keep moving right
                 if(xVelocity < 0)
                 {
-                    turnForce = (maxLength - distance) / dragMultiplier;
+                    RightTurnForce();
                 }
                 else
                 {
-                    turnForce = (maxLength - distance) / -dragMultiplier;
+                    LeftTurnForce();
                 }
             }
 
@@ -78,8 +84,19 @@ public class AvoidObstacle : MonoBehaviour
         }
         else
         {
+            //If we aren't detecting any collisions - resume full speed
             moveForwards.speed = moveForwards.maxSpeed;
         }
 
+    }
+
+    void LeftTurnForce()
+    {
+        turnForce = (maxLength - distance) / -dragMultiplier;
+    }
+
+    void RightTurnForce()
+    {
+        turnForce = (maxLength - distance) / dragMultiplier;
     }
 }

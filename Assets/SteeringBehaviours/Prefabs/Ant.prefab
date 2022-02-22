@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6341520100361800063}
   - component: {fileID: 7872286624234508969}
   - component: {fileID: -7479431333343963414}
+  - component: {fileID: 1653276698467063263}
   m_Layer: 0
   m_Name: Ant
   m_TagString: Untagged
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perlinScale: 0.5
-  wanderScale: 2
+  wanderScale: 5
   perlin: 0
 --- !u!114 &6341520100361800061
 MonoBehaviour:
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341520100361800053}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eef0b1062ff446488876b0d8490dbaa, type: 3}
   m_Name: 
@@ -215,12 +216,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341520100361800053}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11587027d746784bbdccb5d936b96fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  proximityThreshold: 2
+--- !u!114 &1653276698467063263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341520100361800053}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d0585697ae8f241bbaf87132c216e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  proximityThreshold: 40
 --- !u!1 &6341520100385594800
 GameObject:
   m_ObjectHideFlags: 0

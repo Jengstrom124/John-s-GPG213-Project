@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Align : MonoBehaviour
+public class Align : SteeringBase
 {
     Rigidbody rb;
 	Neighbours neighbours;
@@ -19,7 +19,7 @@ public class Align : MonoBehaviour
 		rb.AddTorque(CalculateMove(neighbours.neighbours));
 	}
 
-	public Vector3 CalculateMove(List<GameObject> neighbours)
+	public override Vector3 CalculateMove(List<GameObject> neighbours)
 	{
 		if (neighbours.Count == 0)
         {

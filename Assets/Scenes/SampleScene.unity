@@ -1605,10 +1605,10 @@ GameObject:
   - component: {fileID: 939669943}
   - component: {fileID: 939669942}
   - component: {fileID: 939669941}
+  - component: {fileID: 939669949}
   - component: {fileID: 939669946}
   - component: {fileID: 939669947}
   - component: {fileID: 939669948}
-  - component: {fileID: 939669949}
   - component: {fileID: 939669950}
   m_Layer: 0
   m_Name: Ant
@@ -1627,7 +1627,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 1
+  m_AngularDrag: 1.1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -1704,7 +1704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939669940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.044901796, y: 0.51, z: -25.37}
+  m_LocalPosition: {x: 2.1, y: 0.51, z: -25.37}
   m_LocalScale: {x: 1, y: 1, z: 1.843413}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1751,13 +1751,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939669940}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1488412200}
-  turnMultiplier: 0.025
+  turnMultiplier: 0.01
   targetPos: {x: 0, y: 0, z: 0}
   targetXPos: 0
 --- !u!135 &939669949
@@ -2545,7 +2545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1488412196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.4, y: 1.3, z: 43.4}
+  m_LocalPosition: {x: 1.9, y: 1.3, z: 42.5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []

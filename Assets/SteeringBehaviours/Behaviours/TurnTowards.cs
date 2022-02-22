@@ -6,7 +6,7 @@ public class TurnTowards : MonoBehaviour
 {
     Rigidbody rb;
     public Transform target;
-    public float turnMultiplier = 20f;
+    public float turnMultiplier = 0.05f;
 
     public Vector3 targetPos;
     public float targetXPos;

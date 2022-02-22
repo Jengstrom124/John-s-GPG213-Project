@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c275963767a60fc48ae3a2f8285bcf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLength: 30
-  dragMultiplier: 5
+  maxLength: 25
+  dragMultiplier: 10
   speedReductionMultiplier: 0.5
+  targetTurnMultiplier: 50
   myTurnDirection: 0
   turnForce: 0
   distance: 0
