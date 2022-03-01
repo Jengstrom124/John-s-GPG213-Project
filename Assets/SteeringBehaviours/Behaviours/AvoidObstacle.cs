@@ -22,6 +22,7 @@ public class AvoidObstacle : MonoBehaviour
     public RayDirection myTurnDirection;
 
     MoveForwards moveForwards;
+    Neighbours neighbours;
     
     [Header("Reference ONLY:")]
     public float turnForce;
@@ -33,6 +34,19 @@ public class AvoidObstacle : MonoBehaviour
     {
         rb = GetComponentInParent<Rigidbody>();
         moveForwards = GetComponentInParent<MoveForwards>();
+        neighbours = GetComponentInParent<Neighbours>();
+    }
+
+    private void Update()
+    {
+        if(neighbours.neighbours.Count == 0)
+        {
+            minSpeed = 0.25f;
+        }
+        else
+        {
+            minSpeed = -0.5f;
+        }
     }
 
     void FixedUpdate()
@@ -98,6 +112,6 @@ public class AvoidObstacle : MonoBehaviour
 
     void RightTurnForce()
     {
-        turnForce = (maxLength - distance) / dragMultiplier * 0.5f;
+        turnForce = (maxLength - distance) / dragMultiplier;
     }
 }
