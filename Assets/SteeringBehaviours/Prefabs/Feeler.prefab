@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8743433351232840263}
   - component: {fileID: 8743433351232840264}
   m_Layer: 0
-  m_Name: SideFeeler
+  m_Name: Feeler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
