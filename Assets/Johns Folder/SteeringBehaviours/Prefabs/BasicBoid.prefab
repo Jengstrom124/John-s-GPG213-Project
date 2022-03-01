@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 572743478071194192}
   - component: {fileID: 572743478071194194}
   m_Layer: 0
-  m_Name: BasicAnt
+  m_Name: BasicBoid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572743478071194200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
   m_Name: 
