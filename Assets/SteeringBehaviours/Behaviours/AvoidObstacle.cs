@@ -9,6 +9,7 @@ public class AvoidObstacle : MonoBehaviour
     public float maxLength = 20f;
     public float dragMultiplier = 10f;
     public float speedReductionMultiplier = 4f;
+    public float minSpeed = -0.2f;
     //public float maxTurnForce = 5f;
 
     public enum RayDirection
@@ -53,7 +54,7 @@ public class AvoidObstacle : MonoBehaviour
             distance = hitinfo.distance;
 
             //Adjust speed based on distance to closest collision - clamped between 1 & the max speed
-            moveForwards.speed = Mathf.Clamp(moveForwards.speed - (distance / speedReductionMultiplier), 1f, moveForwards.maxSpeed);
+            moveForwards.speed = Mathf.Clamp(moveForwards.speed - (distance / speedReductionMultiplier), minSpeed, moveForwards.maxSpeed);
 
             //Apply torque based on ray direction (if the left ray hits an object turn right to dodge it)
             if (myTurnDirection == RayDirection.Right)
@@ -97,6 +98,6 @@ public class AvoidObstacle : MonoBehaviour
 
     void RightTurnForce()
     {
-        turnForce = (maxLength - distance) / dragMultiplier;
+        turnForce = (maxLength - distance) / dragMultiplier * 0.5f;
     }
 }

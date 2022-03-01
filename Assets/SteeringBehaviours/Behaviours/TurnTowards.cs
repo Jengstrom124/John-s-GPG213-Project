@@ -5,10 +5,13 @@ using UnityEngine;
 public class TurnTowards : MonoBehaviour
 {
     Rigidbody rb;
+
+    [Header("Target Values")]
     public Transform target;
     public float turnMultiplier = 0.05f;
 
-    public Vector3 targetPos;
+    [Header("Reference Only")]
+    Vector3 targetPos;
     public float targetXPos;
 
     // Start is called before the first frame update

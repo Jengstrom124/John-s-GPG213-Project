@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLength: 25
-  dragMultiplier: 10
+  dragMultiplier: 8
   speedReductionMultiplier: 0.5
-  targetTurnMultiplier: 50
+  minSpeed: -1
   myTurnDirection: 0
   turnForce: 0
   distance: 0

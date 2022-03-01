@@ -7,6 +7,8 @@ public class Align : SteeringBase
     Rigidbody rb;
 	Neighbours neighbours;
 
+	public float force = 2f;
+
     private void Start()
     {
 		neighbours = GetComponent<Neighbours>();
@@ -15,8 +17,9 @@ public class Align : SteeringBase
 
     void FixedUpdate()
 	{
-		// Some are Torque, some are Force
-		rb.AddTorque(CalculateMove(neighbours.neighbours));
+		//rb.AddTorque(CalculateMove(neighbours.neighbours) * force);
+
+		rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove(neighbours.neighbours)) * force);
 	}
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)

@@ -7,7 +7,11 @@ public class Separation : SteeringBase
 	Rigidbody rb;
 	Neighbours neighbours;
 
-	public float proximityThreshold = 10f;
+	public float minDistance = 2f;
+	public float force = 2f;
+
+	[Header("Ref Only:")]
+	public float myDistance;
 
 	private void Start()
 	{
@@ -17,8 +21,7 @@ public class Separation : SteeringBase
 
 	void FixedUpdate()
 	{
-		// Some are Torque, some are Force
-		rb.AddForce(CalculateMove(neighbours.neighbours));
+		rb.AddRelativeForce(CalculateMove(neighbours.neighbours) * force);
 	}
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)
@@ -30,17 +33,22 @@ public class Separation : SteeringBase
 
 		Vector3 separationMove = Vector3.zero;
 
-		// Average of all neighbours positions
 		foreach (GameObject neighbour in neighbours)
 		{
-			if (Vector3.Distance(transform.position, neighbour.transform.position) < proximityThreshold)
-			{
-				separationMove -= transform.InverseTransformPoint(neighbour.transform.position);
-			}
+			//Check my Distance from each neighbour
+			myDistance = Vector3.Distance(transform.position, neighbour.transform.position);
+
+			//if we are too close
+			if(myDistance < minDistance)
+            {
+				separationMove = transform.InverseTransformPoint(neighbour.transform.position);
+            }
+
 		}
 
 		separationMove /= neighbours.Count;
 
-		return separationMove;
+		//note seperation move is negative to move away from neighbours
+		return -separationMove;
 	}
 }

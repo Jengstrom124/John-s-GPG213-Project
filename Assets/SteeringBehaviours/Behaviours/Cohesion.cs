@@ -8,6 +8,7 @@ public class Cohesion : SteeringBase
 	Neighbours neighbours;
 
 	public float proximityThreshold = 2f;
+	public float force = 2f;
 
 	private void Start()
 	{
@@ -16,9 +17,8 @@ public class Cohesion : SteeringBase
 	}
 
 	void FixedUpdate()
-	{
-		// Some are Torque, some are Force
-		rb.AddForce(CalculateMove(neighbours.neighbours));
+	{		
+		rb.AddRelativeForce(CalculateMove(neighbours.neighbours) * force);
 	}
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)
@@ -33,7 +33,7 @@ public class Cohesion : SteeringBase
 		// Average of all neighbours positions
 		foreach (GameObject neighbour in neighbours)
 		{
-			if(Vector3.Distance(transform.position, neighbour.transform.position) > proximityThreshold)
+			//if(Vector3.Distance(transform.position, neighbour.transform.position) > proximityThreshold)
             {
 				cohesionMove += transform.InverseTransformPoint(neighbour.transform.position);
             }
