@@ -28,6 +28,6 @@ public class TurnTowards : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddTorque(new Vector3(0, targetXPos * turnMultiplier, 0));
+        rb.AddTorque(new Vector3(0, targetXPos, 0) * turnMultiplier);
     }
 }
