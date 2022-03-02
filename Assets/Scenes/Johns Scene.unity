@@ -2258,8 +2258,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
-  totalFeelers: 20
-  fov: 5
+  emergencyFeeler: {fileID: 0}
+  standardFeelerCount: 5
+  emergencyFeelerCount: 3
+  fov: 25
 --- !u!4 &1236012670
 Transform:
   m_ObjectHideFlags: 0
@@ -2318,161 +2320,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   maxSpeed: 0
---- !u!1 &1297556450
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1297556454}
-  - component: {fileID: 1297556453}
-  - component: {fileID: 1297556452}
-  - component: {fileID: 1297556451}
-  - component: {fileID: 1297556458}
-  - component: {fileID: 1297556457}
-  - component: {fileID: 1297556456}
-  - component: {fileID: 1297556455}
-  m_Layer: 0
-  m_Name: Eagle
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1297556451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cfdf0b2e5d16bc46a27876f46491452, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1389943499}
-  chicken: {fileID: 460289063}
-  radiusOfInterest: 10
-  distance: 0
-  stateManager: {fileID: 1297556458}
-  flyingState: {fileID: 0}
-  swoopState: {fileID: 0}
-  fleeState: {fileID: 0}
---- !u!114 &1297556452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98a6db0b653f764eac834f85857a9dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _parentBlackboard: {fileID: 0}
-  _serializedBlackboard: '{"_variables":{}}'
-  _objectReferences: []
-  _serializedVariables: []
---- !u!114 &1297556453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aad115aca74ce3c4891b3f6de0b4aae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"_position":{"x":286.9032,"y":135.6387},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"0"},{"_position":{"x":161.5706,"y":217.3059},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"1"},{"_position":{"x":73.41742,"y":362.5171},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"2"},{"_condition":{"method":{"_baseInfo":"EagleModel|CheckMyRadius|System.Boolean","_paramsInfo":"UnityEngine.GameObject"},"parameters":[{"_type":"UnityEngine.GameObject","_value":{"$content":1,"$type":"UnityEngine.GameObject"}}],"checkValue":{"_type":"System.Boolean","_value":{"$content":true,"$type":"System.Boolean"}},"$type":"NodeCanvas.Tasks.Conditions.CheckFunction_Multiplatform"},"_position":{"x":-162.4291,"y":454.6386},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"3"},{"_action":{"method":{"_baseInfo":"EagleModel|FlyAway|System.Void","_paramsInfo":""},"parameters":[],"returnValue":{},"$type":"NodeCanvas.Tasks.Actions.ExecuteFunction_Multiplatform"},"_position":{"x":140.4188,"y":451.516},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"4"},{"_position":{"x":463.4146,"y":353.1853},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"5"},{"_condition":{"method":{"_baseInfo":"EagleModel|CheckMyRadius|System.Boolean","_paramsInfo":"UnityEngine.GameObject"},"parameters":[{"_type":"UnityEngine.GameObject","_value":{"$content":2,"$type":"UnityEngine.GameObject"}}],"checkValue":{"_type":"System.Boolean","_value":{"$content":true,"$type":"System.Boolean"}},"$type":"NodeCanvas.Tasks.Conditions.CheckFunction_Multiplatform"},"_position":{"x":309.0804,"y":450.8523},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"6"},{"_action":{"method":{"_baseInfo":"EagleModel|SwoopChicken|System.Void","_paramsInfo":""},"parameters":[],"returnValue":{},"$type":"NodeCanvas.Tasks.Actions.ExecuteFunction_Multiplatform"},"_position":{"x":627.2226,"y":451.2899},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"7"},{"_action":{"method":{"_baseInfo":"EagleModel|Fly|System.Void","_paramsInfo":""},"parameters":[],"returnValue":{},"$type":"NodeCanvas.Tasks.Actions.ExecuteFunction_Multiplatform"},"_position":{"x":409.75,"y":217.5171},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"8"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"8"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"5"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[{"name":"...","rect":{"xMin":-5.33609,"yMin":36.66462,"xMax":167.6647,"yMax":136.6646}}],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
-  _boundGraphObjectReferences:
-  - {fileID: 0}
-  - {fileID: 1389943499}
-  - {fileID: 460289063}
-  _boundGraphSource:
-    _version: 3.22
-    _category: 
-    _comments: 
-    _translation: {x: 151, y: 13}
-    _zoomFactor: 0.7500089
-  _firstActivation: 0
-  _enableAction: 0
-  _disableAction: 0
-  _lockBoundGraphPrefabOverrides: 1
-  _preInitializeSubGraphs: 0
-  _updateMode: 0
-  _graph: {fileID: 0}
-  _blackboard: {fileID: 1297556452}
---- !u!4 &1297556454
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0132735, y: -0.44598043, z: -0.02175938}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1297556455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f349b74a9b183e742b84d5794712d9b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1297556456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4556602fc47e56c41907d2d43b71fd31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1297556457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 513f8ad2feacabd4c8825c546e5d5ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1297556458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297556450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770895b945a5c94498e32fcfb63c8a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: {fileID: 1297556457}
 --- !u!4 &1348938583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6341520100361800056, guid: 35034211da549da479fa5c571fa778b6, type: 3}
@@ -3222,3 +3069,76 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ab666fa553ce44da53f05f87053562, type: 3}
+--- !u!1001 &8190467847551299519
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.0132735
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.44598043
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.02175938
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926553, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8190467846532926554, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: _boundGraphObjectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1389943499}
+    - target: {fileID: 8190467846532926554, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: _boundGraphObjectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 460289063}
+    - target: {fileID: 8190467846532926556, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1389943499}
+    - target: {fileID: 8190467846532926556, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: chicken
+      value: 
+      objectReference: {fileID: 460289063}
+    - target: {fileID: 8190467846532926557, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}
+      propertyPath: m_Name
+      value: Eagle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0db85cc9755b15c45813cdec80d1856d, type: 3}

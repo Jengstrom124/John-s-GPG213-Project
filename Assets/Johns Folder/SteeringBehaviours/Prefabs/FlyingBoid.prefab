@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 1653276698467063263}
   - component: {fileID: 4593242462644426645}
   - component: {fileID: 2441223562379109553}
+  - component: {fileID: 3063678505831893556}
   m_Layer: 0
   m_Name: FlyingBoid
   m_TagString: Untagged
@@ -178,7 +179,7 @@ SphereCollider:
   m_GameObject: {fileID: 6341520100361800053}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
@@ -267,6 +268,20 @@ MonoBehaviour:
   feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
   totalFeelers: 5
   fov: 20
+--- !u!136 &3063678505831893556
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341520100361800053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 26.5
+  m_Height: 23.6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 13.8}
 --- !u!1 &6341520100385594800
 GameObject:
   m_ObjectHideFlags: 0

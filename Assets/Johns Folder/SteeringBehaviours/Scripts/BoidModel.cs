@@ -7,8 +7,11 @@ public class BoidModel : MonoBehaviour
     SBManager manager;
 
     public GameObject feeler;
+    public GameObject emergencyFeeler;
+
     [Tooltip("Use an ODD Count ONLY")]
-    public int totalFeelers = 5;
+    public int standardFeelerCount = 5;
+    public int emergencyFeelerCount = 3;
 
     [Tooltip("Adjust the angle of all RayCasts")]
     public float fov = 20;
@@ -29,7 +32,7 @@ public class BoidModel : MonoBehaviour
 
     void SpawnFeelers()
     {
-        for (int i = 0; i < totalFeelers; i++)
+        for (int i = 0; i < standardFeelerCount; i++)
         {
             //spawn a feeler
             GameObject newFeeler = Instantiate(feeler, this.transform);
@@ -57,6 +60,14 @@ public class BoidModel : MonoBehaviour
                 avoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Right;
                 rightFeelers.Add(newFeeler);
             }
+
+            /*
+            if(i < emergencyFeelerCount)
+            {
+                GameObject newEmergencyFeeler = Instantiate(emergencyFeeler, this.transform);
+                avoidObstacle = newEmergencyFeeler.GetComponent<AvoidObstacle>();
+            }
+            */
         }
     }
 
