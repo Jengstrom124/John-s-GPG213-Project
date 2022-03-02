@@ -7,48 +7,69 @@ public class BoidModel : MonoBehaviour
     SBManager manager;
 
     public GameObject feeler;
-    List<GameObject> myFeelers = new List<GameObject>();
+    [Tooltip("Use an ODD Count ONLY")]
+    public int totalFeelers = 5;
 
-    public int totalFeelers = 3;
+    [Tooltip("Adjust the angle of all RayCasts")]
+    public float fov = 20;
+
+    List<GameObject> leftFeelers = new List<GameObject>();
+    List<GameObject> rightFeelers = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        manager = GetComponent<SBManager>();
+        SpawnFeelers();
+    }
 
-        for(int i = 0; i < totalFeelers; i++)
-        {                        
+    private void Update()
+    {
+        UpdateFeelerFOV();
+    }
+
+    void SpawnFeelers()
+    {
+        for (int i = 0; i < totalFeelers; i++)
+        {
             //spawn a feeler
             GameObject newFeeler = Instantiate(feeler, this.transform);
+            AvoidObstacle avoidObstacle = newFeeler.GetComponent<AvoidObstacle>();
 
             //first spawn
-            if(i == 0)
+            if (i == 0)
             {
-
+                avoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Straight;
+                newFeeler.transform.localRotation = Quaternion.Euler(transform.forward);
             }
 
-            //even
-            if (i % 2 == 0)
-            {
+            //Setting up RayDirection based on even / odd 
 
+            //even
+            else if (i % 2 == 0)
+            {
+                avoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Left;
+                leftFeelers.Add(newFeeler);
             }
 
             //odd numbers
-            if (i % 2 == 0)
+            else if (i % 2 == 1)
             {
-
+                avoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Right;
+                rightFeelers.Add(newFeeler);
             }
-
-            //set angle
-
-            //set corresponding ray direction
-
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateFeelerFOV()
     {
-        
+        foreach (GameObject leftFeeler in leftFeelers)
+        {
+            leftFeeler.transform.localRotation = Quaternion.Euler(0, -fov * (leftFeelers.IndexOf(leftFeeler) + 1), 0);
+        }
+
+        foreach (GameObject rightFeeler in rightFeelers)
+        {
+            rightFeeler.transform.localRotation = Quaternion.Euler(0, fov * (rightFeelers.IndexOf(rightFeeler) + 1), 0);
+        }
     }
 }

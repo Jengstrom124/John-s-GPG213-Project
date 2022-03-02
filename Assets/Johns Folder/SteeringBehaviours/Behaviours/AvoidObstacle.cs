@@ -39,6 +39,7 @@ public class AvoidObstacle : MonoBehaviour
 
     private void Update()
     {
+        //This may be bad because this script needs to know about neighbours now
         if(neighbours.neighbours.Count == 0)
         {
             minSpeed = 0.25f;
@@ -54,6 +55,8 @@ public class AvoidObstacle : MonoBehaviour
         RaycastHit hitinfo;
         hitinfo = new RaycastHit();
         Physics.Raycast(transform.position, transform.forward, out hitinfo, maxLength, 255, QueryTriggerInteraction.Ignore);
+
+        Debug.DrawRay(transform.position, transform.forward, Color.green);
 
         //X Velocity is used to make sure we aren't turning against an already existing torque - see below
         localVelocity = transform.InverseTransformDirection(rb.velocity);
