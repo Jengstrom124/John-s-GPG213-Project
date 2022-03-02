@@ -1280,7 +1280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 569657226}
-  - component: {fileID: 569657225}
+  - component: {fileID: 569657227}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -1288,25 +1288,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &569657225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 569657224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95370cea4f8c32a43839e132168eafa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xRange: {x: 0, y: 40}
-  zRange: {x: 0, y: 40}
-  scale: 15
-  objectsToSpawn:
-  - {fileID: 6341520100361800053, guid: 35034211da549da479fa5c571fa778b6, type: 3}
-  spawnThreshold: 0.78
-  spawnHeight: 40
 --- !u!4 &569657226
 Transform:
   m_ObjectHideFlags: 0
@@ -1315,13 +1296,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569657224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 39.88, z: 0}
+  m_LocalPosition: {x: 28.4, y: 51.3, z: -40.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &569657227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569657224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d6c4abe7afd6e4d9603241337ee3db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 6341520100361800053, guid: 35034211da549da479fa5c571fa778b6, type: 3}
+  spawnCount: 30
+  spawnFacingForward: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,8 +2213,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093132041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76, y: -14.4, z: 26}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 235708845}
@@ -2262,8 +2258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
-  totalFeelers: 5
-  fov: 15
+  totalFeelers: 20
+  fov: 5
 --- !u!4 &1236012670
 Transform:
   m_ObjectHideFlags: 0

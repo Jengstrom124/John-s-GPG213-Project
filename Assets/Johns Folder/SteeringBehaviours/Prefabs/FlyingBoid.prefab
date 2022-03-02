@@ -103,7 +103,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341520100361800053}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: cba076aa5654a2b4a8917697628e0f01, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -123,7 +123,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 1
 --- !u!114 &6341520100361800059
 MonoBehaviour:
@@ -215,13 +215,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6341520100361800053}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11587027d746784bbdccb5d936b96fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proximityThreshold: 25
-  force: 0.5
+  force: 0.1
 --- !u!114 &1653276698467063263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d0585697ae8f241bbaf87132c216e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 5
-  force: 5
+  minDistance: 10
+  force: 10
   myDistance: 0
 --- !u!114 &4593242462644426645
 MonoBehaviour:

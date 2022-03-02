@@ -7,7 +7,6 @@ public class Cohesion : SteeringBase
 	Rigidbody rb;
 	Neighbours neighbours;
 
-	public float proximityThreshold = 2f;
 	public float force = 2f;
 
 	private void Start()
