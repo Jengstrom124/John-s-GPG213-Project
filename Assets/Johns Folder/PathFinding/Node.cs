@@ -5,5 +5,5 @@ using UnityEngine;
 public class Node
 {
     public bool isBlocked;
-
+    public Vector2 gridPos;
 }
