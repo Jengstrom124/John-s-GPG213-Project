@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class WorldScanner : MonoBehaviour
 {
+    public Transform startPos;
+    public Node startNode;
     public Vector2 gridSize;
     Node[,] gridNodeReferences;
     public LayerMask obstacle;
 
+    public List<Node> path = new List<Node>();
+
     private void Start()
     {
-        CreateGrid();
+        CreateGrid();        
     }
 
     void CreateGrid()
@@ -35,11 +39,68 @@ public class WorldScanner : MonoBehaviour
         }
     }
 
+    public Node WorldToNodePos(Vector3 worldPos)
+    {
+        int x;
+        int y;
+
+        if((worldPos.x <= gridSize.x && worldPos.x >= 0) && (worldPos.z <= gridSize.y && worldPos.z >= 0))
+        {
+            x = (int)worldPos.x;
+            y = (int)worldPos.z;
+            return gridNodeReferences[x, y];
+
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public Vector2 NodeToWorldPos(Node node)
+    {
+        float x = node.gridPos.x;
+        float y = node.gridPos.y;
+
+        return new Vector2(x, y);
+    }
+
+    public List<Node> GetNeighbours(Node node)
+    {
+        List<Node> neighbours = new List<Node>();
+
+        for (int x = -1; x < 2; x++)
+        {
+            for (int y = -1; y < 2; y++)
+            {
+                if(x == 0 && y == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    //check to make sure we are within the grid
+                    int checkX = (int)node.gridPos.x + x;
+                    int checkY = (int)node.gridPos.y + y;
+
+                    if((checkX >= 0 && checkX <= gridSize.x) && (checkY >= 0 && checkY <= gridSize.y))
+                    {
+                        neighbours.Add(gridNodeReferences[checkX, checkY]);
+                    }
+                }
+            }
+        }
+
+        return neighbours;
+    }
+
     private void OnDrawGizmos()
     {
         //Stop constant null errors when not in play mode using null check
         if(gridNodeReferences != null)
-        {
+        {        
+            startNode = WorldToNodePos(startPos.position);
+
             //loop through each node and draw a cube for each grid position
             for (int x = 0; x < gridSize.x; x++)
             {
@@ -48,14 +109,26 @@ public class WorldScanner : MonoBehaviour
                     Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
 
                     //change colour to indicate if path is blocked or clear
-                    if (gridNodeReferences[x,y].isBlocked)
+                    if(gridNodeReferences[x,y] == startNode)
+                    {
+                        Gizmos.color = Color.cyan;
+                    }
+                    else if (gridNodeReferences[x,y].isBlocked)
                     {
                         Gizmos.color = Color.red;
                     }
-                    else
+                    else if(gridNodeReferences[x, y] != startNode)
                     {
                         Gizmos.color = Color.green;
                         //Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+                    }
+
+                    if(path != null)
+                    {
+                        if(path.Contains(gridNodeReferences[x, y]))
+                        {
+                            Gizmos.color = Color.black;
+                        }
                     }
                 }
             }
