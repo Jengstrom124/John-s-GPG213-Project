@@ -55,6 +55,8 @@ public class CharacterSelect : NetworkBehaviour
 
     private void AssignCharacter(ulong client, int characterIndex)
     {
+        // Allows character to be selected for given client
+        // Server can call this directly, client can request the server selects the character on the client's player
         PlayerController player =
             NetworkManager.Singleton.ConnectedClients[client].PlayerObject.GetComponent<PlayerController>();
         player.selectedCharacter = CharacterIndex[characterIndex];
