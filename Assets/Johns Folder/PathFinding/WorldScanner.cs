@@ -53,6 +53,7 @@ public class WorldScanner : MonoBehaviour
         }
         else
         {
+            Debug.Log("Object World Position is outside of Grid Space");
             return null;
         }
     }
