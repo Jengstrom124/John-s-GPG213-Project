@@ -11,6 +11,9 @@ public class ServerManager : NetworkManager
 	//passing a ulong for ClientId?
     public event Action<ulong> JoinServerEvent;
 
+    //need list of clients
+    public List<ulong> ClientList = new List<ulong>();
+
     private void OnGUI()
     {
         GUILayout.BeginArea(new Rect(10,10,300,300));
@@ -44,30 +47,33 @@ public class ServerManager : NetworkManager
             StartClient();
         }
 
-        //Event for something? Maybe providing client address? Not sure to be honest
+        //Pass in ClientId
         JoinServerEvent?.Invoke(client);
+        
+        //need to add client to list
+		ClientList.Add(client);
     }
 
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
         //spawn players
-        foreach (var player in ConnectedClients)
+        foreach (var player in ClientList)
         {
-            //if player selected shark, spawn player as shark with ownership
-            
-            //elseif player selected fish, spawn player as fish with ownership
+	        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
+	            .selectedCharacter);
         }
-
-        //Player Prefab; shark/fish (character) to Players
-        //assign ownership
     }
 
     #region GUI Buttons
     void StartButtons()
     {
         if(GUILayout.Button("Host")) StartHost();
-        if(GUILayout.Button("Client")) StartClient();
+        if (GUILayout.Button("Client"))
+        {
+	        StartClient();
+	        JoinServer(NetworkManager.Singleton.LocalClientId);
+        }
         if(GUILayout.Button("Server")) StartServer();
     }
 
@@ -75,7 +81,7 @@ public class ServerManager : NetworkManager
     {
         if (GUILayout.Button("Stop Server")) Shutdown();
     }
-    
+
     #endregion
     
     public void LobbyStartServer()
