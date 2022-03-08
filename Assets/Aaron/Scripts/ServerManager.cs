@@ -8,7 +8,8 @@ using UnityEngine.UI;
 
 public class ServerManager : NetworkManager
 {
-    public event Action JoinServerEvent;
+	//passing a ulong for ClientId?
+    public event Action<ulong> JoinServerEvent;
 
     private void OnGUI()
     {
@@ -36,7 +37,7 @@ public class ServerManager : NetworkManager
     }
 
     //Called from lobby
-    public void JoinServer()
+    public void JoinServer(ulong client)
     {
         if (!IsHost && !IsServer)
         {
@@ -44,7 +45,7 @@ public class ServerManager : NetworkManager
         }
 
         //Event for something? Maybe providing client address? Not sure to be honest
-        JoinServerEvent?.Invoke();
+        JoinServerEvent?.Invoke(client);
     }
 
     //Starting Game, waiting on event from lobby
