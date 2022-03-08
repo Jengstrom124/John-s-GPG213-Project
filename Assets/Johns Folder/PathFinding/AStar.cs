@@ -62,20 +62,30 @@ public class AStar : MonoBehaviour
                     }
                     else
                     {
-                        int neighbourToTarget = DistanceCheck(neighbour, targetNode);
-                        int currentNodeToTarget = DistanceCheck(currentNode, targetNode);
+                        //Calculate hCost
+                        neighbour.hCost = DistanceCheck(neighbour, targetNode);
+                        currentNode.hCost = DistanceCheck(currentNode, targetNode);
 
                         //check if neighbours distance to target is less then my current distance OR if neighbour is not in openlist
-                        if(neighbourToTarget < currentNodeToTarget || !openList.Contains(neighbour))
+                        if(neighbour.hCost < currentNode.hCost || !openList.Contains(neighbour))
                         {
-                            //Calcuate f cost
-                            neighbour.gCost = DistanceCheck(neighbour, currentNode);
-                            neighbour.hCost = neighbourToTarget;
+                            Vector2 neighbourPos = worldScanner.NodeToWorldPos(neighbour);
+                            Vector2 currentNodePos = worldScanner.NodeToWorldPos(currentNode);
+
+                            //Calculate neighbour gCost - if neighbour is diagonal gCost is double
+                            if (neighbourPos.y == currentNodePos.y || neighbourPos.y != currentNodePos.y && neighbourPos.x == currentNodePos.x)
+                            {
+                                neighbour.gCost = 7;
+                            }
+                            else
+                            {
+                                neighbour.gCost = 14;
+                            }
 
                             //set parent to keep track of our path
                             neighbour.parent = currentNode;
 
-                            if(!openList.Contains(neighbour))
+                            if (!openList.Contains(neighbour))
                             {
                                 openList.Add(neighbour);
                             }

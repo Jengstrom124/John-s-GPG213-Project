@@ -70,17 +70,19 @@ public class WorldScanner : MonoBehaviour
     {
         List<Node> neighbours = new List<Node>();
 
+        //Check in a 3 by 3 grid for all neighbours
         for (int x = -1; x < 2; x++)
         {
             for (int y = -1; y < 2; y++)
             {
+                //we are the centre grid to skip us
                 if(x == 0 && y == 0)
                 {
                     continue;
                 }
                 else
                 {
-                    //check to make sure we are within the grid
+                    //check to make neighbour is within the grid
                     int checkX = (int)node.gridPos.x + x;
                     int checkY = (int)node.gridPos.y + y;
 
