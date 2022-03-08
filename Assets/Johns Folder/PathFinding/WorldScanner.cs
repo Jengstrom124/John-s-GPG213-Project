@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WorldScanner : MonoBehaviour
 {
-    public Transform startPos;
-    public Node startNode;
+    public Transform startPos, endPos;
+    Node startNode, endNode;
     public Vector2 gridSize;
     Node[,] gridNodeReferences;
     public LayerMask obstacle;
@@ -103,6 +103,7 @@ public class WorldScanner : MonoBehaviour
         if(gridNodeReferences != null)
         {        
             startNode = WorldToNodePos(startPos.position);
+            endNode = WorldToNodePos(endPos.position);
 
             //loop through each node and draw a cube for each grid position
             for (int x = 0; x < gridSize.x; x++)
@@ -114,6 +115,10 @@ public class WorldScanner : MonoBehaviour
                     if(gridNodeReferences[x,y] == startNode)
                     {
                         Gizmos.color = Color.cyan;
+                    }
+                    else if(gridNodeReferences[x,y] == endNode)
+                    {
+                        Gizmos.color = Color.grey;
                     }
                     else if (gridNodeReferences[x,y].isBlocked)
                     {
@@ -127,7 +132,7 @@ public class WorldScanner : MonoBehaviour
 
                     if(path != null)
                     {
-                        if(path.Contains(gridNodeReferences[x, y]))
+                        if(path.Contains(gridNodeReferences[x, y]) && gridNodeReferences[x,y] != endNode)
                         {
                             Gizmos.color = Color.black;
                         }
