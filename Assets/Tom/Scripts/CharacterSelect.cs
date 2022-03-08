@@ -23,10 +23,10 @@ public class CharacterSelect : NetworkBehaviour
     {
         int index = 0;
 
+        // Keeps character select modular so you can add more characters
         foreach (CharacterButton b in buttons)
         {
             CharacterIndex.Add(index, b.character);
-            // int buttonIndex = index; // Need this temporary int so listener isn't overwritten when index increments
             b.characterIndex = index;
             b.button.onClick.AddListener(() => SelectCharacter(b.characterIndex));
             index++;
@@ -35,27 +35,30 @@ public class CharacterSelect : NetworkBehaviour
 
     public void SelectCharacter(int characterIndex)
     {
+        ulong clientID = NetworkManager.Singleton.LocalClientId;
         if (NetworkManager.Singleton.IsServer)
         {
-            AssignCharacter(characterIndex);
+            AssignCharacter(clientID, characterIndex);
         }
         else if (NetworkManager.Singleton.IsClient)
         {
-            RequestCharacterSelectServerRpc(characterIndex);
+            RequestCharacterSelectServerRpc(clientID, characterIndex);
         }
         // Debug.Log("You selected " + character.characterName + "!");
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void RequestCharacterSelectServerRpc(int characterIndex)
+    public void RequestCharacterSelectServerRpc(ulong client, int characterIndex)
     {
-        AssignCharacter(characterIndex);
+        AssignCharacter(client, characterIndex);
     }
 
-    private void AssignCharacter(int characterIndex)
+    private void AssignCharacter(ulong client, int characterIndex)
     {
+        // Allows character to be selected for given client
+        // Server can call this directly, client can request the server selects the character on the client's player
         PlayerController player =
-            NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerController>();
+            NetworkManager.Singleton.ConnectedClients[client].PlayerObject.GetComponent<PlayerController>();
         player.selectedCharacter = CharacterIndex[characterIndex];
     }
 }
