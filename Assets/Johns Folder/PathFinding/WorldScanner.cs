@@ -30,7 +30,7 @@ public class WorldScanner : MonoBehaviour
                 gridNodeReferences[x, y].gridPos = new Vector2(x, y);
 
                 //Check for obstacle
-                if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0, 0.5f), Quaternion.identity, obstacle))
+                if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
                 {
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;
@@ -109,7 +109,6 @@ public class WorldScanner : MonoBehaviour
             {
                 for (int y = 0; y < gridSize.y; y++)
                 {                        
-                    Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
 
                     //change colour to indicate if path is blocked or clear
                     if(gridNodeReferences[x,y] == startNode)
@@ -133,6 +132,10 @@ public class WorldScanner : MonoBehaviour
                             Gizmos.color = Color.black;
                         }
                     }
+
+                    //Draw after to prevent weird offset
+                    Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+
                 }
             }
         }

@@ -69,6 +69,7 @@ public class AStar : MonoBehaviour
                         //check if neighbours distance to target is less then my current distance OR if neighbour is not in openlist
                         if(neighbour.hCost < currentNode.hCost || !openList.Contains(neighbour))
                         {
+                            //Using world positions to calculate gCost
                             Vector2 neighbourPos = worldScanner.NodeToWorldPos(neighbour);
                             Vector2 currentNodePos = worldScanner.NodeToWorldPos(currentNode);
 
