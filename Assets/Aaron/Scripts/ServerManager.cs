@@ -14,11 +14,14 @@ public class ServerManager : NetworkManager
     //need list of clients
     public List<ulong> ClientList = new List<ulong>();
 
+    /*public NetworkObject sharkPrefab;
+    public NetworkObject fishPrefab;*/
+
     private void OnGUI()
     {
         GUILayout.BeginArea(new Rect(10,10,300,300));
 
-        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
+        if (!IsClient && !IsServer)
         {
             StartButtons();
         }
@@ -42,11 +45,10 @@ public class ServerManager : NetworkManager
     //Called from lobby
     public void JoinServer(ulong client)
     {
-        if (!IsHost && !IsServer)
-        {
-            StartClient();
-        }
+	    
 
+	    client = NetworkManager.Singleton.ServerClientId;
+        
         //Pass in ClientId
         JoinServerEvent?.Invoke(client);
         
@@ -57,29 +59,63 @@ public class ServerManager : NetworkManager
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
-        //spawn players
+	    Debug.Log(NetworkManager.Singleton.ConnectedClients);
+	    Debug.Log(ClientList.Count);
+
+	    //spawn players
         foreach (var player in ClientList)
         {
+	        
 	        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
 	            .selectedCharacter);
+
+	        //I feel dirty using strings
+	        if (GetComponent<CharacterBase>().characterName == "Shark")
+	        {
+		        /*NetworkObject shark = Instantiate(sharkPrefab);
+		        shark.GetComponent<NetworkObject>().ChangeOwnership(player);*/
+	        }
+
+	        if (GetComponent<CharacterBase>().characterName == "Fish")
+	        {
+		        /*NetworkObject fish = Instantiate(fishPrefab);
+		        fish.GetComponent<NetworkObject>().ChangeOwnership(player);*/
+	        }
         }
     }
 
     #region GUI Buttons
     void StartButtons()
     {
-        if(GUILayout.Button("Host")) StartHost();
-        if (GUILayout.Button("Client"))
+	    if (GUILayout.Button("Host"))
+	    {
+		    StartHost();
+		    JoinServer(NetworkManager.Singleton.ServerClientId);
+	    }
+	    
+        if(GUILayout.Button("Client"))
         {
 	        StartClient();
-	        JoinServer(NetworkManager.Singleton.LocalClientId);
+	        JoinServer(NetworkManager.Singleton.ServerClientId);
         }
-        if(GUILayout.Button("Server")) StartServer();
+
+        if (GUILayout.Button("Server"))
+        {
+	        StartServer();
+        }
     }
 
     void StopButton()
     {
-        if (GUILayout.Button("Stop Server")) Shutdown();
+	    if (GUILayout.Button("Stop Server"))
+	    {
+		    Shutdown();
+	    }
+
+	    if (GUILayout.Button("Start Game"))
+	    {
+		    StartGame();
+	    }
     }
 
     #endregion
