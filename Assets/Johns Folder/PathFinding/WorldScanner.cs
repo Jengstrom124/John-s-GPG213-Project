@@ -10,13 +10,32 @@ public class WorldScanner : MonoBehaviour
     Node[,] gridNodeReferences;
     public LayerMask obstacle;
 
+    public bool constantScan = false;
+
     public List<Node> path = new List<Node>();
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
 
+    public List<GameObject> obstacles = new List<GameObject>();
+
     private void Awake()
     {
-        CreateGrid();        
+        CreateGrid();
+
+        //Sub to all obstacle objects - tell the world scanner to rescan if they move
+        //obstacles.Add(FindObjectsOfType<Obstacle>());
+        foreach(GameObject obstacle in obstacles)
+        {
+            Debug.Log("Subscribe");
+        }
+    }
+
+    void Update()
+    {
+        if(constantScan)
+        {
+            CreateGrid();
+        }
     }
 
     void CreateGrid()

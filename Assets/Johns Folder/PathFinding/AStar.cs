@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AStar : MonoBehaviour
 {
     public WorldScanner worldScanner;
     public Transform seeker, target;
+
+    public event Action<List<Node>> pathFoundEvent;
 
     [Header("Options:")]
     public bool visualizeOpenCloseLists = false;
@@ -131,6 +134,8 @@ public class AStar : MonoBehaviour
         path.Reverse();
 
         worldScanner.path = path;
+
+        pathFoundEvent?.Invoke(path);
     }
 
     int DistanceCheck(Node a, Node b)
