@@ -9,10 +9,10 @@ using UnityEngine.UI;
 public class ServerManager : NetworkManager
 {
 	//passing a ulong for ClientId?
-    public event Action<ulong> JoinServerEvent;
+    public event Action<int> JoinServerEvent;
 
     //need list of clients
-    public List<ulong> ClientList = new List<ulong>();
+    //public NetworkList<int> ClientList = new NetworkList<int>();
 
     /*public NetworkObject sharkPrefab;
     public NetworkObject fishPrefab;*/
@@ -43,44 +43,46 @@ public class ServerManager : NetworkManager
     }
 
     //Called from lobby
-    public void JoinServer(ulong client)
+    public void JoinServer(int client)
     {
-	    
-
-	    client = NetworkManager.Singleton.ServerClientId;
+	    client = NetworkManager.Singleton.GetInstanceID();
         
         //Pass in ClientId
         JoinServerEvent?.Invoke(client);
         
         //need to add client to list
-		ClientList.Add(client);
+		//ClientList.Add(client);
     }
 
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
-	    Debug.Log(NetworkManager.Singleton.ConnectedClients);
-	    Debug.Log(ClientList.Count);
+	    Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
+	    //Debug.Log(ClientList.Count);
 
 	    //spawn players
-        foreach (var player in ClientList)
+        foreach (var player in ConnectedClientsIds)
         {
 	        
 	        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
 	            .selectedCharacter);
 
 	        //I feel dirty using strings
-	        if (GetComponent<CharacterBase>().characterName == "Shark")
+	        /*if (GetComponent<CharacterBase>().characterName == "Shark")
 	        {
+		        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
+			        .selectedCharacter);
 		        /*NetworkObject shark = Instantiate(sharkPrefab);
-		        shark.GetComponent<NetworkObject>().ChangeOwnership(player);*/
+		        shark.GetComponent<NetworkObject>().ChangeOwnership(player);#1#
 	        }
 
 	        if (GetComponent<CharacterBase>().characterName == "Fish")
 	        {
+		        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
+			        .selectedCharacter);
 		        /*NetworkObject fish = Instantiate(fishPrefab);
-		        fish.GetComponent<NetworkObject>().ChangeOwnership(player);*/
-	        }
+		        fish.GetComponent<NetworkObject>().ChangeOwnership(player);#1#
+	        }*/
         }
     }
 
@@ -90,13 +92,13 @@ public class ServerManager : NetworkManager
 	    if (GUILayout.Button("Host"))
 	    {
 		    StartHost();
-		    JoinServer(NetworkManager.Singleton.ServerClientId);
+		    JoinServer(NetworkManager.Singleton.GetInstanceID());
 	    }
 	    
         if(GUILayout.Button("Client"))
         {
 	        StartClient();
-	        JoinServer(NetworkManager.Singleton.ServerClientId);
+	        JoinServer(NetworkManager.Singleton.GetInstanceID());
         }
 
         if (GUILayout.Button("Server"))
