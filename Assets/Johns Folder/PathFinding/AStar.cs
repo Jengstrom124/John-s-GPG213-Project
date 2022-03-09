@@ -7,6 +7,9 @@ public class AStar : MonoBehaviour
     public WorldScanner worldScanner;
     public Transform seeker, target;
 
+    [Header("Options:")]
+    public bool visualizeOpenCloseLists = false;
+
     private void Update()
     {
         FindPath(seeker.position, target.position);
@@ -20,6 +23,17 @@ public class AStar : MonoBehaviour
 
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
+
+        if(visualizeOpenCloseLists)
+        {
+            worldScanner.openList = openList;
+            worldScanner.closedList = closedList;
+        }
+        else
+        {
+            worldScanner.openList = null;
+            worldScanner.closedList = null;
+        }
 
         openList.Add(startNode);
 

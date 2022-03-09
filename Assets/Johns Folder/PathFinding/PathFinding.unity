@@ -444,6 +444,7 @@ GameObject:
   - component: {fileID: 668529950}
   - component: {fileID: 668529949}
   - component: {fileID: 668529951}
+  - component: {fileID: 668529952}
   m_Layer: 0
   m_Name: Scanner
   m_TagString: Untagged
@@ -491,9 +492,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668529948}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ebb6bc10d97df94985d7ae99a100779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldScanner: {fileID: 668529949}
+  seeker: {fileID: 807946609}
+  target: {fileID: 97203542}
+  visualizeOpenCloseLists: 0
+--- !u!114 &668529952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668529948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fdecb312fa23754e8e967cfe15f60f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   worldScanner: {fileID: 668529949}

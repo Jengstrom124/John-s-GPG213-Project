@@ -11,8 +11,10 @@ public class WorldScanner : MonoBehaviour
     public LayerMask obstacle;
 
     public List<Node> path = new List<Node>();
+    public List<Node> openList = new List<Node>();
+    public List<Node> closedList = new List<Node>();
 
-    private void Start()
+    private void Awake()
     {
         CreateGrid();        
     }
@@ -75,7 +77,7 @@ public class WorldScanner : MonoBehaviour
         {
             for (int y = -1; y < 2; y++)
             {
-                //we are the centre grid to skip us
+                //we are the centre grid - skip us
                 if(x == 0 && y == 0)
                 {
                     continue;
@@ -86,9 +88,13 @@ public class WorldScanner : MonoBehaviour
                     int checkX = (int)node.gridPos.x + x;
                     int checkY = (int)node.gridPos.y + y;
 
-                    if((checkX >= 0 && checkX <= gridSize.x) && (checkY >= 0 && checkY <= gridSize.y))
+                    if((checkX >= 0 && checkX <= gridSize.x -1) && (checkY >= 0 && checkY <= gridSize.y -1))
                     {
                         neighbours.Add(gridNodeReferences[checkX, checkY]);
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
             }
@@ -127,7 +133,6 @@ public class WorldScanner : MonoBehaviour
                     else if(gridNodeReferences[x, y] != startNode)
                     {
                         Gizmos.color = Color.green;
-                        //Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
                     }
 
                     if(path != null)
@@ -135,6 +140,22 @@ public class WorldScanner : MonoBehaviour
                         if(path.Contains(gridNodeReferences[x, y]) && gridNodeReferences[x,y] != endNode)
                         {
                             Gizmos.color = Color.black;
+                        }
+                    }
+
+                    if (openList != null)
+                    {
+                        if (openList.Contains(gridNodeReferences[x, y]) && gridNodeReferences[x, y] != endNode && gridNodeReferences[x, y] != startNode)
+                        {
+                            Gizmos.color = Color.white;
+                        }
+                    }
+
+                    if (closedList != null)
+                    {
+                        if (closedList.Contains(gridNodeReferences[x, y]) && gridNodeReferences[x, y] != endNode && gridNodeReferences[x, y] != startNode)
+                        {
+                            Gizmos.color = Color.blue;
                         }
                     }
 
