@@ -58,14 +58,13 @@ public class ServerManager : NetworkManager
     public void StartGame()
     {
 	    Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
-	    //Debug.Log(ClientList.Count);
 
 	    //spawn players
-        foreach (var player in ConnectedClientsIds)
+        foreach (var player in ConnectedClients)
         {
 	        
-	        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
-	            .selectedCharacter);
+	        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.
+		        GetComponent<PlayerController>().selectedCharacter);
 
 	        //I feel dirty using strings
 	        /*if (GetComponent<CharacterBase>().characterName == "Shark")
