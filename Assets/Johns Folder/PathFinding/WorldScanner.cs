@@ -16,7 +16,10 @@ public class WorldScanner : MonoBehaviour
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
 
-    public List<GameObject> obstacles = new List<GameObject>();
+    public List<Obstacle> obstacles = new List<Obstacle>();
+    Object[] obstacleArray;
+
+    List<Node> objectClosedNodes = new List<Node>();
 
     private void Awake()
     {
@@ -24,9 +27,12 @@ public class WorldScanner : MonoBehaviour
 
         //Sub to all obstacle objects - tell the world scanner to rescan if they move
         //obstacles.Add(FindObjectsOfType<Obstacle>());
-        foreach(GameObject obstacle in obstacles)
+
+        obstacleArray = FindObjectsOfType<Obstacle>(); 
+
+        foreach(Obstacle obstacle in obstacleArray)
         {
-            Debug.Log("Subscribe");
+            obstacle.gameObject.GetComponent<Obstacle>().OnMovedEvent += ReScan;
         }
     }
 
@@ -38,7 +44,7 @@ public class WorldScanner : MonoBehaviour
         }
     }
 
-    void CreateGrid()
+    public void CreateGrid()
     {
         gridNodeReferences = new Node[(int)gridSize.x, (int)gridSize.y];
 
@@ -56,6 +62,104 @@ public class WorldScanner : MonoBehaviour
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;
                 }
+            }
+        }
+    }
+
+    public void ReScan(GameObject go)
+    {
+        Debug.Log(go);
+
+        Vector3 objectPreviousPos = go.GetComponent<Obstacle>().previousPos;
+        Vector3 objectNewPos = go.transform.position;
+
+        Node previousCentreNode = WorldToNodePos(objectPreviousPos);
+        Node currentCentreNode = WorldToNodePos(objectNewPos);
+
+        //Fill list with (blocked) neighbours
+        CheckForBlockedNeighbours(previousCentreNode);
+
+        //Continue to iterate through that list until all blocked nodes have been found
+        for(int i = 0; i < objectClosedNodes.Count; i++)
+        {
+            CheckForBlockedNeighbours(objectClosedNodes[i]);
+        }
+
+        float lowestXPos = objectClosedNodes[0].gridPos.x;
+        float highestXPos = objectClosedNodes[1].gridPos.x;
+        float lowestYPos = objectClosedNodes[0].gridPos.y;
+        float highestYPos = objectClosedNodes[1].gridPos.y;
+
+        foreach(Node n in objectClosedNodes)
+        {
+            float nXPos = n.gridPos.x;
+            float nYPos = n.gridPos.y;
+
+            //Remember the objects shape
+            if(nXPos < lowestXPos)
+            {
+                lowestXPos = nXPos;
+            }
+            else if(nXPos > highestXPos)
+            {
+                highestXPos = nXPos;
+            }
+            else if(nYPos < lowestYPos)
+            {
+                lowestYPos = nYPos;
+            }
+            else if(nYPos > highestYPos)
+            {
+                highestYPos = nYPos;
+            }
+
+            //Rescan OLD Area Only
+            if (Physics.CheckBox(new Vector3(nXPos, 0, nYPos), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+            {
+                // Something is there
+                gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = true;
+            }
+            else
+            {
+                gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = false;
+            }
+        }
+
+        objectClosedNodes.Clear();
+
+        //Using the difference from both the lowest & highest coordinate values to FOR loop through the shape of the object
+        int lowXDifferenceToCentre = (int)previousCentreNode.gridPos.x - (int)lowestXPos;
+        int highXDifferenceToCentre = (int)highestXPos - (int)previousCentreNode.gridPos.x;
+
+        int lowYDifferenceToCentre = (int)previousCentreNode.gridPos.y - (int)lowestYPos;
+        int highYDifferenceToCentre = (int)highestYPos - (int)previousCentreNode.gridPos.y;
+
+        //Scan NEW area ONLY
+        for (int x = ((int)currentCentreNode.gridPos.x - lowXDifferenceToCentre) -1; x <= ((int)currentCentreNode.gridPos.x + highXDifferenceToCentre) +1; x++)
+        {
+            for (int y = ((int)currentCentreNode.gridPos.y - lowYDifferenceToCentre) -1; y <= ((int)currentCentreNode.gridPos.y + highYDifferenceToCentre) +1; y++)
+            {
+                //Check for obstacle
+                if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                {
+                    // Something is there
+                    gridNodeReferences[x, y].isBlocked = true;
+                }
+                else
+                {
+                    gridNodeReferences[x, y].isBlocked = false;
+                }
+            }
+        }
+    }
+
+    void CheckForBlockedNeighbours(Node node)
+    {
+        foreach(Node neighbour in GetNeighbours(node))
+        {
+            if(neighbour.isBlocked && !objectClosedNodes.Contains(neighbour))
+            {
+                objectClosedNodes.Add(neighbour);
             }
         }
     }
