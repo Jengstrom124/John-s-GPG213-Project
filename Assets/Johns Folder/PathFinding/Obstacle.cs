@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : ObstacleBase
 {
     [Header("Ref Only")]
     Vector3 currentPos;
@@ -36,7 +36,8 @@ public class Obstacle : MonoBehaviour
 
         //OnMovedEvent?.Invoke(gameObject);
         //StaticEvents.ReScanEventTest(gameObject);
-        WorldScanner.instance.ReScan(gameObject);
+        //WorldScanner.instance.ReScan(gameObject);
+        StoppedMoving(gameObject);
 
         alreadyUpdatingGrid = false;
     }
