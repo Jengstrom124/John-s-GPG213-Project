@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class WorldScanner : MonoBehaviour
 {
+    //Singleton Declaration
+    public static WorldScanner instance;
+
+    //General Variables
     public Transform startPos, endPos;
     Node startNode, endNode;
     public Vector2 gridSize;
     Node[,] gridNodeReferences;
     public LayerMask obstacle;
 
+    [Header("Option")]
     public bool constantScan = false;
 
+    //List for visualizing nodes only
     public List<Node> path = new List<Node>();
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
@@ -24,17 +30,19 @@ public class WorldScanner : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         CreateGrid();
 
-        //Sub to all obstacle objects - tell the world scanner to rescan if they move
-        //obstacles.Add(FindObjectsOfType<Obstacle>());
+        //Sub to all obstacle objects in the world
+        //obstacleArray = FindObjectsOfType<Obstacle>(); 
 
-        obstacleArray = FindObjectsOfType<Obstacle>(); 
-
-        foreach(Obstacle obstacle in obstacleArray)
+        //foreach(Obstacle obstacle in obstacleArray)
         {
-            obstacle.gameObject.GetComponent<Obstacle>().OnMovedEvent += ReScan;
+            //obstacle.gameObject.GetComponent<Obstacle>().OnMovedEvent += ReScan;
         }
+
+        //StaticEvents.ReScanEvent += ReScan;
     }
 
     void Update()
@@ -85,72 +93,58 @@ public class WorldScanner : MonoBehaviour
             CheckForBlockedNeighbours(objectClosedNodes[i]);
         }
 
-        //These coordinates are used for mappiping out the shape of the object
-        float lowestXPos = objectClosedNodes[0].gridPos.x;
-        float highestXPos = objectClosedNodes[1].gridPos.x;
-        float lowestYPos = objectClosedNodes[0].gridPos.y;
-        float highestYPos = objectClosedNodes[1].gridPos.y;
-
-        foreach(Node n in objectClosedNodes)
+        foreach (Node n in objectClosedNodes)
         {
             float nXPos = n.gridPos.x;
             float nYPos = n.gridPos.y;
 
-            //Loop through all nodes to find the correct node coordinates
-            if(nXPos < lowestXPos)
-            {
-                lowestXPos = nXPos;
-            }
-            else if(nXPos > highestXPos)
-            {
-                highestXPos = nXPos;
-            }
-            else if(nYPos < lowestYPos)
-            {
-                lowestYPos = nYPos;
-            }
-            else if(nYPos > highestYPos)
-            {
-                highestYPos = nYPos;
-            }
-
             //Rescan OLD Area Only - we can do this using our list of closed nodes
-            if (Physics.CheckBox(new Vector3(nXPos, 0, nYPos), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+            if(objectClosedNodes != null)
             {
-                //Something is still there
-                gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = true;
+                if (Physics.CheckBox(new Vector3(nXPos, 0, nYPos), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                {
+                    //Something is still there
+                    gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = true;
+                }
+                else
+                {
+                    gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = false;
+                }
             }
-            else
-            {
-                gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = false;
-            }
+           
         }
 
         //Clear this list for future use
         objectClosedNodes.Clear();
 
-        //Using the difference from both the lowest & highest coordinate values to FOR loop through the shape of the object
-        int lowXDifferenceToCentre = (int)previousCentreNode.gridPos.x - (int)lowestXPos;
-        int highXDifferenceToCentre = (int)highestXPos - (int)previousCentreNode.gridPos.x;
+        //Object Bounds/Size
+        Collider collider = go.GetComponent<Collider>();
+        Vector3 minSize = collider.bounds.min;
+        Vector3 maxSize = collider.bounds.max;
 
-        int lowYDifferenceToCentre = (int)previousCentreNode.gridPos.y - (int)lowestYPos;
-        int highYDifferenceToCentre = (int)highestYPos - (int)previousCentreNode.gridPos.y;
-
-        //Scan NEW area ONLY - we can do this by using the centre node of the object and starting at its lowest x,y variables to its highest x,y variables
-        for (int x = ((int)currentCentreNode.gridPos.x - lowXDifferenceToCentre) -1; x <= ((int)currentCentreNode.gridPos.x + highXDifferenceToCentre) +1; x++)
+        //Scan NEW area ONLY - we can do this by using the bounds of the object
+        for (int x = (int)minSize.x -1; x <= (int)maxSize.x +1; x++)
         {
-            for (int y = ((int)currentCentreNode.gridPos.y - lowYDifferenceToCentre) -1; y <= ((int)currentCentreNode.gridPos.y + highYDifferenceToCentre) +1; y++)
+            for (int y = (int)minSize.z -1; y <= (int)maxSize.z +1; y++)
             {
-                //Check for obstacle
-                if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                //Make sure obstacle is within grid bounds
+                if(((x + 1 <= gridSize.x && x + 1 >= 0) && (y + 1 <= gridSize.y && y + 1 >= 0)) && ((x - 1 <= gridSize.x && x - 1 >= 0) && (y - 1 <= gridSize.y && y - 1 >= 0)))
                 {
-                    // Something is there
-                    gridNodeReferences[x, y].isBlocked = true;
+                    if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                    {
+                        // Something is there
+                        gridNodeReferences[x, y].isBlocked = true;
+                    }
+                    else
+                    {
+                        gridNodeReferences[x, y].isBlocked = false;
+                    }
                 }
                 else
                 {
-                    gridNodeReferences[x, y].isBlocked = false;
+                    Debug.Log("Object Outside of Grid Space");
                 }
+                
             }
         }
     }
@@ -210,16 +204,18 @@ public class WorldScanner : MonoBehaviour
                 else
                 {
                     //check to make neighbour is within the grid
-                    int checkX = (int)node.gridPos.x + x;
-                    int checkY = (int)node.gridPos.y + y;
-
-                    if((checkX >= 0 && checkX <= gridSize.x -1) && (checkY >= 0 && checkY <= gridSize.y -1))
+                    //int checkX = (int)node.gridPos.x + x;
+                    //int checkY = (int)node.gridPos.y + y;
+                    if (node != null)
                     {
-                        neighbours.Add(gridNodeReferences[checkX, checkY]);
-                    }
-                    else
-                    {
-                        continue;
+                        if (((int)node.gridPos.x + x >= 0 && (int)node.gridPos.x + x <= gridSize.x - 1) && ((int)node.gridPos.y + y >= 0 && (int)node.gridPos.y + y <= gridSize.y - 1))
+                        {
+                            neighbours.Add(gridNodeReferences[(int)node.gridPos.x + x, (int)node.gridPos.y + y]);
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                 }
             }

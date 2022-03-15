@@ -554,7 +554,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   constantScan: 0
-  obstacles: []
 --- !u!4 &668529950
 Transform:
   m_ObjectHideFlags: 0

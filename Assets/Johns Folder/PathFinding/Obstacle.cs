@@ -10,7 +10,6 @@ public class Obstacle : MonoBehaviour
     public Vector3 previousPos;
     bool alreadyUpdatingGrid = false;
 
-    Node centreNode;
     public event Action<GameObject> OnMovedEvent;
 
 
@@ -34,7 +33,11 @@ public class Obstacle : MonoBehaviour
 
         previousPos = currentPos;
         currentPos = transform.position;
-        OnMovedEvent?.Invoke(gameObject);
+
+        //OnMovedEvent?.Invoke(gameObject);
+        //StaticEvents.ReScanEventTest(gameObject);
+        WorldScanner.instance.ReScan(gameObject);
+
         alreadyUpdatingGrid = false;
     }
 }
