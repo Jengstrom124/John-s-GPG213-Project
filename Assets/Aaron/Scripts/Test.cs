@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-	public List<ulong> TestClientList = new List<ulong>();
+	public GameObject sharkPrefab;
+	public GameObject fishPrefab;
 
     // Start is called before the first frame update
     void Start()

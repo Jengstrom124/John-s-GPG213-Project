@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NodeCanvas.Tasks.Actions;
 using Unity.Netcode;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -8,18 +9,16 @@ using UnityEngine.UI;
 
 public class ServerManager : NetworkManager
 {
-	//passing a ulong for ClientId?
+    private CharacterSelect characterSelect;
+    public Test test;
+    public Vector3 spawn;
+
+    //passing a ulong for ClientId?
     public event Action<int> JoinServerEvent;
-
-    //need list of clients
-    //public NetworkList<int> ClientList = new NetworkList<int>();
-
-    /*public NetworkObject sharkPrefab;
-    public NetworkObject fishPrefab;*/
 
     private void OnGUI()
     {
-        GUILayout.BeginArea(new Rect(10,10,300,300));
+        GUILayout.BeginArea(new Rect(10, 10, 300, 300));
 
         if (!IsClient && !IsServer)
         {
@@ -30,7 +29,7 @@ public class ServerManager : NetworkManager
         {
             StopButton();
         }
-        
+
         GUILayout.EndArea();
     }
 
@@ -40,87 +39,96 @@ public class ServerManager : NetworkManager
         //sub to StartGameEvent from lobby; call StartGame()
 
         NetworkManager.Singleton.RunInBackground = true;
+        
+        //How else to grab this besides FindObject?
+        characterSelect = FindObjectOfType<CharacterSelect>();
+        test = FindObjectOfType<Test>();
     }
 
     //Called from lobby
     public void JoinServer(int client)
     {
-	    client = NetworkManager.Singleton.GetInstanceID();
-        
+        client = NetworkManager.Singleton.GetInstanceID();
+
         //Pass in ClientId
         JoinServerEvent?.Invoke(client);
-        
+
         //need to add client to list
-		//ClientList.Add(client);
+        //ClientList.Add(client);
     }
 
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
-	    Debug.Log(NetworkManager.Singleton.ConnectedClients.Count);
+        Debug.Log(ConnectedClients.Count);
 
-	    //spawn players
-        foreach (var player in ConnectedClients)
+        //spawn players
+        foreach (var player in ConnectedClientsIds)
         {
-	        
-	        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.
-		        GetComponent<PlayerController>().selectedCharacter);
+            Debug.Log("ID " + player + "; " + "Char = " + ConnectedClients[player].PlayerObject
+                .GetComponent<PlayerController>()
+                .selectedCharacter);
 
-	        //I feel dirty using strings
-	        /*if (GetComponent<CharacterBase>().characterName == "Shark")
-	        {
-		        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
-			        .selectedCharacter);
-		        /*NetworkObject shark = Instantiate(sharkPrefab);
-		        shark.GetComponent<NetworkObject>().ChangeOwnership(player);#1#
-	        }
+            Instantiate(ConnectedClients[player].PlayerObject.GetComponent<PlayerController>().selectedCharacter);
 
-	        if (GetComponent<CharacterBase>().characterName == "Fish")
-	        {
-		        Instantiate(NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.ServerClientId].PlayerObject.GetComponent<PlayerController>()
-			        .selectedCharacter);
-		        /*NetworkObject fish = Instantiate(fishPrefab);
-		        fish.GetComponent<NetworkObject>().ChangeOwnership(player);#1#
-	        }*/
+            //There has to be a less fragile way of linking the prefab to the index?
+            if (ConnectedClients[player].PlayerObject
+                .GetComponent<PlayerController>()
+                .selectedCharacter == characterSelect.CharacterIndex[0])
+            {
+                Instantiate(test.sharkPrefab);
+                //shark.GetComponent<NetworkObject>().Spawn();
+                //shark.GetComponent<NetworkObject>().ChangeOwnership(player);
+            }
+
+            else if (ConnectedClients[player].PlayerObject
+                .GetComponent<PlayerController>()
+                .selectedCharacter == characterSelect.CharacterIndex[1])
+            {
+                Instantiate(test.fishPrefab);
+                //fish.GetComponent<NetworkObject>().Spawn();
+                //fish.GetComponent<NetworkObject>().ChangeOwnership(player);
+            }
         }
     }
 
     #region GUI Buttons
+
     void StartButtons()
     {
-	    if (GUILayout.Button("Host"))
-	    {
-		    StartHost();
-		    JoinServer(NetworkManager.Singleton.GetInstanceID());
-	    }
-	    
-        if(GUILayout.Button("Client"))
+        if (GUILayout.Button("Host"))
         {
-	        StartClient();
-	        JoinServer(NetworkManager.Singleton.GetInstanceID());
+            StartHost();
+            JoinServer(NetworkManager.Singleton.GetInstanceID());
+        }
+
+        if (GUILayout.Button("Client"))
+        {
+            StartClient();
+            JoinServer(NetworkManager.Singleton.GetInstanceID());
         }
 
         if (GUILayout.Button("Server"))
         {
-	        StartServer();
+            StartServer();
         }
     }
 
     void StopButton()
     {
-	    if (GUILayout.Button("Stop Server"))
-	    {
-		    Shutdown();
-	    }
+        if (GUILayout.Button("Stop Server"))
+        {
+            Shutdown();
+        }
 
-	    if (GUILayout.Button("Start Game"))
-	    {
-		    StartGame();
-	    }
+        if (GUILayout.Button("Start Game"))
+        {
+            StartGame();
+        }
     }
 
     #endregion
-    
+
     public void LobbyStartServer()
     {
         NetworkManager.Singleton.StartServer();
