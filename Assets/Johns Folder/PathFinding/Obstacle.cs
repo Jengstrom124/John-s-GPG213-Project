@@ -12,7 +12,6 @@ public class Obstacle : ObstacleBase
 
     public event Action<GameObject> OnMovedEvent;
 
-
     private void Start()
     {
         currentPos = transform.position;

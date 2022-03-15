@@ -22,7 +22,7 @@ public class WorldScanner : MonoBehaviour
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
 
-    //public List<Obstacle> obstacles = new List<Obstacle>();
+    public List<ObstacleBase> dynamicObstacles = new List<ObstacleBase>();
     Object[] obstacleArray;
 
     //Used for storing the closed nodes of an object on the map once it moves (so we can rescan those nodes and update them)
@@ -42,6 +42,7 @@ public class WorldScanner : MonoBehaviour
             //obstacle.gameObject.GetComponent<Obstacle>().OnMovedEvent += ReScan;
         }
 
+        //Sub to single static event
         //StaticEvents.ReScanEvent += ReScan;
     }
 
@@ -128,7 +129,7 @@ public class WorldScanner : MonoBehaviour
             for (int y = (int)minSize.z -1; y <= (int)maxSize.z +1; y++)
             {
                 //Make sure obstacle is within grid bounds
-                if(((x + 1 <= gridSize.x && x + 1 >= 0) && (y + 1 <= gridSize.y && y + 1 >= 0)) && ((x - 1 <= gridSize.x && x - 1 >= 0) && (y - 1 <= gridSize.y && y - 1 >= 0)))
+                if(((x + 1 <= gridSize.x && x + 1 >= 0) && (y + 1 <= gridSize.y && y + 1 >= 0)) && ((x <= gridSize.x && x >= 0) && (y <= gridSize.y && y >= 0)))
                 {
                     if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
                     {
