@@ -16,9 +16,10 @@ public class WorldScanner : MonoBehaviour
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
 
-    public List<Obstacle> obstacles = new List<Obstacle>();
+    //public List<Obstacle> obstacles = new List<Obstacle>();
     Object[] obstacleArray;
 
+    //Used for storing the closed nodes of an object on the map once it moves (so we can rescan those nodes and update them)
     List<Node> objectClosedNodes = new List<Node>();
 
     private void Awake()
@@ -68,23 +69,23 @@ public class WorldScanner : MonoBehaviour
 
     public void ReScan(GameObject go)
     {
-        Debug.Log(go);
-
         Vector3 objectPreviousPos = go.GetComponent<Obstacle>().previousPos;
         Vector3 objectNewPos = go.transform.position;
 
+        //Use this centre node as a reference for how big the object is and where it is on the map
         Node previousCentreNode = WorldToNodePos(objectPreviousPos);
         Node currentCentreNode = WorldToNodePos(objectNewPos);
 
-        //Fill list with (blocked) neighbours
+        //Fill list with (blocked) neighbours of the previous centre node
         CheckForBlockedNeighbours(previousCentreNode);
 
-        //Continue to iterate through that list until all blocked nodes have been found
+        //Continue to iterate through that list until all previous blocked nodes have been found
         for(int i = 0; i < objectClosedNodes.Count; i++)
         {
             CheckForBlockedNeighbours(objectClosedNodes[i]);
         }
 
+        //These coordinates are used for mappiping out the shape of the object
         float lowestXPos = objectClosedNodes[0].gridPos.x;
         float highestXPos = objectClosedNodes[1].gridPos.x;
         float lowestYPos = objectClosedNodes[0].gridPos.y;
@@ -95,7 +96,7 @@ public class WorldScanner : MonoBehaviour
             float nXPos = n.gridPos.x;
             float nYPos = n.gridPos.y;
 
-            //Remember the objects shape
+            //Loop through all nodes to find the correct node coordinates
             if(nXPos < lowestXPos)
             {
                 lowestXPos = nXPos;
@@ -113,10 +114,10 @@ public class WorldScanner : MonoBehaviour
                 highestYPos = nYPos;
             }
 
-            //Rescan OLD Area Only
+            //Rescan OLD Area Only - we can do this using our list of closed nodes
             if (Physics.CheckBox(new Vector3(nXPos, 0, nYPos), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
             {
-                // Something is there
+                //Something is still there
                 gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = true;
             }
             else
@@ -125,6 +126,7 @@ public class WorldScanner : MonoBehaviour
             }
         }
 
+        //Clear this list for future use
         objectClosedNodes.Clear();
 
         //Using the difference from both the lowest & highest coordinate values to FOR loop through the shape of the object
@@ -134,7 +136,7 @@ public class WorldScanner : MonoBehaviour
         int lowYDifferenceToCentre = (int)previousCentreNode.gridPos.y - (int)lowestYPos;
         int highYDifferenceToCentre = (int)highestYPos - (int)previousCentreNode.gridPos.y;
 
-        //Scan NEW area ONLY
+        //Scan NEW area ONLY - we can do this by using the centre node of the object and starting at its lowest x,y variables to its highest x,y variables
         for (int x = ((int)currentCentreNode.gridPos.x - lowXDifferenceToCentre) -1; x <= ((int)currentCentreNode.gridPos.x + highXDifferenceToCentre) +1; x++)
         {
             for (int y = ((int)currentCentreNode.gridPos.y - lowYDifferenceToCentre) -1; y <= ((int)currentCentreNode.gridPos.y + highYDifferenceToCentre) +1; y++)
