@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedCharacter: {fileID: 0}
+  playerName: Test Name
+  playerColour:
+    m_InternalValue: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &8028888742822982695
 MonoBehaviour:
   m_ObjectHideFlags: 0
