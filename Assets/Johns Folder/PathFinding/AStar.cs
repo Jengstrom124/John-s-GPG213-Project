@@ -6,23 +6,39 @@ using System;
 public class AStar : MonoBehaviour
 {
     public WorldScanner worldScanner;
-    public Transform seeker, target;
-
     public event Action<List<Node>> pathFoundEvent;
 
     [Header("Options:")]
     public bool visualizeOpenCloseLists = false;
 
-    private void Update()
+    //HACK for now
+    public ThingToMove thingToMove;
+
+    public Node targetNode;
+    Transform start;
+
+    private void Start()
     {
-        FindPath(seeker.position, target.position);
+        thingToMove.atEndNodeEvent += FindPath;
+        worldScanner.onReScanEvent += ReScanPath;
     }
 
-    void FindPath(Vector3 startPos, Vector3 targetPos)
+    private void Update()
+    {
+        //if(targetNode != null)
+        {
+            //FindPath(seeker, targetNode);
+        }
+    }
+
+    public void FindPath(Transform startPos, Node _targetNode)
     {
         //Convert world positions to grid positions
-        Node startNode = worldScanner.WorldToNodePos(startPos);
-        Node targetNode = worldScanner.WorldToNodePos(targetPos);
+        Node startNode = worldScanner.WorldToNodePos(startPos.position);
+
+        targetNode = _targetNode;
+        start = startPos;
+        //Node targetNode = worldScanner.WorldToNodePos(targetPos);
 
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
@@ -111,10 +127,7 @@ public class AStar : MonoBehaviour
                     }
                 }
             }
-
-
         }
-
     }
 
     void RetracePath(Node start, Node end)
@@ -134,6 +147,7 @@ public class AStar : MonoBehaviour
         path.Reverse();
 
         worldScanner.path = path;
+        worldScanner.endNode = end;
 
         pathFoundEvent?.Invoke(path);
     }
@@ -141,5 +155,10 @@ public class AStar : MonoBehaviour
     int DistanceCheck(Node a, Node b)
     {
         return (int)Vector2.Distance(worldScanner.NodeToWorldPos(a), worldScanner.NodeToWorldPos(b));
+    }
+
+    void ReScanPath()
+    {
+        FindPath(start, targetNode);
     }
 }

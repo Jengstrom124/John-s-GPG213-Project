@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class WorldScanner : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class WorldScanner : MonoBehaviour
 
     //General Variables
     public Transform startPos, endPos;
-    Node startNode, endNode;
+    public Node startNode, endNode;
     public Vector2 gridSize;
-    Node[,] gridNodeReferences;
+    public Node[,] gridNodeReferences;
     public LayerMask obstacle;
 
     [Header("Option")]
@@ -21,12 +22,15 @@ public class WorldScanner : MonoBehaviour
     public List<Node> path = new List<Node>();
     public List<Node> openList = new List<Node>();
     public List<Node> closedList = new List<Node>();
+    public List<Node> totalOpenNodes = new List<Node>();
 
     public List<ObstacleBase> dynamicObstacles = new List<ObstacleBase>();
-    Object[] obstacleArray;
+    Obstacle[] obstacleArray;
 
     //Used for storing the closed nodes of an object on the map once it moves (so we can rescan those nodes and update them)
     List<Node> objectClosedNodes = new List<Node>();
+
+    public event Action onReScanEvent;
 
     private void Awake()
     {
@@ -72,6 +76,10 @@ public class WorldScanner : MonoBehaviour
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;
                 }
+                else
+                {
+                    totalOpenNodes.Add(gridNodeReferences[x, y]);
+                }
             }
         }
     }
@@ -106,10 +114,14 @@ public class WorldScanner : MonoBehaviour
                 {
                     //Something is still there
                     gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = true;
+
+                    RemoveNodeFromOpenNodeList(gridNodeReferences[(int)nXPos, (int)nYPos]);
                 }
                 else
                 {
                     gridNodeReferences[(int)nXPos, (int)nYPos].isBlocked = false;
+
+                    AddNodeToOpenNodeList(gridNodeReferences[(int)nXPos, (int)nYPos]);
                 }
             }
            
@@ -135,10 +147,14 @@ public class WorldScanner : MonoBehaviour
                     {
                         // Something is there
                         gridNodeReferences[x, y].isBlocked = true;
+
+                        RemoveNodeFromOpenNodeList(gridNodeReferences[x, y]);
                     }
                     else
                     {
                         gridNodeReferences[x, y].isBlocked = false;
+
+                        AddNodeToOpenNodeList(gridNodeReferences[x, y]);
                     }
                 }
                 else
@@ -148,6 +164,8 @@ public class WorldScanner : MonoBehaviour
                 
             }
         }
+
+        onReScanEvent?.Invoke();
     }
 
     void CheckForBlockedNeighbours(Node node)
@@ -225,13 +243,29 @@ public class WorldScanner : MonoBehaviour
         return neighbours;
     }
 
+    void RemoveNodeFromOpenNodeList(Node node)
+    {
+        if (totalOpenNodes.Contains(node))
+        {
+            totalOpenNodes.Remove(node);
+        }
+    }
+
+    void AddNodeToOpenNodeList(Node node)
+    {
+        if (!totalOpenNodes.Contains(node))
+        {
+            totalOpenNodes.Add(node);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         //Stop constant null errors when not in play mode using null check
         if(gridNodeReferences != null)
         {        
             startNode = WorldToNodePos(startPos.position);
-            endNode = WorldToNodePos(endPos.position);
+            //endNode = WorldToNodePos(endPos.position);
 
             //loop through each node and draw a cube for each grid position
             for (int x = 0; x < gridSize.x; x++)
