@@ -241,8 +241,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7688179865695734824}
   - component: {fileID: 7688179865695734827}
-  - component: {fileID: 7688179865695734826}
-  - component: {fileID: 2966812561824268125}
   m_Layer: 0
   m_Name: Lobby User Interface
   m_TagString: Untagged
@@ -280,67 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JoinedClients: {fileID: 7688179867083144782}
   UIClientPrefab: {fileID: 7653463898304630573, guid: 48f865df9172b9746bccc7e9a35c8e67, type: 3}
-  ServerManager: {fileID: 7688179865695734826}
---- !u!114 &7688179865695734826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7688179865695734825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49600d1643b017f4687c38853c2b75bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RunInBackground: 1
-  LogLevel: 1
-  NetworkConfig:
-    ProtocolVersion: 0
-    NetworkTransport: {fileID: 2966812561824268125}
-    PlayerPrefab: {fileID: 7653463898304630573, guid: 48f865df9172b9746bccc7e9a35c8e67, type: 3}
-    NetworkPrefabs:
-    - Override: 0
-      Prefab: {fileID: 7653463898304630573, guid: 48f865df9172b9746bccc7e9a35c8e67, type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    TickRate: 30
-    ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
-    ConnectionData: 
-    EnableTimeResync: 0
-    TimeResyncInterval: 30
-    EnsureNetworkVariableLengthSafety: 0
-    EnableSceneManagement: 1
-    ForceSamePrefabs: 1
-    RecycleNetworkIds: 1
-    NetworkIdRecycleDelay: 120
-    RpcHashSize: 0
-    LoadSceneTimeOut: 120
-    MessageBufferTimeout: 20
-    EnableNetworkLogs: 1
-  test: {fileID: 0}
-  spawn: {x: 0, y: 0, z: 0}
---- !u!114 &2966812561824268125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7688179865695734825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b84c2d8dfe509a34fb59e2b81f8e1319, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageBufferSize: 5120
-  MaxConnections: 100
-  MaxSentMessageQueueSize: 128
-  ConnectAddress: 127.0.0.1
-  ConnectPort: 7777
-  ServerListenPort: 7777
-  MessageSendMode: 0
+  ServerManager: {fileID: 0}
 --- !u!1 &7688179865763728455
 GameObject:
   m_ObjectHideFlags: 0
