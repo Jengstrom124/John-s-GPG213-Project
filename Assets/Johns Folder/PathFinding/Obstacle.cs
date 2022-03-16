@@ -16,9 +16,12 @@ public class Obstacle : ObstacleBase
     {
         currentPos = transform.position;
     }
-
+    
     private void Update()
     {
+        //Restricting movement to grid based movement
+        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.position.z));
+
         if(transform.position != currentPos && !alreadyUpdatingGrid)
         {
             alreadyUpdatingGrid = true;
