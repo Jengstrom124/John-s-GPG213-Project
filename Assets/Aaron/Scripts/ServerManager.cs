@@ -16,8 +16,6 @@ public class ServerManager : NetworkManager
     //passing a ulong for ClientId?
     public event Action<int> JoinServerEvent;
 
-    public NetworkList<NetworkObjectReference> NetworkedObjects = new NetworkList<NetworkObjectReference>();
-
     private void OnGUI()
     {
         GUILayout.BeginArea(new Rect(10, 10, 300, 300));
@@ -62,21 +60,12 @@ public class ServerManager : NetworkManager
     {
         NetworkManager networkManager = this;
 
-        networkManager.SpawnManager.SpawnedObjects.TryGetValue(keyClientId, out NetworkObject networkObject);
+        
+        //networkManager.SpawnManager.SpawnedObjects.TryGetValue(keyClientId, out NetworkObject networkObject);
 
+        NetworkObject networkObject = networkManager.SpawnManager.GetPlayerNetworkObject(keyClientId);
+        
         return networkObject;
-    }
-    
-    
-    
-    private void OnConnectedCallback(ulong clientId)
-    {
-        NetworkObject spawnedObj = Resolve(clientId);
-
-        if (spawnedObj != null)
-        {
-            NetworkedObjects.Add(new NetworkObjectReference(spawnedObj));
-        }
     }
 
     //Called from lobby
