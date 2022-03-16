@@ -11,21 +11,23 @@ namespace Gerallt
     {
         public GameObject JoinedClients;
         public GameObject UIClientPrefab;
-        //public GeralltNetworkManager GeralltNetworkManager;
+        
         public ServerManager ServerManager;
+        public GNetworkedListBehaviour GNetworkedListBehaviour;
         
-        public void OnEnable()
+        public void Awake()
         {
-            //GeralltNetworkManager.OnJoinServerEvent += OnJoinServer;
             //ServerManager.JoinServerEvent += OnJoinServer;
-            ServerManager.OnClientConnectedCallback += OnJoinServer;
+            //ServerManager.OnClientConnectedCallback += OnJoinServer;
+            GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
-        
+
         public void OnDisable()
         {
             //GeralltNetworkManager.OnJoinServerEvent -= OnJoinServer;
             //ServerManager.JoinServerEvent -= OnJoinServer;
-            ServerManager.OnClientConnectedCallback -= OnJoinServer;
+            //ServerManager.OnClientConnectedCallback -= OnJoinServer;
+            //GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
         }
 
         public void OnJoinButtonClicked()
@@ -38,41 +40,41 @@ namespace Gerallt
             UpdateClientsList();
         }
 
+        private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<ulong> changeEvent)
+        {
+            UpdateClientsList();
+        }
 
 
         public void UpdateClientsList()
         {
+            // if (!NetworkManager.Singleton.IsClient)
+            //     return;
+            
             // Destroy all client UI instances in joined clients list
             foreach (Transform child in JoinedClients.transform)
             {
                 GameObject.Destroy(child);
             }
-            
-            // Refresh client UI with newly connected clients:
-            foreach(NetworkObjectReference spawnedObjRef in ServerManager.NetworkedObjects)
+
+            if (GNetworkedListBehaviour.NetworkedObjects != null)
             {
-                NetworkObject spawnedObj = ServerManager.Resolve(spawnedObjRef.NetworkObjectId);
-
-                PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
-
-                if (playerController != null)
+                // Refresh client UI with newly connected clients:
+                foreach(ulong clientId in GNetworkedListBehaviour.NetworkedObjects)
                 {
-                    GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                    var tmp = clientInstance.GetComponent<TextMeshPro>();
-                    
-                    tmp.SetText(playerController.playerName);
+                    NetworkObject spawnedObj = ServerManager.Resolve(clientId);
+
+                    PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
+
+                    if (playerController != null)
+                    {
+                        GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
+                        var tmp = clientInstance.GetComponent<UIClient>();
+                        tmp.UpdateUI(playerController);
+
+                    }
                 }
             }
-        }
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
         }
     }
 }
