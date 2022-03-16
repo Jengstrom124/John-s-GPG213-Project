@@ -25,6 +25,11 @@ namespace Gerallt
             //GeralltNetworkManager.OnJoinServerEvent -= OnJoinServer;
             ServerManager.JoinServerEvent -= OnJoinServer;
         }
+
+        public void OnJoinButtonClicked()
+        {
+            
+        }
         
         private void OnJoinServer(int clientId)
         {
