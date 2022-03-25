@@ -11,19 +11,34 @@ namespace Gerallt
         public ServerManager ServerManager;
         //public NetworkList<NetworkObjectReference> NetworkedObjects;// = new NetworkList<NetworkObjectReference>();
         //[SerializeField] public NetworkList<ulong> NetworkedObjects = new NetworkList<ulong>(NetworkVariableReadPermission.Everyone, new List<ulong>());
-        [SerializeField] public NetworkList<ulong> NetworkedObjects = new NetworkList<ulong>();
+        [SerializeField] public NetworkList<ulong> NetworkedObjects;
         public void Awake()
         {
-            //if(NetworkedObjects!= null) NetworkedObjects.Dispose();
-            
-            //NetworkedObjects = new NetworkList<NetworkObjectReference>();
-            
-            //NetworkedObjects = new GNetworkList<ulong>(NetworkVariableReadPermission.Everyone, new List<ulong>());
+            NetworkedObjects = new NetworkList<ulong>();
             
             ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
             ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
         }
-
+        
+        // public override void OnNetworkSpawn()
+        // {
+        //     if (!IsClient)
+        //     {
+        //         enabled = false;
+        //     }
+        //     else
+        //     {
+        //         ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+        //         ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+        //     }
+        // }
+        //
+        // public override void OnNetworkDespawn()
+        // {
+        //     ServerManager.OnClientConnectedCallback -= ServerManager_OnOnClientConnectedCallback;
+        //     ServerManager.OnClientDisconnectCallback -= ServerManager_OnOnClientDisconnectCallback;
+        // }
+        
         public void OnDisable()
         {
             //ServerManager.OnClientConnectedCallback -= ServerManager_OnOnClientConnectedCallback;

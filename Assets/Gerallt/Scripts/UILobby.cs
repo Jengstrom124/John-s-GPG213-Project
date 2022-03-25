@@ -15,7 +15,7 @@ namespace Gerallt
         public ServerManager ServerManager;
         public GNetworkedListBehaviour GNetworkedListBehaviour;
         
-        public void Awake()
+        public void Start()
         {
             //ServerManager.JoinServerEvent += OnJoinServer;
             //ServerManager.OnClientConnectedCallback += OnJoinServer;
@@ -28,6 +28,11 @@ namespace Gerallt
             //ServerManager.JoinServerEvent -= OnJoinServer;
             //ServerManager.OnClientConnectedCallback -= OnJoinServer;
             //GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
+        }
+
+        public void OnDestroy()
+        {
+            GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
         }
 
         public void OnJoinButtonClicked()
@@ -48,17 +53,21 @@ namespace Gerallt
 
         public void UpdateClientsList()
         {
-            // if (!NetworkManager.Singleton.IsClient)
-            //     return;
+             //if (!NetworkManager.Singleton.IsClient)
+             //    return;
             
             // Destroy all client UI instances in joined clients list
-            foreach (Transform child in JoinedClients.transform)
+            for (int idx = 0; idx < JoinedClients.transform.childCount; idx++ )
             {
-                GameObject.Destroy(child);
+                Transform child = JoinedClients.transform.GetChild(idx);
+                
+                GameObject.Destroy(child.gameObject);
             }
 
             if (GNetworkedListBehaviour.NetworkedObjects != null)
             {
+                //GNetworkedListBehaviour.NetworkedObjects
+                //var x = ServerManager.ConnectedClientsIds;
                 // Refresh client UI with newly connected clients:
                 foreach(ulong clientId in GNetworkedListBehaviour.NetworkedObjects)
                 {
@@ -69,8 +78,8 @@ namespace Gerallt
                     if (playerController != null)
                     {
                         GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                        var tmp = clientInstance.GetComponent<UIClient>();
-                        tmp.UpdateUI(playerController);
+                        var uiClient = clientInstance.GetComponent<UIClient>();
+                        uiClient.UpdateUI(playerController);
 
                     }
                 }
