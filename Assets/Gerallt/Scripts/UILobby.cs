@@ -15,21 +15,20 @@ namespace Gerallt
         public ServerManager ServerManager;
         public GNetworkedListBehaviour GNetworkedListBehaviour;
         
+        public event Action OnGameStart;
+        
         public void Start()
         {
-            //ServerManager.JoinServerEvent += OnJoinServer;
-            //ServerManager.OnClientConnectedCallback += OnJoinServer;
+            // if (!ServerManager.IsClient)
+            // {
+            //     this.enabled = false;
+            //
+            //     return;
+            // }
+            
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
-
-        public void OnDisable()
-        {
-            //GeralltNetworkManager.OnJoinServerEvent -= OnJoinServer;
-            //ServerManager.JoinServerEvent -= OnJoinServer;
-            //ServerManager.OnClientConnectedCallback -= OnJoinServer;
-            //GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
-        }
-
+        
         public void OnDestroy()
         {
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
@@ -40,12 +39,7 @@ namespace Gerallt
             
         }
         
-        private void OnJoinServer(ulong clientId)
-        {
-            UpdateClientsList();
-        }
-
-        private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<ulong> changeEvent)
+        private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)
         {
             UpdateClientsList();
         }
@@ -69,18 +63,21 @@ namespace Gerallt
                 //GNetworkedListBehaviour.NetworkedObjects
                 //var x = ServerManager.ConnectedClientsIds;
                 // Refresh client UI with newly connected clients:
-                foreach(ulong clientId in GNetworkedListBehaviour.NetworkedObjects)
+                foreach(LobbyPlayerData lobbyPlayerData in GNetworkedListBehaviour.NetworkedObjects)
                 {
-                    NetworkObject spawnedObj = ServerManager.Resolve(clientId);
+                    NetworkObject spawnedObj = ServerManager.Resolve(lobbyPlayerData.ClientId);
 
-                    PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
-
-                    if (playerController != null)
+                    if (spawnedObj != null)
                     {
-                        GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                        var uiClient = clientInstance.GetComponent<UIClient>();
-                        uiClient.UpdateUI(playerController);
-
+                        PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
+                    
+                        if (playerController != null)
+                        {
+                            GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
+                            var uiClient = clientInstance.GetComponent<UIClient>();
+                            uiClient.UpdateUI(playerController);
+                    
+                        }
                     }
                 }
             }

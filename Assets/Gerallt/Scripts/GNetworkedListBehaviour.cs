@@ -11,13 +11,18 @@ namespace Gerallt
         public ServerManager ServerManager;
         //public NetworkList<NetworkObjectReference> NetworkedObjects;// = new NetworkList<NetworkObjectReference>();
         //[SerializeField] public NetworkList<ulong> NetworkedObjects = new NetworkList<ulong>(NetworkVariableReadPermission.Everyone, new List<ulong>());
-        [SerializeField] public NetworkList<ulong> NetworkedObjects;
+        public NetworkList<LobbyPlayerData> NetworkedObjects;
+        
         public void Awake()
         {
-            NetworkedObjects = new NetworkList<ulong>();
+            //NetworkedObjects = new NetworkList<LobbyPlayerData>(NetworkVariableReadPermission.Everyone, new List<LobbyPlayerData>());
+            NetworkedObjects = new NetworkList<LobbyPlayerData>();
             
-            ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-            ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+            //if (ServerManager.IsServer)
+            {
+                ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+                ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+            }
         }
         
         // public override void OnNetworkSpawn()
@@ -47,12 +52,36 @@ namespace Gerallt
 
         private void ServerManager_OnOnClientConnectedCallback(ulong clientId)
         {
-            NetworkedObjects.Add(clientId);
+            LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
+            lobbyPlayerData.ClientId = clientId;
+            
+            NetworkedObjects.Add(lobbyPlayerData);
+
+            //UpdateOnConnectedClientRpc(clientId);
         }
         
         private void ServerManager_OnOnClientDisconnectCallback(ulong clientId)
         {
-            NetworkedObjects.Remove(clientId);
+            // Remove LobbyPlayerData object matching clientId from NetworkedObjects list 
+            for (int i = 0; i < NetworkedObjects.Count; i++)
+            {
+                LobbyPlayerData item = NetworkedObjects[i];
+
+                if (item.ClientId == clientId)
+                {
+                    NetworkedObjects.Remove(item);
+                    break;
+                }
+            }
+        }
+
+        [ClientRpc]
+        void UpdateOnConnectedClientRpc(ulong clientId)
+        {
+            // LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
+            // lobbyPlayerData.ClientId = clientId;
+            //
+            // NetworkedObjects.Add(lobbyPlayerData);
         }
     }
 }
