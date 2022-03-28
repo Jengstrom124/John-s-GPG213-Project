@@ -24,7 +24,7 @@ public class WorldScanner : MonoBehaviour
     public List<Node> closedList = new List<Node>();
     public List<Node> totalOpenNodes = new List<Node>();
 
-    public List<ObstacleBase> dynamicObstacles = new List<ObstacleBase>();
+    //public List<ObstacleBase> dynamicObstacles = new List<ObstacleBase>();
     Obstacle[] obstacleArray;
 
     //Used for storing the closed nodes of an object on the map once it moves (so we can rescan those nodes and update them)
@@ -159,12 +159,13 @@ public class WorldScanner : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Object Outside of Grid Space");
+                    Debug.Log(go.name + " Outside of Grid Space");
                 }
                 
             }
         }
 
+        //Shoot an event to let pathfinding algorithms recalculate a path based on the new grid information
         onReScanEvent?.Invoke();
     }
 

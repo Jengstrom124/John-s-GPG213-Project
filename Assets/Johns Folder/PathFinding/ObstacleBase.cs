@@ -10,7 +10,7 @@ public class ObstacleBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        WorldScanner.instance.dynamicObstacles.Add(this);
+        //WorldScanner.instance.dynamicObstacles.Add(this);
     }
 
     public void StoppedMoving(GameObject go)
