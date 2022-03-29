@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement />
+    <ui:ScrollView />
+    <ui:Label text="Label" display-tooltip-when-elided="true" />
+    <ui:Button text="Button" display-tooltip-when-elided="true" />
+    <ui:Toggle label="Toggle" />
+    <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" text="filler text" />
+    <ui:RadioButton label="Radio Button" />
+</ui:UXML>
