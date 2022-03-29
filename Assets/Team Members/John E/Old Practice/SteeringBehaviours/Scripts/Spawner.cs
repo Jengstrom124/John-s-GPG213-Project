@@ -5,6 +5,10 @@ using UnityEditor;
 
 public class Spawner : MonoBehaviour
 {
+    //Spawn Area
+    public Vector2 xCoords = new Vector2(0, 50);
+    public Vector2 yCoords = new Vector2(0, 50);
+
     public GameObject objectToSpawn;
     public int spawnCount;
 
@@ -17,7 +21,7 @@ public class Spawner : MonoBehaviour
         for(int i = 0; i < spawnCount; i++)
         {
             GameObject newObject = PrefabUtility.InstantiatePrefab(objectToSpawn) as GameObject;
-            newObject.transform.position = new Vector3(Random.Range(-50, 30), 50, Random.Range(-40, 30));
+            newObject.transform.position = new Vector3(Random.Range(xCoords.x, xCoords.y), 0, Random.Range(yCoords.x, yCoords.y));
 
             if(spawnFacingForward)
             {
