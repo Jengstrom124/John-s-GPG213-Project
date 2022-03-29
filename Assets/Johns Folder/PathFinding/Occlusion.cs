@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Occlusion : MonoBehaviour
 {
-    int rayCount = 10;
-
+    public int rayCount = 4;
     public float rayLength = 2.5f;
-    public float fov = 20f; 
+    public float fov = 2f; 
 
     public Transform test;
 
@@ -35,7 +34,7 @@ public class Occlusion : MonoBehaviour
 
             Physics.Raycast(position.position, new Vector3(0, 0, (fov * i) + 1), out hit, rayLength, 255, QueryTriggerInteraction.Ignore);
 
-            Debug.DrawRay(position.position, new Vector3(0, 0, (fov * i) + 1), Color.green);
+            Debug.DrawRay(position.position, new Vector3(0, 0, (fov * i) + 1) * rayLength, Color.green, 5f);
 
             hits.Add(hit);
         }

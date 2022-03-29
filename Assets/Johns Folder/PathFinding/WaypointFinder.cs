@@ -7,16 +7,23 @@ public class WaypointFinder : MonoBehaviour
     public WorldScanner worldScanner;
 
     public Vector2 randomNodePos;
+    Vector2 previousNode;
     
     public Node RandomNodePosition()
     {
-        randomNodePos = new Vector2(Random.Range(0, (int)worldScanner.gridSize.x), Random.Range(0, (int)worldScanner.gridSize.y));
+        GenerateRandomNode();
 
-        if(worldScanner.gridNodeReferences[(int)randomNodePos.x, (int)randomNodePos.y].isBlocked)
+        previousNode = randomNodePos;
+        return worldScanner.gridNodeReferences[(int)randomNodePos.x, (int)randomNodePos.y];
+    }
+
+    void GenerateRandomNode()
+    {
+        do
         {
             randomNodePos = new Vector2(Random.Range(0, (int)worldScanner.gridSize.x), Random.Range(0, (int)worldScanner.gridSize.y));
         }
-
-        return worldScanner.gridNodeReferences[(int)randomNodePos.x, (int)randomNodePos.y];
+        while (worldScanner.gridNodeReferences[(int)randomNodePos.x, (int)randomNodePos.y].isBlocked || randomNodePos == previousNode);
+        
     }
 }
