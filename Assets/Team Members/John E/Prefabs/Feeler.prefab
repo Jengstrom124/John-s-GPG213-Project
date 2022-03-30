@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8743433351232840263}
   - component: {fileID: 8743433351232840264}
   m_Layer: 0
-  m_Name: EmergencyFeeler
+  m_Name: Feeler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,11 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c275963767a60fc48ae3a2f8285bcf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLength: 5
-  dragMultiplier: 1
-  speedReductionMultiplier: 0.5
-  minSpeed: -1
+  maxLength: 25
+  dragMultiplier: 20
+  speedReductionMultiplier: 10
+  minSpeed: -10
+  emergencyFeeler: 0
+  emergencyFeelerInUse: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 119
   myTurnDirection: 0
   turnForce: 0
   distance: 0
   xVelocity: 0
+  updateSpeed: 0
+  feelerActive: 0
