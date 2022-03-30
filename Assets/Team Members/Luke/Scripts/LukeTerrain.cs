@@ -44,12 +44,13 @@ public class LukeTerrain : MonoBehaviour
 	{
 		offsetX = Random.Range(-1000f,1000f);
 		offsetY = Random.Range(-1000f,1000f);
+		terrainGenerator.scale = scale;
+		terrainGenerator.calculateHeightCallback = CalculateHeight;
+		terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
 	}
 	
 	void Update()
     {
-	    terrainGenerator.scale = scale;
-	    terrainGenerator.calculateHeightCallback = CalculateHeight;
-	    terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
+
     }
 }

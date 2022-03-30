@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class WaterSpawner : MonoBehaviour
 {
 	public TerrainGenerator terrainGenerator;
-	public Terrain _terrain;
+	/*public Terrain _terrain;*/
 	private TerrainData _terrainData;
 	public GameObject coralPrefab;
 
@@ -16,12 +16,12 @@ public class WaterSpawner : MonoBehaviour
 	public int xOffset;
 	public int yOffset;
 
-	private IEnumerator Timer(float seconds)
+	/*private IEnumerator Timer(float seconds)
 	{
 		yield return new WaitForSeconds(seconds);
 		Debug.Log("time");
 		FunctionLoop();
-	}
+	}*/
 
 	private void FunctionLoop()
 	{
@@ -41,11 +41,9 @@ public class WaterSpawner : MonoBehaviour
 			float xCoord = (float) x / terrainGenerator.width;
 			float yCoord = (float) y / terrainGenerator.height;
 			float value = Mathf.PerlinNoise(xCoord * frequency + xOffset, yCoord * frequency + yOffset);
-			Debug.Log(value);
-			//if statement
 			if (value > threshold)
 			{
-				Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y) + _terrain.transform.position;
+				Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
 				Instantiate(coralPrefab, worldPosition, Quaternion.identity, transform);
 			}
 		}
@@ -56,8 +54,8 @@ public class WaterSpawner : MonoBehaviour
 		_terrainData = terrainGenerator.terrainDataForRandomExample;
 		xOffset = Random.Range(-1000, 1000);
 		yOffset = Random.Range(-1000, 1000);
-
-	StartCoroutine(Timer(1f));
+		/*StartCoroutine(Timer(0.1f));*/
+		FunctionLoop();
 	}
 
     // Update is called once per frame
