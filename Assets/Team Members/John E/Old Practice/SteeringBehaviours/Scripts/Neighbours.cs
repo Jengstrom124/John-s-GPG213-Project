@@ -6,11 +6,21 @@ public class Neighbours : MonoBehaviour
 {
     public List<GameObject> neighbours;
 
+    public List<Collider> fishColliders = new List<Collider>();
+
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<MoveForwards>() != null && !neighbours.Contains(other.gameObject))
+        if(other == other.GetComponent<CapsuleCollider>())
         {
-            neighbours.Add(other.gameObject);
+            Debug.Log("Skip");
+        }
+        else
+        {
+            if (other.GetComponent<BoidModel>() != null && !neighbours.Contains(other.gameObject))
+            {
+                neighbours.Add(other.gameObject);
+            }
         }
     }
 

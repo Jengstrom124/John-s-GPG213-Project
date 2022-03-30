@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3956263565174007993}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fish_ViewModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,8 @@ GameObject:
   - component: {fileID: 5782324754834491190}
   - component: {fileID: 7435328888860800600}
   - component: {fileID: 7803384113620637917}
-  m_Layer: 0
+  - component: {fileID: -7430627336242286335}
+  m_Layer: 7
   m_Name: FishModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b167424619dd649a8c47f1176bdb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  maxSpeed: 15
+  speed: 5
+  maxSpeed: 8
 --- !u!114 &2219981257583123347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
+  fishColliders: []
 --- !u!114 &3166194528815824960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eef0b1062ff446488876b0d8490dbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 10
+  force: 2
 --- !u!114 &6844581979469349891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11587027d746784bbdccb5d936b96fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 0.1
+  force: 0.25
 --- !u!114 &5782324754834491190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d0585697ae8f241bbaf87132c216e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 10
-  force: 10
+  minDistance: 5
+  force: 5
   myDistance: 0
 --- !u!114 &7435328888860800600
 MonoBehaviour:
@@ -250,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
-  emergencyFeeler: {fileID: 0}
+  emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3
   fov: 20
@@ -264,7 +266,24 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 26.5
-  m_Height: 23.6
+  m_Radius: 26.35
+  m_Height: 27.18
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 13.8}
+  m_Center: {x: 0, y: 0, z: 12.9}
+--- !u!114 &-7430627336242286335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219981257583123356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0557d8abc44e4db468aad1be1c5bf64e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviours: []
+  feelers: []
+  activeFeelers: []
+  activeEmergencyFeelers: []
+  emergencyFeelerInUse: 0

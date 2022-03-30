@@ -41,7 +41,7 @@ public class Separation : SteeringBase
 			//if we are too close
 			if(myDistance < minDistance)
             {
-				separationMove = transform.InverseTransformPoint(neighbour.transform.position);
+				separationMove += transform.InverseTransformPoint(neighbour.transform.position);
             }
 
 		}

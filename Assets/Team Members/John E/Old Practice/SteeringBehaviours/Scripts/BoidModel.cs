@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BoidModel : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class BoidModel : MonoBehaviour
     List<GameObject> rightFeelers = new List<GameObject>();
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SpawnFeelers();
     }
@@ -61,13 +62,28 @@ public class BoidModel : MonoBehaviour
                 rightFeelers.Add(newFeeler);
             }
 
-            /*
+            
             if(i < emergencyFeelerCount)
             {
                 GameObject newEmergencyFeeler = Instantiate(emergencyFeeler, this.transform);
-                avoidObstacle = newEmergencyFeeler.GetComponent<AvoidObstacle>();
+                AvoidObstacle emergencyAvoidObstacle = newEmergencyFeeler.GetComponent<AvoidObstacle>();
+
+                if(i == 0)
+                {
+                    emergencyAvoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Straight;
+                    newEmergencyFeeler.transform.localRotation = Quaternion.Euler(transform.forward);
+                }
+                else if(i == 1)
+                {
+                    emergencyAvoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Left;
+                    newEmergencyFeeler.transform.localRotation = Quaternion.Euler(0, -35f, 0);
+                }
+                else
+                {
+                    emergencyAvoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Right;
+                    newEmergencyFeeler.transform.localRotation = Quaternion.Euler(0, 35f, 0);
+                }
             }
-            */
         }
     }
 
