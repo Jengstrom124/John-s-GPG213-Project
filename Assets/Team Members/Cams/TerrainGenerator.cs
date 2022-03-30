@@ -32,6 +32,7 @@ public class TerrainGenerator : MonoBehaviour
 	
 	private void Start()
 	{
+		// Demo code. So this in your own script
 		if (randomHeightTest)
 		{
 			// Set the callback to a temp randomiser function
@@ -40,7 +41,7 @@ public class TerrainGenerator : MonoBehaviour
 		}
 	}
 
-	TerrainData GenerateTerrain(TerrainData terrainData)
+	public TerrainData GenerateTerrain(TerrainData terrainData)
 	{
 		terrainData.heightmapResolution = width + 1;
 		terrainData.size = new Vector3(width, depth, height);
