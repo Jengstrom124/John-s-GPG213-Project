@@ -1,58 +1,94 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KevinTerrainGen : MonoBehaviour
 {
+    public TerrainGenerator terrainGenerator;
+
     public TerrainData terrainData;
+   
 
-    public int width = 256;
-    public int height = 256;
-    public int depth = 20;
-
-    public float scale = 20f;
-
-    public float offsetX = 100f;
-    public float offsetY = 100f;
-
-    public float maxPeak = 20f;
-    public float minPeak = -20f; 
+    public float frequencyX = 1f;
+    public float frequencyY = 1f;
+    public int yHeight = 20;
     
-    public delegate float CalculateHeightDelegate(int x, int y);
-
-    public CalculateHeightDelegate calculateHeightCallback; 
+    public GameObject sandPrefab;
+    public GameObject treePrefab; 
     void Start()
     {
-        GenerateTerrain(terrainData); 
+        terrainGenerator.calculateHeightCallback = CalculateHeightCallback;
+        terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
+        terrainGenerator.depth = yHeight;
     }
 
-    TerrainData GenerateTerrain(TerrainData terrainData)
+    private float CalculateHeightCallback(int x, int y)
     {
-        terrainData.heightmapResolution = width + 1; 
-        terrainData.size = new Vector3(width, depth, height);
-
-        terrainData.SetHeights(0, 0, GenerateHeights());
-        return terrainData;
-    }
-
-    float[,] GenerateHeights()
-    {
-        float[,] heights = new float[width, height];
-        for (int x = 0; x < width; x++)
+        float xCoord = (10f * (float) x / terrainGenerator.width);
+        float yCoord = (10f * (float) y / terrainGenerator.height);
+        float perlinValue = Mathf.PerlinNoise(xCoord/frequencyX,yCoord/frequencyY);
+        /*if (perlinValue > 0.9f)
         {
-            for (int y = 0; y < height; y++)
+            float perlinValue2 = Mathf.PerlinNoise(xCoord/frequencyX,yCoord/frequencyY);
+            if (perlinValue2 > 0.9f)
             {
-                if (calculateHeightCallback != null)
-                    //heights[x, y] = calculateHeightCallback(x, y);
-                    heights[x, y] = Mathf.PerlinNoise(maxPeak, 0); 
-                Debug.Log(heights); 
+                Instantiate(sandPrefab, new Vector3(x,terrainGenerator.terrainDataForRandomExample.GetHeight(x,y) ,y),Quaternion.identity);
+                //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x,y));
             }
         }
 
-        return heights;
+        if (perlinValue is > 0.8f and < 0.9f)
+        {
+           Instantiate(treePrefab, new Vector3(x , terrainGenerator.terrainDataForRandomExample.GetHeight(x,y), y),Quaternion.identity);
+           //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x,y));
+        }*/
+
+        if (perlinValue > 0.9f)
+        {
+            //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x, y));
+        }
+        return perlinValue;
     }
-    void Update()
+
+    /*void SpawnSandObject()
     {
-     
-    }
+        for (int x = 0; x < terrainGenerator.width; x++)
+        {
+            Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x, 0));
+            /*for (int y = 0; y < terrainGenerator.height; y++)
+            {
+                Vector3 pos = terrainGenerator.transform.position;
+                pos.y = terrainGenerator.terrainDataForRandomExample.GetHeight(x, y);
+                Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x, y));
+                //Instantiate(sandPrefab, new Vector3(x, pos.y, y), Quaternion.identity);
+            }#1#
+        }
+
+    }*/
+
+
+    /*for (int i = 0; i < terrainGenerator.width; i++)
+    {
+        for (int j = 0; j < terrainGenerator.height; j++)
+        {
+            Instantiate(sandPrefab);
+            sandPrefab.transform.position = new Vector3(i, 0, j);
+        }
+    }*/
+
+    /*void SpawnSand(float perlinValue)
+    {
+        for (int i = 0; i < terrainGenerator.width; i++)
+        {
+            for (int j = 0; j < terrainGenerator.height; j++)
+                if (perlinValue > 0.90f)
+                {
+                    Instantiate(sandPrefab);
+                    sandPrefab.transform.position = new Vector3(i, 0, j); 
+
+                }
+        }
+    }*/
+
 }
