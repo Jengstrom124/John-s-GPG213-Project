@@ -6,14 +6,12 @@ public class AvoidObstacle : MonoBehaviour
 {
     private Rigidbody rb;
 
+    [Header("Configurations:")]
     public float maxLength = 20f;
     public float dragMultiplier = 10f;
     public float speedReductionMultiplier = 4f;
     public float minSpeed = 0f;
-
     public bool emergencyFeeler = false;
-    public bool emergencyFeelerInUse = false;
-
     public LayerMask layerMask;
 
     public enum RayDirection
@@ -24,6 +22,8 @@ public class AvoidObstacle : MonoBehaviour
     }
 
     public RayDirection myTurnDirection;
+
+    public bool visualizeRays = false;
 
     MoveForwards moveForwards;
     Neighbours neighbours;
@@ -58,13 +58,17 @@ public class AvoidObstacle : MonoBehaviour
         {
             feelerActive = true;
 
-            if(emergencyFeeler)
+            //Visualizing RayCasts
+            if(visualizeRays)
             {
-                //Debug.DrawLine(transform.position, hitinfo.point, Color.red);
-            }
-            else
-            {
-                //Debug.DrawLine(transform.position, hitinfo.point, Color.green);
+                if (emergencyFeeler)
+                {
+                    Debug.DrawLine(transform.position, hitinfo.point, Color.red);
+                }
+                else
+                {
+                    Debug.DrawLine(transform.position, hitinfo.point, Color.green);
+                }
             }
 
             //How far the object is from us

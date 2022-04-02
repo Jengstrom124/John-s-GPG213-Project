@@ -6,14 +6,22 @@ using UnityEditor;
 public class Spawner : MonoBehaviour
 {
     //Spawn Area
-    public int xArea = 50;
-    public int yArea = 50;
-    public int height = 0;
+    [Header("Custom Spawn Area (Not using SpawnerPos)")]
+    public Vector2Int xMinYMin = new Vector2Int(0,0);
+    public Vector2Int xMaxYMax = new Vector2Int(50,50);
 
+    [Header("Adjust Only When Using Spawner Pos (Adds to current position)")]
+    public int xMax = 50;
+    public int yMax = 50;
+
+    [Header("Configurations:")]
     public GameObject objectToSpawn;
     public int spawnCount;
+    public int spawnHeight = 0;
 
+    [Header("Options:")]
     public bool spawnFacingForward;
+    public bool useSpawnerPosition;
 
 
     // Start is called before the first frame update
@@ -22,9 +30,17 @@ public class Spawner : MonoBehaviour
         for(int i = 0; i < spawnCount; i++)
         {
             GameObject newObject = PrefabUtility.InstantiatePrefab(objectToSpawn) as GameObject;
-            newObject.transform.position = new Vector3(Random.Range(transform.position.x, transform.position.x + xArea), height, Random.Range(transform.position.z, transform.position.z + yArea));
 
-            if(spawnFacingForward)
+            if(useSpawnerPosition)
+            {
+                newObject.transform.position = new Vector3(Random.Range(transform.position.x, transform.position.x + xMax), spawnHeight, Random.Range(transform.position.z, transform.position.z + yMax));
+            }
+            else
+            {
+                newObject.transform.position = new Vector3(Random.Range(xMinYMin.x, xMaxYMax.x), spawnHeight, Random.Range(xMinYMin.y, xMaxYMax.y));
+            }
+
+            if (spawnFacingForward)
             {
                 newObject.transform.rotation = Quaternion.Euler(transform.forward);
             }
