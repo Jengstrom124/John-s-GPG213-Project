@@ -420,12 +420,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 694705561}
-  terrainData: {fileID: 15600000, guid: c5da1f24caac2b04cbf305a347b774b9, type: 2}
+  terrainData: {fileID: 736514450}
   frequencyX: 1
   frequencyY: 1
   yHeight: 20
+  seaLevel: 10
   sandPrefab: {fileID: 3897914036944931770, guid: 82508949ad981fb4abad39b0811f3212, type: 3}
   treePrefab: {fileID: 6225732010763997142, guid: a740f706c5d498e4c912095695d4b89e, type: 3}
+  seaweedPrefab: {fileID: 6850793855374070641, guid: c2f9aa226f15d0d4885fbc448ec38f6f, type: 3}
+  coralPrefab: {fileID: 6292741600736004651, guid: 3962e4c0005ade546aea915946d3be99, type: 3}
 --- !u!4 &1407382158
 Transform:
   m_ObjectHideFlags: 0
@@ -533,7 +536,7 @@ Transform:
   m_GameObject: {fileID: 1876677312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 125, y: 10, z: 124.3}
-  m_LocalScale: {x: 24.81008, y: 24.81008, z: 24.81008}
+  m_LocalScale: {x: 26.784962, y: 26.784962, z: 26.784962}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
