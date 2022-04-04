@@ -68,7 +68,7 @@ public class BoidModel : MonoBehaviour
                 GameObject newEmergencyFeeler = Instantiate(emergencyFeeler, this.transform);
                 AvoidObstacle emergencyAvoidObstacle = newEmergencyFeeler.GetComponent<AvoidObstacle>();
 
-                if(i == 0)
+                if(i <= 1)
                 {
                     emergencyAvoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Straight;
                     newEmergencyFeeler.transform.localRotation = Quaternion.Euler(transform.forward);
