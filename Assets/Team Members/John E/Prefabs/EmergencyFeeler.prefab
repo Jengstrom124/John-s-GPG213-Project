@@ -49,11 +49,11 @@ MonoBehaviour:
   speedReductionMultiplier: 10
   minSpeed: -10
   emergencyFeeler: 1
-  emergencyFeelerInUse: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 119
   myTurnDirection: 0
+  visualizeRays: 1
   turnForce: 0
   distance: 0
   xVelocity: 0

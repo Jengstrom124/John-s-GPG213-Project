@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eef0b1062ff446488876b0d8490dbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 2
+  force: 5
 --- !u!114 &6844581979469349891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11587027d746784bbdccb5d936b96fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 0.25
+  force: 0.4
 --- !u!114 &5782324754834491190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 5
-  force: 5
+  force: 2.5
   myDistance: 0
 --- !u!114 &7435328888860800600
 MonoBehaviour:
@@ -266,10 +266,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 26.35
+  m_Radius: 27
   m_Height: 27.18
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 12.9}
+  m_Center: {x: 0, y: 0, z: 14.5}
 --- !u!114 &-7430627336242286335
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ public class SBManager : MonoBehaviour
 
         if(activeFeelers.Count <= 0)
         {
-            moveForwards.speed = moveForwards.speed = Mathf.Lerp(moveForwards.speed, moveForwards.maxSpeed, 3f);
+            moveForwards.speed = Mathf.Lerp(moveForwards.speed, moveForwards.maxSpeed, 3f);
         }
     }
 

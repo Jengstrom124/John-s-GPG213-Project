@@ -93,11 +93,11 @@ public class AvoidObstacle : MonoBehaviour
                 //if we're already moving in a positive rotation (right) - keep moving right
                 if (xVelocity < 0)
                 {
-                    TurnForce(dragMultiplier);
+                    TurnForce(dragMultiplier/2);
                 }
                 else
                 {
-                    TurnForce(-dragMultiplier);
+                    TurnForce(-dragMultiplier/2);
                 }
             }
 
