@@ -44,6 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d6c4abe7afd6e4d9603241337ee3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xMinYMin: {x: 0, y: 0}
+  xMaxYMax: {x: 50, y: 50}
+  xMax: 50
+  yMax: 50
   objectToSpawn: {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
   spawnCount: 30
+  spawnHeight: 0
   spawnFacingForward: 1
+  useSpawnerPosition: 0
