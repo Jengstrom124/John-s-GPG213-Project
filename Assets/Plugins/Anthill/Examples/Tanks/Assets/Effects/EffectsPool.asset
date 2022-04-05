@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ebecb221d99404a87077f78659a9db, type: 3}
+  m_Name: EffectsPool
+  m_EditorClassIdentifier: 
+  items:
+  - prefab: {fileID: 2337522129009805385, guid: bd475ffc9fc6a4c1d8c44dff0646bd22,
+      type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1
+  - prefab: {fileID: 8669221373171791494, guid: d8cf2f5f26f9b4128a4ca0218ce94e1b,
+      type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1
+  - prefab: {fileID: 3960390557256645864, guid: 48724b57bcdd74b9caeb7539ad1ed7e1,
+      type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1
+  - prefab: {fileID: 3047298379213058814, guid: 0ef7ba44ae691487e8b9f233dbab2e0c,
+      type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1
+  - prefab: {fileID: 984546162026816687, guid: ebaa41dc79fbe4a228ee27b5726c6c4a, type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1
+  - prefab: {fileID: 3542678705847006603, guid: cb20eb073ec554c4c9c8b28b33bb6c48,
+      type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1
+  - prefab: {fileID: 2146379166069064663, guid: 6c6559b6f8e3641288a6ae0d191da262,
+      type: 3}
+    initialSize: 5
+    isGrow: 1
+    maxGrowing: 20
+    isOpened: 1

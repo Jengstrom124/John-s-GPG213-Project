@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b77ca242926439092ce0b163dea89d, type: 3}
+  m_Name: Plant03
+  m_EditorClassIdentifier: 
+  key: Idle
+  frames:
+  - {fileID: 4828772420389195508, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 1658937212142007792, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 8806543758895606400, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -7006325127827633445, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -4266858969449806329, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -8524675853373328861, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -373641949101448202, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 3216912588619632951, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 4197972654127085579, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 3334780649310790219, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -6874100204244354935, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 769279914857135941, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -7986723322606992948, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -4661003866563762241, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -8415270789599260923, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -1374843242527240684, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 8658374578040684237, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 7268575249995651022, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -5454528528118252621, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -1618794017411438297, guid: d5d5879f103914e179e72da5b710e57d, type: 3}

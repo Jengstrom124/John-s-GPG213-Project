@@ -1,0 +1,286 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: TankScenario
+  m_EditorClassIdentifier: 
+  conditions:
+    position: {x: 56, y: 99}
+    list:
+    - id: 0
+      name: Alive
+    - id: 1
+      name: Injured
+    - id: 2
+      name: Enemy Alive
+    - id: 3
+      name: See Gun
+    - id: 4
+      name: See Ammo
+    - id: 5
+      name: See Bomb
+    - id: 6
+      name: See Repair
+    - id: 7
+      name: Has Gun
+    - id: 8
+      name: Has Ammo
+    - id: 9
+      name: Has Bomb
+    - id: 10
+      name: See Enemy
+    - id: 11
+      name: On Line of Fire
+    - id: 12
+      name: Near Enemy
+  actions:
+  - name: Search Weapon
+    isDefault: 1
+    state: {fileID: 5068928797882468058, guid: 125f1df0d6d0143c399071535c73bd11, type: 3}
+    cost: 0
+    position: {x: 296, y: 99}
+    pre:
+    - id: 7
+      value: 0
+    - id: 9
+      value: 0
+    post:
+    - id: 3
+      value: 1
+  - name: Pickup Gun
+    isDefault: 0
+    state: {fileID: 7698854947022644433, guid: 1d545ab92bd2a4e0b9b12c554f336410, type: 3}
+    cost: 0
+    position: {x: 496, y: 99}
+    pre:
+    - id: 7
+      value: 0
+    - id: 3
+      value: 1
+    post:
+    - id: 7
+      value: 1
+    - id: 3
+      value: 0
+    - id: 9
+      value: 0
+  - name: Search Ammo
+    isDefault: 0
+    state: {fileID: 1522913666106243841, guid: d07e861717e4f4bb0823d1c74ccf20ce, type: 3}
+    cost: 1
+    position: {x: 696, y: 99}
+    pre:
+    - id: 7
+      value: 1
+    - id: 8
+      value: 0
+    post:
+    - id: 4
+      value: 1
+  - name: Pickup Ammo
+    isDefault: 0
+    state: {fileID: 9112051183054807738, guid: 5cc732d57d7ac448f80b8c12b24aa499, type: 3}
+    cost: 0
+    position: {x: 896, y: 99}
+    pre:
+    - id: 4
+      value: 1
+    - id: 7
+      value: 1
+    post:
+    - id: 4
+      value: 0
+    - id: 8
+      value: 1
+  - name: Scout With Gun
+    isDefault: 0
+    state: {fileID: 4017767283505478755, guid: bb948eb061fec4bc6aebdff1cae1eef9, type: 3}
+    cost: 0
+    position: {x: 296, y: 359}
+    pre:
+    - id: 7
+      value: 1
+    - id: 8
+      value: 1
+    - id: 10
+      value: 0
+    post:
+    - id: 10
+      value: 1
+  - name: Aim
+    isDefault: 0
+    state: {fileID: 2040430068920020899, guid: e691741e293f64a87ad086b9463cdab8, type: 3}
+    cost: 0
+    position: {x: 496, y: 359}
+    pre:
+    - id: 10
+      value: 1
+    - id: 11
+      value: 0
+    - id: 7
+      value: 1
+    - id: 8
+      value: 1
+    post:
+    - id: 11
+      value: 1
+  - name: Attack With Gun
+    isDefault: 0
+    state: {fileID: 2917610433145730044, guid: 0f40d0aa629f84d36a6c64e95cd00d4e, type: 3}
+    cost: 0
+    position: {x: 696, y: 359}
+    pre:
+    - id: 10
+      value: 1
+    - id: 11
+      value: 1
+    - id: 8
+      value: 1
+    post:
+    - id: 2
+      value: 0
+    - id: 10
+      value: 0
+    - id: 11
+      value: 0
+  - name: Pickup Bomb
+    isDefault: 0
+    state: {fileID: 4009988988846450662, guid: eaa6a51a8e5a64fb9ac34fb969562bb2, type: 3}
+    cost: 1
+    position: {x: 296, y: 639}
+    pre:
+    - id: 5
+      value: 1
+    - id: 7
+      value: 0
+    post:
+    - id: 9
+      value: 1
+  - name: Scout With Bomb
+    isDefault: 0
+    state: {fileID: 4017767283505478755, guid: bb948eb061fec4bc6aebdff1cae1eef9, type: 3}
+    cost: 0
+    position: {x: 696, y: 639}
+    pre:
+    - id: 9
+      value: 1
+    post:
+    - id: 10
+      value: 1
+  - name: Approach
+    isDefault: 0
+    state: {fileID: 8742665485455941811, guid: 351b2b963bde54fe5a059af5dfc26e25, type: 3}
+    cost: 0
+    position: {x: 896, y: 639}
+    pre:
+    - id: 12
+      value: 0
+    - id: 10
+      value: 1
+    post:
+    - id: 12
+      value: 1
+  - name: Detonate Bomb
+    isDefault: 0
+    state: {fileID: 7685037473243039929, guid: b2087b586a0dc4cdfbb448af84406d13, type: 3}
+    cost: 0
+    position: {x: 1096, y: 639}
+    pre:
+    - id: 12
+      value: 1
+    - id: 9
+      value: 1
+    post:
+    - id: 2
+      value: 0
+    - id: 0
+      value: 0
+  - name: Drop Gun And Pickup Bomb
+    isDefault: 0
+    state: {fileID: 4009988988846450662, guid: eaa6a51a8e5a64fb9ac34fb969562bb2, type: 3}
+    cost: 1
+    position: {x: 496, y: 639}
+    pre:
+    - id: 7
+      value: 1
+    - id: 8
+      value: 0
+    - id: 5
+      value: 1
+    post:
+    - id: 7
+      value: 0
+    - id: 9
+      value: 1
+    - id: 5
+      value: 0
+  - name: Search Repair
+    isDefault: 0
+    state: {fileID: 4017767283505478755, guid: bb948eb061fec4bc6aebdff1cae1eef9, type: 3}
+    cost: 5
+    position: {x: 290, y: 934}
+    pre:
+    - id: 1
+      value: 1
+    post:
+    - id: 6
+      value: 1
+  - name: Pickup Repair
+    isDefault: 0
+    state: {fileID: 5015266942250561875, guid: 9e09500f8cf65494898d7f5abc9530e0, type: 3}
+    cost: 0
+    position: {x: 496, y: 935}
+    pre:
+    - id: 6
+      value: 1
+    post:
+    - id: 1
+      value: 0
+    - id: 6
+      value: 0
+  goals:
+  - name: Kill the Enemy
+    isDefault: 1
+    position: {x: 56, y: 439}
+    conditions:
+    - id: 2
+      value: 0
+    - id: 1
+      value: 0
+  worldStates:
+  - position: {x: 63, y: 1180}
+    list:
+    - id: 0
+      value: 1
+    - id: 1
+      value: 1
+    - id: 2
+      value: 1
+    - id: 3
+      value: 0
+    - id: 4
+      value: 0
+    - id: 5
+      value: 0
+    - id: 6
+      value: 0
+    - id: 7
+      value: 0
+    - id: 8
+      value: 0
+    - id: 9
+      value: 1
+    - id: 10
+      value: 0
+    - id: 11
+      value: 0
+    - id: 12
+      value: 0

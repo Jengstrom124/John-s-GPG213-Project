@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b77ca242926439092ce0b163dea89d, type: 3}
+  m_Name: Repair
+  m_EditorClassIdentifier: 
+  key: Idle
+  frames:
+  - {fileID: -8595171533772156863, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -4683365050137967493, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 8414273874572932029, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 689598209960942265, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 4667436695532968811, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -5428607050841444835, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 1614624548415884925, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -8595171533772156863, guid: d5d5879f103914e179e72da5b710e57d, type: 3}

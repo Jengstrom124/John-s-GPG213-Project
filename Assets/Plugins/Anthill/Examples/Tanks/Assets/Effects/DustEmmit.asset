@@ -1,0 +1,357 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00aa2b5eb6c4e4509b9d45be132d5a1c, type: 3}
+  m_Name: DustEmmit
+  m_EditorClassIdentifier: 
+  burst:
+    isOpen: 0
+    isExists: 0
+    list: []
+  emission:
+    isOpen: 1
+    isExists: 1
+    spawnInterval: 0.2
+    rndToSpawnInterval: {x: 0, y: 0}
+    numParticles: 1
+    rndToNumParticles: {x: 0, y: 0}
+  source:
+    isOpen: 1
+    isExists: 1
+    prefabs:
+    - {fileID: 5277324552465882308, guid: 27fcb4d703c9544858535fae4966638b, type: 3}
+    selectRandom: 0
+  lifeTime:
+    isOpen: 1
+    isExists: 1
+    duration: 0.75
+    rndToDuration: {x: 0, y: 0}
+  position:
+    isOpen: 1
+    isExists: 1
+    position: {x: 0, y: 0}
+    rndToPositionX: {x: -0.1, y: 0.1}
+    rndToPositionY: {x: 0, y: 0}
+    rotate: 0
+    inheritRotation: 0
+    distance: 0
+    rndToDistance: {x: 0, y: 0}
+    initialAngle: 0
+    lowerAngle: 0
+    upperAngle: 0
+    strongOrder: 0
+    countParticles: 0
+  actor:
+    isOpen: 1
+    isExists: 1
+    startFrame: 1
+    selectRandomFrame: 0
+    useChildActor: 0
+    playAnimation: 0
+    reverse: 0
+    timeScale: 1
+    rndToTimeScale: {x: 0, y: 0}
+    loop: 0
+    loopDelay: 0
+    rndToLoopDelay: {x: 0, y: 0}
+    flipX: 0
+    flipY: 0
+    rndFlipX: 0
+    rndFlipY: 0
+    sorting: 1
+    sortingMode: 2
+    sortingLayer: Default
+    sortingOrder: 240
+  colour:
+    isOpen: 1
+    isExists: 1
+    startColor: {r: 0.27058825, g: 0.21568628, b: 0.16078432, a: 1}
+    useChildSprite: 0
+    animateColor: 0
+    effectLifeTime: 0
+    endColor: {r: 0, g: 0, b: 0, a: 0}
+    curveColor:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gradientColor: 1
+    gradient:
+      serializedVersion: 2
+      key0: {r: 0.27058825, g: 0.21568628, b: 0.16078432, a: 1}
+      key1: {r: 0.52156866, g: 0.41568628, b: 0.3137255, a: 1}
+      key2: {r: 0.6392157, g: 0.5176471, b: 0.39607844, a: 0}
+      key3: {r: 0.6392157, g: 0.5176471, b: 0.39607844, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 49344
+      ctime2: 65535
+      ctime3: 65535
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 42598
+      atime2: 65535
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 3
+  scale:
+    isOpen: 1
+    isExists: 1
+    startScale: {x: 0.75, y: 1}
+    rndToScaleX: {x: 0, y: 0}
+    rndToScaleY: {x: 0, y: 0}
+    proportional: 1
+    useChildSprite: 0
+    animateScale: 1
+    effectLifeTime: 0
+    endScale: {x: 2.5, y: 0}
+    scaleCurveX:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: -0.07452522
+        outSlope: -0.07452522
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.21959028
+      - serializedVersion: 3
+        time: 0.46844596
+        value: 0.55510205
+        inSlope: 0.037828803
+        outSlope: 0.037828803
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.2970913
+      - serializedVersion: 3
+        time: 0.9987604
+        value: 0.0010015368
+        inSlope: -0.03713353
+        outSlope: -0.03713353
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.21915136
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    scaleCurveY:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  rotation:
+    isOpen: 1
+    isExists: 1
+    startAngle: 0
+    rndToAngle: {x: -10, y: 10}
+    enableRotation: 0
+    angularSpeed: 0
+    rndToAngularSpeed: {x: 0, y: 0}
+    accel: 0
+    drag: 1
+    animateAngle: 0
+    endAngle: 0
+    curveAngle:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    inheritRotation: 1
+  movement:
+    isOpen: 1
+    isExists: 1
+    speed: 0.25
+    rndToSpeed: {x: -0.1, y: -0.2}
+    accel: 0
+    drag: 1
+    animateSpeed: 0
+    endSpeed: 0
+    speedCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gravity: 0
+    gravityFactor: {x: 0, y: 0}
+    rotate: 0
+  physicSettings:
+    isOpen: 0
+    isExists: 0
+    customMass: 0
+    autoMass: 1
+    mass: 1
+    rndToMass: {x: 0, y: 0}
+    customLinearDrag: 0
+    linearDrag: 0
+    rndToLinearDrag: {x: 0, y: 0}
+    customAngularDrag: 0
+    angularDrag: 0.05
+    rndToAngularDrag: {x: 0, y: 0}
+    customGravityScale: 0
+    gravityScale: 1
+    rndToGravityScale: {x: 0, y: 0}
+    freezeRotation: 0
+    lifeTimeLoss: 0
+    amountTimeLosing: 0
+  physicImpulse:
+    isOpen: 0
+    isExists: 0
+    force: 0
+    rndToForce: {x: 0, y: 0}
+    startAngle: 0
+    rndToAngleLower: 0
+    rndToAngleUpper: 0
+    useParticleAngle: 0
+    inheritRotation: 0
+    rotate: 0
+    rotateChild: 0
+    applyToPosition: 0
+    position: {x: 0, y: 0}
+    rndToPositionX: {x: 0, y: 0}
+    rndToPositionY: {x: 0, y: 0}
+    addTorque: 0
+    torqueForce: 0
+    rndToTorqueForce: {x: 0, y: 0}
+  physicExplosion:
+    isOpen: 0
+    isExists: 0
+    radius: 0.5
+    force: 20
+    numRays: 12
+    mask:
+      serializedVersion: 2
+      m_Bits: 1
+    startDecay: 0
+    pixelsPerUnit: 100
+    minDistance: 0.01
+  sfLighting:
+    isOpen: 0
+    isExists: 0
+    startRadius: 0.5
+    rndToStartRadius: {x: 0, y: 0}
+    animateRadius: 0
+    endRadius: 0
+    radiusCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    startIntensity: 0.5
+    rndToStartIntensity: {x: 0, y: 0}
+    animateIntensity: 0
+    endIntensity: 0
+    intensityCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    startColor: {r: 1, g: 1, b: 1, a: 1}
+    animateColor: 0
+    gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  trail:
+    isOpen: 0
+    isExists: 0
+    startTime: 0.5
+    rndToStartTime: {x: 0, y: 0}
+    animateTime: 0
+    endTime: 0.5
+    timeCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    startWidth: 1
+    rndToStartWidth: {x: 0, y: 0}
+    widthCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2

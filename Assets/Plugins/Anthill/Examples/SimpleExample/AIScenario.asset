@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f22e7053ea04ed0922308786facc8c, type: 3}
+  m_Name: AIScenario
+  m_EditorClassIdentifier: 
+  conditions:
+    list:
+    - id: 0
+      name: Is Cargo Delivered
+    - id: 1
+      name: See Cargo
+    - id: 2
+      name: Has Cargo
+    - id: 3
+      name: See Base
+    - id: 4
+      name: Near Base
+  actions:
+  - name: Search Cargo
+    isDefault: 1
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 400, y: 40}
+    pre:
+    - id: 2
+      value: 0
+    post:
+    - id: 1
+      value: 1
+  - name: Pickup Cargo
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 600, y: 40}
+    pre:
+    - id: 2
+      value: 0
+    - id: 1
+      value: 1
+    post:
+    - id: 2
+      value: 1
+  - name: Search Base
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 800, y: 40}
+    pre:
+    - id: 2
+      value: 1
+    - id: 3
+      value: 0
+    post:
+    - id: 3
+      value: 1
+  - name: Move To Base
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 600, y: 260}
+    pre:
+    - id: 2
+      value: 1
+    - id: 3
+      value: 1
+    - id: 4
+      value: 0
+    post:
+    - id: 4
+      value: 1
+  - name: Unload Cargo
+    isDefault: 0
+    state: {fileID: 0}
+    cost: 0
+    position: {x: 800, y: 260}
+    pre:
+    - id: 2
+      value: 1
+    - id: 0
+      value: 0
+    - id: 4
+      value: 1
+    post:
+    - id: 0
+      value: 1
+    - id: 2
+      value: 0
+  goals:
+  - name: Find Cargo
+    isDefault: 0
+    position: {x: 400, y: 560}
+    conditions:
+    - id: 2
+      value: 1
+  - name: Delivery
+    isDefault: 1
+    position: {x: 600, y: 560}
+    conditions:
+    - id: 0
+      value: 1
+  worldStates:
+  - position: {x: 393, y: 746}
+    isAutoUpdate: 1
+    list:
+    - id: 0
+      value: 0
+    - id: 1
+      value: 0
+    - id: 2
+      value: 0
+    - id: 3
+      value: 0
+    - id: 4
+      value: 0

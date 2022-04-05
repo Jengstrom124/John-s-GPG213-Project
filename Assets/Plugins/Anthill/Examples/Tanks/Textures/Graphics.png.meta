@@ -1,0 +1,5312 @@
+fileFormatVersion: 2
+guid: d5d5879f103914e179e72da5b710e57d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7136415389559450687
+    second: AmmoItem-01
+  - first:
+      213: 7735879305706103273
+    second: AmmoItem-02
+  - first:
+      213: 1701011029034549621
+    second: AmmoItem-03
+  - first:
+      213: -7632722840873955595
+    second: AmmoItem-04
+  - first:
+      213: 7338816141848196756
+    second: AmmoItem-05
+  - first:
+      213: -6737844715009343361
+    second: AmmoItem-06
+  - first:
+      213: -8445123546052288943
+    second: AmmoItem-07
+  - first:
+      213: 1328702636678351545
+    second: BombItem-01
+  - first:
+      213: -5345860743125766424
+    second: BombItem-02
+  - first:
+      213: -6880604705532387512
+    second: BombItem-03
+  - first:
+      213: 1809357324170096230
+    second: BombItem-04
+  - first:
+      213: -8920135193377882977
+    second: BombItem-05
+  - first:
+      213: -6611676826638965857
+    second: BombItem-06
+  - first:
+      213: -496482495317794997
+    second: BombItem-07
+  - first:
+      213: -5338313187209905767
+    second: BombTower-01
+  - first:
+      213: -6737880311974553951
+    second: Box-01
+  - first:
+      213: 9165904944852922899
+    second: Bullet-01
+  - first:
+      213: 3425351539962828018
+    second: Ground-01
+  - first:
+      213: -7078159825299465285
+    second: Ground-02
+  - first:
+      213: -889433803210933706
+    second: Ground-03
+  - first:
+      213: 2269879060062774275
+    second: GunItem-01
+  - first:
+      213: 6027785631543876696
+    second: GunItem-02
+  - first:
+      213: 5667550535151230430
+    second: GunItem-03
+  - first:
+      213: -544548711718259985
+    second: GunItem-04
+  - first:
+      213: 8851938227379142612
+    second: GunItem-05
+  - first:
+      213: -5821774551711255035
+    second: GunItem-06
+  - first:
+      213: -5740193011275618094
+    second: GunItem-07
+  - first:
+      213: -2199325321791859524
+    second: GunTower-01
+  - first:
+      213: 1444393203520836786
+    second: GunTower-02
+  - first:
+      213: 4000928351711759760
+    second: GunTower-03
+  - first:
+      213: -4299636836364015701
+    second: GunTower-04
+  - first:
+      213: -544938686211139747
+    second: HealItem-01
+  - first:
+      213: -8656572920840193953
+    second: HealItem-02
+  - first:
+      213: -7026006096229814195
+    second: HealItem-03
+  - first:
+      213: -3166103161708881146
+    second: HealItem-04
+  - first:
+      213: 986511138033286454
+    second: HealItem-05
+  - first:
+      213: 589281253215041746
+    second: HealItem-06
+  - first:
+      213: 7964559695643201753
+    second: HealItem-07
+  - first:
+      213: 6103009366236793378
+    second: HPBar-01
+  - first:
+      213: 773358179301369538
+    second: HPBar-02
+  - first:
+      213: -2488447319521399691
+    second: HPBar-03
+  - first:
+      213: -919016394090522341
+    second: HPBar-04
+  - first:
+      213: 4684011400664355530
+    second: Rock-01
+  - first:
+      213: -9173515206693383166
+    second: Rock-02
+  - first:
+      213: -1611168198849574045
+    second: TankB1-01
+  - first:
+      213: -1688817162523403184
+    second: TankB1-02
+  - first:
+      213: -1658488883682487364
+    second: TankB1-03
+  - first:
+      213: 2900965811084605175
+    second: TankB1-04
+  - first:
+      213: -9160829413098069093
+    second: TankB2-01
+  - first:
+      213: -7991378310740189068
+    second: TankB2-02
+  - first:
+      213: -2087350945032675847
+    second: TankB2-03
+  - first:
+      213: -1983852102692900843
+    second: TankB2-04
+  - first:
+      213: -2833312725006815716
+    second: Tree-01
+  - first:
+      213: 7954328192878167021
+    second: Ammo-01
+  - first:
+      213: -8396724547403542455
+    second: Ammo-02
+  - first:
+      213: -8327843960587377854
+    second: Ammo-03
+  - first:
+      213: 3756271271421796404
+    second: Ammo-04
+  - first:
+      213: 4875651318974612866
+    second: Ammo-05
+  - first:
+      213: 3129339768157843416
+    second: Ammo-06
+  - first:
+      213: 8552597810022852682
+    second: Ammo-07
+  - first:
+      213: -2400906511236618168
+    second: Base-01
+  - first:
+      213: -5570921886776194874
+    second: Base-02
+  - first:
+      213: 9183315166416555159
+    second: Bomb-01
+  - first:
+      213: -7077759281332388187
+    second: Bomb-02
+  - first:
+      213: 4647821057990515429
+    second: Bomb-03
+  - first:
+      213: 7429036644213992508
+    second: Bomb-04
+  - first:
+      213: 5763803472507892248
+    second: Bomb-05
+  - first:
+      213: -687220965003247734
+    second: Bomb-06
+  - first:
+      213: 1065792211462064763
+    second: Bomb-07
+  - first:
+      213: 5232590655365473811
+    second: BonusPoint-01
+  - first:
+      213: -5210482694531845248
+    second: ExplosionTrace-01
+  - first:
+      213: -477189056442494047
+    second: Gun-01
+  - first:
+      213: 1052749453575178186
+    second: Gun-02
+  - first:
+      213: 5522289936347052451
+    second: Gun-03
+  - first:
+      213: -6591388293409218867
+    second: Gun-04
+  - first:
+      213: -2526024183967994737
+    second: Gun-05
+  - first:
+      213: 7010984407486306835
+    second: Gun-06
+  - first:
+      213: -8358164944809177082
+    second: Gun-07
+  - first:
+      213: 3319428132202320117
+    second: Gun-08
+  - first:
+      213: 4878716608318187099
+    second: Misc-01
+  - first:
+      213: -2721772577531525046
+    second: Misc-02
+  - first:
+      213: 2923611486085656033
+    second: Misc-03
+  - first:
+      213: 8812357720086545140
+    second: Misc-04
+  - first:
+      213: 2241379004580627381
+    second: Misc-05
+  - first:
+      213: 8316924134252875325
+    second: Plants-Plant01-01
+  - first:
+      213: 6128960325858303446
+    second: Plants-Plant01-02
+  - first:
+      213: -2934317025918708425
+    second: Plants-Plant01-03
+  - first:
+      213: -6334188193793431553
+    second: Plants-Plant01-04
+  - first:
+      213: 2524311273677770890
+    second: Plants-Plant01-05
+  - first:
+      213: -3375845543143254203
+    second: Plants-Plant01-06
+  - first:
+      213: -5303729400676932691
+    second: Plants-Plant01-07
+  - first:
+      213: -8665697357678795801
+    second: Plants-Plant01-08
+  - first:
+      213: 5168610501434161118
+    second: Plants-Plant01-09
+  - first:
+      213: -6900925442887206790
+    second: Plants-Plant01-10
+  - first:
+      213: 4930015001149652502
+    second: Plants-Plant01-11
+  - first:
+      213: -1784950008547848551
+    second: Plants-Plant01-12
+  - first:
+      213: -16065300312410659
+    second: Plants-Plant01-13
+  - first:
+      213: 1513007840574952994
+    second: Plants-Plant01-14
+  - first:
+      213: 8128976917190015573
+    second: Plants-Plant01-15
+  - first:
+      213: -3678993421900955870
+    second: Plants-Plant01-16
+  - first:
+      213: -6162374930043786063
+    second: Plants-Plant01-17
+  - first:
+      213: -3976509164125102465
+    second: Plants-Plant01-18
+  - first:
+      213: -7260328917759432884
+    second: Plants-Plant01-19
+  - first:
+      213: 472265545318213150
+    second: Plants-Plant01-20
+  - first:
+      213: -7964797823234954653
+    second: Plants-Plant02-01
+  - first:
+      213: -2533420066117311655
+    second: Plants-Plant02-02
+  - first:
+      213: -712755807073967451
+    second: Plants-Plant02-03
+  - first:
+      213: -8348098819036293266
+    second: Plants-Plant02-04
+  - first:
+      213: 3622814903363817642
+    second: Plants-Plant02-05
+  - first:
+      213: 5478787852759652778
+    second: Plants-Plant02-06
+  - first:
+      213: 5681136254774464669
+    second: Plants-Plant02-07
+  - first:
+      213: -1926527145859304514
+    second: Plants-Plant02-08
+  - first:
+      213: 3199341830785261509
+    second: Plants-Plant02-09
+  - first:
+      213: 3766330202270237372
+    second: Plants-Plant02-10
+  - first:
+      213: -8103277948965499574
+    second: Plants-Plant02-11
+  - first:
+      213: 5504976875356730118
+    second: Plants-Plant02-12
+  - first:
+      213: -323362794079090647
+    second: Plants-Plant02-13
+  - first:
+      213: 3362895435345618436
+    second: Plants-Plant02-14
+  - first:
+      213: 2899444797913198090
+    second: Plants-Plant02-15
+  - first:
+      213: 6887070589110900355
+    second: Plants-Plant02-16
+  - first:
+      213: 2152833845553628993
+    second: Plants-Plant02-17
+  - first:
+      213: -8211470597056522803
+    second: Plants-Plant02-18
+  - first:
+      213: -5817375353832095242
+    second: Plants-Plant02-19
+  - first:
+      213: 3225403942881644069
+    second: Plants-Plant02-20
+  - first:
+      213: 4828772420389195508
+    second: Plants-Plant03-01
+  - first:
+      213: 1658937212142007792
+    second: Plants-Plant03-02
+  - first:
+      213: 8806543758895606400
+    second: Plants-Plant03-03
+  - first:
+      213: -7006325127827633445
+    second: Plants-Plant03-04
+  - first:
+      213: -4266858969449806329
+    second: Plants-Plant03-05
+  - first:
+      213: -8524675853373328861
+    second: Plants-Plant03-06
+  - first:
+      213: -373641949101448202
+    second: Plants-Plant03-07
+  - first:
+      213: 3216912588619632951
+    second: Plants-Plant03-08
+  - first:
+      213: 4197972654127085579
+    second: Plants-Plant03-09
+  - first:
+      213: 3334780649310790219
+    second: Plants-Plant03-10
+  - first:
+      213: -6874100204244354935
+    second: Plants-Plant03-11
+  - first:
+      213: 769279914857135941
+    second: Plants-Plant03-12
+  - first:
+      213: -7986723322606992948
+    second: Plants-Plant03-13
+  - first:
+      213: -4661003866563762241
+    second: Plants-Plant03-14
+  - first:
+      213: -8415270789599260923
+    second: Plants-Plant03-15
+  - first:
+      213: -1374843242527240684
+    second: Plants-Plant03-16
+  - first:
+      213: 8658374578040684237
+    second: Plants-Plant03-17
+  - first:
+      213: 7268575249995651022
+    second: Plants-Plant03-18
+  - first:
+      213: -5454528528118252621
+    second: Plants-Plant03-19
+  - first:
+      213: -1618794017411438297
+    second: Plants-Plant03-20
+  - first:
+      213: 1203076561546638611
+    second: Plants-Plant04-01
+  - first:
+      213: 7906273114427174305
+    second: Plants-Plant04-02
+  - first:
+      213: 1771320506416011790
+    second: Plants-Plant04-03
+  - first:
+      213: -1409124510679211616
+    second: Plants-Plant04-04
+  - first:
+      213: -9085200695585293983
+    second: Plants-Plant04-05
+  - first:
+      213: -4436579362433754148
+    second: Plants-Plant04-06
+  - first:
+      213: 829482870083342499
+    second: Plants-Plant04-07
+  - first:
+      213: 6090518753302330939
+    second: Plants-Plant04-08
+  - first:
+      213: -6855868083993939655
+    second: Plants-Plant04-09
+  - first:
+      213: 108864297213713577
+    second: Plants-Plant04-10
+  - first:
+      213: -35008047167125329
+    second: Plants-Plant04-11
+  - first:
+      213: 5819091690850035850
+    second: Plants-Plant04-12
+  - first:
+      213: 3276975000314462929
+    second: Plants-Plant04-13
+  - first:
+      213: 7017551853137835259
+    second: Plants-Plant04-14
+  - first:
+      213: -7504313121361411341
+    second: Plants-Plant04-15
+  - first:
+      213: 6611501176124453952
+    second: Plants-Plant04-16
+  - first:
+      213: 3049709556058446478
+    second: Plants-Plant04-17
+  - first:
+      213: 6783625655705473859
+    second: Plants-Plant04-18
+  - first:
+      213: -6261771142179320870
+    second: Plants-Plant04-19
+  - first:
+      213: -1150890163246322035
+    second: Plants-Plant04-20
+  - first:
+      213: -1275509123252589969
+    second: Plants-Plant05-01
+  - first:
+      213: 1663362759024652786
+    second: Plants-Plant05-02
+  - first:
+      213: 5225670547897406046
+    second: Plants-Plant05-03
+  - first:
+      213: -1660736737802181319
+    second: Plants-Plant05-04
+  - first:
+      213: 240355618604393627
+    second: Plants-Plant05-05
+  - first:
+      213: 8624311087935647617
+    second: Plants-Plant05-06
+  - first:
+      213: 3973367750933966704
+    second: Plants-Plant05-07
+  - first:
+      213: -7266072426666510120
+    second: Plants-Plant05-08
+  - first:
+      213: -3064546855979490847
+    second: Plants-Plant05-09
+  - first:
+      213: 6865390566449439387
+    second: Plants-Plant05-10
+  - first:
+      213: 5026699264789287400
+    second: Plants-Plant05-11
+  - first:
+      213: 4472804231394609061
+    second: Plants-Plant05-12
+  - first:
+      213: 3587687881971472817
+    second: Plants-Plant05-13
+  - first:
+      213: 755435120613836676
+    second: Plants-Plant05-14
+  - first:
+      213: -8457013907977688933
+    second: Plants-Plant05-15
+  - first:
+      213: 6621725685579982240
+    second: Plants-Plant05-16
+  - first:
+      213: -1904504154305651439
+    second: Plants-Plant05-17
+  - first:
+      213: -8561969557108643926
+    second: Plants-Plant05-18
+  - first:
+      213: -7371271242572599690
+    second: Plants-Plant05-19
+  - first:
+      213: 3033335064608682187
+    second: Plants-Plant05-20
+  - first:
+      213: 8036189643074835008
+    second: Plants-Tree01-01
+  - first:
+      213: 178928858578810587
+    second: ProgressBarCircle-01
+  - first:
+      213: 2223624284543778380
+    second: ProgressBarCircle-02
+  - first:
+      213: 6834789429094877277
+    second: ProgressBarCircle-03
+  - first:
+      213: 3661251463949212335
+    second: ProgressBarCircle-04
+  - first:
+      213: 3574909108720448418
+    second: ProgressBarCircle-05
+  - first:
+      213: 8324844202617938312
+    second: ProgressBarCircle-06
+  - first:
+      213: 4145813514233341480
+    second: ProgressBarCircle-07
+  - first:
+      213: 1918014652444730482
+    second: ProgressBarCircle-08
+  - first:
+      213: -4393175327561363276
+    second: ProgressBarCircle-09
+  - first:
+      213: -8172175475871971939
+    second: ProgressBarCircle-10
+  - first:
+      213: 6193927898112694434
+    second: ProgressBarCircle-11
+  - first:
+      213: 5670814787976932475
+    second: ProgressBarCircle-12
+  - first:
+      213: 6267627407106745914
+    second: ProgressBarCircle-13
+  - first:
+      213: 503967279795875189
+    second: ProgressBarCircle-14
+  - first:
+      213: 8264436974773166870
+    second: ProgressBarCircle-15
+  - first:
+      213: -8154856749487018484
+    second: ProgressBarCircle-16
+  - first:
+      213: -1349174821613635428
+    second: ProgressBarCircle-17
+  - first:
+      213: -867305783073845256
+    second: ProgressBarCircle-18
+  - first:
+      213: 6484428886595836417
+    second: ProgressBarCircle-19
+  - first:
+      213: 2062256400395593941
+    second: ProgressBarCircle-20
+  - first:
+      213: 989566236280666028
+    second: ProgressBarCircle-21
+  - first:
+      213: -8930084693812696072
+    second: ProgressBarHorizontal-01
+  - first:
+      213: 6745283526561224663
+    second: ProgressBarHorizontal-02
+  - first:
+      213: -8802925072812657700
+    second: ProgressBarHorizontal-03
+  - first:
+      213: -944094748661565196
+    second: ProgressBarHorizontal-04
+  - first:
+      213: 2651131088192975429
+    second: ProgressBarHorizontal-05
+  - first:
+      213: 6942597595479737193
+    second: ProgressBarHorizontal-06
+  - first:
+      213: -8672460847044582878
+    second: ProgressBarHorizontal-07
+  - first:
+      213: -7197319254989454002
+    second: ProgressBarHorizontal-08
+  - first:
+      213: 1511272503312404221
+    second: ProgressBarHorizontal-09
+  - first:
+      213: -7344808094210548356
+    second: ProgressBarHorizontal-10
+  - first:
+      213: -8595171533772156863
+    second: Repair-01
+  - first:
+      213: -4683365050137967493
+    second: Repair-02
+  - first:
+      213: 8414273874572932029
+    second: Repair-03
+  - first:
+      213: 689598209960942265
+    second: Repair-04
+  - first:
+      213: 4667436695532968811
+    second: Repair-05
+  - first:
+      213: -5428607050841444835
+    second: Repair-06
+  - first:
+      213: 1614624548415884925
+    second: Repair-07
+  - first:
+      213: -7295884331477860154
+    second: Rocks-01
+  - first:
+      213: 1791542432724120138
+    second: Rocks-02
+  - first:
+      213: -1761103883627583781
+    second: Rocks-03
+  - first:
+      213: -1279011951930623190
+    second: Rocks-04
+  - first:
+      213: 2296712524359767481
+    second: Rocks-05
+  - first:
+      213: 2463751026737361315
+    second: Rocks-06
+  - first:
+      213: -3363809255978463793
+    second: Rocks-07
+  - first:
+      213: -6201370209515914761
+    second: Rocks-08
+  - first:
+      213: 1100475272729929060
+    second: TankGreen-01
+  - first:
+      213: -5957848700888832678
+    second: TankGreen-02
+  - first:
+      213: -377677448440899842
+    second: TankGreen-03
+  - first:
+      213: 8584566267843855048
+    second: TankGreen-04
+  - first:
+      213: -808355174537394671
+    second: TankRed-01
+  - first:
+      213: 2931003036778622348
+    second: TankRed-02
+  - first:
+      213: 8432935398126356078
+    second: TankRed-03
+  - first:
+      213: -7496646765698969579
+    second: TankRed-04
+  - first:
+      213: -7523935263497258155
+    second: TankTower-01
+  - first:
+      213: -8955582618123105971
+    second: TankTower-02
+  - first:
+      213: 3253767682438706019
+    second: TankTower-03
+  - first:
+      213: 4409346157955124216
+    second: TankTower-04
+  - first:
+      213: -8224716397282944026
+    second: Ground-04
+  - first:
+      213: 5054534931580846452
+    second: Bullets-01
+  - first:
+      213: 1480168572861177467
+    second: TankBomb-01
+  - first:
+      213: -169888878438190580
+    second: Particles-01
+  - first:
+      213: 6955138477306786569
+    second: Particles-02
+  - first:
+      213: -2758170822950884431
+    second: Particles-03
+  - first:
+      213: -47042876029673885
+    second: Particles-04
+  - first:
+      213: 6548291520356831854
+    second: Clouds-01
+  - first:
+      213: -5210092014125140150
+    second: Clouds-02
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ammo-01
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 671
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3c06bf853736e60800000000000000
+      internalID: 7954328192878167021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ammo-02
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 612
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940953b0387d87b80800000000000000
+      internalID: -8396724547403542455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ammo-03
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 650
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 243ae486a0e8d6c80800000000000000
+      internalID: -8327843960587377854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ammo-04
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 591
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 430e91dd1d4f02430800000000000000
+      internalID: 3756271271421796404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ammo-05
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 557
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2858524da0bc9a340800000000000000
+      internalID: 4875651318974612866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ammo-06
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 553
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df2d8e60f5ad6b20800000000000000
+      internalID: 3129339768157843416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ammo-07
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 532
+        width: 62
+        height: 57
+      alignment: 9
+      pivot: {x: 0.5322581, y: 0.57894737}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a482235056ee0b670800000000000000
+      internalID: 8552597810022852682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-01
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 1891
+        width: 174
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 848a1d2af344eaed0800000000000000
+      internalID: -2400906511236618168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Base-02
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 116
+        width: 287
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c8814b5f0c10b2b0800000000000000
+      internalID: -5570921886776194874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-01
+      rect:
+        serializedVersion: 2
+        x: 1382
+        y: 720
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c47b21d70b17f70800000000000000
+      internalID: 9183315166416555159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-02
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 704
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ae7576ee6fb6cd90800000000000000
+      internalID: -7077759281332388187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-03
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 677
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eada1580a0608040800000000000000
+      internalID: 4647821057990515429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-04
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 761
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3c2cb9977d391760800000000000000
+      internalID: 7429036644213992508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-05
+      rect:
+        serializedVersion: 2
+        x: 1543
+        y: 732
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812fef568b42dff40800000000000000
+      internalID: 5763803472507892248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-06
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 718
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8fb7c26c208676f0800000000000000
+      internalID: -687220965003247734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bomb-07
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 623
+        width: 76
+        height: 95
+      alignment: 9
+      pivot: {x: 0.5986842, y: 0.4473684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a03989e547ace00800000000000000
+      internalID: 1065792211462064763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BonusPoint-01
+      rect:
+        serializedVersion: 2
+        x: 1579
+        y: 948
+        width: 94
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31666144a75ed9840800000000000000
+      internalID: 5232590655365473811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Box-01
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 943
+        width: 84
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a698a91e8d3e72a0800000000000000
+      internalID: -6737880311974553951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bullets-01
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1708
+        width: 42
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4710ead7db0552640800000000000000
+      internalID: 5054534931580846452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExplosionTrace-01
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1417
+        width: 445
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 083fb1c7895a0b7b0800000000000000
+      internalID: -5210482694531845248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground-01
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 81
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f4525ac31b498f20800000000000000
+      internalID: 3425351539962828018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground-02
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 941
+        width: 696
+        height: 1106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbb959df32355cd90800000000000000
+      internalID: -7078159825299465285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground-03
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1543
+        width: 810
+        height: 504
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a336c1ba818a3f0800000000000000
+      internalID: -889433803210933706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ground-04
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 339
+        width: 996
+        height: 600
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6eb9e995300fbdd80800000000000000
+      internalID: -8224716397282944026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-01
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 947
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a39a08d41fa069f0800000000000000
+      internalID: -477189056442494047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-02
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 947
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac7c5d1ec0e1c9e00800000000000000
+      internalID: 1052749453575178186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-03
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 947
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a93ea2507d13ac40800000000000000
+      internalID: 5522289936347052451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-04
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 947
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcedca2154fa684a0800000000000000
+      internalID: -6591388293409218867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-05
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1237
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8caa8c5362c1fcd0800000000000000
+      internalID: -2526024183967994737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-06
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 778
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31a160e3c250c4160800000000000000
+      internalID: 7010984407486306835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-07
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 735
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 600d6822445d10c80800000000000000
+      internalID: -8358164944809177082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gun-08
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 947
+        width: 68
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5808824, y: 0.51265824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f09b559c4af01e20800000000000000
+      internalID: 3319428132202320117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Misc-01
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 984
+        width: 80
+        height: 89
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b56aa9e18eea4b340800000000000000
+      internalID: 4878716608318187099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Misc-02
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 4
+        width: 98
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4885d4e2425a3ad0800000000000000
+      internalID: -2721772577531525046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Misc-03
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 1417
+        width: 68
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed23691821c29820800000000000000
+      internalID: 2923611486085656033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Misc-04
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 701
+        width: 67
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f20e6318a8cb4a70800000000000000
+      internalID: 8812357720086545140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Misc-05
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 719
+        width: 56
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b30c0f445afa1f10800000000000000
+      internalID: 2241379004580627381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Particles-01
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 82
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c02f66517fe64adf0800000000000000
+      internalID: -169888878438190580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Particles-02
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1788
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 903b58f589d958060800000000000000
+      internalID: 6955138477306786569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Particles-03
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1526
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bb6a2cff3209b9d0800000000000000
+      internalID: -2758170822950884431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Particles-04
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1817
+        width: 56
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36ed905e0ced85ff0800000000000000
+      internalID: -47042876029673885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-01
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 600
+        width: 52
+        height: 64
+      alignment: 9
+      pivot: {x: 0.47115386, y: 0.515625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e04066f66ab6370800000000000000
+      internalID: 8316924134252875325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-02
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 758
+        width: 57
+        height: 65
+      alignment: 9
+      pivot: {x: 0.5, y: 0.50769234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dd1f3991f07e0550800000000000000
+      internalID: 6128960325858303446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-03
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 668
+        width: 54
+        height: 65
+      alignment: 9
+      pivot: {x: 0.5277778, y: 0.50769234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7351cbb26363747d0800000000000000
+      internalID: -2934317025918708425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-04
+      rect:
+        serializedVersion: 2
+        x: 1378
+        y: 558
+        width: 52
+        height: 63
+      alignment: 9
+      pivot: {x: 0.50961536, y: 0.52380955}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff72870d5617818a0800000000000000
+      internalID: -6334188193793431553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-05
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 2
+        width: 52
+        height: 66
+      alignment: 9
+      pivot: {x: 0.50961536, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a80d312aab7280320800000000000000
+      internalID: 2524311273677770890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-06
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 2
+        width: 57
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5475c505d569621d0800000000000000
+      internalID: -3375845543143254203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-07
+      rect:
+        serializedVersion: 2
+        x: 1788
+        y: 714
+        width: 56
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5089286, y: 0.5322581}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da32bdfd53e5566b0800000000000000
+      internalID: -5303729400676932691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-08
+      rect:
+        serializedVersion: 2
+        x: 1526
+        y: 612
+        width: 52
+        height: 65
+      alignment: 9
+      pivot: {x: 0.50961536, y: 0.50769234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e3a3808a224db780800000000000000
+      internalID: -8665697357678795801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-09
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 634
+        width: 54
+        height: 65
+      alignment: 9
+      pivot: {x: 0.49074075, y: 0.50769234}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed73658ddd79ab740800000000000000
+      internalID: 5168610501434161118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-10
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 600
+        width: 52
+        height: 64
+      alignment: 9
+      pivot: {x: 0.47115386, y: 0.515625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a78b0435fdcfa30a0800000000000000
+      internalID: -6900925442887206790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-11
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 518
+        width: 50
+        height: 66
+      alignment: 9
+      pivot: {x: 0.45, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61e3fd0f58eea6440800000000000000
+      internalID: 4930015001149652502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-12
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 369
+        width: 48
+        height: 64
+      alignment: 9
+      pivot: {x: 0.42708334, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99eccae9c659a37e0800000000000000
+      internalID: -1784950008547848551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-13
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 435
+        width: 49
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4387755, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd53ba9c1bce6cff0800000000000000
+      internalID: -16065300312410659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-14
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 500
+        width: 49
+        height: 65
+      alignment: 9
+      pivot: {x: 0.4387755, y: 0.4923077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 226d9df5d984ff410800000000000000
+      internalID: 1513007840574952994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-15
+      rect:
+        serializedVersion: 2
+        x: 1127
+        y: 466
+        width: 49
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4387755, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55af570ef6defc070800000000000000
+      internalID: 8128976917190015573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-16
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 501
+        width: 50
+        height: 64
+      alignment: 9
+      pivot: {x: 0.43, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22f389499f691fcc0800000000000000
+      internalID: -3678993421900955870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-17
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 439
+        width: 48
+        height: 63
+      alignment: 9
+      pivot: {x: 0.42708334, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bca7f996a8da7aa0800000000000000
+      internalID: -6162374930043786063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-18
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 439
+        width: 48
+        height: 63
+      alignment: 9
+      pivot: {x: 0.42708334, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7edc32dbf990d8c0800000000000000
+      internalID: -3976509164125102465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-19
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 2
+        width: 52
+        height: 66
+      alignment: 9
+      pivot: {x: 0.47115386, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c47e370f0512e3b90800000000000000
+      internalID: -7260328917759432884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant01-20
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 600
+        width: 52
+        height: 64
+      alignment: 9
+      pivot: {x: 0.47115386, y: 0.515625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e162954e203dd8600800000000000000
+      internalID: 472265545318213150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-01
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1657
+        width: 30
+        height: 49
+      alignment: 9
+      pivot: {x: 0.41666666, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36aa64e349a577190800000000000000
+      internalID: -7964797823234954653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-02
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 1840
+        width: 27
+        height: 49
+      alignment: 9
+      pivot: {x: 0.42592594, y: 0.47959185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9532b3c5fdb77dcd0800000000000000
+      internalID: -2533420066117311655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-03
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1466
+        width: 26
+        height: 46
+      alignment: 9
+      pivot: {x: 0.40384614, y: 0.51086956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a262cbae58cb16f0800000000000000
+      internalID: -712755807073967451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-04
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1514
+        width: 27
+        height: 45
+      alignment: 9
+      pivot: {x: 0.3888889, y: 0.5222222}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e67db7daa58952c80800000000000000
+      internalID: -8348098819036293266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-05
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 1789
+        width: 27
+        height: 49
+      alignment: 9
+      pivot: {x: 0.3888889, y: 0.47959185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0ddf9c5f2d64230800000000000000
+      internalID: 3622814903363817642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-06
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1418
+        width: 26
+        height: 46
+      alignment: 9
+      pivot: {x: 0.40384614, y: 0.51086956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa9d6733680980c40800000000000000
+      internalID: 5478787852759652778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-07
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 1741
+        width: 27
+        height: 46
+      alignment: 9
+      pivot: {x: 0.42592594, y: 0.51086956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d90dc62e25377de40800000000000000
+      internalID: 5681136254774464669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-08
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1561
+        width: 27
+        height: 46
+      alignment: 9
+      pivot: {x: 0.42592594, y: 0.51086956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb3b8ec94c99345e0800000000000000
+      internalID: -1926527145859304514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-09
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1609
+        width: 28
+        height: 46
+      alignment: 9
+      pivot: {x: 0.44642857, y: 0.51086956}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cfd00bb178566c20800000000000000
+      internalID: 3199341830785261509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-10
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1657
+        width: 30
+        height: 49
+      alignment: 9
+      pivot: {x: 0.41666666, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb284253d51b44430800000000000000
+      internalID: 3766330202270237372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-11
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1660
+        width: 32
+        height: 49
+      alignment: 9
+      pivot: {x: 0.453125, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4dc7af63af5b8f80800000000000000
+      internalID: -8103277948965499574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-12
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1560
+        width: 32
+        height: 47
+      alignment: 9
+      pivot: {x: 0.515625, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 603b0603d4b956c40800000000000000
+      internalID: 5504976875356730118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-13
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1866
+        width: 37
+        height: 48
+      alignment: 9
+      pivot: {x: 0.527027, y: 0.48958334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9288655804f238bf0800000000000000
+      internalID: -323362794079090647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-14
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1967
+        width: 37
+        height: 49
+      alignment: 9
+      pivot: {x: 0.527027, y: 0.47959185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 406ee80c4976bae20800000000000000
+      internalID: 3362895435345618436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-15
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1916
+        width: 37
+        height: 49
+      alignment: 9
+      pivot: {x: 0.527027, y: 0.47959185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0e68798ea5ec3820800000000000000
+      internalID: 2899444797913198090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-16
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1763
+        width: 35
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 386def6263ac39f50800000000000000
+      internalID: 6887070589110900355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-17
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1814
+        width: 36
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5138889, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14789a0f9f660ed10800000000000000
+      internalID: 2152833845553628993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-18
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1609
+        width: 32
+        height: 49
+      alignment: 9
+      pivot: {x: 0.453125, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc591ea8ffefa0e80800000000000000
+      internalID: -8211470597056522803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-19
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 1711
+        width: 32
+        height: 50
+      alignment: 9
+      pivot: {x: 0.453125, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f1c9bdffe7844fa0800000000000000
+      internalID: -5817375353832095242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant02-20
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 1657
+        width: 30
+        height: 49
+      alignment: 9
+      pivot: {x: 0.41666666, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52eca901ccfe2cc20800000000000000
+      internalID: 3225403942881644069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-01
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 843
+        width: 63
+        height: 50
+      alignment: 9
+      pivot: {x: 0.50793654, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fe4082beee330340800000000000000
+      internalID: 4828772420389195508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-02
+      rect:
+        serializedVersion: 2
+        x: 1457
+        y: 666
+        width: 67
+        height: 50
+      alignment: 9
+      pivot: {x: 0.49253732, y: 0.53}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f5b662ea9ab50710800000000000000
+      internalID: 1658937212142007792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-03
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 616
+        width: 65
+        height: 49
+      alignment: 9
+      pivot: {x: 0.50769234, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08ae7efb3e0273a70800000000000000
+      internalID: 8806543758895606400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-04
+      rect:
+        serializedVersion: 2
+        x: 1538
+        y: 679
+        width: 67
+        height: 51
+      alignment: 9
+      pivot: {x: 0.52238804, y: 0.48039216}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdac0f6da6884ce90800000000000000
+      internalID: -7006325127827633445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-05
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 823
+        width: 67
+        height: 50
+      alignment: 9
+      pivot: {x: 0.52238804, y: 0.51}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7064143cf5219c4c0800000000000000
+      internalID: -4266858969449806329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-06
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1423
+        width: 69
+        height: 51
+      alignment: 9
+      pivot: {x: 0.5072464, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322355e1a7442b980800000000000000
+      internalID: -8524675853373328861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-07
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 771
+        width: 67
+        height: 50
+      alignment: 9
+      pivot: {x: 0.49253732, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f3af9e70ae80daf0800000000000000
+      internalID: -373641949101448202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-08
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 667
+        width: 65
+        height: 50
+      alignment: 9
+      pivot: {x: 0.50769234, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 731d72694f4c4ac20800000000000000
+      internalID: 3216912588619632951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-09
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 719
+        width: 66
+        height: 50
+      alignment: 9
+      pivot: {x: 0.530303, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b087c0a13e1324a30800000000000000
+      internalID: 4197972654127085579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-10
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 843
+        width: 63
+        height: 50
+      alignment: 9
+      pivot: {x: 0.50793654, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4224060555874e20800000000000000
+      internalID: 3334780649310790219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-11
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 709
+        width: 61
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5081967, y: 0.5212766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9883397e84a4a90a0800000000000000
+      internalID: -6874100204244354935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-12
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 504
+        width: 62
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54ff6e9b1080daa00800000000000000
+      internalID: 769279914857135941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-13
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 825
+        width: 58
+        height: 48
+      alignment: 9
+      pivot: {x: 0.51724136, y: 0.5104167}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc1ceac1475792190800000000000000
+      internalID: -7986723322606992948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-14
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1914
+        width: 61
+        height: 51
+      alignment: 9
+      pivot: {x: 0.5081967, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb7aebcada9c05fb0800000000000000
+      internalID: -4661003866563762241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-15
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1862
+        width: 61
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5081967, y: 0.51}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50f07398dc3f63b80800000000000000
+      internalID: -8415270789599260923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-16
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1810
+        width: 61
+        height: 50
+      alignment: 9
+      pivot: {x: 0.52459013, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41e415bea539bece0800000000000000
+      internalID: -1374843242527240684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-17
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 895
+        width: 64
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5, y: 0.51}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dce33600ec9b82870800000000000000
+      internalID: 8658374578040684237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-18
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 504
+        width: 62
+        height: 47
+      alignment: 9
+      pivot: {x: 0.516129, y: 0.5212766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec7df27edaa2fd460800000000000000
+      internalID: 7268575249995651022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-19
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 792
+        width: 63
+        height: 49
+      alignment: 9
+      pivot: {x: 0.50793654, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bbf648f33f9d44b0800000000000000
+      internalID: -5454528528118252621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant03-20
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 843
+        width: 63
+        height: 50
+      alignment: 9
+      pivot: {x: 0.50793654, y: 0.49}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 729e9abfa63e889e0800000000000000
+      internalID: -1618794017411438297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-01
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 650
+        width: 76
+        height: 52
+      alignment: 9
+      pivot: {x: 0.48026314, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 315f59032cf22b010800000000000000
+      internalID: 1203076561546638611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-02
+      rect:
+        serializedVersion: 2
+        x: 1770
+        y: 869
+        width: 78
+        height: 52
+      alignment: 9
+      pivot: {x: 0.49358973, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ad27a22289b8bd60800000000000000
+      internalID: 7906273114427174305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-03
+      rect:
+        serializedVersion: 2
+        x: 1948
+        y: 922
+        width: 79
+        height: 51
+      alignment: 9
+      pivot: {x: 0.5, y: 0.50980395}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0a9a40ad9ef49810800000000000000
+      internalID: 1771320506416011790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-04
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 828
+        width: 78
+        height: 48
+      alignment: 9
+      pivot: {x: 0.49358973, y: 0.5208333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a16ba039b8c17ce0800000000000000
+      internalID: -1409124510679211616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-05
+      rect:
+        serializedVersion: 2
+        x: 1464
+        y: 815
+        width: 77
+        height: 48
+      alignment: 9
+      pivot: {x: 0.48701298, y: 0.5208333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 169b1825a12eae180800000000000000
+      internalID: -9085200695585293983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-06
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 912
+        width: 78
+        height: 53
+      alignment: 9
+      pivot: {x: 0.49358973, y: 0.509434}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdb9e4c639a1e62c0800000000000000
+      internalID: -4436579362433754148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-07
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 801
+        width: 79
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5, y: 0.509434}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a0d69a864ae28b00800000000000000
+      internalID: 829482870083342499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-08
+      rect:
+        serializedVersion: 2
+        x: 1946
+        y: 869
+        width: 78
+        height: 51
+      alignment: 9
+      pivot: {x: 0.49358973, y: 0.5294118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3eb074898ed58450800000000000000
+      internalID: 6090518753302330939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-09
+      rect:
+        serializedVersion: 2
+        x: 1671
+        y: 858
+        width: 78
+        height: 52
+      alignment: 9
+      pivot: {x: 0.49358973, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9317a923d401bd0a0800000000000000
+      internalID: -6855868083993939655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-10
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 650
+        width: 76
+        height: 52
+      alignment: 9
+      pivot: {x: 0.48026314, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ac55246083c28100800000000000000
+      internalID: 108864297213713577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-11
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 774
+        width: 77
+        height: 52
+      alignment: 9
+      pivot: {x: 0.48701298, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa8c258dd50a38ff0800000000000000
+      internalID: -35008047167125329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-12
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 624
+        width: 75
+        height: 51
+      alignment: 9
+      pivot: {x: 0.47333333, y: 0.5294118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a882b8cdf0191c050800000000000000
+      internalID: 5819091690850035850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-13
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1370
+        width: 69
+        height: 51
+      alignment: 9
+      pivot: {x: 0.42753622, y: 0.5294118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d2449f86672a7d20800000000000000
+      internalID: 3276975000314462929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-14
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1318
+        width: 69
+        height: 50
+      alignment: 9
+      pivot: {x: 0.42753622, y: 0.54}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf43a27da3a536160800000000000000
+      internalID: 7017551853137835259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-15
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 567
+        width: 72
+        height: 55
+      alignment: 9
+      pivot: {x: 0.4513889, y: 0.4909091}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f243f5c9f25bd790800000000000000
+      internalID: -7504313121361411341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-16
+      rect:
+        serializedVersion: 2
+        x: 1977
+        y: 1476
+        width: 70
+        height: 48
+      alignment: 9
+      pivot: {x: 0.43571427, y: 0.5625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 044b9fa5a45c0cb50800000000000000
+      internalID: 6611501176124453952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-17
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 859
+        width: 78
+        height: 51
+      alignment: 9
+      pivot: {x: 0.49358973, y: 0.5294118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a5af4eeaeb25a20800000000000000
+      internalID: 3049709556058446478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-18
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 829
+        width: 77
+        height: 51
+      alignment: 9
+      pivot: {x: 0.48701298, y: 0.5294118}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3431d89b797442e50800000000000000
+      internalID: 6783625655705473859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-19
+      rect:
+        serializedVersion: 2
+        x: 1383
+        y: 817
+        width: 79
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4909091}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adb0c9d8258b919a0800000000000000
+      internalID: -6261771142179320870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant04-20
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 650
+        width: 76
+        height: 52
+      alignment: 9
+      pivot: {x: 0.48026314, y: 0.5192308}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8e26348e773700f0800000000000000
+      internalID: -1150890163246322035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-01
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 878
+        width: 94
+        height: 63
+      alignment: 9
+      pivot: {x: 0.48404256, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6a62c8d53b7c4ee0800000000000000
+      internalID: -1275509123252589969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-02
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 1062
+        width: 96
+        height: 65
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.4923077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f13740dd93751710800000000000000
+      internalID: 1663362759024652786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-03
+      rect:
+        serializedVersion: 2
+        x: 1812
+        y: 989
+        width: 96
+        height: 64
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5255a03daf458840800000000000000
+      internalID: 5225670547897406046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-04
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 997
+        width: 96
+        height: 63
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9352cd56cb0e3f8e0800000000000000
+      internalID: -1660736737802181319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-05
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 1009
+        width: 96
+        height: 64
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b942fa2692ae55300800000000000000
+      internalID: 240355618604393627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-06
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 943
+        width: 96
+        height: 64
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18feddcad35bfa770800000000000000
+      internalID: 8624311087935647617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-07
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1011
+        width: 96
+        height: 62
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.516129}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07f696ceaec342730800000000000000
+      internalID: 3973367750933966704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-08
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 875
+        width: 95
+        height: 62
+      alignment: 9
+      pivot: {x: 0.48947367, y: 0.516129}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d8384010a9b92b90800000000000000
+      internalID: -7266072426666510120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-09
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 939
+        width: 95
+        height: 63
+      alignment: 9
+      pivot: {x: 0.48947367, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e16dc30fda8875d0800000000000000
+      internalID: -3064546855979490847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-10
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 878
+        width: 94
+        height: 63
+      alignment: 9
+      pivot: {x: 0.48404256, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9269858854c64f50800000000000000
+      internalID: 6865390566449439387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-11
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 878
+        width: 95
+        height: 64
+      alignment: 9
+      pivot: {x: 0.48947367, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e19b76495c62c540800000000000000
+      internalID: 5026699264789287400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-12
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 923
+        width: 93
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4784946, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a7c32220c7921e30800000000000000
+      internalID: 4472804231394609061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-13
+      rect:
+        serializedVersion: 2
+        x: 1675
+        y: 978
+        width: 94
+        height: 63
+      alignment: 9
+      pivot: {x: 0.48404256, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b912e9ce170ac130800000000000000
+      internalID: 3587687881971472817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-14
+      rect:
+        serializedVersion: 2
+        x: 1577
+        y: 882
+        width: 92
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4728261, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 487ca0f5d38db7a00800000000000000
+      internalID: 755435120613836676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-15
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 931
+        width: 94
+        height: 64
+      alignment: 9
+      pivot: {x: 0.48404256, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b98a37a68a6a2aa80800000000000000
+      internalID: -8457013907977688933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-16
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 944
+        width: 95
+        height: 65
+      alignment: 9
+      pivot: {x: 0.48947367, y: 0.4923077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a523197d6815eb50800000000000000
+      internalID: 6621725685579982240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-17
+      rect:
+        serializedVersion: 2
+        x: 1675
+        y: 912
+        width: 93
+        height: 64
+      alignment: 9
+      pivot: {x: 0.4784946, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11d1b59ef87d195e0800000000000000
+      internalID: -1904504154305651439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 2
+        width: 96
+        height: 66
+      alignment: 9
+      pivot: {x: 0.49479166, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa7a4d21d06cd2980800000000000000
+      internalID: -8561969557108643926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-19
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 1129
+        width: 97
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67e686b0cdbf3b990800000000000000
+      internalID: -7371271242572599690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Plant05-20
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 878
+        width: 94
+        height: 63
+      alignment: 9
+      pivot: {x: 0.48404256, y: 0.50793654}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc0bcb28b22981a20800000000000000
+      internalID: 3033335064608682187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Plants-Tree01-01
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1843
+        width: 235
+        height: 204
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 042162f17e7468f60800000000000000
+      internalID: 8036189643074835008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-01
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 1739
+        width: 7
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5714286, y: -1.5909091}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6f7af49deab7200800000000000000
+      internalID: 178928858578810587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-02
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 90
+        width: 24
+        height: 24
+      alignment: 9
+      pivot: {x: 0.16666667, y: -1.375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4ef92a6186ebde10800000000000000
+      internalID: 2223624284543778380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-03
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 2018
+        width: 39
+        height: 29
+      alignment: 9
+      pivot: {x: 0.102564104, y: -0.9655172}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d588bc306cc0ade50800000000000000
+      internalID: 6834789429094877277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-04
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1771
+        width: 57
+        height: 37
+      alignment: 9
+      pivot: {x: 0.07017544, y: -0.5405405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faa521eeec06fc230800000000000000
+      internalID: 3661251463949212335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-05
+      rect:
+        serializedVersion: 2
+        x: 1751
+        y: 816
+        width: 78
+        height: 51
+      alignment: 9
+      pivot: {x: 0.2948718, y: -0.11764706}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a33799c4e0ac9130800000000000000
+      internalID: 3574909108720448418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-06
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 730
+        width: 62
+        height: 60
+      alignment: 9
+      pivot: {x: 0.08064516, y: 0.05}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 881238302b9c78370800000000000000
+      internalID: 8324844202617938312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-07
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1967
+        width: 61
+        height: 80
+      alignment: 9
+      pivot: {x: 0.06557377, y: 0.2875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82664ecfc63e88930800000000000000
+      internalID: 4145813514233341480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-08
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 10
+        width: 62
+        height: 104
+      alignment: 9
+      pivot: {x: 0.08064516, y: 0.45192307}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27466f01a282e9a10800000000000000
+      internalID: 1918014652444730482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-09
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 3
+        width: 61
+        height: 111
+      alignment: 9
+      pivot: {x: 0.06557377, y: 0.4864865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0d1bcc05e4803c0800000000000000
+      internalID: -4393175327561363276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-10
+      rect:
+        serializedVersion: 2
+        x: 967
+        y: 2
+        width: 74
+        height: 112
+      alignment: 9
+      pivot: {x: 0.22972973, y: 0.49107143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d950e76e3b9969e80800000000000000
+      internalID: -8172175475871971939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-11
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 753
+        width: 71
+        height: 114
+      alignment: 9
+      pivot: {x: 0.1971831, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a893634b9045f550800000000000000
+      internalID: 6193927898112694434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-12
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 975
+        width: 81
+        height: 114
+      alignment: 9
+      pivot: {x: 0.2962963, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7ca5602108c2be40800000000000000
+      internalID: 5670814787976932475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-13
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 1195
+        width: 103
+        height: 114
+      alignment: 9
+      pivot: {x: 0.44660193, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a36a9116be51bf650800000000000000
+      internalID: 6267627407106745914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-14
+      rect:
+        serializedVersion: 2
+        x: 1481
+        y: 1311
+        width: 110
+        height: 114
+      alignment: 9
+      pivot: {x: 0.48181817, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57d27a222937ef600800000000000000
+      internalID: 503967279795875189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-15
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 1427
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61365f544ad21b270800000000000000
+      internalID: 8264436974773166870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-16
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 1427
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0e21ac1ef024de80800000000000000
+      internalID: -8154856749487018484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-17
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 1427
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9871d1e5a4c64de0800000000000000
+      internalID: -1349174821613635428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-18
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 1171
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ffcd384cf5b6f3f0800000000000000
+      internalID: -867305783073845256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-19
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 1055
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10a93d467b15df950800000000000000
+      internalID: 6484428886595836417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-20
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 1043
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d8ea55154b9e9c10800000000000000
+      internalID: 2062256400395593941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarCircle-21
+      rect:
+        serializedVersion: 2
+        x: 1696
+        y: 1043
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca7ba3bbf35abbd00800000000000000
+      internalID: 989566236280666028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-01
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 962
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb242bd847f11480800000000000000
+      internalID: -8930084693812696072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-02
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 940
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d7d9fd11af0c9d50800000000000000
+      internalID: 6745283526561224663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-03
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 918
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd33f92494ab5d580800000000000000
+      internalID: -8802925072812657700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-04
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 967
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f837bff3d6e5e2f0800000000000000
+      internalID: -944094748661565196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-05
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 909
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 542bcbcada5bac420800000000000000
+      internalID: 2651131088192975429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-06
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 896
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9630d09cabf095060800000000000000
+      internalID: 6942597595479737193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-07
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 887
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 222ac6beeca35a780800000000000000
+      internalID: -8672460847044582878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-08
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 874
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e454647454cfd1c90800000000000000
+      internalID: -7197319254989454002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-09
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 856
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfe40cea55e19f410800000000000000
+      internalID: 1511272503312404221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBarHorizontal-10
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 865
+        width: 80
+        height: 20
+      alignment: 9
+      pivot: {x: 0.06875, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7d9a29e3fff11a90800000000000000
+      internalID: -7344808094210548356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-01
+      rect:
+        serializedVersion: 2
+        x: 445
+        y: 4
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14016f97701d7b880800000000000000
+      internalID: -8595171533772156863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-02
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 4
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b740c09ec48510fb0800000000000000
+      internalID: -4683365050137967493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-03
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 4
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db3f4c8128185c470800000000000000
+      internalID: 8414273874572932029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-04
+      rect:
+        serializedVersion: 2
+        x: 706
+        y: 6
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ba97761be1f19900800000000000000
+      internalID: 689598209960942265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-05
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 6
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6b9dd802f016c040800000000000000
+      internalID: 4667436695532968811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-06
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 6
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1e2a6536a6b9a4b0800000000000000
+      internalID: -5428607050841444835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Repair-07
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 1091
+        width: 85
+        height: 73
+      alignment: 9
+      pivot: {x: 0.5529412, y: 0.5068493}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7e44fdd87c486610800000000000000
+      internalID: 1614624548415884925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-01
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1028
+        width: 346
+        height: 387
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c08ce31bdfcfba90800000000000000
+      internalID: -7295884331477860154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-02
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 1075
+        width: 432
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a427f8eb956dcd810800000000000000
+      internalID: 1791542432724120138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-03
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 70
+        width: 306
+        height: 267
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd621db395d4f87e0800000000000000
+      internalID: -1761103883627583781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-04
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 79
+        width: 336
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b32bdf769004ee0800000000000000
+      internalID: -1279011951930623190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-05
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 1771
+        width: 164
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b597a55fdf8fdf10800000000000000
+      internalID: 2296712524359767481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-06
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 14
+        width: 129
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a13fab5180013220800000000000000
+      internalID: 2463751026737361315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-07
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 1773
+        width: 88
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd8b3dcd495151d0800000000000000
+      internalID: -3363809255978463793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rocks-08
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 1035
+        width: 53
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f93d1596ae40f9a0800000000000000
+      internalID: -6201370209515914761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankBomb-01
+      rect:
+        serializedVersion: 2
+        x: 1301
+        y: 586
+        width: 75
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7e5619897d9a8410800000000000000
+      internalID: 1480168572861177467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankGreen-01
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 1415
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4652b231e6ca54f00800000000000000
+      internalID: 1100475272729929060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankGreen-02
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 1415
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a55affd2c28715da0800000000000000
+      internalID: -5957848700888832678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankGreen-03
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 1415
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef611069c5832caf0800000000000000
+      internalID: -377677448440899842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankGreen-04
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 1287
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c242a1a981822770800000000000000
+      internalID: 8584566267843855048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankRed-01
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 1287
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1168959604528c4f0800000000000000
+      internalID: -808355174537394671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankRed-02
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 1287
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8de7ca9bb30da820800000000000000
+      internalID: 2931003036778622348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankRed-03
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 1159
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e668323a01ec70570800000000000000
+      internalID: 8432935398126356078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankRed-04
+      rect:
+        serializedVersion: 2
+        x: 1714
+        y: 1159
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5109eeb4c7f86f790800000000000000
+      internalID: -7496646765698969579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankTower-01
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 1772
+        width: 86
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55bf53acdbc959790800000000000000
+      internalID: -7523935263497258155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankTower-02
+      rect:
+        serializedVersion: 2
+        x: 1958
+        y: 1166
+        width: 86
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d490c1abe0167b380800000000000000
+      internalID: -8955582618123105971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankTower-03
+      rect:
+        serializedVersion: 2
+        x: 1102
+        y: 1004
+        width: 80
+        height: 69
+      alignment: 9
+      pivot: {x: 0.4625, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 363b76dc774b72d20800000000000000
+      internalID: 3253767682438706019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TankTower-04
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 77
+        height: 67
+      alignment: 9
+      pivot: {x: 0.44155845, y: 0.51492536}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb06ac08f4213d30800000000000000
+      internalID: 4409346157955124216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Plants-Plant04-05: -9085200695585293983
+      Plants-Plant05-11: 5026699264789287400
+      Repair-01: -8595171533772156863
+      Plants-Plant05-18: -8561969557108643926
+      Repair-06: -5428607050841444835
+      ProgressBarCircle-11: 6193927898112694434
+      Repair-05: 4667436695532968811
+      Plants-Plant03-07: -373641949101448202
+      Bomb-07: 1065792211462064763
+      Plants-Plant05-12: 4472804231394609061
+      Plants-Plant03-19: -5454528528118252621
+      TankTower-03: 3253767682438706019
+      Plants-Plant02-17: 2152833845553628993
+      Plants-Plant04-04: -1409124510679211616
+      Plants-Plant04-06: -4436579362433754148
+      Plants-Plant05-20: 3033335064608682187
+      Ammo-04: 3756271271421796404
+      Plants-Plant04-07: 829482870083342499
+      Plants-Plant04-02: 7906273114427174305
+      TankTower-01: -7523935263497258155
+      Plants-Plant03-17: 8658374578040684237
+      Plants-Plant05-10: 6865390566449439387
+      ProgressBarCircle-09: -4393175327561363276
+      ProgressBarCircle-13: 6267627407106745914
+      Plants-Plant03-14: -4661003866563762241
+      Misc-05: 2241379004580627381
+      Plants-Plant01-16: -3678993421900955870
+      Plants-Plant01-19: -7260328917759432884
+      ProgressBarCircle-07: 4145813514233341480
+      Plants-Plant05-16: 6621725685579982240
+      Particles-02: 6955138477306786569
+      Gun-07: -8358164944809177082
+      TankRed-04: -7496646765698969579
+      TankGreen-03: -377677448440899842
+      Plants-Plant03-13: -7986723322606992948
+      Plants-Plant01-03: -2934317025918708425
+      Plants-Plant04-20: -1150890163246322035
+      Plants-Plant03-09: 4197972654127085579
+      Plants-Plant04-16: 6611501176124453952
+      Plants-Plant01-15: 8128976917190015573
+      Particles-03: -2758170822950884431
+      Gun-05: -2526024183967994737
+      Gun-08: 3319428132202320117
+      Plants-Plant02-14: 3362895435345618436
+      Plants-Plant01-06: -3375845543143254203
+      Bomb-02: -7077759281332388187
+      BonusPoint-01: 5232590655365473811
+      Repair-03: 8414273874572932029
+      ProgressBarCircle-06: 8324844202617938312
+      Plants-Plant02-01: -7964797823234954653
+      Misc-01: 4878716608318187099
+      Plants-Plant02-12: 5504976875356730118
+      ProgressBarCircle-01: 178928858578810587
+      Rocks-07: -3363809255978463793
+      TankTower-04: 4409346157955124216
+      ProgressBarHorizontal-01: -8930084693812696072
+      Plants-Plant01-11: 4930015001149652502
+      Plants-Plant05-04: -1660736737802181319
+      Bomb-03: 4647821057990515429
+      Ground-04: -8224716397282944026
+      Ammo-07: 8552597810022852682
+      Gun-02: 1052749453575178186
+      Plants-Plant04-10: 108864297213713577
+      Base-02: -5570921886776194874
+      ProgressBarCircle-08: 1918014652444730482
+      Rocks-08: -6201370209515914761
+      Plants-Plant05-08: -7266072426666510120
+      Plants-Plant03-02: 1658937212142007792
+      Plants-Plant04-12: 5819091690850035850
+      ProgressBarCircle-04: 3661251463949212335
+      Misc-03: 2923611486085656033
+      Ammo-05: 4875651318974612866
+      Ammo-02: -8396724547403542455
+      Plants-Plant02-18: -8211470597056522803
+      Gun-01: -477189056442494047
+      Plants-Plant02-05: 3622814903363817642
+      Plants-Plant03-08: 3216912588619632951
+      Plants-Plant01-17: -6162374930043786063
+      Plants-Plant01-02: 6128960325858303446
+      Plants-Plant05-01: -1275509123252589969
+      Plants-Plant05-05: 240355618604393627
+      Plants-Plant01-01: 8316924134252875325
+      Rocks-02: 1791542432724120138
+      Plants-Plant02-11: -8103277948965499574
+      TankRed-03: 8432935398126356078
+      Bomb-05: 5763803472507892248
+      Plants-Plant02-06: 5478787852759652778
+      ProgressBarCircle-03: 6834789429094877277
+      Ammo-03: -8327843960587377854
+      Gun-04: -6591388293409218867
+      Plants-Plant03-06: -8524675853373328861
+      Plants-Plant04-17: 3049709556058446478
+      Plants-Plant04-01: 1203076561546638611
+      Bomb-06: -687220965003247734
+      Plants-Plant02-13: -323362794079090647
+      Repair-07: 1614624548415884925
+      ProgressBarCircle-19: 6484428886595836417
+      Repair-04: 689598209960942265
+      Plants-Plant05-09: -3064546855979490847
+      Plants-Plant03-01: 4828772420389195508
+      Plants-Plant05-14: 755435120613836676
+      Plants-Plant02-19: -5817375353832095242
+      Ground-01: 3425351539962828018
+      Plants-Plant01-07: -5303729400676932691
+      Plants-Plant01-10: -6900925442887206790
+      Rocks-03: -1761103883627583781
+      ProgressBarCircle-02: 2223624284543778380
+      Plants-Plant02-04: -8348098819036293266
+      TankTower-02: -8955582618123105971
+      Bomb-01: 9183315166416555159
+      Particles-04: -47042876029673885
+      ProgressBarHorizontal-08: -7197319254989454002
+      ProgressBarCircle-05: 3574909108720448418
+      ProgressBarCircle-14: 503967279795875189
+      Plants-Plant05-19: -7371271242572599690
+      TankGreen-01: 1100475272729929060
+      Rocks-05: 2296712524359767481
+      ProgressBarCircle-21: 989566236280666028
+      Plants-Plant02-20: 3225403942881644069
+      ProgressBarHorizontal-02: 6745283526561224663
+      Plants-Plant04-19: -6261771142179320870
+      Ammo-06: 3129339768157843416
+      Bullets-01: 5054534931580846452
+      Plants-Plant01-14: 1513007840574952994
+      Plants-Plant04-11: -35008047167125329
+      Plants-Plant03-04: -7006325127827633445
+      Plants-Plant03-12: 769279914857135941
+      Plants-Plant04-15: -7504313121361411341
+      Plants-Plant03-10: 3334780649310790219
+      ProgressBarHorizontal-07: -8672460847044582878
+      Plants-Plant01-04: -6334188193793431553
+      Plants-Plant01-08: -8665697357678795801
+      Plants-Plant04-03: 1771320506416011790
+      ProgressBarHorizontal-05: 2651131088192975429
+      Gun-06: 7010984407486306835
+      Rocks-06: 2463751026737361315
+      ProgressBarHorizontal-09: 1511272503312404221
+      Plants-Plant01-12: -1784950008547848551
+      Plants-Plant02-10: 3766330202270237372
+      Plants-Plant04-18: 6783625655705473859
+      Plants-Plant02-07: 5681136254774464669
+      Plants-Plant01-05: 2524311273677770890
+      ProgressBarHorizontal-04: -944094748661565196
+      Plants-Plant02-15: 2899444797913198090
+      Plants-Plant03-15: -8415270789599260923
+      Plants-Plant01-09: 5168610501434161118
+      Plants-Plant05-07: 3973367750933966704
+      ProgressBarCircle-12: 5670814787976932475
+      Plants-Plant05-03: 5225670547897406046
+      Plants-Plant01-18: -3976509164125102465
+      Plants-Plant03-05: -4266858969449806329
+      ProgressBarHorizontal-10: -7344808094210548356
+      Plants-Plant02-16: 6887070589110900355
+      ExplosionTrace-01: -5210482694531845248
+      TankGreen-04: 8584566267843855048
+      Base-01: -2400906511236618168
+      Plants-Plant04-08: 6090518753302330939
+      Misc-02: -2721772577531525046
+      Plants-Plant02-02: -2533420066117311655
+      Box-01: -6737880311974553951
+      Plants-Plant05-02: 1663362759024652786
+      Plants-Plant05-17: -1904504154305651439
+      ProgressBarHorizontal-03: -8802925072812657700
+      ProgressBarCircle-10: -8172175475871971939
+      ProgressBarCircle-17: -1349174821613635428
+      Ground-02: -7078159825299465285
+      Plants-Plant01-13: -16065300312410659
+      ProgressBarCircle-15: 8264436974773166870
+      Ammo-01: 7954328192878167021
+      Plants-Plant04-09: -6855868083993939655
+      Plants-Plant05-06: 8624311087935647617
+      ProgressBarHorizontal-06: 6942597595479737193
+      ProgressBarCircle-18: -867305783073845256
+      TankBomb-01: 1480168572861177467
+      Bomb-04: 7429036644213992508
+      Plants-Tree01-01: 8036189643074835008
+      Rocks-01: -7295884331477860154
+      Plants-Plant04-14: 7017551853137835259
+      Rocks-04: -1279011951930623190
+      Plants-Plant04-13: 3276975000314462929
+      Plants-Plant03-11: -6874100204244354935
+      ProgressBarCircle-16: -8154856749487018484
+      Plants-Plant02-03: -712755807073967451
+      Gun-03: 5522289936347052451
+      Repair-02: -4683365050137967493
+      Plants-Plant03-03: 8806543758895606400
+      Ground-03: -889433803210933706
+      Plants-Plant02-09: 3199341830785261509
+      Plants-Plant05-15: -8457013907977688933
+      Plants-Plant05-13: 3587687881971472817
+      Plants-Plant02-08: -1926527145859304514
+      Plants-Plant03-20: -1618794017411438297
+      TankRed-02: 2931003036778622348
+      TankGreen-02: -5957848700888832678
+      Plants-Plant01-20: 472265545318213150
+      Misc-04: 8812357720086545140
+      Particles-01: -169888878438190580
+      ProgressBarCircle-20: 2062256400395593941
+      Plants-Plant03-16: -1374843242527240684
+      Plants-Plant03-18: 7268575249995651022
+      TankRed-01: -808355174537394671
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

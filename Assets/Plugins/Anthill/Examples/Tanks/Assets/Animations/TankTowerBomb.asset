@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b77ca242926439092ce0b163dea89d, type: 3}
+  m_Name: TankTowerBomb
+  m_EditorClassIdentifier: 
+  key: BombTower
+  frames:
+  - {fileID: 9183315166416555159, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -7077759281332388187, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 4647821057990515429, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 7429036644213992508, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 5763803472507892248, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -687220965003247734, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 1065792211462064763, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 9183315166416555159, guid: d5d5879f103914e179e72da5b710e57d, type: 3}

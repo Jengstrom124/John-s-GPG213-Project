@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b77ca242926439092ce0b163dea89d, type: 3}
+  m_Name: CircleProgressBar
+  m_EditorClassIdentifier: 
+  key: ProgressBar
+  frames:
+  - {fileID: 0}
+  - {fileID: 178928858578810587, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 2223624284543778380, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 6834789429094877277, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 3661251463949212335, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 3574909108720448418, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 8324844202617938312, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 4145813514233341480, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 1918014652444730482, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -4393175327561363276, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -8172175475871971939, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 6193927898112694434, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 5670814787976932475, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 6267627407106745914, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 503967279795875189, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 8264436974773166870, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -8154856749487018484, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -1349174821613635428, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -867305783073845256, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 6484428886595836417, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 2062256400395593941, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 989566236280666028, guid: d5d5879f103914e179e72da5b710e57d, type: 3}

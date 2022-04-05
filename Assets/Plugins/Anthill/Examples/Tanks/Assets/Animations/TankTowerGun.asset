@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b77ca242926439092ce0b163dea89d, type: 3}
+  m_Name: TankTowerGun
+  m_EditorClassIdentifier: 
+  key: GunTower
+  frames:
+  - {fileID: 4409346157955124216, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: 3253767682438706019, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -8955582618123105971, guid: d5d5879f103914e179e72da5b710e57d, type: 3}
+  - {fileID: -7523935263497258155, guid: d5d5879f103914e179e72da5b710e57d, type: 3}

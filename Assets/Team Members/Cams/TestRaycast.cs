@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestRaycast : MonoBehaviour
 {
+	public GameObject cubePrefab;
 	public LayerMask layerMask;
 
 	public Terrain terrain;
@@ -18,10 +19,21 @@ public class TestRaycast : MonoBehaviour
 		}
 	}
 
-	void LateUpdate()
+	void Start()
 	{
-		Vector3 pos = transform.position;
-		pos.y = terrain.SampleHeight(transform.position);
-		transform.position = pos;
+		for (int x = 0; x < 256; x++)
+		{
+			for (int z = 0; z < 256; z++)
+			{
+				Vector3 pos = new Vector3(x,0,z);
+				pos.y = terrain.SampleHeight(pos);
+				if (pos.y>16f)
+				{
+					Instantiate(cubePrefab, pos, Quaternion.identity);
+					
+				}
+				// transform.position = pos;
+			}
+		}
 	}
 }
