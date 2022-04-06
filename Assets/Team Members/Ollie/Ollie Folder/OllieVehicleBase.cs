@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class OllieVehicleBase : MonoBehaviour
 {
-    public bool grounded;
     public Rigidbody rb;
     public float forwardSpeed;
     public float turnSpeed;
+    public float wiggleSpeed;
     public Vector3 localVelocity;
     public bool playerInVehicle;
-    public Transform exitPoint;
+    public Transform tailTurnPoint;
     public GameObject car;
 
     private bool forward, backward, left, right;
@@ -36,54 +36,95 @@ public class OllieVehicleBase : MonoBehaviour
         {
             exitVehicleEvent?.Invoke();
         }
+
+        wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
     }
 
     private void FixedUpdate()
     {
         Forward();
-        Backward();
+        //Backward();
         Left();
         Right();
+        Steering();
     }
 
     public void Forward()
     {
-        if(forward)
-            if (grounded && playerInVehicle)
-            {
-                rb.AddRelativeForce(Vector3.forward * forwardSpeed);
-            }
+        rb.AddRelativeForce(0,0,forwardSpeed);
     }
 
-    public void Backward()
-    {
-        if(backward)
-            if (grounded && playerInVehicle)
-            {
-                rb.AddRelativeForce(Vector3.back * forwardSpeed);
-            }
-    }
+    // public void Backward()
+    // {
+    //     if(backward)
+    //         if (grounded && playerInVehicle)
+    //         {
+    //             rb.AddRelativeForce(Vector3.back * forwardSpeed);
+    //         }
+    // }
 
     public void Left()
     {
-        if(left)
-            if (grounded && playerInVehicle)
-            {
-                rb.AddRelativeForce(-localVelocity/5);
-                rb.AddRelativeTorque(0, -turnSpeed,0);
-            }
+        // if(left)
+        // {
+        //     rb.AddRelativeForce(-localVelocity/5);
+        //     rb.AddRelativeTorque(0, -turnSpeed,0);
+        // }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            left = true;
+        }
+        else
+        {
+            left = false;
+        }
     }
     
     public void Right()
     {
-        if(right)
-            if (grounded && playerInVehicle)
-            {
-                rb.AddRelativeForce(-localVelocity/5);
-                rb.AddRelativeTorque(0, turnSpeed,0);
-            }
+        // if(right)
+        // {
+        //     rb.AddRelativeForce(-localVelocity/5);
+        //     rb.AddRelativeTorque(0, turnSpeed,0);
+        // }
+        
+        if (Input.GetKey(KeyCode.D))
+        {
+            right = true;
+        }
+        else
+        {
+            right = false;
+        }
     }
 
+    public void Steering()
+    {
+        if (left)
+        {
+            print("moving left" + left);
+            //rb.AddForceAtPosition((new Vector3(turnSpeed,0,-localVelocity.z)),tailTurnPoint.position);
+            
+            //rb.AddForceAtPosition(Vector3.right,tailTurnPoint.position);
+            rb.AddRelativeTorque(0, -turnSpeed,0);
+        }
+        else if (right)
+        {
+            print("moving right" + right);
+            //rb.AddForceAtPosition((new Vector3(-turnSpeed,0,-localVelocity.z)),tailTurnPoint.position);
+            
+            //rb.AddForceAtPosition(Vector3.left,tailTurnPoint.position);
+            rb.AddRelativeTorque(0, turnSpeed,0);
+        }
+        else
+        {
+            rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position);
+        }
+    }
+
+    #region IDrivable Interface
+    
     public void Enter()
     {
         playerInVehicle = true;
@@ -136,10 +177,10 @@ public class OllieVehicleBase : MonoBehaviour
             
     }
 
-    public Transform GetVehicleExitPoint()
-    {
-        return exitPoint;
-    }
+    // public Transform GetVehicleExitPoint()
+    // {
+    //     return exitPoint;
+    // }
 
     public bool canEnter()
     {
@@ -152,4 +193,5 @@ public class OllieVehicleBase : MonoBehaviour
             return true;
         }
     }
+    #endregion
 }
