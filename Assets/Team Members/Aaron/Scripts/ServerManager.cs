@@ -60,6 +60,9 @@ public class ServerManager : NetworkManager
     {
         NetworkManager networkManager = this;
 
+
+        if (keyClientId != LocalClientId)
+            return null;
         
         //networkManager.SpawnManager.SpawnedObjects.TryGetValue(keyClientId, out NetworkObject networkObject);
 
