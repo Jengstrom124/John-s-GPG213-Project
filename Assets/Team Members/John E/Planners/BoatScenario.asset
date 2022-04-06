@@ -78,7 +78,7 @@ MonoBehaviour:
   goals:
   - name: Delivery
     isDefault: 1
-    position: {x: 350.6297, y: 420.37973}
+    position: {x: 355.58636, y: 421.61887}
     conditions:
     - id: 3
       value: 1
