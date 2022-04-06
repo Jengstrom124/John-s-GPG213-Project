@@ -26,9 +26,15 @@ namespace Gerallt
             //     return;
             // }
             
+            //GNetworkedListBehaviour.OnAwakeComplete += GNetworkedListBehaviour_AwakeComplete;
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
-        
+
+        private void GNetworkedListBehaviour_AwakeComplete()
+        {
+            GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
+        }
+
         public void OnDestroy()
         {
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
@@ -65,20 +71,24 @@ namespace Gerallt
                 // Refresh client UI with newly connected clients:
                 foreach(LobbyPlayerData lobbyPlayerData in GNetworkedListBehaviour.NetworkedObjects)
                 {
-                    NetworkObject spawnedObj = ServerManager.Resolve(lobbyPlayerData.ClientId);
-
-                    if (spawnedObj != null)
-                    {
-                        PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
+                    GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
+                    var uiClient = clientInstance.GetComponent<UIClient>();
+                    uiClient.UpdateUI(lobbyPlayerData.ClientId);
                     
-                        if (playerController != null)
-                        {
-                            GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                            var uiClient = clientInstance.GetComponent<UIClient>();
-                            uiClient.UpdateUI(playerController);
-                    
-                        }
-                    }
+                    // NetworkObject spawnedObj = ServerManager.Resolve(lobbyPlayerData.ClientId);
+                    //
+                    // if (spawnedObj != null)
+                    // {
+                    //     PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
+                    //
+                    //     if (playerController != null)
+                    //     {
+                    //         GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
+                    //         var uiClient = clientInstance.GetComponent<UIClient>();
+                    //         uiClient.UpdateUI(playerController);
+                    //
+                    //     }
+                    // }
                 }
             }
         }

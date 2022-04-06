@@ -12,6 +12,8 @@ namespace Gerallt
         //public NetworkList<NetworkObjectReference> NetworkedObjects;// = new NetworkList<NetworkObjectReference>();
         //[SerializeField] public NetworkList<ulong> NetworkedObjects = new NetworkList<ulong>(NetworkVariableReadPermission.Everyone, new List<ulong>());
         public NetworkList<LobbyPlayerData> NetworkedObjects;
+
+        public Action OnAwakeComplete;
         
         public void Awake()
         {
@@ -20,23 +22,37 @@ namespace Gerallt
             
             //if (ServerManager.IsServer)
             {
+                ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
                 ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
                 ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
             }
+
+            if (OnAwakeComplete != null)
+            {
+                OnAwakeComplete();
+            }
         }
-        
-        // public override void OnNetworkSpawn()
-        // {
-        //     if (!IsClient)
-        //     {
-        //         enabled = false;
-        //     }
-        //     else
-        //     {
-        //         ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-        //         ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
-        //     }
-        // }
+
+        private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate connectionApprovedCallback)
+        {
+            Debug.Log("Client connection approval " + clientId.ToString());
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            // if (!IsClient || !IsHost)
+            // {
+            //     //enabled = false;
+            // }
+            // else
+            // {
+            //     ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+            //     ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+            // }
+            
+            //ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+            //ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+        }
         //
         // public override void OnNetworkDespawn()
         // {

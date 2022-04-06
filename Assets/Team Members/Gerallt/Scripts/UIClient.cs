@@ -13,6 +13,11 @@ namespace Gerallt
             UITextMeshPro.SetText(playerController.playerName);
         }
         
+        public void UpdateUI(ulong clientId)
+        {
+            UITextMeshPro.SetText(clientId.ToString());
+        }
+        
         // Start is called before the first frame update
         void Start()
         {
