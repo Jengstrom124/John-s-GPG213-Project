@@ -809,13 +809,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  tailTransform: {fileID: 5562041122306409152}
+  tailJointTransform: {fileID: 5562041122306409152}
+  tailTipTransform: {fileID: 1001782359803232529}
+  headJointTransform: {fileID: 8873145128334385027}
   acceleratingForce: 15
+  reversingForce: 3
   longitudinalFrictionCoefficient: 1
   lateralFrictionCoefficient: 3
   steeringFrictionCoefficient: 2
   wigglePeriodInSeconds: 2
-  maxWiggleAngle: 5
+  maxWiggleAngle: 10
   maxSteeringAngle: 45
   currentSteeringAngle: 0
   localVelocity: {x: 0, y: 0, z: 0}

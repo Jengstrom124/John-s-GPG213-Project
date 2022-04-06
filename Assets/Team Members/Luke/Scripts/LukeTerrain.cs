@@ -10,6 +10,8 @@ public class LukeTerrain : MonoBehaviour
 	public float scale = 20f;
 	public float offsetX = 100f;
 	public float offsetY = 100f;
+
+	public float fringe = 0.05f;
 	
 	public float xOctave1Frequency = 4f;
 	public float xOctave2Frequency = 40f;
@@ -23,19 +25,24 @@ public class LukeTerrain : MonoBehaviour
 		float xCoord = (float) x / terrainGenerator.width;
 		float yCoord = (float) y / terrainGenerator.height;
 
-		float octave1 = amplitudeOctave1 * Mathf.PerlinNoise( xCoord*xOctave1Frequency+offsetX,  yCoord*yOctave1Frequency+offsetY);
-		float octave2 = amplitudeOctave2 * Mathf.PerlinNoise( xCoord*xOctave2Frequency+offsetX,  yCoord*yOctave2Frequency+offsetY);
+		if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+		{
+			float octave1 = amplitudeOctave1 * Mathf.PerlinNoise( xCoord*xOctave1Frequency+offsetX,  yCoord*yOctave1Frequency+offsetY);
+			float octave2 = amplitudeOctave2 * Mathf.PerlinNoise( xCoord*xOctave2Frequency+offsetX,  yCoord*yOctave2Frequency+offsetY);
 
-		if (octave1 > 0.7f)
-		{
-			return octave1 + octave2;
-		}
-		else if(octave1<0.42)
-		{
-			return octave1 * 0.8f;
-		}
+			if (octave1 > 0.7f)
+			{
+				return octave1 + octave2;
+			}
+			else if(octave1<0.42)
+			{
+				return octave1 * 0.8f;
+			}
 		
-		return octave1;
+			return octave1;	
+		}
+
+		return terrainGenerator.terrainDataForRandomExample.GetHeight(x, y);
 	}
 	
 	// Start is called before the first frame update
@@ -44,6 +51,7 @@ public class LukeTerrain : MonoBehaviour
 	{
 		offsetX = Random.Range(-1000f,1000f);
 		offsetY = Random.Range(-1000f,1000f);
+		GetComponentInChildren<SubmersedSpawner>().fringe = fringe;
 		terrainGenerator.scale = scale;
 		terrainGenerator.calculateHeightCallback = CalculateHeight;
 		terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
