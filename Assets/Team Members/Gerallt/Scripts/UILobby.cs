@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
 
 namespace Gerallt
 {
@@ -11,11 +12,34 @@ namespace Gerallt
     {
         public GameObject JoinedClients;
         public GameObject UIClientPrefab;
+        public TMP_InputField UIPlayerNameInput;
         
         public ServerManager ServerManager;
         public GNetworkedListBehaviour GNetworkedListBehaviour;
         
         public event Action OnGameStart;
+        public event Action<LobbyPlayerData> OnPlayerDataChanged;
+        
+        public void PlayerName_ValueChanged()
+        {
+            string playerName = UIPlayerNameInput.text;
+            ulong clientId = ServerManager.LocalClientId;
+
+            for (int i = 0; i < GNetworkedListBehaviour.NetworkedObjects.Count; i++)
+            {
+                LobbyPlayerData playerData = GNetworkedListBehaviour.NetworkedObjects[i];
+
+                if (playerData.ClientId == clientId)
+                {
+                    //playerData.PlayerName = playerName;
+                    
+                    GNetworkedListBehaviour.UpdatePlayerName(i, playerName);
+                    
+                    OnPlayerDataChanged?.Invoke(playerData);
+                    break;
+                }
+            }
+        }
         
         public void Start()
         {
@@ -25,7 +49,7 @@ namespace Gerallt
             //
             //     return;
             // }
-            
+
             //GNetworkedListBehaviour.OnAwakeComplete += GNetworkedListBehaviour_AwakeComplete;
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
@@ -72,8 +96,9 @@ namespace Gerallt
                 foreach(LobbyPlayerData lobbyPlayerData in GNetworkedListBehaviour.NetworkedObjects)
                 {
                     GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                    var uiClient = clientInstance.GetComponent<UIClient>();
-                    uiClient.UpdateUI(lobbyPlayerData.ClientId);
+                    UIClient uiClient = clientInstance.GetComponent<UIClient>();
+                    uiClient.parentView = this;
+                    uiClient.UpdateUI(lobbyPlayerData);
                     
                     // NetworkObject spawnedObj = ServerManager.Resolve(lobbyPlayerData.ClientId);
                     //

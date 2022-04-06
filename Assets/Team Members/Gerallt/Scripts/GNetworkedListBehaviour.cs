@@ -70,9 +70,18 @@ namespace Gerallt
         {
             LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
             lobbyPlayerData.ClientId = clientId;
-            
-            NetworkedObjects.Add(lobbyPlayerData);
 
+            NetworkedObjects.Add(lobbyPlayerData);
+            
+            // if (NetworkedObjects.Count == 0)
+            // {
+            //     NetworkedObjects.Add(lobbyPlayerData);
+            // }
+            // else
+            // {
+            //     NetworkedObjects.Insert((int)clientId, lobbyPlayerData);
+            // }
+            
             //UpdateOnConnectedClientRpc(clientId);
         }
         
@@ -91,6 +100,29 @@ namespace Gerallt
             }
         }
 
+        public void UpdatePlayerName(int i, string newPlayerName)
+        {
+
+            if (ServerManager.IsClient)
+            {
+                UpdatePlayerNameServerRpc(i, newPlayerName);    
+            }
+            
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        void UpdatePlayerNameServerRpc(int i, string newPlayerName)
+        {
+            if (i < 0 || i >= NetworkedObjects.Count)
+                return;
+            
+            LobbyPlayerData data = NetworkedObjects[i];
+                
+            data.PlayerName = newPlayerName;
+
+            NetworkedObjects[i] = data;
+        }
+        
         [ClientRpc]
         void UpdateOnConnectedClientRpc(ulong clientId)
         {
