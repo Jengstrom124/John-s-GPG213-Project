@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WaterSpawner : MonoBehaviour
+public class SubmersedSpawner : MonoBehaviour
 {
 	public TerrainGenerator terrainGenerator;
 	/*public Terrain _terrain;*/
@@ -15,7 +15,10 @@ public class WaterSpawner : MonoBehaviour
 	public float frequency = 15f;
 	public int xOffset;
 	public int yOffset;
+	public float fringe;
 
+
+	//Depends on hierarchy order.
 	/*private IEnumerator Timer(float seconds)
 	{
 		yield return new WaitForSeconds(seconds);
@@ -40,11 +43,14 @@ public class WaterSpawner : MonoBehaviour
 		{
 			float xCoord = (float) x / terrainGenerator.width;
 			float yCoord = (float) y / terrainGenerator.height;
-			float value = Mathf.PerlinNoise(xCoord * frequency + xOffset, yCoord * frequency + yOffset);
-			if (value > threshold)
+			if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
 			{
-				Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
-				Instantiate(coralPrefab, worldPosition, Quaternion.identity, transform);
+				float value = Mathf.PerlinNoise(xCoord * frequency + xOffset, yCoord * frequency + yOffset);
+				if (value > threshold)
+				{
+					Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
+					Instantiate(coralPrefab, worldPosition, Quaternion.identity, transform);
+				}
 			}
 		}
 	}

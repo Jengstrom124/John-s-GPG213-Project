@@ -6,8 +6,10 @@ public class Kshark : MonoBehaviour
 {
     
     public Rigidbody sharkRb;
+    
     public float sharkSpeed;
-
+    public float turningSpeed;
+    public float pivotAmount;
     public float reduction = 0.5f;
     
     public GameObject sharkObject;
@@ -44,11 +46,13 @@ public class Kshark : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            sharkRb.AddRelativeTorque(new Vector3(0f, -4f, 0f));
+            sharkRb.AddRelativeForce(new Vector3(0f, 0f, pivotAmount));
+            sharkRb.AddRelativeTorque(new Vector3(0f, -turningSpeed, 0f));
         }
         if (Input.GetKey(KeyCode.D))
         {
-            sharkRb.AddRelativeTorque(new Vector3(0f, 4f, 0f));
+            sharkRb.AddRelativeForce(new Vector3(0f, 0f, pivotAmount));
+            sharkRb.AddRelativeTorque(new Vector3(0f, turningSpeed, 0f));
         }
     }
 
