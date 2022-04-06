@@ -123,6 +123,90 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &179903924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179903925}
+  - component: {fileID: 179903927}
+  - component: {fileID: 179903926}
+  m_Layer: 0
+  m_Name: SharkCamera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &179903925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179903924}
+  m_LocalRotation: {x: 0.39166722, y: -0, z: -0, w: 0.920107}
+  m_LocalPosition: {x: 0, y: 7.58, z: -5.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1368012307}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 46.117, y: 0, z: 0}
+--- !u!81 &179903926
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179903924}
+  m_Enabled: 0
+--- !u!20 &179903927
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179903924}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &290998983
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &469440755
 AudioListener:
   m_ObjectHideFlags: 0
@@ -293,9 +377,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469440754}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 130.7, y: 221.9, z: 122.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -308,6 +392,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2709366438121233967, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+      propertyPath: m_Drag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2709366438121233967, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+      propertyPath: m_AngularDrag
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2709366438121233970, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
       propertyPath: sharkRb
       value: 
@@ -317,9 +409,21 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2709366438121233970, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+      propertyPath: tailObject
+      value: 
+      objectReference: {fileID: 1029515165}
+    - target: {fileID: 2709366438121233970, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+      propertyPath: pivotAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2709366438121233970, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
       propertyPath: sharkObject
       value: 
       objectReference: {fileID: 1368012304}
+    - target: {fileID: 2709366438121233970, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+      propertyPath: turningSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2713968622847442949, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -459,6 +563,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1029515165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8480300258891093262, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+  m_PrefabInstance: {fileID: 682662537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1368012304 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3378303050871511743, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
@@ -467,6 +576,11 @@ GameObject:
 --- !u!54 &1368012306 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 2709366438121233967, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
+  m_PrefabInstance: {fileID: 682662537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1368012307 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2713968622847442949, guid: b7924f5a2896b404293a39fb73f5d835, type: 3}
   m_PrefabInstance: {fileID: 682662537}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1407382156
