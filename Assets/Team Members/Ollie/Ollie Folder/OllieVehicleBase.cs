@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class OllieVehicleBase : MonoBehaviour
+public class OllieVehicleBase : MonoBehaviour, IControllable
 {
     public Rigidbody rb;
     public float forwardSpeed;
@@ -36,7 +36,6 @@ public class OllieVehicleBase : MonoBehaviour
         {
             exitVehicleEvent?.Invoke();
         }
-
         wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
     }
 
@@ -123,18 +122,19 @@ public class OllieVehicleBase : MonoBehaviour
         }
     }
 
-    #region IDrivable Interface
-    
-    public void Enter()
+    void SpeedBoost()
     {
-        playerInVehicle = true;
-        car.SetActive(true);
+        StartCoroutine(SpeedBoostCoroutine());
     }
 
-    public void Exit()
+    IEnumerator SpeedBoostCoroutine()
     {
-        playerInVehicle = false;
+        forwardSpeed = forwardSpeed * 2;
+        yield return new WaitForSeconds(2);
+        forwardSpeed = forwardSpeed / 2;
     }
+
+    #region IControllable Interface
 
     public void Steer(float amount)
     {
@@ -177,21 +177,25 @@ public class OllieVehicleBase : MonoBehaviour
             
     }
 
-    // public Transform GetVehicleExitPoint()
-    // {
-    //     return exitPoint;
-    // }
-
-    public bool canEnter()
+    public void Reverse(float input)
     {
-        if(playerInVehicle)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        print("sharks can't reverse, dummy");
     }
+
+    public void Action()
+    {
+        
+    }
+
+    public void Action2()
+    {
+        SpeedBoost();
+    }
+
+    public void Action3()
+    {
+        
+    }
+
     #endregion
 }
