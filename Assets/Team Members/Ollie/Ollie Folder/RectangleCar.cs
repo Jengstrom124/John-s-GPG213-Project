@@ -10,7 +10,7 @@ public class RectangleCar : OllieVehicleBase
         rb = GetComponent<Rigidbody>();
         forwardSpeed = 20;
         turnSpeed = 2;
-        grounded = true;
+        //grounded = true;
         car = this.gameObject;
     }
 }

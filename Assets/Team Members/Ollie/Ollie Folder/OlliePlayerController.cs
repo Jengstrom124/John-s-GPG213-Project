@@ -35,7 +35,7 @@ public class OlliePlayerController : MonoBehaviour
         }
         if (Input.GetKey(backward))
         {
-            currentlyPiloting.GetComponent<OllieVehicleBase>()?.Backward();
+            //currentlyPiloting.GetComponent<OllieVehicleBase>()?.Backward();
             currentlyPiloting.GetComponent<OlliePlayerAvatar>()?.Backward();
         }
         
