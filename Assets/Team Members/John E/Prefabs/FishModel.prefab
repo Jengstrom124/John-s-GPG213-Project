@@ -236,8 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d0585697ae8f241bbaf87132c216e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 5
-  force: 2.5
+  minDistance: 7.5
+  force: 3
   myDistance: 0
 --- !u!114 &7435328888860800600
 MonoBehaviour:
