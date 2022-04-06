@@ -10,6 +10,6 @@ public class CubeCar : OllieVehicleBase
         rb = GetComponent<Rigidbody>();
         forwardSpeed = 20;
         turnSpeed = 2;
-        grounded = true;
+        //grounded = true;
     }
 }
