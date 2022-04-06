@@ -6,6 +6,8 @@ using System;
 public class BoidModel : MonoBehaviour
 {
     SBManager manager;
+    Neighbours neighbours;
+    TurnTowards turnTowards;
 
     public GameObject feeler;
     public GameObject emergencyFeeler;
@@ -23,7 +25,15 @@ public class BoidModel : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        neighbours = GetComponent<Neighbours>();
+        turnTowards = GetComponent<TurnTowards>();
         SpawnFeelers();
+    }
+
+    private void Start()
+    {
+        neighbours.inVisionEvent += CheckForShark;
+        neighbours.outVisionEvent += SharkExit;
     }
 
     private void Update()
@@ -97,6 +107,22 @@ public class BoidModel : MonoBehaviour
         foreach (GameObject rightFeeler in rightFeelers)
         {
             rightFeeler.transform.localRotation = Quaternion.Euler(0, fov * (rightFeelers.IndexOf(rightFeeler) + 1), 0);
+        }
+    }
+
+    void CheckForShark(Collider other)
+    {
+        if(other.GetComponent<SharkModel>() != null)
+        {
+            turnTowards.target = -other.gameObject.transform.position;
+        }
+    }
+
+    void SharkExit(Collider other)
+    {
+        if (other.GetComponent<SharkModel>() != null)
+        {
+            turnTowards.target = Vector3.zero;
         }
     }
 }
