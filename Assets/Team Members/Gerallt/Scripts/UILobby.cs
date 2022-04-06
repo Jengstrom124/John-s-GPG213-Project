@@ -31,9 +31,10 @@ namespace Gerallt
 
                 if (playerData.ClientId == clientId)
                 {
-                    //playerData.PlayerName = playerName;
-                    
-                    GNetworkedListBehaviour.UpdatePlayerName(i, playerName);
+                    playerData.PlayerName = playerName;
+                    playerData.ClientIPAddress = GNetworkedListBehaviour.GetClientIPAddress();
+                    //GNetworkedListBehaviour.UpdatePlayerName(i, playerName);
+                    GNetworkedListBehaviour.UpdatePlayerData(i, playerData);
                     
                     OnPlayerDataChanged?.Invoke(playerData);
                     break;

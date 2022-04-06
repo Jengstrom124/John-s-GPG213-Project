@@ -10,15 +10,12 @@ namespace Gerallt
     {
         public TextMeshProUGUI UITextMeshPro;
         public UILobby parentView;
-        
-        // public void UpdateUI(PlayerController playerController)
-        // {
-        //     UITextMeshPro.SetText(playerController.playerName);
-        // }
-        
+
         public void UpdateUI(LobbyPlayerData lobbyPlayerData)
         {
-            UITextMeshPro.SetText(lobbyPlayerData.ClientId.ToString() + " - " + lobbyPlayerData.PlayerName);
+            UITextMeshPro.SetText(lobbyPlayerData.ClientId.ToString() 
+                                  + " - " + lobbyPlayerData.PlayerName
+                                  + " - " + lobbyPlayerData.ClientIPAddress);
         }
 
         // Start is called before the first frame update

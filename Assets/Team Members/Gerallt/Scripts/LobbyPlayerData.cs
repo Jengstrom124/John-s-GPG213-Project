@@ -9,30 +9,16 @@ namespace Gerallt
     public struct LobbyPlayerData : INetworkSerializable, IEquatable<LobbyPlayerData>
         {
             public ulong ClientId;
-
             public NetworkableString PlayerName;
-            //private NetworkableString playerName;
+            public NetworkableString ClientIPAddress;
             public int SelectedPlayerIndex;
 
-            // public string PlayerName
-            // {
-            //     get
-            //     {
-            //         return playerName;
-            //     }
-            //     set
-            //     {
-            //         playerName = value;
-            //     }
-            // }
-            
             public LobbyPlayerData(ulong clientId, string name, int playerNum)
             {
                 ClientId = clientId;
                 SelectedPlayerIndex = playerNum;
-                //playerName = new NetworkableString();
-                //PlayerName = name;
                 PlayerName = name;
+                ClientIPAddress = string.Empty;
             }
 
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -40,6 +26,7 @@ namespace Gerallt
                 serializer.SerializeValue(ref ClientId);
                 serializer.SerializeValue(ref PlayerName);
                 serializer.SerializeValue(ref SelectedPlayerIndex);
+                serializer.SerializeValue(ref ClientIPAddress);
             }
 
             public bool Equals(LobbyPlayerData other)

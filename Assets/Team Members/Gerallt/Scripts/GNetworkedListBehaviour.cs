@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,8 +11,6 @@ namespace Gerallt
     public class GNetworkedListBehaviour : NetworkBehaviour
     {
         public ServerManager ServerManager;
-        //public NetworkList<NetworkObjectReference> NetworkedObjects;// = new NetworkList<NetworkObjectReference>();
-        //[SerializeField] public NetworkList<ulong> NetworkedObjects = new NetworkList<ulong>(NetworkVariableReadPermission.Everyone, new List<ulong>());
         public NetworkList<LobbyPlayerData> NetworkedObjects;
 
         public Action OnAwakeComplete;
@@ -70,7 +70,8 @@ namespace Gerallt
         {
             LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
             lobbyPlayerData.ClientId = clientId;
-
+            lobbyPlayerData.ClientIPAddress = GetClientIPAddress();
+            
             NetworkedObjects.Add(lobbyPlayerData);
             
             // if (NetworkedObjects.Count == 0)
@@ -102,12 +103,18 @@ namespace Gerallt
 
         public void UpdatePlayerName(int i, string newPlayerName)
         {
-
             if (ServerManager.IsClient)
             {
                 UpdatePlayerNameServerRpc(i, newPlayerName);    
             }
-            
+        }
+
+        public void UpdatePlayerData(int i, LobbyPlayerData newData)
+        {
+            if (ServerManager.IsClient)
+            {
+                UpdatePlayerDataServerRpc(i, newData);    
+            }
         }
         
         [ServerRpc(RequireOwnership = false)]
@@ -123,13 +130,34 @@ namespace Gerallt
             NetworkedObjects[i] = data;
         }
         
-        [ClientRpc]
-        void UpdateOnConnectedClientRpc(ulong clientId)
+        [ServerRpc(RequireOwnership = false)]
+        void UpdatePlayerDataServerRpc(int i, LobbyPlayerData newData)
         {
-            // LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
-            // lobbyPlayerData.ClientId = clientId;
-            //
-            // NetworkedObjects.Add(lobbyPlayerData);
+            if (i < 0 || i >= NetworkedObjects.Count)
+                return;
+            
+            NetworkedObjects[i] = newData;
+        }
+        
+        public static string GetClientIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork) // IPv4
+                {
+                    return ip.ToString();
+                }
+            }
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetworkV6) // IPv6
+                {
+                    return ip.ToString();
+                }
+            }
+
+            return string.Empty;
         }
     }
 }
