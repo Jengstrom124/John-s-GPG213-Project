@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NodeCanvas.Tasks.Actions;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
@@ -78,17 +78,13 @@ public class ServerManager : NetworkManager
 
         //Pass in ClientId
         JoinServerEvent?.Invoke(client);
-
-        //need to add client to list
-        //ClientList.Add(client);
     }
 
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
-        Debug.Log(ConnectedClients.Count);
 
-        //spawn players
+	    //spawn players
         foreach (var player in ConnectedClientsIds)
         {
             Debug.Log("ID " + player + "; " + "Char = " + ConnectedClients[player].PlayerObject
@@ -102,18 +98,18 @@ public class ServerManager : NetworkManager
                 .GetComponent<PlayerController>()
                 .selectedCharacter == characterSelect.CharacterIndex[0])
             {
-                Instantiate(test.sharkPrefab);
-                //shark.GetComponent<NetworkObject>().Spawn();
-                //shark.GetComponent<NetworkObject>().ChangeOwnership(player);
+                GameObject go = Instantiate(test.sharkPrefab);
+                go.GetComponent<NetworkObject>().Spawn();
+                go.GetComponent<NetworkObject>().ChangeOwnership(player);
             }
 
             else if (ConnectedClients[player].PlayerObject
                 .GetComponent<PlayerController>()
                 .selectedCharacter == characterSelect.CharacterIndex[1])
             {
-                Instantiate(test.fishPrefab);
-                //fish.GetComponent<NetworkObject>().Spawn();
-                //fish.GetComponent<NetworkObject>().ChangeOwnership(player);
+                GameObject go = Instantiate(test.fishPrefab);
+                go.GetComponent<NetworkObject>().Spawn();
+                go.GetComponent<NetworkObject>().ChangeOwnership(player);
             }
         }
     }

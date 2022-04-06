@@ -16,7 +16,8 @@ public class CharacterSelect : NetworkBehaviour
     }
 
     public CharacterButton[] buttons;
-
+    
+    // Using a Dictionary so the int can be sent over the network and receivers can get the character from that
     public Dictionary<int, CharacterBase> CharacterIndex = new Dictionary<int, CharacterBase>();
 
     private void Awake()
