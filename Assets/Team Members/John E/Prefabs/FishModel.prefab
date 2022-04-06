@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 7435328888860800600}
   - component: {fileID: 7803384113620637917}
   - component: {fileID: -7430627336242286335}
+  - component: {fileID: -1422218037190890246}
   m_Layer: 7
   m_Name: FishModel
   m_TagString: Untagged
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11587027d746784bbdccb5d936b96fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 0.4
+  force: 0.3
 --- !u!114 &5782324754834491190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +270,7 @@ CapsuleCollider:
   m_Radius: 27
   m_Height: 27.18
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 14.5}
+  m_Center: {x: 0, y: 0, z: 10.96}
 --- !u!114 &-7430627336242286335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +288,18 @@ MonoBehaviour:
   activeFeelers: []
   activeEmergencyFeelers: []
   emergencyFeelerInUse: 0
+--- !u!114 &-1422218037190890246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219981257583123356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
+  turnMultiplier: 0.025
+  targetXPos: 0
