@@ -7,7 +7,7 @@ public class TurnTowards : MonoBehaviour
     Rigidbody rb;
 
     [Header("Target Values")]
-    public Transform target;
+    public Vector3 target;
     public float turnMultiplier = 0.05f;
 
     [Header("Reference Only")]
@@ -21,13 +21,28 @@ public class TurnTowards : MonoBehaviour
     }
     private void Update()
     {
-        targetPos = transform.InverseTransformPoint(target.position);
-        targetXPos = targetPos.x;
+        //targetPos = transform.TransformVector(target);
+        targetXPos = target.x;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        rb.AddTorque(new Vector3(0, targetXPos, 0) * turnMultiplier);
+        if(target != Vector3.zero)
+        {
+            Debug.Log(targetXPos);
+            rb.AddRelativeTorque(new Vector3(0, targetXPos, 0) * turnMultiplier);
+        }
     }
+
+    /*
+    float TurnDirection(Vector3 pos)
+    {
+        targetPos = transform.InverseTransformPoint(target.position);
+        targetXPos = targetPos.x;
+
+        return targetXPos;
+    }
+    */
 }
