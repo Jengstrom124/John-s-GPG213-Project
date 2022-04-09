@@ -6,20 +6,28 @@ public class Align : SteeringBase
 {
     Rigidbody rb;
 	Neighbours neighbours;
+	BoidModel fish;
 
 	public float force = 2f;
+	bool usePlayerForce = false;
 
     private void Start()
     {
 		neighbours = GetComponent<Neighbours>();
+		fish = GetComponent<BoidModel>();
 		rb = GetComponent<Rigidbody>();
+
+		fish.onPlayerFishEvent += FollowPlayer;
+		fish.onFishChangeEvent += UpdateBool;
     }
 
     void FixedUpdate()
 	{
 		//rb.AddTorque(CalculateMove(neighbours.neighbours) * force);
-
-		rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove(neighbours.neighbours)) * force);
+		if(!usePlayerForce)
+        {
+			rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove(neighbours.neighboursList)) * force);
+        }
 	}
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)
@@ -41,5 +49,27 @@ public class Align : SteeringBase
 
 		return alignmentMove;
 	}
+
+	void FollowPlayer(GameObject playerFish)
+    {			
+
+		Neighbours playerFishNeighbours = playerFish.GetComponent<Neighbours>();
+		foreach(GameObject playerNeighbour in playerFishNeighbours.neighboursList)
+        {		
+			Debug.Log("Test Neighbours");
+
+			playerNeighbour.GetComponent<BoidModel>().neighbourDebugColour = true;
+			if(!usePlayerForce)
+            {
+				usePlayerForce = true;
+            }
+			rb.AddTorque(playerFish.transform.forward * force);
+		}
+    }
+
+	void UpdateBool()
+    {
+		usePlayerForce = false;
+    }
 
 }

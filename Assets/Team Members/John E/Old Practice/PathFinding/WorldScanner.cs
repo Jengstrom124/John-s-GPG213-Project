@@ -264,8 +264,9 @@ public class WorldScanner : MonoBehaviour
     {
         //Stop constant null errors when not in play mode using null check
         if(gridNodeReferences != null)
-        {        
-            startNode = WorldToNodePos(startPos.position);
+        { 
+            if(startNode != null)
+                startNode = WorldToNodePos(startPos.position);
             //endNode = WorldToNodePos(endPos.position);
 
             //loop through each node and draw a cube for each grid position

@@ -5,13 +5,11 @@ using System;
 
 public class Neighbours : MonoBehaviour
 {
-    public List<GameObject> neighbours;
-
+    public List<GameObject> neighboursList = new List<GameObject>();
     public List<Collider> fishColliders = new List<Collider>();
     
     public event Action<Collider> inVisionEvent;
     public event Action<Collider> outVisionEvent;
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,9 +21,9 @@ public class Neighbours : MonoBehaviour
         else
         {
             //Only add a neighnour if the physical neighbour is in our vision radius (boid behind us considers us a neighbour but they are not a neighbour to us)
-            if (other.GetComponent<BoidModel>() != null && !neighbours.Contains(other.gameObject))
+            if (other.GetComponent<BoidModel>() != null && !neighboursList.Contains(other.gameObject))
             {
-                neighbours.Add(other.gameObject);
+                neighboursList.Add(other.gameObject);
             }
             else
             {
@@ -36,9 +34,9 @@ public class Neighbours : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (neighbours.Contains(other.gameObject))
+        if (neighboursList.Contains(other.gameObject))
         {
-            neighbours.Remove(other.gameObject);
+            neighboursList.Remove(other.gameObject);
         }
         else
         {

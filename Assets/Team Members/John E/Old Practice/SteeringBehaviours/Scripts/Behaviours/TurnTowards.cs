@@ -31,7 +31,6 @@ public class TurnTowards : MonoBehaviour
     {
         if(target != Vector3.zero)
         {
-            Debug.Log(targetXPos);
             rb.AddRelativeTorque(new Vector3(0, targetXPos, 0) * turnMultiplier);
         }
     }

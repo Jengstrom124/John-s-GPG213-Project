@@ -11,6 +11,7 @@ public class BoidModel : MonoBehaviour
 
     public GameObject feeler;
     public GameObject emergencyFeeler;
+    public Material defaultMaterial;
 
     [Tooltip("Use an ODD Count ONLY")]
     public int standardFeelerCount = 5;
@@ -18,6 +19,12 @@ public class BoidModel : MonoBehaviour
 
     [Tooltip("Adjust the angle of all RayCasts")]
     public float fov = 20;
+
+    public bool isPlayerFish;
+    public bool neighbourDebugColour;
+    public event Action<GameObject> onPlayerFishEvent;
+    public event Action onFishChangeEvent;
+    bool eventCalled = false;
 
     List<GameObject> leftFeelers = new List<GameObject>();
     List<GameObject> rightFeelers = new List<GameObject>();
@@ -34,11 +41,42 @@ public class BoidModel : MonoBehaviour
     {
         neighbours.inVisionEvent += CheckForShark;
         neighbours.outVisionEvent += SharkExit;
+        onFishChangeEvent += UpdateDebug;
+    }
+
+    void UpdateDebug()
+    {
+        neighbourDebugColour = false;
     }
 
     private void Update()
     {
         UpdateFeelerFOV();
+
+        if(isPlayerFish)
+        {
+            gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+
+            if(!eventCalled)
+            {
+                onPlayerFishEvent?.Invoke(gameObject);
+                eventCalled = true;
+            }
+        }
+        else
+        {
+            //HACK: This should all go in view script
+            if(!neighbourDebugColour)
+            {
+                gameObject.GetComponent<Renderer>().material = defaultMaterial;
+            }
+            else
+            {
+                gameObject.GetComponent<Renderer>().material.color = Color.black;
+            }
+            eventCalled = false;
+            onFishChangeEvent?.Invoke();
+        }
     }
 
     void SpawnFeelers()

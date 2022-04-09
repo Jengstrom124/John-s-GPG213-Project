@@ -17,7 +17,7 @@ public class Cohesion : SteeringBase
 
 	void FixedUpdate()
 	{		
-		rb.AddRelativeForce(CalculateMove(neighbours.neighbours) * force);
+		rb.AddRelativeForce(CalculateMove(neighbours.neighboursList) * force);
 	}
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)
