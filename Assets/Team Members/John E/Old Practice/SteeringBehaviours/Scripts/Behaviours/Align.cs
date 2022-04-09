@@ -9,7 +9,7 @@ public class Align : SteeringBase
 	BoidModel fish;
 
 	public float force = 2f;
-	bool usePlayerForce = false;
+	public bool usePlayerForce = false;
 
     private void Start()
     {
@@ -57,12 +57,13 @@ public class Align : SteeringBase
 		foreach(GameObject playerNeighbour in playerFishNeighbours.neighboursList)
         {		
 			Debug.Log("Test Neighbours");
-
+			Align playerNeighbourAlign = playerNeighbour.GetComponent<Align>();
 			playerNeighbour.GetComponent<BoidModel>().neighbourDebugColour = true;
-			if(!usePlayerForce)
+			if(!playerNeighbourAlign.usePlayerForce)
             {
-				usePlayerForce = true;
+				playerNeighbourAlign.usePlayerForce = true;
             }
+
 			rb.AddTorque(playerFish.transform.forward * force);
 		}
     }
