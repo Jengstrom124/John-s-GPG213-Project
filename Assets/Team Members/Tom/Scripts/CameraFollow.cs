@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Tom
 {
-    public class CameraFollow : MonoBehaviour
+    public class CameraFollow : NetworkBehaviour
     {
         public Camera cam;
         public Transform target;
