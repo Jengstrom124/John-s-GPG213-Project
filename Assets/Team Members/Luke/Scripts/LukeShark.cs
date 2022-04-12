@@ -23,7 +23,11 @@ public class LukeShark : MonoBehaviour, IControllable
 	public float currentSteeringAngle = 0f;
 	public Vector3 localVelocity;
 	public Vector3 tailLocalVelocity;
-	
+
+	public bool boostReady = true;
+	public float boostFactor = 3f;
+	public float boostTimeSeconds = 1f;
+	public float boostCooldownSeconds = 2f;
 
 	public void Accelerate(float input)
 	{
@@ -59,8 +63,33 @@ public class LukeShark : MonoBehaviour, IControllable
 		headJointTransform.eulerAngles = new Vector3(90, 0, -(currentYEuler-0.5f*currentSteeringAngle));
 	}
 
+
+	private IEnumerator Boost()
+	{
+		acceleratingForce *= boostFactor;
+		yield return new WaitForSeconds(boostTimeSeconds);
+		acceleratingForce /= boostFactor;
+
+		StartCoroutine(BoostCooldown());
+	}
+	
+	private IEnumerator BoostCooldown()
+	{
+		yield return new WaitForSeconds(boostCooldownSeconds);
+
+		boostReady = true;
+	}
+	
 	public void Action()
 	{
+		//Boost
+		Debug.Log("Action1");
+		if (boostReady)
+		{
+			Debug.Log("Boosting");
+			boostReady = false;
+			StartCoroutine(Boost());
+		}
 	}
 
 	public void Action2()

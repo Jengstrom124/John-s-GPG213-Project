@@ -347,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.76
+      value: 68.29
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 87.4
+      value: 83.02
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -563,6 +563,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1253798911361082623, guid: e839c90d084c58f46a9bee591ffcb983, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3989588239
+      objectReference: {fileID: 0}
     - target: {fileID: 4612785239481996610, guid: e839c90d084c58f46a9bee591ffcb983, type: 3}
       propertyPath: m_Name
       value: Camera Follow
@@ -752,8 +756,30 @@ Transform:
   m_Father: {fileID: 665927330}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2017000718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7227251270856557637, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+  m_PrefabInstance: {fileID: 576910618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2017000722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
   m_PrefabInstance: {fileID: 576910618}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2017000723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017000718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feeler: {fileID: 8743433351232840262, guid: a8267c37086ec6b4eb7c4223aee4f217, type: 3}
+  emergencyFeeler: {fileID: 8743433351232840262, guid: b7ec4f58d085fe24597e495e134ad3d7, type: 3}
+  standardFeelerCount: 5
+  emergencyFeelerCount: 3
+  fov: 20
