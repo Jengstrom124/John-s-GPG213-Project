@@ -7,3 +7,8 @@ public interface IControllable
     void Action2();
     void Action3();
 }
+
+public interface IEdible
+{
+    void GetEaten(EatAbility eatenBy);
+}
