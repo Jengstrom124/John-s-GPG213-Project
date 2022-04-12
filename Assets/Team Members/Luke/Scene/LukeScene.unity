@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &90984851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90984852}
+  - component: {fileID: 90984853}
+  m_Layer: 0
+  m_Name: OnLandSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &90984852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90984851}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10, y: 25, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 665927330}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &90984853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90984851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5916359919866f44b2dda6a8db42852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 203358344}
+  treePrefabs:
+  - {fileID: 919132149155446097, guid: 953500af4257d0e47bdf0a0d5614f019, type: 3}
+  - {fileID: 919132149155446097, guid: dd57acf1568cdfb4c965fdcc715dc956, type: 3}
+  - {fileID: 919132149155446097, guid: 4dca411edcf6fa543a5c5511fa34dd95, type: 3}
+  - {fileID: 919132149155446097, guid: 8bb56d8f8ae394547b8b6bb128900c4b, type: 3}
+  - {fileID: 919132149155446097, guid: 8d2a22b9c0518134b943ccf01494e475, type: 3}
+  - {fileID: 919132149155446097, guid: 808ddfa6a1f37b94cb8d58f55743e435, type: 3}
+  threshold: 0.45
+  frequency: 15
+  xOffset: 0
+  yOffset: 0
+  fringe: 0
 --- !u!1 &100676090
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +614,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1664584252}
+  - {fileID: 90984852}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

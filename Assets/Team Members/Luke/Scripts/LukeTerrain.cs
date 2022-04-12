@@ -22,11 +22,22 @@ public class LukeTerrain : MonoBehaviour
 
 	public float[,] previousHeights;
 
+	private IEnumerator Timer()
+	{
+		yield return new WaitForSeconds(2f);
+		FinishSpawningEvent?.Invoke();
+	}
+	
 	float CalculateHeight(int x, int y)
 	{
 		float xCoord = (float) x / terrainGenerator.width;
 		float yCoord = (float) y / terrainGenerator.height;
 
+		if (x == terrainGenerator.width-1 && y == terrainGenerator.height-1)
+		{
+			StartCoroutine(Timer());
+		}
+		
 		if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
 		{
 			float octave1 = amplitudeOctave1 * Mathf.PerlinNoise( xCoord*xOctave1Frequency+offsetX,  yCoord*yOctave1Frequency+offsetY);
@@ -49,6 +60,9 @@ public class LukeTerrain : MonoBehaviour
 		return previousHeights[x,y];
 	}
 	
+	public delegate void FinishSpawningAction();
+	public event FinishSpawningAction FinishSpawningEvent;
+
 	// Start is called before the first frame update
 
 	void Awake()
