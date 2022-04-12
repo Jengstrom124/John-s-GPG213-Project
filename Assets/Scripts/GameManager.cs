@@ -4,16 +4,17 @@ using Tom;
 using Unity.Netcode;
 using UnityEngine;
 
-public class TomsGameManager : MonoBehaviour
+public class GameManager : ManagerBase<GameManager>
 {
     public GameObject cameraPrefab;
     
     public void Start()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += SetupPlayer;
+        NetworkManager.Singleton.OnClientConnectedCallback += RequestSetupPlayerServerRpc;
     }
-
-    public void SetupPlayer(ulong clientID)
+    
+    [ServerRpc]
+    public void RequestSetupPlayerServerRpc(ulong clientID)
     {
         if (clientID == NetworkManager.Singleton.LocalClientId)
         {
