@@ -273,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5562041122306409152}
   m_Layer: 0
-  m_Name: TailSteering
+  m_Name: TailSteeringJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,7 +368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3392509339360278061}
   m_Layer: 0
-  m_Name: Sharktail3
+  m_Name: PostJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -527,7 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2850674920850648963}
   m_Layer: 0
-  m_Name: Sharktail1
+  m_Name: PreJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,7 +809,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  tailJointTransform: {fileID: 5562041122306409152}
+  preJointTransform: {fileID: 2850674920850648963}
+  mainJointTransform: {fileID: 5562041122306409152}
+  postJointTransform: {fileID: 3392509339360278061}
   tailTipTransform: {fileID: 1001782359803232529}
   headJointTransform: {fileID: 8873145128334385027}
   acceleratingForce: 15

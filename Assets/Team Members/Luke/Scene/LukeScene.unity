@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &42766507 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2850674920850648963, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+  m_PrefabInstance: {fileID: 576910618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &100676090
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8d5ba3f6b99ed4a93b9a694d6adeed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &357825544 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5562041122306409152, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+  m_PrefabInstance: {fileID: 576910618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &497031864
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +343,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1542889696, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+      propertyPath: preJointTransform
+      value: 
+      objectReference: {fileID: 42766507}
+    - target: {fileID: 1542889696, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+      propertyPath: mainJointTransform
+      value: 
+      objectReference: {fileID: 357825544}
+    - target: {fileID: 1542889696, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+      propertyPath: postJointTransform
+      value: 
+      objectReference: {fileID: 1387530910}
+    - target: {fileID: 1856710772411676390, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+      propertyPath: m_Name
+      value: TailSteeringJoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387012895723133671, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+      propertyPath: m_Name
+      value: PostJoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353821693958076697, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+      propertyPath: m_Name
+      value: PreJoint
+      objectReference: {fileID: 0}
     - target: {fileID: 7227251270856557637, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_Name
       value: LukeShark
@@ -480,7 +514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 203358344}
-  scale: 20
   offsetX: 100
   offsetY: 100
   fringe: 0.05
@@ -490,6 +523,8 @@ MonoBehaviour:
   yOctave2Frequency: 40
   amplitudeOctave1: 0.85
   amplitudeOctave2: 0.1
+  dropOffHeight: 0.42
+  highLandHeight: 0.7
 --- !u!154 &665927328
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -551,6 +586,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1387530910 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3392509339360278061, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
+  m_PrefabInstance: {fileID: 576910618}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1462892290
 GameObject:
   m_ObjectHideFlags: 0
