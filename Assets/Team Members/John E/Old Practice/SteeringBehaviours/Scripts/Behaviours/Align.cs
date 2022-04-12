@@ -6,20 +6,39 @@ public class Align : SteeringBase
 {
     Rigidbody rb;
 	Neighbours neighbours;
-	BoidModel fish;
+	FishModel fish;
 
 	public float force = 2f;
+	
+	//Player Fish Stuff
 	public bool usePlayerForce = false;
+	List<GameObject> currentPlayerNeighbours = new List<GameObject>();
+	GameObject currentPlayerFish;
 
-    private void Start()
+    private void Awake()
     {
 		neighbours = GetComponent<Neighbours>();
-		fish = GetComponent<BoidModel>();
+		fish = GetComponent<FishModel>();
 		rb = GetComponent<Rigidbody>();
-
-		fish.onPlayerFishEvent += FollowPlayer;
-		fish.onFishChangeEvent += UpdateBool;
     }
+
+    private void OnEnable()
+    {
+		fish.onFishChangeEvent += ResetPlayerInfluences;
+		fish.onPlayerFishEvent += FollowPlayer;
+		
+		neighbours.newNeighbourEvent += UpdatePlayerInfluence;
+		neighbours.neighbourLeaveEvent += RemovePlayerInfluence;
+	}
+
+    private void OnDisable()
+    {
+		fish.onPlayerFishEvent -= FollowPlayer;
+		fish.onFishChangeEvent -= ResetPlayerInfluences;
+
+		neighbours.newNeighbourEvent -= UpdatePlayerInfluence;
+		neighbours.neighbourLeaveEvent -= RemovePlayerInfluence;
+	}
 
     void FixedUpdate()
 	{
@@ -28,6 +47,11 @@ public class Align : SteeringBase
         {
 			rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove(neighbours.neighboursList)) * force);
         }
+		else
+        {
+			if(currentPlayerFish != null)
+				rb.AddTorque(currentPlayerFish.transform.forward * force);
+		}
 	}
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)
@@ -51,26 +75,70 @@ public class Align : SteeringBase
 	}
 
 	void FollowPlayer(GameObject playerFish)
-    {			
+    {
+		currentPlayerFish = playerFish;
 
 		Neighbours playerFishNeighbours = playerFish.GetComponent<Neighbours>();
 		foreach(GameObject playerNeighbour in playerFishNeighbours.neighboursList)
-        {		
-			Debug.Log("Test Neighbours");
-			Align playerNeighbourAlign = playerNeighbour.GetComponent<Align>();
-			playerNeighbour.GetComponent<BoidModel>().neighbourDebugColour = true;
-			if(!playerNeighbourAlign.usePlayerForce)
+        {
+			//Only update influences if not already done
+			if (!currentPlayerNeighbours.Contains(playerNeighbour))
             {
-				playerNeighbourAlign.usePlayerForce = true;
-            }
+				//For Debugging
+				playerNeighbour.GetComponentInChildren<Fish_ViewModel>().neighbourDebugColour = true;
 
-			rb.AddTorque(playerFish.transform.forward * force);
+				//Keep track of neighbours
+				currentPlayerNeighbours.Add(playerNeighbour);
+
+				//Update align influences
+				Align playerNeighbourAlign = playerNeighbour.GetComponent<Align>();
+				if (!playerNeighbourAlign.usePlayerForce)
+				{
+					playerNeighbourAlign.usePlayerForce = true;
+				}
+            }
+			else
+            {
+				continue;
+            }
 		}
     }
 
-	void UpdateBool()
+	void UpdatePlayerInfluence(GameObject other)
     {
-		usePlayerForce = false;
+		if(other.GetComponent<FishModel>() != null)
+        {
+			Align align = other.GetComponent<Align>();
+			if(align.currentPlayerFish != null)
+			{
+				align.FollowPlayer(currentPlayerFish);
+			}
+        }	
     }
 
+	void ResetPlayerInfluences()
+    {
+		currentPlayerFish = null;
+		usePlayerForce = false;
+
+		foreach(GameObject neighbourFish in currentPlayerNeighbours)
+		{
+			neighbourFish.GetComponentInChildren<Fish_ViewModel>().neighbourDebugColour = false;
+		}
+
+		currentPlayerNeighbours.Clear();
+	}
+
+	void RemovePlayerInfluence(GameObject other)
+	{
+		if(other.GetComponent<FishModel>() != null)
+        {
+			if(currentPlayerNeighbours.Contains(other))
+            {
+				other.GetComponentInChildren<Fish_ViewModel>().neighbourDebugColour = false;
+				other.GetComponent<Align>().usePlayerForce = false;
+				currentPlayerNeighbours.Remove(other);
+			}
+        }
+	}
 }
