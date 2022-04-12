@@ -19,7 +19,7 @@ namespace Gerallt
         {
             //NetworkedObjects = new NetworkList<LobbyPlayerData>(NetworkVariableReadPermission.Everyone, new List<LobbyPlayerData>());
             NetworkedObjects = new NetworkList<LobbyPlayerData>();
-            
+
             //if (ServerManager.IsServer)
             {
                 ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
@@ -33,6 +33,11 @@ namespace Gerallt
             }
         }
 
+        private void Start()
+        {
+
+        }
+        
         private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate connectionApprovedCallback)
         {
             Debug.Log("Client connection approval " + clientId.ToString());
@@ -40,6 +45,12 @@ namespace Gerallt
 
         public override void OnNetworkSpawn()
         {
+            // {
+            //     ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
+            //     ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+            //     ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+            // }
+            
             // if (!IsClient || !IsHost)
             // {
             //     //enabled = false;
@@ -73,7 +84,7 @@ namespace Gerallt
             lobbyPlayerData.ClientIPAddress = GetClientIPAddress();
             
             NetworkedObjects.Add(lobbyPlayerData);
-            
+
             // if (NetworkedObjects.Count == 0)
             // {
             //     NetworkedObjects.Add(lobbyPlayerData);

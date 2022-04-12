@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gerallt;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
@@ -14,7 +15,10 @@ public class ServerManager : NetworkManager
     public Vector3 spawn;
 
     //passing a ulong for ClientId?
-    public event Action<int> JoinServerEvent;
+    public event Action<ulong> JoinServerEvent;
+
+    private bool isServerUp = false;
+    [SerializeField] private float connectionTimeout = 0.5f;
 
     private void OnGUI()
     {
@@ -72,14 +76,53 @@ public class ServerManager : NetworkManager
     }
 
     //Called from lobby
-    public void JoinServer(int client)
+    public void JoinServer(bool autoCreateHost = false)
     {
-        client = NetworkManager.Singleton.GetInstanceID();
+        //client = NetworkManager.Singleton.GetInstanceID();
 
+        if (autoCreateHost)
+        {
+            StartClient();
+            
+            // // Try to connect to server, if it fails connecting then start a new host.
+            // // If the server hasn't been created, then StartHost() otherwise StartClient()
+            //
+            // if (!IsClient && !IsServer)
+            // {
+            //     // Quick test to see if the server is up.
+            //     OnClientConnectedCallback+= delegate(ulong clientID)
+            //     {
+            //         isServerUp = true;
+            //     };
+            //
+            //     StartCoroutine(ConnectionTimeout());
+            //     
+            //     StartClient();
+            // }
+        }
+        
+        ulong client = this.LocalClientId;
+        
         //Pass in ClientId
         JoinServerEvent?.Invoke(client);
     }
 
+    IEnumerator ConnectionTimeout()
+    {
+        yield return new WaitForSeconds(connectionTimeout);
+        if (!isServerUp)
+        {
+            Shutdown();
+            yield return new WaitForSeconds(1.0f);
+            GNetworkState state = FindObjectOfType<GNetworkState>();
+            state.Init(FindObjectOfType<ServerManager>()); // Respawn the network list as it got destroyed on shutdown.
+            
+            StartHost();
+            yield return new WaitForSeconds(1.0f);
+            //state.Spawn();
+        }
+    }
+    
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
@@ -121,13 +164,13 @@ public class ServerManager : NetworkManager
         if (GUILayout.Button("Host"))
         {
             StartHost();
-            JoinServer(NetworkManager.Singleton.GetInstanceID());
+            JoinServer();
         }
 
         if (GUILayout.Button("Client"))
         {
             StartClient();
-            JoinServer(NetworkManager.Singleton.GetInstanceID());
+            JoinServer();
         }
 
         if (GUILayout.Button("Server"))
@@ -150,9 +193,4 @@ public class ServerManager : NetworkManager
     }
 
     #endregion
-
-    public void LobbyStartServer()
-    {
-        NetworkManager.Singleton.StartServer();
-    }
 }

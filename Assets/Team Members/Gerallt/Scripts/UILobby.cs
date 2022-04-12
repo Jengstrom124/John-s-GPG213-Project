@@ -67,7 +67,7 @@ namespace Gerallt
 
         public void OnJoinButtonClicked()
         {
-            
+            ServerManager.JoinServer(autoCreateHost: true);
         }
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)
