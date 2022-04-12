@@ -12,6 +12,9 @@ public class OllieTerrain : MonoBehaviour
     public float height;
     public float scale;
 
+    public float xFrequency;
+    public float yFrequency;
+
     public float offsetX = 100f;
     public float offsetY = 100f;
 
@@ -22,6 +25,8 @@ public class OllieTerrain : MonoBehaviour
         width = 256;
         height = 256;
         scale = 20;
+        xFrequency = 0.25f;
+        yFrequency = 0.25f;
         offsetX = Random.Range(0f, 1000000f);
         offsetY = Random.Range(0f, 1000000f);
         
@@ -34,9 +39,19 @@ public class OllieTerrain : MonoBehaviour
     
     float CalculateHeight(int x, int y)
     {
+        //store value
+        //multiply if below
+        //return final value
+        
         float xCoord = (float)x / width * scale + offsetX;
         float yCoord = (float)y / height * scale + offsetY;
 
-        return Mathf.PerlinNoise(xCoord, yCoord);
+        float value = Mathf.PerlinNoise(xCoord*xFrequency, yCoord*yFrequency);
+        if (value < 0.5f)
+        {
+            value = value * 0.8f;
+        }
+
+        return value;
     }
 }

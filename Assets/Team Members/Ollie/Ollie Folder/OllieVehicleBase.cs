@@ -14,6 +14,7 @@ public class OllieVehicleBase : MonoBehaviour, IControllable
     public bool playerInVehicle;
     public Transform tailTurnPoint;
     public GameObject car;
+    private bool boosting = false;
 
     private bool forward, backward, left, right;
 
@@ -46,6 +47,11 @@ public class OllieVehicleBase : MonoBehaviour, IControllable
         Left();
         Right();
         Steering();
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            Action2();
+        }
     }
 
     public void Forward()
@@ -102,36 +108,43 @@ public class OllieVehicleBase : MonoBehaviour, IControllable
     {
         if (left)
         {
-            print("moving left" + left);
             //rb.AddForceAtPosition((new Vector3(turnSpeed,0,-localVelocity.z)),tailTurnPoint.position);
             
             //rb.AddForceAtPosition(Vector3.right,tailTurnPoint.position);
-            rb.AddRelativeTorque(0, -turnSpeed,0);
+            rb.AddRelativeTorque(0, -turnSpeed,0,ForceMode.Acceleration);
         }
         else if (right)
         {
-            print("moving right" + right);
             //rb.AddForceAtPosition((new Vector3(-turnSpeed,0,-localVelocity.z)),tailTurnPoint.position);
             
             //rb.AddForceAtPosition(Vector3.left,tailTurnPoint.position);
-            rb.AddRelativeTorque(0, turnSpeed,0);
+            rb.AddRelativeTorque(0, turnSpeed,0,ForceMode.Acceleration);
         }
         else
         {
-            rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position);
+            rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position,ForceMode.Acceleration);
         }
     }
 
     void SpeedBoost()
     {
-        StartCoroutine(SpeedBoostCoroutine());
+        if (!boosting)
+        {
+            StartCoroutine(SpeedBoostCoroutine());
+        }
     }
 
     IEnumerator SpeedBoostCoroutine()
     {
+        //doubles speed for 1.5 seconds
+        //prevents reapplication for 3 seconds after deactivation
+        boosting = true;
         forwardSpeed = forwardSpeed * 2;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.5f);
         forwardSpeed = forwardSpeed / 2;
+        yield return new WaitForSeconds(3f);
+        boosting = false;
+        
     }
 
     #region IControllable Interface
