@@ -10,5 +10,11 @@ public interface IControllable
 
 public interface IEdible
 {
-    void GetEaten(EatAbility eatenBy);
+    void GetEaten(IPredator eatenBy);
+}
+
+public interface IPredator
+{
+	void GotFood(float amount);
+	void ChangeBoost(float amount);
 }

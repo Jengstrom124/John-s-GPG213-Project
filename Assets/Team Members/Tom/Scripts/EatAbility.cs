@@ -11,7 +11,7 @@ public class EatAbility : MonoBehaviour
 
         if (edible != null)
         {
-            edible.GetEaten(this);
+            //edible.GetEaten(this);
         }
     }
 }

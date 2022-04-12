@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class TestController : MonoBehaviour
 {
-    List<BoidModel> activeFish = new List<BoidModel>();
+    List<FishModel> activeFish = new List<FishModel>();
 
     private void FixedUpdate()
     {
@@ -17,7 +17,7 @@ public class TestController : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out hitinfo))
             {
-                BoidModel fish = hitinfo.transform.GetComponent<BoidModel>();
+                FishModel fish = hitinfo.transform.GetComponent<FishModel>();
                 if (fish != null)
                 {
                     if(activeFish.Count >= 1)

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EdibleTest : MonoBehaviour, IEdible
+public class CamFish_Model : MonoBehaviour, IEdible
 {
+	public float amount;
+
     public void GetEaten(IPredator eatenBy)
     {
-        Destroy(gameObject);
+	    eatenBy.GotFood(amount);
+
+	    Destroy(gameObject);
     }
 }
