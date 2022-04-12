@@ -5,13 +5,16 @@ using System;
 
 public class BoidModel : MonoBehaviour
 {
+    [Header("Specify Which Feelers to Spawn")]
     public GameObject feeler;
     public GameObject emergencyFeeler;
 
+    [Header("Spawn Amount: (Use ODD Amount eg 3,5,7)")]
     [Tooltip("Use an ODD Count ONLY")]
     public int standardFeelerCount = 5;
     public int emergencyFeelerCount = 3;
 
+    [Header("Custom FOV:")]
     [Tooltip("Adjust the angle of all RayCasts")]
     public float fov = 20;
 
