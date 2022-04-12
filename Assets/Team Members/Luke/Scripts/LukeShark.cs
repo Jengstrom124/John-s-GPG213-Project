@@ -84,7 +84,7 @@ public class LukeShark : MonoBehaviour, IControllable
 	    Vector3 tailTipPosition = tailTipTransform.position;
 	    localVelocity = transform.InverseTransformDirection(rb.velocity);
 	    tailLocalVelocity = mainJointTransform.InverseTransformDirection(rb.GetPointVelocity(tailPosition));
-	    
+
 	    //drive friction.
 	    rb.AddForceAtPosition(longitudinalFrictionCoefficient*rb.mass*transform.
 		    TransformDirection(new Vector3 (0, 0, -localVelocity.z)), tailPosition);
