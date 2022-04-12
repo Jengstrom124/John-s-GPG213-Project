@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LukeShark : MonoBehaviour, IControllable
+public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 {
 	public Rigidbody rb;
 	public Transform preJointTransform;
@@ -151,5 +151,20 @@ public class LukeShark : MonoBehaviour, IControllable
     void IControllable.Steer(float input)
     {
 	    Steer(input);
+    }
+
+    public void GotFood(float amount)
+    {
+	    
+    }
+
+    public void ChangeBoost(float amount)
+    {
+	    
+    }
+
+    public void GetEaten(IPredator eatenBy)
+    {
+	    
     }
 }

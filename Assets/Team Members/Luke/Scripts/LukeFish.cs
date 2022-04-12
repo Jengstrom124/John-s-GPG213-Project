@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LukeFish : MonoBehaviour, IControllable
+public class LukeFish : MonoBehaviour, IControllable, IEdible
 {
 	public Rigidbody rb;
 	public Transform mainJointTransform;
@@ -144,5 +144,10 @@ public class LukeFish : MonoBehaviour, IControllable
     void IControllable.Steer(float input)
     {
 	    Steer(input);
+    }
+
+    public void GetEaten(IPredator eatenBy)
+    {
+	    
     }
 }
