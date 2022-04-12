@@ -63,7 +63,7 @@ public class SBManager : MonoBehaviour
         {
             for (int i = 1; i < activeFeelers.Count; i++)
             {
-                if (!activeFeelers[i].emergencyFeeler && activeFeelers[i].distance < activeFeelers[i - 1].distance)
+                if (!activeFeelers[i].isEmergencyFeeler && activeFeelers[i].distance < activeFeelers[i - 1].distance)
                 {
                     activeFeelers[i].updateSpeed = true;
                     activeFeelers[i - 1].updateSpeed = false;

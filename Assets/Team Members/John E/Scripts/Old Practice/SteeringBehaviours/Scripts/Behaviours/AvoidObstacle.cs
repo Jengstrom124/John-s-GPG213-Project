@@ -6,14 +6,19 @@ public class AvoidObstacle : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [Header("Configurations:")]
+    [Header("General Configurations:")]
+    [Tooltip("Maximum Feeler Reach")]
     public float maxLength = 20f;
+    [Tooltip("Higher drag = more friction = lower turn sensitivty")]
     public float dragMultiplier = 10f;
+
+    [Header("Extra Configurations (Not Required/Ignore)")]
+    [Tooltip("Specify what to look for / ignore")]
+    public LayerMask layerMask;
+    public RayDirection myTurnDirection;
+    public bool isEmergencyFeeler = false;
     public float speedReductionMultiplier = 4f;
     public float minSpeed = 0f;
-    public bool emergencyFeeler = false;
-    public LayerMask layerMask;
-    public bool isAI;
 
     public enum RayDirection
     {
@@ -22,8 +27,7 @@ public class AvoidObstacle : MonoBehaviour
         Straight
     }
 
-    public RayDirection myTurnDirection;
-
+    [Header("Debug Options: ")]
     public bool visualizeRays = false;
 
     MoveForwards moveForwards;
@@ -60,7 +64,7 @@ public class AvoidObstacle : MonoBehaviour
             //Visualizing RayCasts
             if(visualizeRays)
             {
-                if (emergencyFeeler)
+                if (isEmergencyFeeler)
                 {
                     Debug.DrawLine(transform.position, hitinfo.point, Color.red);
                 }
@@ -74,11 +78,11 @@ public class AvoidObstacle : MonoBehaviour
             distance = hitinfo.distance;
 
             //Adjust speed based on distance to closest collision - clamped between 1 & the max speed
-            if(isAI)
+            if (moveForwards != null)
             {
                 moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance - speedReductionMultiplier, minSpeed, moveForwards.maxSpeed);
-            }
 
+            }
             //Apply torque based on ray direction (if the left ray hits an object turn right to dodge it)
             if (myTurnDirection == RayDirection.Right)
             {
