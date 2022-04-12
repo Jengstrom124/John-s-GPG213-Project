@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EdibleTest : MonoBehaviour, IEdible
 {
-    public void GetEaten(EatAbility eatenBy)
+    public void GetEaten(IPredator eatenBy)
     {
         Destroy(gameObject);
     }
