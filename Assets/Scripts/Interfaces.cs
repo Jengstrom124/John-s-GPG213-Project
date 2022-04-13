@@ -23,3 +23,10 @@ public interface IReactsToWater
 {
 	public bool IsWet { get; set; }
 }
+
+public interface IStateBase
+{
+	void Enter();
+	void Execute();
+	void Exit();
+}
