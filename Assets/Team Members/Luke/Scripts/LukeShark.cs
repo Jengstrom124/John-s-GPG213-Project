@@ -44,7 +44,7 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 		float currentYEuler = transform.eulerAngles.y;
 		float targetAngle;
 		
-		if (Mathf.Abs(input) < 0.5)
+		if (Mathf.Abs(input) < 0.5f)
 		{
 			targetAngle = -input * maxSteeringAngle +
 			                    maxWiggleAngle * Mathf.Sin(Time.time * 2 * Mathf.PI / wigglePeriodInSeconds);
@@ -124,28 +124,6 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 	    //tail steering friction.
 	    rb.AddForceAtPosition(steeringFrictionCoefficient*rb.mass*mainJointTransform.
 		    TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailTipPosition);
-
-	    if (Input.GetKey(KeyCode.UpArrow)||Input.GetKey(KeyCode.W))
-	    {
-		    Accelerate(1);
-	    }
-	    else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-	    {
-		    Reverse(1);
-	    }
-	    
-		if (Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A))
-	    {
-		    Steer(-1);
-	    }
-	    else if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
-	    {
-		    Steer(1);
-	    }
-	    else
-	    {
-		    Steer(0);
-	    }
     }
 
     void IControllable.Steer(float input)

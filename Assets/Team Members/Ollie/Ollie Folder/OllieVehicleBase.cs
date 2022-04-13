@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class OllieVehicleBase : MonoBehaviour, IControllable
+public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
 {
     public Rigidbody rb;
     public CapsuleCollider capsuleCollider;
@@ -212,5 +213,22 @@ public class OllieVehicleBase : MonoBehaviour, IControllable
         
     }
 
+    #endregion
+
+    #region IStateBase Interface idk if i'm using this tho
+    public void Enter()
+    {
+        
+    }
+
+    public void Execute()
+    {
+        
+    }
+
+    public void Exit()
+    {
+        
+    }
     #endregion
 }
