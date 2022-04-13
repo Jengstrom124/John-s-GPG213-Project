@@ -45,7 +45,12 @@ namespace Gerallt
 
         public void Start()
         {
-            GameManager.Instance.StartedGameEvent += GameManager_OnStartedGameEvent;
+            GameManager gameManager = GameManager.Instance;
+            if (gameManager != null)
+            {
+                gameManager.StartedGameEvent += GameManager_OnStartedGameEvent;
+            }
+            
             // if (!ServerManager.IsClient)
             // {
             //     this.enabled = false;
