@@ -5,34 +5,29 @@ using System;
 
 public class FishModel : MonoBehaviour
 {
-    Neighbours neighbours;
+    //Neighbours neighbours;
     TurnTowards turnTowards;
 
     [Header("Reference Only:")]
     public bool isPlayerFish;
+    public bool hasWaypoint;
     public bool neighbourDebugColour = false;
     bool eventCalled = false;
 
-    public event Action<GameObject> onPlayerFishEvent;
-    public event Action onFishChangeEvent;
+    public static event Action<GameObject> onPlayerFishEvent;
+    public static event Action<GameObject> onFishChangeEvent;
 
     // Start is called before the first frame update
     void Awake()
     {
-        neighbours = GetComponent<Neighbours>();
+        //neighbours = GetComponent<Neighbours>();
         turnTowards = GetComponent<TurnTowards>();
     }
 
     private void Start()
     {
-        neighbours.newNeighbourEvent += CheckForShark;
-        neighbours.neighbourLeaveEvent += SharkExit;
-        onFishChangeEvent += UpdateDebug;
-    }
-
-    void UpdateDebug()
-    {
-        neighbourDebugColour = false;
+        Neighbours.newNeighbourEvent += CheckForPredator;
+        Neighbours.neighbourLeaveEvent += PredatorOutOfSight;
     }
 
     private void Update()
@@ -50,22 +45,22 @@ public class FishModel : MonoBehaviour
             if (eventCalled)
             {
                 eventCalled = false;
-                onFishChangeEvent?.Invoke();
+                onFishChangeEvent?.Invoke(gameObject);
             }
         }
     }
 
-    void CheckForShark(GameObject other)
+    void CheckForPredator(GameObject other)
     {
-        if (other.GetComponent<SharkModel>() != null)
+        if (other.GetComponent<IPredator>() != null)
         {
             turnTowards.target = -other.transform.position;
         }
     }
 
-    void SharkExit(GameObject other)
+    void PredatorOutOfSight(GameObject other)
     {
-        if (other.GetComponent<SharkModel>() != null)
+        if (other.GetComponent<IPredator>() != null)
         {
             turnTowards.target = Vector3.zero;
         }

@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerFish: 0
+  hasWaypoint: 0
   neighbourDebugColour: 0
 --- !u!114 &2219981257583123346
 MonoBehaviour:
@@ -241,8 +242,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eef0b1062ff446488876b0d8490dbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 5
+  force: 6
   usePlayerForce: 0
+  currentPlayerFish: {fileID: 0}
 --- !u!114 &6844581979469349891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 7.5
-  force: 3
+  force: 2
   myDistance: 0
 --- !u!114 &7435328888860800600
 MonoBehaviour:

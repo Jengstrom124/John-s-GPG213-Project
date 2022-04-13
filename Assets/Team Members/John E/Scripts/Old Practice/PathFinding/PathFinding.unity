@@ -831,7 +831,6 @@ GameObject:
   m_Component:
   - component: {fileID: 668529950}
   - component: {fileID: 668529949}
-  - component: {fileID: 668529951}
   - component: {fileID: 668529952}
   - component: {fileID: 668529953}
   m_Layer: 0
@@ -853,8 +852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be1c54e7a96e634295d1d32c5996916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {fileID: 807946609}
-  endPos: {fileID: 97203542}
+  startPos: {fileID: 0}
+  endPos: {fileID: 0}
   gridSize: {x: 30, y: 30}
   obstacle:
     serializedVersion: 2
@@ -875,21 +874,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &668529951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668529948}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ebb6bc10d97df94985d7ae99a100779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worldScanner: {fileID: 668529949}
-  visualizeOpenCloseLists: 0
-  thingToMove: {fileID: 0}
 --- !u!114 &668529952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,7 +889,7 @@ MonoBehaviour:
   worldScanner: {fileID: 668529949}
   seeker: {fileID: 807946609}
   target: {fileID: 97203542}
-  aStar: {fileID: 668529951}
+  aStar: {fileID: 0}
 --- !u!114 &668529953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1014,7 +998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807946605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.31, y: 0, z: 1.29}
+  m_LocalPosition: {x: 9.31, y: 1, z: 1.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1034,11 +1018,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ca7b9d47aea144cb585b7b5b75ec9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTransform: {fileID: 807946609}
+  distanceThreshold: 2
   aStar: {fileID: 807946613}
-  worldScanner: {fileID: 668529949}
-  waypoint: {fileID: 668529953}
-  speed: 0.1
   maxRayLength: 50
+  drawRaycasts: 1
+  waypoint: {fileID: 668529953}
+  randomWaypointTest: 1
+  finalDestinationPos: {x: 0, y: 0}
+  currentTargetPos: {x: 0, y: 0}
 --- !u!54 &807946611
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1067,7 +1055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 97203542}
+  target: {x: 0, y: 0, z: 0}
   turnMultiplier: 0.05
   targetXPos: 0
 --- !u!114 &807946613
@@ -1082,7 +1070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ebb6bc10d97df94985d7ae99a100779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldScanner: {fileID: 668529949}
   visualizeOpenCloseLists: 0
   thingToMove: {fileID: 807946610}
 --- !u!1 &1186348019

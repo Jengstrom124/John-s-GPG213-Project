@@ -60,6 +60,6 @@ public class CharacterSelect : NetworkBehaviour
         // Server can call this directly, client can request the server selects the character on the client's player
         PlayerController player =
             NetworkManager.Singleton.ConnectedClients[client].PlayerObject.GetComponent<PlayerController>();
-        player.selectedCharacter = CharacterIndex[characterIndex];
+        // player.selectedCharacter = CharacterIndex[characterIndex];
     }
 }
