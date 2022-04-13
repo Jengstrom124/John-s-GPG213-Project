@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gerallt;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,11 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterBase selectedCharacter;
 
+    public LobbyPlayerData? clientInfo;
+    
     public string playerName;
 
     public NetworkVariable<Color> playerColour;
-    
-    
+
+
     //From here on down is taken from Cam's PlayerController - Aaron
     public GameObject controlledThing;
     

@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class ServerManager : NetworkManager
 {
@@ -129,6 +130,11 @@ public class ServerManager : NetworkManager
             //state.Spawn();
         }
     }
+
+    public Color RandomColour()
+    {
+        return new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+    }
     
     //Starting Game, waiting on event from lobby
     public void StartGame()
@@ -148,8 +154,10 @@ public class ServerManager : NetworkManager
             LobbyPlayerData lobbyPlayerData = networkedListBehaviour.GetPlayerDataByClientId(player);
             
             // We have a LobbyPlayerData for the current player created by the client.
-            playerController.playerName = lobbyPlayerData.PlayerName;
-            
+            playerController.clientInfo = lobbyPlayerData; // Store the client info for now.
+            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+            playerController.playerName = lobbyPlayerData.PlayerName; // Player name doesn't have to be networked anymore.
+
             //There has to be a less fragile way of linking the prefab to the index?
             if (ConnectedClients[player].PlayerObject
                 .GetComponent<PlayerController>()
