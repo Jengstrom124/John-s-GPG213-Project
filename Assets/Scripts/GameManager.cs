@@ -91,10 +91,27 @@ public class GameManager : ManagerBase<GameManager>
             // }
         }
 
-        StartedGameEvent?.Invoke();
+        //StartedGameEvent?.Invoke();
+        if (NetworkManager.Singleton.IsServer)
+        {
+            RaiseStartEventClientRpc();
+        }
     }
 
 
+    [ClientRpc]
+    public void RaiseStartEventClientRpc()
+    {
+        StartedGameEvent?.Invoke();
+        
+        // UILobby uiLobby = FindObjectOfType<UILobby>();
+        //
+        // if (uiLobby != null)
+        // {
+        //     uiLobby
+        // }
+    }
+    
     public Color RandomColour()
     {
         return new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);

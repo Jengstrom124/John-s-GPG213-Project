@@ -18,7 +18,7 @@ namespace Gerallt
         public ServerManager ServerManager;
         public NetworkPlayerList GNetworkedListBehaviour;
         
-        public event Action OnGameStart;
+        //public event Action OnGameStart;
         public event Action<LobbyPlayerData> OnPlayerDataChanged;
         
         public void PlayerName_ValueChanged()
