@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Gerallt;
+using JetBrains.Annotations;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
@@ -14,6 +15,8 @@ public class ServerManager : NetworkManager
     public Test test;
     public Vector3 spawn;
     public LobbyPlayerData? currentPlayer;
+    
+    [SerializeField] private GNetworkedListBehaviour networkedListBehaviour;
     
     //passing a ulong for ClientId?
     public event Action<ulong> JoinServerEvent;
@@ -48,6 +51,7 @@ public class ServerManager : NetworkManager
         //How else to grab this besides FindObject?
         characterSelect = FindObjectOfType<CharacterSelect>();
         test = FindObjectOfType<Test>();
+        networkedListBehaviour = FindObjectOfType<GNetworkedListBehaviour>();
         
         //OnClientConnectedCallback += OnConnectedCallback;
     }
@@ -141,11 +145,10 @@ public class ServerManager : NetworkManager
             
             Instantiate(ConnectedClients[player].PlayerObject.GetComponent<PlayerController>().selectedCharacter);
 
-            if (currentPlayer.HasValue)
-            {
-                // We have a LobbyPlayerData for the current player created by the client.
-                playerController.playerName = currentPlayer.Value.PlayerName;
-            }
+            LobbyPlayerData lobbyPlayerData = networkedListBehaviour.GetPlayerDataByClientId(player);
+            
+            // We have a LobbyPlayerData for the current player created by the client.
+            playerController.playerName = lobbyPlayerData.PlayerName;
             
             //There has to be a less fragile way of linking the prefab to the index?
             if (ConnectedClients[player].PlayerObject

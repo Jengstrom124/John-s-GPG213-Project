@@ -42,22 +42,6 @@ namespace Gerallt
             }
         }
 
-        public LobbyPlayerData GetPlayerData()
-        {
-            for (int i = 0; i < GNetworkedListBehaviour.NetworkedObjects.Count; i++)
-            {
-                LobbyPlayerData playerData = GNetworkedListBehaviour.NetworkedObjects[i];
-
-                if (playerData.ClientId == ServerManager.LocalClientId)
-                {
-                    return playerData;
-                }
-            }
-
-            LobbyPlayerData empty = new LobbyPlayerData();
-            return empty;
-        }
-        
         public void Start()
         {
             // if (!ServerManager.IsClient)
@@ -83,9 +67,9 @@ namespace Gerallt
 
         public void OnJoinButtonClicked()
         {
-            LobbyPlayerData lobbyPlayerData = GetPlayerData();
+            LobbyPlayerData lobbyPlayerData = GNetworkedListBehaviour.GetPlayerData();
             
-            ServerManager.JoinServer(autoCreateHost: true);
+            ServerManager.JoinServer(lobbyPlayerData, autoCreateHost: true);
         }
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)

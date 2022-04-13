@@ -112,6 +112,40 @@ namespace Gerallt
             }
         }
 
+        public LobbyPlayerData GetPlayerData()
+        {
+            for (int i = 0; i < NetworkedObjects.Count; i++)
+            {
+                LobbyPlayerData playerData = NetworkedObjects[i];
+
+                if (playerData.ClientId == ServerManager.LocalClientId)
+                {
+                    return playerData;
+                }
+            }
+
+            LobbyPlayerData empty = new LobbyPlayerData();
+            empty.PlayerName = "Unknown";
+            return empty;
+        }
+        
+        public LobbyPlayerData GetPlayerDataByClientId(ulong clientId)
+        {
+            for (int i = 0; i < NetworkedObjects.Count; i++)
+            {
+                LobbyPlayerData playerData = NetworkedObjects[i];
+
+                if (playerData.ClientId == clientId)
+                {
+                    return playerData;
+                }
+            }
+
+            LobbyPlayerData empty = new LobbyPlayerData();
+            empty.PlayerName = "Unknown";
+            return empty;
+        }
+        
         public void UpdatePlayerName(int i, string newPlayerName)
         {
             if (ServerManager.IsClient)
