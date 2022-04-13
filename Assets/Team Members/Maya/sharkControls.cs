@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -88,24 +89,31 @@ namespace MayaStuff
 
             rotateSpeed = (input*5) + 12f;
 
-            if (tailBit1.rotation.z >= 15f)
-                swingLeft = true;
-            else if (tailBit1.rotation.z <= -15f)
-                swingLeft = false;
+            float swingSpeed = (input * 10) / 3;
+            float maxSwingAngle = 16;
             sharkForce.AddForceAtPosition(input*speed*transform.TransformDirection(Vector3.forward), transform.position, 0);
             if (swingLeft)
             {
-                tailBit1.DOLocalRotate(new Vector3(0, 0, 16), input / 3);
-                tailBit2.DOLocalRotate(new Vector3(0, 0, 16), input / 3);
-                tailBit3.DOLocalRotate(new Vector3(0, 0, -16), input / 3);
-                tailBit4.DOLocalRotate(new Vector3(0, 0, -16), input / 3);
+                tailBit1.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
+                tailBit2.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
+                tailBit3.DOLocalRotate(new Vector3(0, 0, -maxSwingAngle), swingSpeed);
+                tailBit4.DOLocalRotate(new Vector3(0, 0, -maxSwingAngle), swingSpeed);
             }
             else
             {
-                tailBit1.DOLocalRotate(new Vector3(0, 0, -16), input / 3);
-                tailBit2.DOLocalRotate(new Vector3(0, 0, -16), input / 3);
-                tailBit3.DOLocalRotate(new Vector3(0, 0, 16), input / 3);
-                tailBit4.DOLocalRotate(new Vector3(0, 0, 16), input / 3);
+                tailBit1.DOLocalRotate(new Vector3(0, 0, -maxSwingAngle), swingSpeed);
+                tailBit2.DOLocalRotate(new Vector3(0, 0, -maxSwingAngle), swingSpeed);
+                tailBit3.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
+                tailBit4.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
+            }
+
+            if (tailBit1.localRotation.z == 16f)
+            {
+                swingLeft = false;
+            }
+            if(tailBit1.localRotation.z == -16f)
+            {
+                swingLeft = true;
             }
             /*tailBit1.DOLocalRotate(new Vector3(0, 0, 0), input * 3);
             tailBit2.DOLocalRotate(new Vector3(0, 0, 0), input * 3);
