@@ -13,7 +13,7 @@ public class PathTracker : MonoBehaviour
 
     [Header("Necessary Script References")]
     public AStar aStar;
-    public WorldScanner worldScanner;
+    //public WorldScanner WorldScannerinstance;
 
     [Header("Extra Settings: ")]
     public float maxRayLength = 10f;
@@ -86,7 +86,7 @@ public class PathTracker : MonoBehaviour
         if (pathToFollow.Count > 0)
         {
             //Assign first path pos as our targetPos
-            currentTargetPos = worldScanner.NodeToWorldPos(pathToFollow[0]);
+            currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
 
             //Once we reach the current path position
             if (Vector2.Distance(currentTargetPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold)
@@ -123,7 +123,7 @@ public class PathTracker : MonoBehaviour
         atEnd = false;
         clearPathToTarget = false;
 
-        finalDestinationPos = new Vector2(worldScanner.NodeToWorldPos(aStar.targetNode).x, worldScanner.NodeToWorldPos(aStar.targetNode).y);
+        finalDestinationPos = new Vector2(WorldScanner.instance.NodeToWorldPos(aStar.targetNode).x, WorldScanner.instance.NodeToWorldPos(aStar.targetNode).y);
     }
 
     void CheckPath()
@@ -133,7 +133,7 @@ public class PathTracker : MonoBehaviour
         {
             if (pathToFollow[i] != aStar.targetNode)
             {
-                Vector2 tempPathPos = worldScanner.NodeToWorldPos(pathToFollow[i]);
+                Vector2 tempPathPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[i]);
 
                 RaycastHit hitTest;
                 hitTest = new RaycastHit();

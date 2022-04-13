@@ -5,39 +5,38 @@ using System;
 
 public class AStar : MonoBehaviour
 {
-    public WorldScanner worldScanner;
-    public event Action<List<Node>> pathFoundEvent;
-
-    [Header("Options:")]
-    public bool visualizeOpenCloseLists = false;
-
-    //HACK for now
-    public PathTracker thingToMove;
-
-    public Node targetNode;
-    Transform start;
+    //public WorldScanner WorldScannerinstance;
 
     //List of nodes that create the path
     List<Node> path = new List<Node>();
 
+    //Event to send through path once found
+    public event Action<List<Node>> pathFoundEvent;
+
+    //For Reference Only
+    public Node targetNode;
+    Transform start;
+
+    [Header("Options:")]
+    public bool visualizeOpenCloseLists = false;
+
+    [Header("Test Only/Ignore")]
+    public PathTracker thingToMove;
+
     private void Start()
     {
-        thingToMove.atEndNodeEvent += FindPath;
-        worldScanner.onReScanEvent += ReScanPath;
-    }
-
-    private void Update()
-    {
-        //if(targetNode != null)
+        if(thingToMove != null)
         {
-            //FindPath(seeker, targetNode);
+            thingToMove.atEndNodeEvent += FindPath;
         }
+
+        WorldScanner.instance.onReScanEvent += ReScanPath;
     }
 
     public void FindPath(Transform startPos, Node _targetNode)
     {
         //Convert world positions to grid positions
-        Node startNode = worldScanner.WorldToNodePos(startPos.position);
+        Node startNode = WorldScanner.instance.WorldToNodePos(startPos.position);
 
         targetNode = _targetNode;
         start = startPos;
@@ -48,13 +47,13 @@ public class AStar : MonoBehaviour
 
         if(visualizeOpenCloseLists)
         {
-            worldScanner.openList = openList;
-            worldScanner.closedList = closedList;
+            WorldScanner.instance.openList = openList;
+            WorldScanner.instance.closedList = closedList;
         }
         else
         {
-            worldScanner.openList = null;
-            worldScanner.closedList = null;
+            WorldScanner.instance.openList = null;
+            WorldScanner.instance.closedList = null;
         }
 
         openList.Add(startNode);
@@ -89,7 +88,7 @@ public class AStar : MonoBehaviour
             else
             {
                 //Otherwise continue finding path to target using neighbours - loop through each neighbour
-                foreach(Node neighbour in worldScanner.GetNeighbours(currentNode))
+                foreach(Node neighbour in WorldScanner.instance.GetNeighbours(currentNode))
                 {
                     if (neighbour.isBlocked || closedList.Contains(neighbour))
                     {
@@ -106,8 +105,8 @@ public class AStar : MonoBehaviour
                         if(neighbour.hCost < currentNode.hCost || !openList.Contains(neighbour))
                         {
                             //Using world positions to calculate gCost
-                            Vector2 neighbourPos = worldScanner.NodeToWorldPos(neighbour);
-                            Vector2 currentNodePos = worldScanner.NodeToWorldPos(currentNode);
+                            Vector2 neighbourPos = WorldScanner.instance.NodeToWorldPos(neighbour);
+                            Vector2 currentNodePos = WorldScanner.instance.NodeToWorldPos(currentNode);
 
                             //Calculate neighbour gCost - if neighbour is diagonal gCost is double
                             if (neighbourPos.y == currentNodePos.y || neighbourPos.y != currentNodePos.y && neighbourPos.x == currentNodePos.x)
@@ -146,15 +145,15 @@ public class AStar : MonoBehaviour
 
         path.Reverse();
 
-        worldScanner.path = path;
-        worldScanner.endNode = end;
+        WorldScanner.instance.path = path;
+        WorldScanner.instance.endNode = end;
 
         pathFoundEvent?.Invoke(path);
     }
 
     int DistanceCheck(Node a, Node b)
     {
-        return (int)Vector2.Distance(worldScanner.NodeToWorldPos(a), worldScanner.NodeToWorldPos(b));
+        return (int)Vector2.Distance(WorldScanner.instance.NodeToWorldPos(a), WorldScanner.instance.NodeToWorldPos(b));
     }
 
     void ReScanPath()
