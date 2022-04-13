@@ -244,7 +244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7688179867083144777, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00044891905
+      value: 0.000090600624
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
@@ -382,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: networkList
       value: 
-      objectReference: {fileID: 1474839603}
+      objectReference: {fileID: 0}
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: levels.Array.size
       value: 1
@@ -458,7 +458,7 @@ PrefabInstance:
       objectReference: {fileID: 1955092064}
     - target: {fileID: 5363260692813700571, guid: 57fc138a50e51744fbf6e0cfd7efa265, type: 3}
       propertyPath: m_Name
-      value: GNetworkedList
+      value: NetworkPlayerList
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57fc138a50e51744fbf6e0cfd7efa265, type: 3}

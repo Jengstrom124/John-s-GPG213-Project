@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 4276638176149353577}
   - component: {fileID: 8811969416565188693}
   - component: {fileID: 1890972485044682138}
+  - component: {fileID: -4011348631466365751}
+  - component: {fileID: 845331542802222535}
+  - component: {fileID: -158972904826370234}
   m_Layer: 0
   m_Name: LukeFish
   m_TagString: Untagged
@@ -47,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b54659c00df6374ba1eff995f92ace1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flock: {fileID: 0}
+  pathfollow: {fileID: 0}
   rb: {fileID: 0}
   mainJointTransform: {fileID: 2662146683937593083}
   tailTipTransform: {fileID: 7254538918823550099}
@@ -95,6 +100,61 @@ CapsuleCollider:
   m_Height: 0.54
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4011348631466365751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &845331542802222535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+  CanCommitToTransform: 0
+--- !u!114 &-158972904826370234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6647763253185511798
 GameObject:
   m_ObjectHideFlags: 0

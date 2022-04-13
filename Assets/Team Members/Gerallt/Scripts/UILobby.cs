@@ -16,7 +16,7 @@ namespace Gerallt
         public TMP_InputField UIPlayerNameInput;
         
         public ServerManager ServerManager;
-        public GNetworkedListBehaviour GNetworkedListBehaviour;
+        public NetworkPlayerList GNetworkedListBehaviour;
         
         public event Action OnGameStart;
         public event Action<LobbyPlayerData> OnPlayerDataChanged;
@@ -33,7 +33,7 @@ namespace Gerallt
                 if (playerData.ClientId == clientId)
                 {
                     playerData.PlayerName = playerName;
-                    playerData.ClientIPAddress = GNetworkedListBehaviour.GetClientIPAddress();
+                    playerData.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
                     //GNetworkedListBehaviour.UpdatePlayerName(i, playerName);
                     GNetworkedListBehaviour.UpdatePlayerData(i, playerData);
                     

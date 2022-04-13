@@ -33,7 +33,7 @@ public class OllieSpawner : MonoBehaviour
                 if (pos.y > 15f)
                 {
                     print("height check reached");
-                    if (UnityEngine.Random.Range(0, 100) > 75)
+                    if (UnityEngine.Random.Range(0, 100) > 90)
                     {
                         //basically - 25% chance to spawn a random tree, at every point above y=15
                         print("tree spawned");
@@ -43,6 +43,10 @@ public class OllieSpawner : MonoBehaviour
                         go.transform.localScale = scaleUp;
                         go.transform.parent = this.transform;
                     }
+                }
+                else if (pos.y > 12f)
+                {
+                    //spawn bushes/rocks/shells/debris?
                 }
             }
         }
