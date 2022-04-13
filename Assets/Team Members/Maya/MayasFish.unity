@@ -165,7 +165,8 @@ MonoBehaviour:
   sharkRotatePoint: {fileID: 1506804117}
   speed: 25
   localVelocity: {x: 0, y: 0, z: 0}
-  rotateSpeed: 10
+  rotateSpeed: 0
+  swingLeft: 0
   tailBit1: {fileID: 53134546}
   tailBit2: {fileID: 1905990168}
   tailBit3: {fileID: 413176853}
@@ -591,8 +592,40 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7246752540734462821, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246752540734462821, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246752540734462821, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246752540734462821, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246752540734462821, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8762443845323579578, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762443845323579578, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762443845323579578, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762443845323579578, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
