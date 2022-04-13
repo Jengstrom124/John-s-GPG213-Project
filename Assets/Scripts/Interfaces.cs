@@ -18,3 +18,8 @@ public interface IPredator
 	void GotFood(float amount);
 	void ChangeBoost(float amount);
 }
+
+public interface IReactsToWater
+{
+	public bool IsWet { get; set; }
+}

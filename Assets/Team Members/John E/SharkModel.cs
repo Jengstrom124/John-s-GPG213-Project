@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SharkModel : MonoBehaviour
+public class SharkModel : MonoBehaviour, IPredator
 {
-    // Start is called before the first frame update
-    void Start()
+    public void ChangeBoost(float amount)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GotFood(float amount)
     {
-        
+        throw new System.NotImplementedException();
     }
 }
