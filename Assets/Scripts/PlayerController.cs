@@ -7,6 +7,7 @@ namespace Cam
 {
     public class PlayerController : MonoBehaviour
     {
+	    // This is Go purely for inspector dragdropping. It should be IControllable if Unity supported that
         public GameObject controlledThing;
 
         // Update is called once per frame
