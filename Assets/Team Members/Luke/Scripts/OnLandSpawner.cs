@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SubmersedSpawner : MonoBehaviour
+public class OnLandSpawner : MonoBehaviour
 {
 	public TerrainGenerator terrainGenerator;
 	/*public Terrain _terrain;*/
 	private TerrainData _terrainData;
-	public GameObject coralPrefab;
+	public List<GameObject> treePrefabs;
 
-	public float threshold = 0.45f;
-	public float frequency = 15f;
+	public float threshold = 0.95f;
+	public float frequency = 12f;
 	public int xOffset;
 	public int yOffset;
 	public float fringe;
@@ -24,15 +24,16 @@ public class SubmersedSpawner : MonoBehaviour
 		{
 			for (int y = 0; y < terrainGenerator.height; y++)
 			{
-				SpawnCoral(x,y);
+				SpawnTrees(x,y);
 			}
 		}
 	}
 	
-	private void SpawnCoral(int x, int y)
+	private void SpawnTrees(int x, int y)
 	{
-		if (_terrainData.GetHeight(x, y) < 6)
+		if (_terrainData.GetHeight(x, y) > 12f)
 		{
+			Debug.Log("mc");
 			float xCoord = (float) x / terrainGenerator.width;
 			float yCoord = (float) y / terrainGenerator.height;
 			if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
@@ -40,8 +41,14 @@ public class SubmersedSpawner : MonoBehaviour
 				float value = Mathf.PerlinNoise(xCoord * frequency + xOffset, yCoord * frequency + yOffset);
 				if (value > threshold)
 				{
+					GameObject go;
 					Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
-					Instantiate(coralPrefab, worldPosition, Quaternion.identity, transform);
+					if (Random.Range(0f, 1f) > 0.5f)
+					{
+						go = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), transform);
+						go.transform.localScale *= 2f;
+						go.transform.position += new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
+					}
 				}
 			}
 		}

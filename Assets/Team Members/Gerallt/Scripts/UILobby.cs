@@ -41,7 +41,7 @@ namespace Gerallt
                 }
             }
         }
-        
+
         public void Start()
         {
             // if (!ServerManager.IsClient)
@@ -67,7 +67,9 @@ namespace Gerallt
 
         public void OnJoinButtonClicked()
         {
-            ServerManager.JoinServer(autoCreateHost: true);
+            LobbyPlayerData lobbyPlayerData = GNetworkedListBehaviour.GetPlayerData();
+            
+            ServerManager.JoinServer(lobbyPlayerData, autoCreateHost: true);
         }
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)

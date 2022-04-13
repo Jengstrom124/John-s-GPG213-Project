@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
+public class LukeFish : MonoBehaviour, IControllable, IEdible
 {
 	public Rigidbody rb;
-	public Transform preJointTransform;
 	public Transform mainJointTransform;
-	public Transform postJointTransform;
 	public Transform tailTipTransform;
-	public Transform headJointTransform;
 	
 	public float acceleratingForce = 5f;
 	public float reversingForce = 3f;
@@ -56,11 +53,8 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 
 		currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
 		
-		preJointTransform.eulerAngles = new Vector3(90, currentYEuler+0.5f*currentSteeringAngle, 180);
 		mainJointTransform.eulerAngles = new Vector3(0, currentYEuler+currentSteeringAngle, 0);
-		postJointTransform.eulerAngles = new Vector3(-90, currentYEuler+1.5f*currentSteeringAngle, 0);
-		tailTipTransform.eulerAngles = new Vector3(-90, currentYEuler+2f*currentSteeringAngle, 0);
-		headJointTransform.eulerAngles = new Vector3(90, 0, -(currentYEuler-0.5f*currentSteeringAngle));
+		tailTipTransform.eulerAngles = new Vector3(0, currentYEuler+2f*currentSteeringAngle, 0);
 	}
 
 
@@ -76,7 +70,6 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 	private IEnumerator BoostCooldown()
 	{
 		yield return new WaitForSeconds(boostCooldownSeconds);
-
 		boostReady = true;
 	}
 	
@@ -151,16 +144,6 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
     void IControllable.Steer(float input)
     {
 	    Steer(input);
-    }
-
-    public void GotFood(float amount)
-    {
-	    
-    }
-
-    public void ChangeBoost(float amount)
-    {
-	    
     }
 
     public void GetEaten(IPredator eatenBy)
