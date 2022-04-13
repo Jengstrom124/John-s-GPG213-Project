@@ -10,20 +10,25 @@ public class Birdzier : MonoBehaviour
     public List<Vector3> positions;
     public List<Vector3> spawnPosList;
     public List<Vector3> newSpawnPosList;
+    public OllieTerrain ollieTerrain;
     private Vector3 pos1, pos2, pos3, pos4, originPos;
     private Vector3 spawnPos1, spawnPos2, spawnPos3, spawnPos4;
     private Vector3 a, b, c, d, e, point;
+    private float tWidth, tHeight;
     private float speed, timer, timeScale;
     public GameObject birdPrefab;
     private GameObject bird;
     void Start()
     {
+        //adds modularity so spawner takes into account terrain width/height
+        tWidth = ollieTerrain.width;
+        tHeight = ollieTerrain.height;
         positions = new List<Vector3>();
         spawnPosList = new List<Vector3>();
         pos1 = new Vector3(0, 20, 0);
-        pos2 = new Vector3(256, 20, 0);
-        pos3 = new Vector3(256, 20, 256);
-        pos4 = new Vector3(0, 20, 256);
+        pos2 = new Vector3(tWidth, 20, 0);
+        pos3 = new Vector3(tWidth, 20, tHeight);
+        pos4 = new Vector3(0, 20, tHeight);
         //lol this does NOT work
         //positions.Add(pos1 + pos2 + pos3 + pos4);
         positions.Add(pos1);
@@ -34,18 +39,20 @@ public class Birdzier : MonoBehaviour
         spawnPosList.Add(spawnPos2);
         spawnPosList.Add(spawnPos3);
         spawnPosList.Add(spawnPos4);
-        timeScale = Time.deltaTime;
+        timeScale = Time.deltaTime/10;
     }
 
     private void Update()
     {
-        TimeFlip();
-        SpawnBird();
+        
         speed = timer;
         print(pos1);
         print(positions.Capacity);
         print(spawnPosList.Capacity);
         BezierCurve();
+        UpdateSpawnPos();
+        SpawnBird();
+        TimeFlip();
     }
 
     private void FixedUpdate()
@@ -53,6 +60,10 @@ public class Birdzier : MonoBehaviour
         if (bird != null)
         {
             bird.transform.position = point;
+            Vector3 dir = point - transform.position;
+            float singleStep = 1.0f * Time.deltaTime;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, dir, singleStep, 10.0f);
+            bird.transform.localRotation = Quaternion.LookRotation(newDirection);
         }
     }
 
@@ -122,10 +133,10 @@ public class Birdzier : MonoBehaviour
     
     void GenerateSpawnPos()
     {
-        spawnPos1 = new Vector3((UnityEngine.Random.Range(0, 256)), 20, 0);
-        spawnPos2 = new Vector3((UnityEngine.Random.Range(0, 256)), 20, 256);
-        spawnPos3 = new Vector3(256, 20, (UnityEngine.Random.Range(0, 256)));
-        spawnPos4 = new Vector3(0, 20, (UnityEngine.Random.Range(0, 256)));
+        spawnPos1 = new Vector3((UnityEngine.Random.Range(0, tWidth)), 20, 0);
+        spawnPos2 = new Vector3((UnityEngine.Random.Range(0, tWidth)), 20, tHeight);
+        spawnPos3 = new Vector3(tWidth, 20, (UnityEngine.Random.Range(0, tHeight)));
+        spawnPos4 = new Vector3(0, 20, (UnityEngine.Random.Range(0, tHeight)));
         
         newSpawnPosList.Add(spawnPos1);
         newSpawnPosList.Add(spawnPos2);

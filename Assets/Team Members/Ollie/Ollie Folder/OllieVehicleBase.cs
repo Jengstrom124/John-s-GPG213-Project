@@ -7,7 +7,9 @@ using UnityEngine;
 public class OllieVehicleBase : MonoBehaviour, IControllable
 {
     public Rigidbody rb;
+    public CapsuleCollider capsuleCollider;
     public float forwardSpeed;
+    public float groundSpeed;
     public float turnSpeed;
     public float wiggleSpeed;
     public Vector3 localVelocity;
@@ -122,7 +124,7 @@ public class OllieVehicleBase : MonoBehaviour, IControllable
         }
         else
         {
-            rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position,ForceMode.Acceleration);
+            //rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position,ForceMode.Acceleration);
         }
     }
 

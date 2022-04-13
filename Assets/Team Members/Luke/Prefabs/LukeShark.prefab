@@ -756,6 +756,9 @@ GameObject:
   - component: {fileID: 1542889693}
   - component: {fileID: 1542889696}
   - component: {fileID: 2471790443286211959}
+  - component: {fileID: 7851975525607619270}
+  - component: {fileID: 887061758960150927}
+  - component: {fileID: 3726469031803898318}
   m_Layer: 0
   m_Name: LukeShark
   m_TagString: Untagged
@@ -825,6 +828,10 @@ MonoBehaviour:
   currentSteeringAngle: 0
   localVelocity: {x: 0, y: 0, z: 0}
   tailLocalVelocity: {x: 0, y: 0, z: 0}
+  boostReady: 1
+  boostFactor: 3
+  boostTimeSeconds: 1
+  boostCooldownSeconds: 2
 --- !u!136 &2471790443286211959
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -839,6 +846,61 @@ CapsuleCollider:
   m_Height: 6.5892653
   m_Direction: 2
   m_Center: {x: 0.0000036066458, y: 1.1283422, z: -1.0532641}
+--- !u!114 &7851975525607619270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227251270856557637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &887061758960150927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227251270856557637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+  CanCommitToTransform: 0
+--- !u!114 &3726469031803898318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227251270856557637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7823118384569480985
 GameObject:
   m_ObjectHideFlags: 0
