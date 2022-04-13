@@ -74,7 +74,12 @@ namespace Gerallt
 
         public void OnDestroy()
         {
-            GameManager.Instance.StartedGameEvent -= GameManager_OnStartedGameEvent;
+            GameManager gameManager = GameManager.Instance;
+            if (gameManager != null)
+            {
+                gameManager.StartedGameEvent -= GameManager_OnStartedGameEvent;
+            }
+            
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
         }
 
