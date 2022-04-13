@@ -1,14 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tom;
 using Unity.Netcode;
 using UnityEngine;
+using Gerallt;
 
 public class GameManager : ManagerBase<GameManager>
 {
     public List<string> levels = new List<string>();
+    public GNetworkedListBehaviour networkList;
     
-    public GameObject cameraPrefab;
+    public CameraFollow camera;
+
+    public event Action StartedGameEvent;
 
     public void Start()
     {
@@ -19,20 +24,75 @@ public class GameManager : ManagerBase<GameManager>
     {
         if (NetworkManager.Singleton.IsServer)
         {
-            GetComponent<NetworkObject>().Spawn();
-            SetupCameraClientRpc(clientID);
+            if (!GetComponent<NetworkObject>().IsSpawned)
+            {
+                GetComponent<NetworkObject>().Spawn();
+            }
+
+            NetworkObjectReference playerObject = NetworkManager.Singleton.ConnectedClients[clientID].PlayerObject;
+            SetupCameraClientRpc(clientID, playerObject);
         }
     }
 
     [ClientRpc]
-    public void SetupCameraClientRpc(ulong clientID)
+    public void SetupCameraClientRpc(ulong clientID, NetworkObjectReference playerObjectRef)
     {
         if (clientID == NetworkManager.Singleton.LocalClientId)
         {
-            CameraFollow newCamera = Instantiate(cameraPrefab).GetComponent<CameraFollow>();
-            newCamera.target = NetworkManager.Singleton.ConnectedClients[clientID].PlayerObject.transform;
-            newCamera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
-            newCamera.GetComponent<NetworkObject>().Spawn();
+            // CameraFollow newCamera = Instantiate(cameraPrefab).GetComponent<CameraFollow>();
+            GameObject playerObject = playerObjectRef;
+            camera.target = playerObject.transform;
+            camera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
+            // newCamera.GetComponent<NetworkObject>().Spawn();
         }
+    }
+
+    public void StartGame()
+    {
+        //spawn players
+            foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
+            {
+                Debug.Log("ID " + player + "; " + "Char = " + NetworkManager.Singleton.ConnectedClients[player].PlayerObject
+                    .GetComponent<PlayerController>()
+                    .selectedCharacter);
+    
+                PlayerController playerController = NetworkManager.Singleton.ConnectedClients[player].PlayerObject.GetComponent<PlayerController>();
+                
+                Instantiate(NetworkManager.Singleton.ConnectedClients[player].PlayerObject.GetComponent<PlayerController>().selectedCharacter);
+    
+                LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
+                
+                // We have a LobbyPlayerData for the current player created by the client.
+                playerController.clientInfo = lobbyPlayerData; // Store the client info for now.
+                playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+                playerController.playerName = lobbyPlayerData.PlayerName; // Player name doesn't have to be networked anymore.
+    
+                //There has to be a less fragile way of linking the prefab to the index?
+                // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
+                //     .GetComponent<PlayerController>()
+                //     .selectedCharacter == characterSelect.CharacterIndex[0])
+                // {
+                //     GameObject go = Instantiate(test.sharkPrefab);
+                //     go.GetComponent<NetworkObject>().Spawn();
+                //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
+                // }
+                //
+                // else if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
+                //     .GetComponent<PlayerController>()
+                //     .selectedCharacter == characterSelect.CharacterIndex[1])
+                // {
+                //     GameObject go = Instantiate(test.fishPrefab);
+                //     go.GetComponent<NetworkObject>().Spawn();
+                //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
+                // }
+            }
+            
+            StartedGameEvent?.Invoke();
+    }
+    
+    
+    public Color RandomColour()
+    {
+        return new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
     }
 }
