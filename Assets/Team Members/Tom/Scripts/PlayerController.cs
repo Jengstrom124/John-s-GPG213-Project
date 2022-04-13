@@ -6,7 +6,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public GameObject selectedCharacter;
 
@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+	    // Client side physical controls only for owned creature
+	    if (!IsOwner)
+		    return;
+	    
         // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
         if (controlledThing != null)
         {
@@ -30,43 +34,43 @@ public class PlayerController : MonoBehaviour
             if (controllable != null)
             {
                 controllable.Steer(0f);
-                if (InputSystem.GetDevice<Keyboard>().aKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Steer(-1f);
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().dKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Steer(1f);
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().wKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Accelerate(1f);
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().sKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Reverse(1f);
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().fKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().fKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Action();
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().eKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Action2();
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().qKey.wasPressedThisFrame)
+                if (InputSystem.GetDevice<Keyboard>().qKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Action3();
@@ -74,4 +78,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    
+    // TODO: ServerRPC for each client control command
+    // Forward on INSIDE the server with ClientRPC to sync all your ghosts on other players computers
 }

@@ -17,7 +17,7 @@ public class ServerManager : NetworkManager
     public Vector3 spawn;
     public LobbyPlayerData? currentPlayer;
     
-    [SerializeField] private GNetworkedListBehaviour networkedListBehaviour;
+    [SerializeField] private NetworkPlayerList networkedListBehaviour;
     
     //passing a ulong for ClientId?
     public event Action<ulong> JoinServerEvent;
@@ -52,7 +52,7 @@ public class ServerManager : NetworkManager
         //How else to grab this besides FindObject?
         characterSelect = FindObjectOfType<CharacterSelect>();
         test = FindObjectOfType<Test>();
-        networkedListBehaviour = FindObjectOfType<GNetworkedListBehaviour>();
+        networkedListBehaviour = FindObjectOfType<NetworkPlayerList>();
         
         //OnClientConnectedCallback += OnConnectedCallback;
     }

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Kevin
 {
-    public class PathFollow : MonoBehaviour
+    public class PathFollow : SerializedMonoBehaviour, IStateBase
     {
         // Start is called before the first frame update
         void Start()
@@ -16,6 +17,21 @@ namespace Kevin
         void Update()
         {
         
+        }
+
+        public void Enter()
+        {
+            
+        }
+
+        public void Execute()
+        {
+            
+        }
+
+        public void Exit()
+        {
+            
         }
     }
 }
