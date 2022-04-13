@@ -33,7 +33,6 @@ public class OnLandSpawner : MonoBehaviour
 	{
 		if (_terrainData.GetHeight(x, y) > 12f)
 		{
-			Debug.Log("mc");
 			float xCoord = (float) x / terrainGenerator.width;
 			float yCoord = (float) y / terrainGenerator.height;
 			if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
@@ -47,7 +46,7 @@ public class OnLandSpawner : MonoBehaviour
 					{
 						go = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), transform);
 						go.transform.localScale *= 2f;
-						go.transform.position += new Vector3(Random.Range(-1,1),0,Random.Range(-1,1));
+						go.transform.position += new Vector3(Random.Range(-0.2f,0.2f),0,Random.Range(-0.2f,0.2f));
 					}
 				}
 			}

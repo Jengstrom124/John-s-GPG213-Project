@@ -24,7 +24,7 @@ public class LukeTerrain : MonoBehaviour
 
 	private IEnumerator Timer()
 	{
-		yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(0.5f);
 		FinishSpawningEvent?.Invoke();
 	}
 	
