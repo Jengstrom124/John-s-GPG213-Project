@@ -18,7 +18,7 @@ public class PlayerController : NetworkBehaviour
 
 
     //From here on down is taken from Cam's PlayerController - Aaron
-    public GameObject controlledThing;
+    public GameObject controlled;
 
     void Update()
     {
@@ -27,9 +27,9 @@ public class PlayerController : NetworkBehaviour
 		    return;
 	    
         // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-        if (controlledThing != null)
+        if (controlled != null)
         {
-            IControllable controllable = controlledThing.GetComponentInChildren<IControllable>();
+            IControllable controllable = controlled.GetComponentInChildren<IControllable>();
 
             if (controllable != null)
             {
