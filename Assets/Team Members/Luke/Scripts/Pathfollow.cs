@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Luke
 {
-	public class Pathfollow : SerializedMonoBehaviour, IStateBase
+	public class Pathfollow : MonoBehaviour, IStateBase
 	{
 		public void Enter()
 		{

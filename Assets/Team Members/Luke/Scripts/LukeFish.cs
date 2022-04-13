@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class LukeFish : MonoBehaviour, IControllable, IEdible
+public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 {
-	public Luke.Flock flock;
-	public Luke.Pathfollow pathfollow;
+	public IStateBase flock;
+	public IStateBase pathfollow;
 	
 	public Rigidbody rb;
 	public Transform mainJointTransform;
