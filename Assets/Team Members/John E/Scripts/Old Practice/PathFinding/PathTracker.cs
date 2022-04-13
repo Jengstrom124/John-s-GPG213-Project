@@ -79,12 +79,13 @@ public class PathTracker : MonoBehaviour
         }
     }
 
+    //Monitor when we reach our target path Pos
     void KeepTrackOfPath()
     {
         //While there is a path to follow
         if (pathToFollow.Count > 0)
         {
-            //Assign first target
+            //Assign first path pos as our targetPos
             currentTargetPos = worldScanner.NodeToWorldPos(pathToFollow[0]);
 
             //Once we reach the current path position
@@ -96,6 +97,7 @@ public class PathTracker : MonoBehaviour
         }
     }
 
+    //When distination is in line of sight - monitor only when our we reach the destination
     void CheckForDestinationOnly()
     {
         //Clear the path list as we can now head directly to the desired target position
@@ -104,10 +106,12 @@ public class PathTracker : MonoBehaviour
         //If our position == the targetPos we have reached the end
         if (Vector2.Distance(finalDestinationPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold && !atEnd)
         {
+            //Fire off event
             atEnd = true;
-
             destinationReachedEvent?.Invoke();
 
+
+            //Ignore (for testing random waypoints)
             if(randomWaypointTest)
                 atEndNodeEvent?.Invoke(transform, waypoint.RandomNodePosition());
         }
@@ -144,6 +148,10 @@ public class PathTracker : MonoBehaviour
                     //Remove each node path from the list that we do not want to travel to
                     pathToFollow.Remove(pathToFollow[i]);
                 }
+            }
+            else
+            {
+                clearPathToTarget = true;
             }
         }
     }

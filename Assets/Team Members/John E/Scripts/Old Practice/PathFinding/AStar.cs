@@ -17,6 +17,9 @@ public class AStar : MonoBehaviour
     public Node targetNode;
     Transform start;
 
+    //List of nodes that create the path
+    List<Node> path = new List<Node>();
+
     private void Start()
     {
         thingToMove.atEndNodeEvent += FindPath;
@@ -132,9 +135,6 @@ public class AStar : MonoBehaviour
 
     void RetracePath(Node start, Node end)
     {
-        //List of nodes that create the path
-        List<Node> path = new List<Node>();
-
         Node currentNode = end;
 
         while(currentNode != start)
@@ -159,6 +159,10 @@ public class AStar : MonoBehaviour
 
     void ReScanPath()
     {
-        FindPath(start, targetNode);
+        //If we have a path, rescan it
+        if(path.Count > 0)
+        {
+            FindPath(start, targetNode);
+        }
     }
 }

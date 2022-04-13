@@ -6,21 +6,32 @@ using UnityEngine;
 
 public class GameManager : ManagerBase<GameManager>
 {
-    public GameObject cameraPrefab;
+    public List<string> levels = new List<string>();
     
+    public GameObject cameraPrefab;
+
     public void Start()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback += RequestSetupPlayerServerRpc;
+        NetworkManager.Singleton.OnClientConnectedCallback += SetupPlayer;
     }
-    
-    [ServerRpc]
-    public void RequestSetupPlayerServerRpc(ulong clientID)
+
+    public void SetupPlayer(ulong clientID)
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            GetComponent<NetworkObject>().Spawn();
+            SetupCameraClientRpc(clientID);
+        }
+    }
+
+    [ClientRpc]
+    public void SetupCameraClientRpc(ulong clientID)
     {
         if (clientID == NetworkManager.Singleton.LocalClientId)
         {
             CameraFollow newCamera = Instantiate(cameraPrefab).GetComponent<CameraFollow>();
-            newCamera.target = NetworkManager.Singleton.LocalClient.PlayerObject.transform;
-            newCamera.offset = new Vector3(0f, 15f, 0f); // HACK
+            newCamera.target = NetworkManager.Singleton.ConnectedClients[clientID].PlayerObject.transform;
+            newCamera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
             newCamera.GetComponent<NetworkObject>().Spawn();
         }
     }
