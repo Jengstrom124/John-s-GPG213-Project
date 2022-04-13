@@ -12,7 +12,7 @@ public class Obstacle : ObstacleBase
 
     public event Action<GameObject> OnMovedEvent;
 
-    private void Start()
+    private void Awake()
     {
         currentPos = transform.position;
     }
@@ -22,7 +22,8 @@ public class Obstacle : ObstacleBase
         //Restricting movement to grid based movement
         transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.position.z));
 
-        if(transform.position != currentPos && !alreadyUpdatingGrid)
+        //Y was reading weird and calling this on start game so checking x & z independently
+        if(transform.position.x != Mathf.RoundToInt(currentPos.x) && transform.position.z != Mathf.RoundToInt(currentPos.z) && !alreadyUpdatingGrid)
         {
             alreadyUpdatingGrid = true;
             StartCoroutine(UpdateGrid());

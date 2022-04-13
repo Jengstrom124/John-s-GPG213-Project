@@ -131,52 +131,11 @@ public class ServerManager : NetworkManager
         }
     }
 
-    public Color RandomColour()
-    {
-        return new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
-    }
     
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
-
-	    //spawn players
-        foreach (var player in ConnectedClientsIds)
-        {
-            Debug.Log("ID " + player + "; " + "Char = " + ConnectedClients[player].PlayerObject
-                .GetComponent<PlayerController>()
-                .selectedCharacter);
-
-            PlayerController playerController = ConnectedClients[player].PlayerObject.GetComponent<PlayerController>();
-            
-            Instantiate(ConnectedClients[player].PlayerObject.GetComponent<PlayerController>().selectedCharacter);
-
-            LobbyPlayerData lobbyPlayerData = networkedListBehaviour.GetPlayerDataByClientId(player);
-            
-            // We have a LobbyPlayerData for the current player created by the client.
-            playerController.clientInfo = lobbyPlayerData; // Store the client info for now.
-            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-            playerController.playerName = lobbyPlayerData.PlayerName; // Player name doesn't have to be networked anymore.
-
-            //There has to be a less fragile way of linking the prefab to the index?
-            if (ConnectedClients[player].PlayerObject
-                .GetComponent<PlayerController>()
-                .selectedCharacter == characterSelect.CharacterIndex[0])
-            {
-                GameObject go = Instantiate(test.sharkPrefab);
-                go.GetComponent<NetworkObject>().Spawn();
-                go.GetComponent<NetworkObject>().ChangeOwnership(player);
-            }
-
-            else if (ConnectedClients[player].PlayerObject
-                .GetComponent<PlayerController>()
-                .selectedCharacter == characterSelect.CharacterIndex[1])
-            {
-                GameObject go = Instantiate(test.fishPrefab);
-                go.GetComponent<NetworkObject>().Spawn();
-                go.GetComponent<NetworkObject>().ChangeOwnership(player);
-            }
-        }
+        GameManager.Instance.StartGame();
     }
 
     #region GUI Buttons
