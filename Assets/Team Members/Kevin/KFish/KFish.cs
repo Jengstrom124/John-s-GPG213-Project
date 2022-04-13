@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KFish : MonoBehaviour, IControllable
+public class KFish : MonoBehaviour, IControllable, IReactsToWater
 {
     public Transform tailSteeringTransform;
     
@@ -89,5 +89,17 @@ public class KFish : MonoBehaviour, IControllable
     public void Action3()
     {
         
+    }
+
+    public bool IsWet
+    {
+        get
+        {
+            return (bool) this; 
+        }
+        set
+        {
+            
+        }
     }
 }
