@@ -13,7 +13,8 @@ public class ServerManager : NetworkManager
     private CharacterSelect characterSelect;
     public Test test;
     public Vector3 spawn;
-
+    public LobbyPlayerData? currentPlayer;
+    
     //passing a ulong for ClientId?
     public event Action<ulong> JoinServerEvent;
 
@@ -76,8 +77,10 @@ public class ServerManager : NetworkManager
     }
 
     //Called from lobby
-    public void JoinServer(bool autoCreateHost = false)
+    public void JoinServer(LobbyPlayerData? currentPlayerData = null, bool autoCreateHost = false)
     {
+        currentPlayer = currentPlayerData;
+        
         //client = NetworkManager.Singleton.GetInstanceID();
 
         if (autoCreateHost)
@@ -134,8 +137,16 @@ public class ServerManager : NetworkManager
                 .GetComponent<PlayerController>()
                 .selectedCharacter);
 
+            PlayerController playerController = ConnectedClients[player].PlayerObject.GetComponent<PlayerController>();
+            
             Instantiate(ConnectedClients[player].PlayerObject.GetComponent<PlayerController>().selectedCharacter);
 
+            if (currentPlayer.HasValue)
+            {
+                // We have a LobbyPlayerData for the current player created by the client.
+                playerController.playerName = currentPlayer.Value.PlayerName;
+            }
+            
             //There has to be a less fragile way of linking the prefab to the index?
             if (ConnectedClients[player].PlayerObject
                 .GetComponent<PlayerController>()
