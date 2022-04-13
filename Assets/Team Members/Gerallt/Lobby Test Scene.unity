@@ -348,7 +348,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
 --- !u!114 &467906830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,6 +774,7 @@ MonoBehaviour:
     EnableNetworkLogs: 1
   test: {fileID: 0}
   spawn: {x: 0, y: 0, z: 0}
+  networkedListBehaviour: {fileID: 0}
   connectionTimeout: 2
 --- !u!114 &1045112564
 MonoBehaviour:
@@ -1362,6 +1363,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1904869120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7688179865361111802, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+  m_PrefabInstance: {fileID: 7688179866696436341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2086706599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1510,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7688179865361111780, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 247
+      objectReference: {fileID: 0}
     - target: {fileID: 7688179865475517584, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1573,6 +1583,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7688179865695734827, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: view
+      value: 
+      objectReference: {fileID: 1904869120}
+    - target: {fileID: 7688179865695734827, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: ServerManager
       value: 
       objectReference: {fileID: 1045112563}
@@ -1616,9 +1630,13 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7688179866640590127, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7688179867083144777, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00008839147
+      value: 0.000995945
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}

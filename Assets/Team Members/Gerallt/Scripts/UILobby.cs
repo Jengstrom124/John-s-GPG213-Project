@@ -10,6 +10,7 @@ namespace Gerallt
 {
     public class UILobby : MonoBehaviour
     {
+        public GameObject view;
         public GameObject JoinedClients;
         public GameObject UIClientPrefab;
         public TMP_InputField UIPlayerNameInput;
@@ -44,6 +45,7 @@ namespace Gerallt
 
         public void Start()
         {
+            GameManager.Instance.StartedGameEvent += GameManager_OnStartedGameEvent;
             // if (!ServerManager.IsClient)
             // {
             //     this.enabled = false;
@@ -55,6 +57,11 @@ namespace Gerallt
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
 
+        private void GameManager_OnStartedGameEvent()
+        {
+            view.SetActive(false);
+        }
+
         private void GNetworkedListBehaviour_AwakeComplete()
         {
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
@@ -62,6 +69,7 @@ namespace Gerallt
 
         public void OnDestroy()
         {
+            GameManager.Instance.StartedGameEvent -= GameManager_OnStartedGameEvent;
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
         }
 
