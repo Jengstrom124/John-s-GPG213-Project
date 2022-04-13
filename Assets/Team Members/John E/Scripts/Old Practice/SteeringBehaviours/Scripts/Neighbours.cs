@@ -8,15 +8,15 @@ public class Neighbours : MonoBehaviour
     public List<GameObject> neighboursList = new List<GameObject>();
     public List<Collider> fishColliders = new List<Collider>();
     
-    public event Action<GameObject> newNeighbourEvent;
-    public event Action<GameObject> neighbourLeaveEvent;
+    public static  event Action<GameObject> newNeighbourEvent;
+    public static event Action<GameObject> neighbourLeaveEvent;
 
     private void OnTriggerEnter(Collider other)
     {
         //Don't add a neighbour if we collide with a vision cone (ie a boid vision cone behind us is not a neighbour)
         if(other == other.GetComponent<CapsuleCollider>())
         {
-            Debug.Log("Skip");
+
         }
         else
         {

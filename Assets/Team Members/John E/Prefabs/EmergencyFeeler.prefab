@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLength: 7
-  dragMultiplier: 1
-  speedReductionMultiplier: 10
-  minSpeed: -10
-  emergencyFeeler: 1
+  dragMultiplier: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 119
   myTurnDirection: 0
+  isEmergencyFeeler: 1
+  speedReductionMultiplier: 10
+  minSpeed: -10
   visualizeRays: 1
   turnForce: 0
   distance: 0

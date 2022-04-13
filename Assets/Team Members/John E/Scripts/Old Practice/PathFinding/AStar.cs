@@ -12,7 +12,7 @@ public class AStar : MonoBehaviour
     public bool visualizeOpenCloseLists = false;
 
     //HACK for now
-    public ThingToMove thingToMove;
+    public PathTracker thingToMove;
 
     public Node targetNode;
     Transform start;
