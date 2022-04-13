@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Gerallt
 {
-    public class GNetworkedListBehaviour : NetworkBehaviour
+    public class NetworkPlayerList : NetworkBehaviour
     {
         public ServerManager ServerManager;
         public NetworkList<LobbyPlayerData> NetworkedObjects;

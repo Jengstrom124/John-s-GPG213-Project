@@ -9,7 +9,7 @@ using Gerallt;
 public class GameManager : ManagerBase<GameManager>
 {
     public List<string> levels = new List<string>();
-    public GNetworkedListBehaviour networkList;
+    public NetworkPlayerList networkList;
 
     public CameraFollow camera;
 
