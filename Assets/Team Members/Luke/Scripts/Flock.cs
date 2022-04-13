@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Luke
 {
-	public class Flock : SerializedMonoBehaviour, IStateBase
+	public class Flock : MonoBehaviour, IStateBase
 	{
 		public void Enter()
 		{

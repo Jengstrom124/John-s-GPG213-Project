@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &394482299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394482300}
+  - component: {fileID: 394482302}
+  - component: {fileID: 394482301}
+  m_Layer: 0
+  m_Name: StateBase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &394482300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394482299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4119284677214216438}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394482302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394482299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fef5ce3454c9e14c8eb6ed914dfd7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &394482301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394482299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f10488b77362145aad9425a2403e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2902874371360471854
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +72,7 @@ GameObject:
   - component: {fileID: -4011348631466365751}
   - component: {fileID: 845331542802222535}
   - component: {fileID: -158972904826370234}
+  - component: {fileID: 939573171499342525}
   m_Layer: 0
   m_Name: LukeFish
   m_TagString: Untagged
@@ -35,6 +93,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5271004244593181308}
+  - {fileID: 394482300}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,8 +109,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b54659c00df6374ba1eff995f92ace1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flock: {fileID: 0}
-  pathfollow: {fileID: 0}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 394482302}
+    - {fileID: 394482301}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: flock
+      Entry: 10
+      Data: 0
+    - Name: pathfollow
+      Entry: 10
+      Data: 1
   rb: {fileID: 0}
   mainJointTransform: {fileID: 2662146683937593083}
   tailTipTransform: {fileID: 7254538918823550099}
@@ -60,7 +134,7 @@ MonoBehaviour:
   longitudinalFrictionCoefficient: 0.4
   lateralFrictionCoefficient: 15
   steeringFrictionCoefficient: 3
-  wigglePeriodInSeconds: 2
+  wigglePeriodInSeconds: 1
   maxWiggleAngle: 5
   maxSteeringAngle: 30
   currentSteeringAngle: 0
@@ -155,6 +229,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &939573171499342525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ca7b9d47aea144cb585b7b5b75ec9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 0}
+  distanceThreshold: 2
+  aStar: {fileID: 0}
+  maxRayLength: 10
+  drawRaycasts: 0
+  waypoint: {fileID: 0}
+  randomWaypointTest: 0
+  finalDestinationPos: {x: 0, y: 0}
+  currentTargetPos: {x: 0, y: 0}
 --- !u!1 &6647763253185511798
 GameObject:
   m_ObjectHideFlags: 0
