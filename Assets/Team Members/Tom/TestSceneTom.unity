@@ -377,6 +377,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4092369335114920102, guid: c7462b74a2108944bb5b8043dc7e4366, type: 3}
   m_PrefabInstance: {fileID: 4092369334901535095}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &231347871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8060951119784412947, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
+  m_PrefabInstance: {fileID: 8060951119053870163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &282952103
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +871,7 @@ PrefabInstance:
       objectReference: {fileID: 7227251270856557637, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
     - target: {fileID: 9174531510330277310, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9174531510330277310, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[5].Prefab
@@ -876,6 +881,10 @@ PrefabInstance:
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[6].Prefab
       value: 
       objectReference: {fileID: 4612785239481996610, guid: e839c90d084c58f46a9bee591ffcb983, type: 3}
+    - target: {fileID: 9174531510330277310, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[7].Prefab
+      value: 
+      objectReference: {fileID: 231347871}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
 --- !u!1001 &791330522
@@ -2870,6 +2879,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 231347874, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2293759758
+      objectReference: {fileID: 0}
     - target: {fileID: 8060951119784412945, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: m_RootOrder
       value: 1

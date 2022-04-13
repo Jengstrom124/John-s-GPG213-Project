@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public CharacterBase selectedCharacter;
+    public GameObject selectedCharacter;
 
     public LobbyPlayerData? clientInfo;
 

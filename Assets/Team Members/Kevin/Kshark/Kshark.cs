@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kshark : MonoBehaviour, IControllable
+public class Kshark : MonoBehaviour, IControllable, IReactsToWater
 {
     
     public Rigidbody sharkRb;
@@ -101,4 +101,6 @@ public class Kshark : MonoBehaviour, IControllable
     {
        
     }
+
+    public bool IsWet { get; set; }
 }
