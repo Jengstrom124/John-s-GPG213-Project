@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LukeFish : MonoBehaviour, IControllable, IEdible
 {
+	public Luke.Flock flock;
+	public Luke.Pathfollow pathfollow;
+	
 	public Rigidbody rb;
 	public Transform mainJointTransform;
 	public Transform tailTipTransform;
