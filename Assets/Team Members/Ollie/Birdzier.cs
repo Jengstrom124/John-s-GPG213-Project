@@ -59,11 +59,30 @@ public class Birdzier : MonoBehaviour
     {
         if (bird != null)
         {
+            Vector3 tempPoint = bird.transform.position;
             bird.transform.position = point;
-            Vector3 dir = point - transform.position;
-            float singleStep = 1.0f * Time.deltaTime;
-            Vector3 newDirection = Vector3.RotateTowards(transform.forward, dir, singleStep, 10.0f);
-            bird.transform.localRotation = Quaternion.LookRotation(newDirection);
+            Vector3 dir = bird.transform.InverseTransformDirection(point - tempPoint);
+            if (dir.x > 0)
+            {
+                bird.transform.eulerAngles = new Vector3(bird.transform.eulerAngles.x, bird.transform.eulerAngles.y + 2,
+                    bird.transform.eulerAngles.z);
+            }
+            else if (dir.x < 0)
+            {
+                bird.transform.eulerAngles = new Vector3(bird.transform.eulerAngles.x, bird.transform.eulerAngles.y - 2,
+                    bird.transform.eulerAngles.z);
+            }
+            
+            //could try and use lerp/dotween to make the movement a bit smoother
+
+
+            // float singleStep = 10.0f * Time.deltaTime;
+            // Vector3 newDirection = Vector3.RotateTowards(transform.forward, dir, singleStep, 0.0f);
+            //bird.transform.localRotation = Quaternion.LookRotation(newDirection);
+
+            //try and get dir as local coords
+            //neg = right
+            //pos = left
         }
     }
 
