@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KFish : MonoBehaviour, IControllable, IReactsToWater
+public class KFish : MonoBehaviour, IControllable, IReactsToWater, IStateBase
 {
     public Transform tailSteeringTransform;
     
@@ -14,6 +14,13 @@ public class KFish : MonoBehaviour, IControllable, IReactsToWater
     public Vector3 tailLocalVelocity;
 
     public float fishSpeed;
+    public float fishState;
+
+    public StateBase stateBase;
+    
+    public GameObject flock;
+    public GameObject pathFollow; 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +58,8 @@ public class KFish : MonoBehaviour, IControllable, IReactsToWater
         {
             Steer(1f);
         }
+        
+        
     }
 
     public void Steer(float input)
@@ -101,5 +110,20 @@ public class KFish : MonoBehaviour, IControllable, IReactsToWater
         {
             
         }
+    }
+
+    public void Enter()
+    {
+        
+    }
+
+    public void Execute()
+    {
+        
+    }
+
+    public void Exit()
+    {
+        
     }
 }
