@@ -41,6 +41,7 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 	
 	private void Steer(float input)
 	{
+		//Debug.Log(input);
 		float currentYEuler = transform.eulerAngles.y;
 		float targetAngle;
 		
@@ -51,6 +52,7 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 		}
 		else
 		{
+			//Debug.Log("I Shouldn't be wiggling!");
 			targetAngle = -input * maxSteeringAngle;
 		}
 
