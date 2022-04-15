@@ -70,6 +70,7 @@ public class GameManager : ManagerBase<GameManager>
             playerController.controlled = spawnedCharacter;
             
             spawnedCharacter.GetComponent<NetworkObject>().Spawn();
+            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
             NetworkObjectReference characterReference = spawnedCharacter;
             SetupCameraClientRpc(player, characterReference);
 
