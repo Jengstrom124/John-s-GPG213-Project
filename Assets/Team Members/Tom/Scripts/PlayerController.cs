@@ -33,17 +33,19 @@ public class PlayerController : NetworkBehaviour
 
             if (controllable != null)
             {
-                controllable.Steer(0f);
                 if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Steer(-1f);
                 }
-
-                if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
+                else if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     controllable.Steer(1f);
+                }
+                else
+                {
+                    controllable.Steer(0f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
