@@ -50,26 +50,23 @@ public class GameManager : ManagerBase<GameManager>
         //spawn players
         foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            Debug.Log("ID " + player + "; " + "Char = " + NetworkManager.Singleton.ConnectedClients[player].PlayerObject
-                .GetComponent<PlayerController>()
-                .selectedCharacter);
-
-            PlayerController playerController = NetworkManager.Singleton.ConnectedClients[player].PlayerObject
-                .GetComponent<PlayerController>();
+            NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
+            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+            
+            Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
 
             GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
+            playerController.controlled = spawnedCharacter;
+            
             spawnedCharacter.GetComponent<NetworkObject>().Spawn();
             NetworkObjectReference characterReference = spawnedCharacter;
             SetupCameraClientRpc(player, characterReference);
 
-            LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
-
             // We have a LobbyPlayerData for the current player created by the client.
+            LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
             playerController.clientInfo = lobbyPlayerData; // Store the client info for now.
-            playerController.playerColour =
-                new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-            playerController.playerName =
-                lobbyPlayerData.PlayerName; // Player name doesn't have to be networked anymore.
+            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+            playerController.playerName = lobbyPlayerData.PlayerName; // Player name doesn't have to be networked anymore.
 
             //There has to be a less fragile way of linking the prefab to the index?
             // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
