@@ -44,6 +44,17 @@ public class GameManager : ManagerBase<GameManager>
             camera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
         }
     }
+    
+    [ClientRpc]
+    public void SetupLocalPlayerControllerClientRpc(ulong clientID, NetworkObjectReference playerInstanceRef,  NetworkObjectReference playerControllerRef)
+    {
+        if (clientID == NetworkManager.Singleton.LocalClientId)
+        {
+            GameObject playerInstance = playerInstanceRef;
+            PlayerController playerController = ((GameObject)playerControllerRef).GetComponent<PlayerController>();
+            playerController.controlled = playerInstance;
+        }
+    }
 
     public void StartGame()
     {
@@ -61,6 +72,9 @@ public class GameManager : ManagerBase<GameManager>
             spawnedCharacter.GetComponent<NetworkObject>().Spawn();
             NetworkObjectReference characterReference = spawnedCharacter;
             SetupCameraClientRpc(player, characterReference);
+
+            NetworkObjectReference playerControllerReference = playerController.gameObject;
+            SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
 
             // We have a LobbyPlayerData for the current player created by the client.
             LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
