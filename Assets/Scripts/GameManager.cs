@@ -48,7 +48,7 @@ public class GameManager : ManagerBase<GameManager>
     [ClientRpc]
     public void SetupLocalPlayerControllerClientRpc(ulong clientID, NetworkObjectReference playerInstanceRef,  NetworkObjectReference playerControllerRef)
     {
-        if (clientID == NetworkManager.Singleton.LocalClientId)
+        //if (clientID == NetworkManager.Singleton.LocalClientId)
         {
             GameObject playerInstance = playerInstanceRef;
             PlayerController playerController = ((GameObject)playerControllerRef).GetComponent<PlayerController>();
@@ -74,8 +74,12 @@ public class GameManager : ManagerBase<GameManager>
             NetworkObjectReference characterReference = spawnedCharacter;
             SetupCameraClientRpc(player, characterReference);
 
-            NetworkObjectReference playerControllerReference = playerController.gameObject;
-            SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
+            if (IsServer)
+            {
+                NetworkObjectReference playerControllerReference = playerController.gameObject;
+                //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
+                SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
+            }
 
             // We have a LobbyPlayerData for the current player created by the client.
             LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
