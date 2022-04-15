@@ -10,6 +10,8 @@ namespace Gerallt
 {
     public class NetworkPlayerList : NetworkBehaviour
     {
+        public static NetworkPlayerList Instance;
+        
         public ServerManager ServerManager;
         public NetworkList<LobbyPlayerData> NetworkedObjects;
 
@@ -17,6 +19,8 @@ namespace Gerallt
         
         public void Awake()
         {
+            Instance = this;
+            
             //NetworkedObjects = new NetworkList<LobbyPlayerData>(NetworkVariableReadPermission.Everyone, new List<LobbyPlayerData>());
             NetworkedObjects = new NetworkList<LobbyPlayerData>();
 
@@ -182,6 +186,20 @@ namespace Gerallt
                 return;
             
             NetworkedObjects[i] = newData;
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        public void UpdatePlayerDataServerRpc(LobbyPlayerData newData)
+        {
+            for (int i = 0; i < NetworkedObjects.Count; i++)
+            {
+                LobbyPlayerData playerData = NetworkedObjects[i];
+
+                if (playerData.ClientId == newData.ClientId)
+                {
+                    NetworkedObjects[i] = newData;
+                }
+            }
         }
         
         public static string GetClientIPAddress()
