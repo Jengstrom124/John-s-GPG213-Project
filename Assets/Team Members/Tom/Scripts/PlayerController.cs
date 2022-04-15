@@ -143,7 +143,7 @@ public class PlayerController : NetworkBehaviour
                 }
                 else
                 {
-                    controllable.Steer(0f);
+                    Steer(0f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
