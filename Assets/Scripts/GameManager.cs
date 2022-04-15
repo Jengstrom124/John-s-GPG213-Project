@@ -78,9 +78,8 @@ public class GameManager : ManagerBase<GameManager>
 
             // We have a LobbyPlayerData for the current player created by the client.
             LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
-            playerController.clientInfo = lobbyPlayerData; // Store the client info for now.
+            playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
             playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-            playerController.playerName = lobbyPlayerData.PlayerName; // Player name doesn't have to be networked anymore.
 
             //There has to be a less fragile way of linking the prefab to the index?
             // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
@@ -114,13 +113,6 @@ public class GameManager : ManagerBase<GameManager>
     public void RaiseStartEventClientRpc()
     {
         StartedGameEvent?.Invoke();
-        
-        // UILobby uiLobby = FindObjectOfType<UILobby>();
-        //
-        // if (uiLobby != null)
-        // {
-        //     uiLobby
-        // }
     }
     
     public Color RandomColour()
