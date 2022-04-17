@@ -18,7 +18,7 @@ public class Water : MonoBehaviour
         IReactsToWater boolInterface = other.GetComponent<IReactsToWater>();
         if (boolInterface != null)
         {
-            boolInterface.IsWet = true; 
+            other.GetComponent<IReactsToWater>().IsWet = true; 
             Debug.Log("Splash!!!");
         }
         

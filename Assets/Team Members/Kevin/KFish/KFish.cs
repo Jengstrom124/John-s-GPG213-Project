@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Luke;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using Flock = Kevin.Flock;
 
-public class KFish : MonoBehaviour, IControllable, IReactsToWater, IStateBase
+public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase
 {
     public Transform tailSteeringTransform;
     
@@ -16,10 +19,8 @@ public class KFish : MonoBehaviour, IControllable, IReactsToWater, IStateBase
     public float fishSpeed;
     public float fishState;
 
-    public StateBase stateBase;
-    
-    public GameObject flock;
-    public GameObject pathFollow; 
+    public IStateBase flock;
+    public IStateBase pathFollow;
     
     // Start is called before the first frame update
     void Start()
