@@ -34,6 +34,8 @@ public class PathTracker : MonoBehaviour
     //Event for when entity reaches destination
     public event Action destinationReachedEvent;
 
+    public event Action<Vector2> newTargetAssignedEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -87,6 +89,7 @@ public class PathTracker : MonoBehaviour
         {
             //Assign first path pos as our targetPos
             currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
+            newTargetAssignedEvent?.Invoke(currentTargetPos);
 
             //Once we reach the current path position
             if (Vector2.Distance(currentTargetPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold)
@@ -102,6 +105,8 @@ public class PathTracker : MonoBehaviour
     {
         //Clear the path list as we can now head directly to the desired target position
         pathToFollow.Clear();
+        //currentTargetPos = finalDestinationPos;
+        newTargetAssignedEvent?.Invoke(finalDestinationPos);
 
         //If our position == the targetPos we have reached the end
         if (Vector2.Distance(finalDestinationPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold && !atEnd)
