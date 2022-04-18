@@ -19,116 +19,21 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     public GameObject car;
     private bool boosting = false;
 
-    private bool forward, backward, left, right;
-
-    public delegate void ExitVehicle();
-
-    public static event ExitVehicle exitVehicleEvent;
-
-    private void Start()
-    {
-        forward = false;
-        backward = false;
-        left = false;
-        right = false;
-    }
+    //left overs ported from Vehicles project - maybe needed later for changing sharks
+    //although I think this is unlikely
+    // public delegate void ExitVehicle();
+    // public static event ExitVehicle exitVehicleEvent;
+    
 
     private void Update()
     {
+        //both are currently unused
         localVelocity = transform.InverseTransformDirection(rb.velocity);
-        if (rb.velocity == (Vector3.zero))
-        {
-            exitVehicleEvent?.Invoke();
-        }
         wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
     }
 
-    private void FixedUpdate()
-    {
-        Forward();
-        //Backward();
-        Left();
-        Right();
-        Steering();
-
-        if (Input.GetKey(KeyCode.F))
-        {
-            Action2();
-        }
-    }
-
-    public void Forward()
-    {
-        rb.AddRelativeForce(0,0,forwardSpeed);
-    }
-
-    // public void Backward()
-    // {
-    //     if(backward)
-    //         if (grounded && playerInVehicle)
-    //         {
-    //             rb.AddRelativeForce(Vector3.back * forwardSpeed);
-    //         }
-    // }
-
-    public void Left()
-    {
-        // if(left)
-        // {
-        //     rb.AddRelativeForce(-localVelocity/5);
-        //     rb.AddRelativeTorque(0, -turnSpeed,0);
-        // }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            left = true;
-        }
-        else
-        {
-            left = false;
-        }
-    }
     
-    public void Right()
-    {
-        // if(right)
-        // {
-        //     rb.AddRelativeForce(-localVelocity/5);
-        //     rb.AddRelativeTorque(0, turnSpeed,0);
-        // }
-        
-        if (Input.GetKey(KeyCode.D))
-        {
-            right = true;
-        }
-        else
-        {
-            right = false;
-        }
-    }
-
-    public void Steering()
-    {
-        if (left)
-        {
-            //rb.AddForceAtPosition((new Vector3(turnSpeed,0,-localVelocity.z)),tailTurnPoint.position);
-            
-            //rb.AddForceAtPosition(Vector3.right,tailTurnPoint.position);
-            rb.AddRelativeTorque(0, -turnSpeed,0,ForceMode.Acceleration);
-        }
-        else if (right)
-        {
-            //rb.AddForceAtPosition((new Vector3(-turnSpeed,0,-localVelocity.z)),tailTurnPoint.position);
-            
-            //rb.AddForceAtPosition(Vector3.left,tailTurnPoint.position);
-            rb.AddRelativeTorque(0, turnSpeed,0,ForceMode.Acceleration);
-        }
-        else
-        {
-            //rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position,ForceMode.Acceleration);
-        }
-    }
-
+    //Action 2 - E key
     void SpeedBoost()
     {
         if (!boosting)
@@ -141,6 +46,7 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     {
         //doubles speed for 1.5 seconds
         //prevents reapplication for 3 seconds after deactivation
+        print("shark go zoom");
         boosting = true;
         forwardSpeed = forwardSpeed * 2;
         yield return new WaitForSeconds(1.5f);
@@ -156,41 +62,25 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     {
         if (amount > 0)
         {
-            right = true;
-            left = false;
+            rb.AddRelativeTorque(0, turnSpeed,0,ForceMode.Acceleration);
         }
            
         else if (amount < 0)
         {
-            right = false;
-            left = true;
+            rb.AddRelativeTorque(0, -turnSpeed,0,ForceMode.Acceleration);
         }
         else
         {
-            right = false;
-            left = false;
+            // put wiggle code here if I get it working
         }
     }
 
     public void Accelerate(float amount)
     {
-        print("accelerating " + amount);
         if (amount > 0)
         {
-            forward = true;
-            backward = false;
+            rb.AddRelativeForce(0,0,forwardSpeed);
         }
-        else if (amount < 0)
-        {
-            forward = false;
-            backward = true;
-        }
-        else
-        {
-            forward = false;
-            backward = false;
-        }
-            
     }
 
     public void Reverse(float input)
@@ -198,24 +88,21 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
         print("sharks can't reverse, dummy");
     }
 
-    public void Action()
+    public void Action() // F key
     {
         
     }
-
-    public void Action2()
+    public void Action2() // E key
     {
         SpeedBoost();
     }
-
-    public void Action3()
+    public void Action3() // Q key
     {
         
     }
-
     #endregion
 
-    #region IStateBase Interface idk if i'm using this tho
+    #region IStateBase Interface - I don't know if I'm using this yet
     public void Enter()
     {
         
@@ -231,4 +118,62 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
         
     }
     #endregion
+    
+    #region Hardcoded Movement - Obsolete
+    // public void Forward()
+    // {
+    //     rb.AddRelativeForce(0,0,forwardSpeed);
+    //     print("going forward");
+    // }
+
+    // public void Backward()
+    // {
+    //     if(backward)
+    //         if (grounded && playerInVehicle)
+    //         {
+    //             rb.AddRelativeForce(Vector3.back * forwardSpeed);
+    //         }
+    // }
+
+    /*public void Left()
+    {
+        // if (Input.GetKey(KeyCode.A))
+        // {
+        //     left = true;
+        // }
+        // else
+        // {
+        //     left = false;
+        // }
+    }
+    
+    public void Right()
+    {
+        // if (Input.GetKey(KeyCode.D))
+        // {
+        //     right = true;
+        // }
+        // else
+        // {
+        //     right = false;
+        // }
+    }*/
+
+    /*public void Steering()
+    {
+        if (left)
+        {
+            rb.AddRelativeTorque(0, -turnSpeed,0,ForceMode.Acceleration);
+        }
+        else if (right)
+        {
+            rb.AddRelativeTorque(0, turnSpeed,0,ForceMode.Acceleration);
+        }
+        else
+        {
+            //rb.AddForceAtPosition((new Vector3(wiggleSpeed,0,0)),tailTurnPoint.position,ForceMode.Acceleration);
+        }
+    }*/
+    #endregion
+
 }
