@@ -46,9 +46,9 @@ public class Birdzier : MonoBehaviour
     {
         
         speed = timer;
-        print(pos1);
-        print(positions.Capacity);
-        print(spawnPosList.Capacity);
+        // print(pos1);
+        // print(positions.Capacity);
+        // print(spawnPosList.Capacity);
         BezierCurve();
         UpdateSpawnPos();
         SpawnBird();
@@ -137,7 +137,7 @@ public class Birdzier : MonoBehaviour
         if (bird != null)
         {
             UpdateSpawnPos();
-            print("yeet that bird");
+            //print("yeet that bird");
             Destroy(bird);
         }
     }
@@ -145,8 +145,6 @@ public class Birdzier : MonoBehaviour
     void UpdateSpawnPos()
     {
         newSpawnPosList.Clear();
-        
-        
         GenerateSpawnPos();
     }
     

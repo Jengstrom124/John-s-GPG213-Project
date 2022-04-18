@@ -21,7 +21,6 @@ public class OllieSpawner : MonoBehaviour
     private void Start()
     {
         heightsArray = ollieTerrain.ollieTerrainData.GetHeights(0,0,(int)256,(int)256);
-        print(heightsArray.Length);
         scaleUp = new Vector3(2, 2, 2);
 
         for (int x = 0; x < 256; x++)
@@ -36,7 +35,6 @@ public class OllieSpawner : MonoBehaviour
                     if (UnityEngine.Random.Range(0, 100) > 90)
                     {
                         //basically - 25% chance to spawn a random tree, at every point above y=15
-                        print("tree spawned");
                         int prefabIndex = UnityEngine.Random.Range(0, treePrefabList.Capacity);
                         GameObject go = Instantiate(treePrefabList[prefabIndex]);
                         go.transform.position = pos;
