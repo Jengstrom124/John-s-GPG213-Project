@@ -1,43 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Luke;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Flock = Kevin.Flock;
+using Vector3 = UnityEngine.Vector3;
 
 public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase
 {
-    public Transform tailSteeringTransform;
-    
-    public GameObject fishPrefab;
+    //State Base
+    public IStateBase flock;
+    public IStateBase pathFollow;
 
-    public Rigidbody fRb; 
+    //Bool Checker
+    public bool iWet;
+    
+    //Fish Movement Variables
+    public Rigidbody fRb;
+    public Transform tailObjectTransform;
+
+    public float acceleration = 10f;
+    public float currentSteeringAngle;
+    public float steeringMax = 45f;
     
     public Vector3 localVelocity;
     public Vector3 tailLocalVelocity;
 
-    public float fishSpeed;
-    public float fishState;
-
-    public IStateBase flock;
-    public IStateBase pathFollow;
-    
-    // Start is called before the first frame update
     void Start()
     {
-        fRb = fishPrefab.GetComponent<Rigidbody>();
+        fRb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 tailPos = tailSteeringTransform.position;
+        Vector3 tailPosition = tailObjectTransform.position;
         localVelocity = transform.InverseTransformDirection(fRb.velocity);
-        tailLocalVelocity = tailSteeringTransform.InverseTransformDirection((fRb.GetPointVelocity(tailPos)));
+        tailLocalVelocity = tailObjectTransform.InverseTransformDirection(fRb.GetPointVelocity(tailPosition));
         
-        //fRb.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
-
-        fRb.AddForceAtPosition(tailSteeringTransform.TransformDirection(new Vector3(-tailLocalVelocity.x,0f,0f)), tailPos);
+        
+        fRb.AddForceAtPosition(fRb.mass*tailObjectTransform.
+            TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
         
         if (localVelocity.z > 0) 
         {
@@ -59,72 +62,71 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
         {
             Steer(1f);
         }
-        
-        
     }
-
+    public bool IsWet { get; set; }
     public void Steer(float input)
     {
-        if (input > 0f)
-        {
-            tailSteeringTransform.eulerAngles = new Vector3(0f, 90f, 0f);
-        }
-
+        float currentYEuler = transform.eulerAngles.y;
+        float targetAngle = 0;
+        
         if (input < 0f)
         {
-            tailSteeringTransform.eulerAngles = new Vector3(0f, -90f, 0f);
+            targetAngle = -input * steeringMax;
         }
+
+        if (input > 0f)
+        {
+            targetAngle = -input * steeringMax;
+        }
+
+        if (input == 0f)
+        {
+            targetAngle = -input;
+        }
+
+        currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
+        tailObjectTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
     }
 
     public void Accelerate(float input)
     {
-        fRb.AddRelativeForce(new Vector3(0f, -fishSpeed*(input*2f)), 0f);
+        fRb.AddForceAtPosition(input*acceleration*transform.TransformDirection(Vector3.down), transform.position,0);
     }
 
     public void Reverse(float input)
     {
-        fRb.AddRelativeForce(new Vector3(0f, fishSpeed*input), 0f);
+        throw new System.NotImplementedException();
     }
 
     public void Action()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     public void Action2()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     public void Action3()
     {
-        
-    }
-
-    public bool IsWet
-    {
-        get
-        {
-            return (bool) this; 
-        }
-        set
-        {
-            
-        }
+        throw new System.NotImplementedException();
     }
 
     public void Enter()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     public void Execute()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     public void Exit()
     {
-        
+        throw new System.NotImplementedException();
     }
+
+   
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using Tree = Unity.VisualScripting.Antlr3.Runtime.Tree.Tree;
 
 public class KevinTerrainGen : MonoBehaviour
@@ -9,24 +10,39 @@ public class KevinTerrainGen : MonoBehaviour
     public TerrainGenerator terrainGenerator;
 
     public Terrain terrainData;
-   
-   
 
+    public float offsetX;
+    public float offsetY;
+    
+    
+    public float fringe = 0.05f;
     public float frequencyX = 1f;
     public float frequencyY = 1f;
     public int yHeight = 20;
     
+    public float cliffLevel = 30f;
     public float seaLevel = 10f; 
     
     public GameObject sandPrefab;
-    public GameObject treePrefab;
+    //public GameObject treePrefab;
     public GameObject seaweedPrefab;
     public GameObject coralPrefab;
-    
+    public List<GameObject> treePrefab;
     private List<Vector3> currentPosition;
+    
+    
+    //bools used to test the different prefabs
+
+    public bool sand;
+    public bool tree;
+    public bool seaweed;
+    public bool coral;
     
     void Start()
     {
+        offsetX = Random.Range(0f, 9999f);
+        offsetY = Random.Range(0f, 9999f);
+        
         terrainGenerator.calculateHeightCallback = CalculateHeightCallback;
         terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
         terrainGenerator.depth = yHeight;
@@ -41,22 +57,23 @@ public class KevinTerrainGen : MonoBehaviour
                 Vector3 pos = new Vector3(x, 0, z);
                 pos.y = terrainData.SampleHeight(pos);
                 
-                if (pos.y > seaLevel)
+                if (pos.y > seaLevel && sand)
                 {
                     Instantiate(sandPrefab, pos,Quaternion.identity);
                 }
-                if (pos.y > seaLevel && perlinValue1 > 0.6f)
+                if (pos.y > seaLevel && perlinValue1 > 0.6f && tree)
                 {
-                    Instantiate(treePrefab, pos,Quaternion.identity);
+                    int randomTree = Random.Range(0, treePrefab.Count);
+                    Instantiate(treePrefab[randomTree], pos,Quaternion.identity);
                 }
-                if (pos.y < seaLevel && perlinValue1 > 0.75)
+                if (pos.y < seaLevel && perlinValue1 > 0.75 && seaweed)
                 {
                     Instantiate(seaweedPrefab, pos,Quaternion.identity);
                 }
 
-                if (pos.y < seaLevel && perlinValue1 > 0.4f && perlinValue1 < 0.5f)
+                if (pos.y < seaLevel && perlinValue1 > 0.4f && perlinValue1 < 0.5f && coral)
                 {
-                    Debug.Log(perlinValue1);
+                    //Debug.Log(perlinValue1);
                     Instantiate(coralPrefab, pos,Quaternion.identity);
                 }
 
@@ -66,12 +83,39 @@ public class KevinTerrainGen : MonoBehaviour
 
     private float CalculateHeightCallback(int x, int y)
     {
-        float xCoord = (10f * (float) x / terrainGenerator.width);
-        float yCoord = (10f * (float) y / terrainGenerator.height);
+        float xCoord = ((float) x / terrainGenerator.width);
+        float yCoord = ((float) y / terrainGenerator.height);
         
-        float perlinValue2 = Mathf.PerlinNoise(xCoord/frequencyX,yCoord/frequencyY);
         
-        return perlinValue2; 
+        float perlinValue = Mathf.PerlinNoise(xCoord*frequencyX+offsetX,yCoord*frequencyY+offsetY);
+        if (perlinValue > 0.51f)
+        {
+            return perlinValue*2f;
+        }
+
+        if (perlinValue < 0.5f)
+        {
+            float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
+            return perlinValue2*-0.5f;
+        }
+
+        
+        /*if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+        {
+            return perlinValue; 
+        }
+
+        return previousHeights[x, y];*/
+        /*if (perlinValue < 0.7f)
+        {
+            float perlinValue2 = Mathf.PerlinNoise(10f*xCoord*frequencyX+offsetX,10f*yCoord*frequencyY+offsetY);
+            return perlinValue2;
+        }
+        else
+        {
+            
+        }*/
+        return perlinValue;
     }
 }
     

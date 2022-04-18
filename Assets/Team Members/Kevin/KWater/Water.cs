@@ -18,7 +18,8 @@ public class Water : MonoBehaviour
         IReactsToWater boolInterface = other.GetComponent<IReactsToWater>();
         if (boolInterface != null)
         {
-            other.GetComponent<IReactsToWater>().IsWet = true; 
+            boolInterface.IsWet = true;
+            other.GetComponent<KFish>().iWet = true;
             Debug.Log("Splash!!!");
         }
         
@@ -29,7 +30,8 @@ public class Water : MonoBehaviour
         IReactsToWater boolInterface = other.GetComponent<IReactsToWater>();
         if (boolInterface != null)
         {
-            boolInterface.IsWet = false; 
+            boolInterface.IsWet = false;
+            other.GetComponent<KFish>().iWet = false;
             Debug.Log("Splosh!!!");
         }
     }
