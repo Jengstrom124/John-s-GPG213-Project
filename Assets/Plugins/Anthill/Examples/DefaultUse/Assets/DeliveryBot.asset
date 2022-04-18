@@ -66,7 +66,7 @@ MonoBehaviour:
     isDefault: 0
     state: {fileID: 5033328925660565644, guid: 5374f1d38f57d43b4a6051050709c2c6, type: 3}
     cost: 0
-    position: {x: 423, y: 261}
+    position: {x: 406, y: 264}
     pre:
     - id: 2
       value: 1
@@ -95,15 +95,9 @@ MonoBehaviour:
     - id: 2
       value: 0
   goals:
-  - name: Find Cargo
-    isDefault: 0
-    position: {x: 220, y: 560}
-    conditions:
-    - id: 2
-      value: 1
   - name: Delivery
     isDefault: 1
-    position: {x: 427, y: 559}
+    position: {x: 431, y: 559}
     conditions:
     - id: 0
       value: 1

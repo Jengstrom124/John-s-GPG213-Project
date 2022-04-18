@@ -11,8 +11,8 @@ public class PathTracker : MonoBehaviour
     [Tooltip("How close to the targetPos does the transform need to be")]
     public float distanceThreshold = 2f;
 
-    [Header("Necessary Script References")]
-    public AStar aStar;
+    // [Header("Necessary Script References")]
+    // private AStar aStar;
     //public WorldScanner WorldScannerinstance;
 
     [Header("Extra Settings: ")]
@@ -22,7 +22,7 @@ public class PathTracker : MonoBehaviour
     [Header("Test stuff only / Ignore")]
     public WaypointFinder waypoint;
     public bool randomWaypointTest;
-    public event Action<Transform, Node> atEndNodeEvent;
+    // public event Action<Node, Node> atEndNodeEvent;
 
     [Header("References Only - Don't Touch")]
     public Vector2 finalDestinationPos;
@@ -39,12 +39,12 @@ public class PathTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        aStar.pathFoundEvent += GeneratePathList;
+        AStar.Instance.pathFoundEvent += GeneratePathList;
         
-        if(randomWaypointTest)
-        {
-            aStar.FindPath(transform, waypoint.RandomNodePosition());
-        }
+        // if(randomWaypointTest)
+        // {
+	        // AStar.Instance.FindPath(transform, waypoint.RandomNodePosition());
+        // }
     }
 
     // Update is called once per frame
@@ -117,8 +117,8 @@ public class PathTracker : MonoBehaviour
 
 
             //Ignore (for testing random waypoints)
-            if(randomWaypointTest)
-                atEndNodeEvent?.Invoke(transform, waypoint.RandomNodePosition());
+            // if(randomWaypointTest)
+                // atEndNodeEvent?.Invoke(transform, waypoint.RandomNodePosition());
         }
     }
 
@@ -128,7 +128,7 @@ public class PathTracker : MonoBehaviour
         atEnd = false;
         clearPathToTarget = false;
 
-        finalDestinationPos = new Vector2(WorldScanner.instance.NodeToWorldPos(aStar.targetNode).x, WorldScanner.instance.NodeToWorldPos(aStar.targetNode).y);
+        finalDestinationPos = new Vector2(WorldScanner.instance.NodeToWorldPos(AStar.Instance.targetNode).x, WorldScanner.instance.NodeToWorldPos(AStar.Instance.targetNode).y);
     }
 
     void CheckPath()
@@ -136,7 +136,7 @@ public class PathTracker : MonoBehaviour
         //Loop through each remaining path and find a path position we can head straight to that is not blocked
         for (int i = 0; i < pathToFollow.Count; i++)
         {
-            if (pathToFollow[i] != aStar.targetNode)
+            if (pathToFollow[i] != AStar.Instance.targetNode)
             {
                 Vector2 tempPathPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[i]);
 
