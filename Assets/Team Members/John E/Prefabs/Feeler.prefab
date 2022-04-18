@@ -53,7 +53,7 @@ MonoBehaviour:
   isEmergencyFeeler: 0
   speedReductionMultiplier: 12
   minSpeed: 0
-  visualizeRays: 0
+  visualizeRays: 1
   turnForce: 0
   distance: 0
   xVelocity: 0

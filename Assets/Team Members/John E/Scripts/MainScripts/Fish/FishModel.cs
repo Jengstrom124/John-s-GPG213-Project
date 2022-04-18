@@ -7,6 +7,8 @@ public class FishModel : MonoBehaviour
 {
     //Neighbours neighbours;
     TurnTowards turnTowards;
+    AStar aStar;
+    PathTracker pathTracker;
 
     [Header("Reference Only:")]
     public bool isPlayerFish;
@@ -17,17 +19,27 @@ public class FishModel : MonoBehaviour
     public static event Action<GameObject> onPlayerFishEvent;
     public static event Action<GameObject> onFishChangeEvent;
 
+    public event Action<bool, Transform> runFromPredatorEvent;
+    public event Action<Vector3> onDestinationAssignedEvent;
+
     // Start is called before the first frame update
     void Awake()
     {
         //neighbours = GetComponent<Neighbours>();
         turnTowards = GetComponent<TurnTowards>();
+        aStar = GetComponent<AStar>();
+        pathTracker = GetComponent<PathTracker>();
     }
 
     private void Start()
     {
         Neighbours.newNeighbourEvent += CheckForPredator;
         Neighbours.neighbourLeaveEvent += PredatorOutOfSight;
+
+        John.TestController.destinationSelectedEvent += SetDestination;
+        pathTracker.newTargetAssignedEvent += SetDestination;
+
+        //aStar.FindPath(transform, WorldScanner.instance.WorldToNodePos(new Vector3(10, 0, 41)));
     }
 
     private void Update()
@@ -54,7 +66,8 @@ public class FishModel : MonoBehaviour
     {
         if (other.GetComponent<IPredator>() != null)
         {
-            turnTowards.target = -other.transform.position;
+            //turnTowards.target = other.transform;
+            runFromPredatorEvent?.Invoke(true, other.transform);
         }
     }
 
@@ -62,7 +75,20 @@ public class FishModel : MonoBehaviour
     {
         if (other.GetComponent<IPredator>() != null)
         {
-            turnTowards.target = Vector3.zero;
+            //turnTowards.target = Vector3.zero;
+            runFromPredatorEvent?.Invoke(false, null);
         }
+    }
+
+    void SetDestination(Vector2 destination)
+    {
+        //Generate Path
+        //aStar.FindPath(transform, WorldScanner.instance.WorldToNodePos(new Vector3(destination.x, 0, destination.y)));
+
+        //Set turn towards target
+        //turnTowards.targetXPos = pathTracker.currentTargetPos.x;
+        Debug.Log("Look At: " + destination);
+        onDestinationAssignedEvent?.Invoke(new Vector3(destination.x, 0, destination.y));
+        //Debug.Log("DESTINATION SET");
     }
 }

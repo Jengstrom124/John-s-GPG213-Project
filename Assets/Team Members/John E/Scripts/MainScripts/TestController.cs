@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 namespace John
 {
     public class TestController : MonoBehaviour
     {
         List<FishModel> activeFish = new List<FishModel>();
+        public static event Action<Vector2> destinationSelectedEvent;
 
         //Camera Test
         public Tom.CameraFollow cam;
@@ -35,8 +37,21 @@ namespace John
 
                         activeFish.Add(fish);
                         fish.isPlayerFish = true;
-                        cam.target = fish.transform;
+                        if(cam != null)
+                            cam.target = fish.transform;
+
                         playerFish = fish.transform;
+                    }
+                    
+                }
+                else
+                {
+                    if (activeFish.Count >= 1)
+                    {
+                        Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.z);
+                        destinationSelectedEvent?.Invoke(mousePos);
+
+                        Debug.Log("Destination: " + mousePos);
                     }
                 }
             }
@@ -47,10 +62,13 @@ namespace John
 
         private void Update()
         {
-            offsetValue = cam.offset.y + (InputSystem.GetDevice<Mouse>().scroll.ReadValue().normalized.y * -InputSystem.GetDevice<Mouse>().scroll.ReadValue().normalized.y);
+            if(cam != null)
+            {
+                offsetValue = cam.offset.y + (InputSystem.GetDevice<Mouse>().scroll.ReadValue().normalized.y * -InputSystem.GetDevice<Mouse>().scroll.ReadValue().normalized.y);
 
-            if (cam.target == playerFish)
-                cam.offset = new Vector3(0, Mathf.Clamp(offsetValue, 30, 100), 0);
+                if (cam.target == playerFish)
+                    cam.offset = new Vector3(0, Mathf.Clamp(offsetValue, 30, 100), 0);
+            }
         }
     }
 }

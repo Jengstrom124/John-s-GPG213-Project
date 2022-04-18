@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AStar : MonoBehaviour
+public class AStar : ManagerBase<AStar>
 {
+	
     //public WorldScanner WorldScannerinstance;
 
     //List of nodes that create the path
@@ -15,7 +16,9 @@ public class AStar : MonoBehaviour
 
     //For Reference Only
     public Node targetNode;
-    Transform start;
+    public Vector3 targetPos;
+    Vector3 startPos;
+    Node startNode;
 
     [Header("Options:")]
     public bool visualizeOpenCloseLists = false;
@@ -25,21 +28,22 @@ public class AStar : MonoBehaviour
 
     private void Start()
     {
-        if(thingToMove != null)
-        {
-            thingToMove.atEndNodeEvent += FindPath;
-        }
+        // if(thingToMove != null)
+        // {
+            // thingToMove.atEndNodeEvent += FindPath;
+        // }
 
         WorldScanner.instance.onReScanEvent += ReScanPath;
-    }
+	}
 
-    public void FindPath(Transform startPos, Node _targetNode)
+    
+    // public void FindPath(Node _startNode, Node _targetNode)
+    public void FindPath(Vector3 _startPos, Vector3 _targetPos)
     {
-        //Convert world positions to grid positions
-        Node startNode = WorldScanner.instance.WorldToNodePos(startPos.position);
 
-        targetNode = _targetNode;
-        start = startPos;
+        // targetNode = _targetNode;
+        startPos = _startPos;
+        startNode = WorldScanner.instance.WorldToNodePos(_targetPos);
         //Node targetNode = worldScanner.WorldToNodePos(targetPos);
 
         List<Node> openList = new List<Node>();
@@ -161,7 +165,7 @@ public class AStar : MonoBehaviour
         //If we have a path, rescan it
         if(path.Count > 0)
         {
-            FindPath(start, targetNode);
+            FindPath(startPos, targetPos);
         }
     }
 }

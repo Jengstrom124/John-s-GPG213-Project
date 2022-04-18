@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class OlliePlayerController : MonoBehaviour
 {
+    //pretty sure this entire class is obsolete
+    //ported over from Vehicles project
+    //may be necessary for swapping aquatic "vehicle" (ie shark) later on so haven't deleted
+    
     public KeyCode forward, backward, left, right;
     public GameObject currentlyPiloting;
     public OlliePlayerAvatar playerAvatar;
@@ -17,20 +21,20 @@ public class OlliePlayerController : MonoBehaviour
     private void OnEnable()
     {
         playerAvatar.touchingCarEvent += ChangePiloting;
-        OllieVehicleBase.exitVehicleEvent += ExitCar;
+        //OllieVehicleBase.exitVehicleEvent += ExitCar;
     }
 
     private void OnDisable()
     {
         playerAvatar.touchingCarEvent -= ChangePiloting;
-        OllieVehicleBase.exitVehicleEvent -= ExitCar;
+        //OllieVehicleBase.exitVehicleEvent -= ExitCar;
     }
 
     private void FixedUpdate()
     {
         if (Input.GetKey(forward))
         {
-            currentlyPiloting.GetComponent<OllieVehicleBase>()?.Forward();
+            //currentlyPiloting.GetComponent<OllieVehicleBase>()?.Forward();
             currentlyPiloting.GetComponent<OlliePlayerAvatar>()?.Forward();
         }
         if (Input.GetKey(backward))
@@ -41,13 +45,13 @@ public class OlliePlayerController : MonoBehaviour
         
         if ((Input.GetKey(left))&&((Input.GetKey(forward)||(Input.GetKey(backward)))))
         {
-            currentlyPiloting.GetComponent<OllieVehicleBase>()?.Left();
+            //currentlyPiloting.GetComponent<OllieVehicleBase>()?.Left();
             currentlyPiloting.GetComponent<OlliePlayerAvatar>()?.Left();
         }
         
         if ((Input.GetKey(right))&&((Input.GetKey(forward)||(Input.GetKey(backward)))))
         {
-            currentlyPiloting.GetComponent<OllieVehicleBase>()?.Right();
+            //currentlyPiloting.GetComponent<OllieVehicleBase>()?.Right();
             currentlyPiloting.GetComponent<OlliePlayerAvatar>()?.Right();
         }
         
