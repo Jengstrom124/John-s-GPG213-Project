@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 1502603086, guid: 1101bc0df40b9c74382e681b0fc27944, type: 3}
+    - target: {fileID: 1502603088, guid: 1101bc0df40b9c74382e681b0fc27944, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 40041715782345473, guid: 1101bc0df40b9c74382e681b0fc27944, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -148,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 40041715782345473, guid: 1101bc0df40b9c74382e681b0fc27944, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 40041715782345473, guid: 1101bc0df40b9c74382e681b0fc27944, type: 3}
       propertyPath: m_LocalPosition.z
@@ -555,7 +559,7 @@ Terrain:
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: d5c5a30ad2938b44eb4e1db0f08aad9d, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -811,6 +815,28 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: f0d2c16f2db176c41bd7e1f3beb9d7e2, type: 3}
   - {fileID: 919132149155446097, guid: a62dfc25707aec742878a13953eaf369, type: 3}
   - {fileID: 919132149155446097, guid: af9a304f1ba415f4da67a98f194fdaa1, type: 3}
+  shorelinePrefabList:
+  - {fileID: 919132149155446097, guid: 73f65d9c4f0b8ce4db5e6cbbb2b898d0, type: 3}
+  - {fileID: 919132149155446097, guid: 3eb9cf92a75708143a0545021e7b293f, type: 3}
+  - {fileID: 919132149155446097, guid: 691e1d692ad230549907098d8567f88a, type: 3}
+  - {fileID: 919132149155446097, guid: 06aeb071d3210124e9aaec84513b9ce8, type: 3}
+  - {fileID: 919132149155446097, guid: 3706ec83d332aff4fb2f2408cf2ef566, type: 3}
+  - {fileID: 919132149155446097, guid: 74c9fb442e75fb541a80ea1680ae7122, type: 3}
+  - {fileID: 919132149155446097, guid: 590011b58c7cb8648951dae48efe8e4e, type: 3}
+  - {fileID: 919132149155446097, guid: 07880203b2d25204d8bd7b01924a3a65, type: 3}
+  - {fileID: 919132149155446097, guid: 21fd8480d8e115b4d82386a3be32986e, type: 3}
+  - {fileID: 919132149155446097, guid: 1278d45211c46cc4aa79a03c0be84aeb, type: 3}
+  underwaterDebrisList:
+  - {fileID: 919132149155446097, guid: 1ab79bb63014557419958ba530a804bb, type: 3}
+  - {fileID: 919132149155446097, guid: a773bfcf305872d47b99f5a64b330d62, type: 3}
+  - {fileID: 919132149155446097, guid: 10f1b1cc0e409c641b7a02806fa2fb67, type: 3}
+  - {fileID: 919132149155446097, guid: f6a67c2e3d2f7ad44a5057366900308e, type: 3}
+  - {fileID: 919132149155446097, guid: c960074f1dfcbc544b7b43164d770704, type: 3}
+  - {fileID: 919132149155446097, guid: 98d8554514468c74c942b80729f975de, type: 3}
+  - {fileID: 919132149155446097, guid: f8173dd5cc6b3084784a8a43c5cbd5cf, type: 3}
+  - {fileID: 919132149155446097, guid: c04b0fbd255c1fb4fb38d4d3db25129f, type: 3}
+  - {fileID: 919132149155446097, guid: a4c07108f5909184583bfa35830ddceb, type: 3}
+  - {fileID: 919132149155446097, guid: 5ed8b720f4ef89947a4edf819ce9b4c6, type: 3}
 --- !u!4 &1957923934
 Transform:
   m_ObjectHideFlags: 0
