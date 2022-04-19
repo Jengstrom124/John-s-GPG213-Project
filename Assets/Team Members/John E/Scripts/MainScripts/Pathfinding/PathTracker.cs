@@ -36,6 +36,10 @@ public class PathTracker : MonoBehaviour
             //For testing a random waypoint whilst we have no way to set a waypoint
             AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
         }
+        else
+        {
+            Debug.Log("AStar Reference Missing");
+        }
     }
 
     // Update is called once per frame
