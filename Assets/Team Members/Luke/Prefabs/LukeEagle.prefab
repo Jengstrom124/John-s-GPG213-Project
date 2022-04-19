@@ -725,6 +725,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 386503be3caab3741a0b7ee953a0070f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circuitBreaker: 0
+  controlPoints: []
+  iterationsPerCourse: 200
+  durationPerCourse: 7
+  rangePerCourse: 45
+  terrainPosition: {x: 0, y: 0, z: 0}
+  terrainDimensions: {x: 0, y: 0, z: 0}
 --- !u!1 &1585751792936906
 GameObject:
   m_ObjectHideFlags: 0

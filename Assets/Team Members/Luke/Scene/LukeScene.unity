@@ -568,11 +568,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664584250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3911949051204171370, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
+  m_PrefabInstance: {fileID: 3911949052862069840}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1664584252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3911949051204171372, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
   m_PrefabInstance: {fileID: 3911949052862069840}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1664584254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664584250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c931eee25523994bb4de49d2882c711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 203358344}
+  birdPrefabs:
+  - {fileID: 1537502993957880, guid: cb3f7d144cf61584599adf3d4ccdc7cc, type: 3}
+  threshold: 0.9
+  frequency: 30
+  xOffset: 0
+  yOffset: 0
+  fringe: 0
 --- !u!1001 &1689796610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -648,6 +673,10 @@ PrefabInstance:
     - target: {fileID: 3911949051204171370, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
       propertyPath: m_Name
       value: SubSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
+      propertyPath: threshold
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
       propertyPath: terrainGenerator
