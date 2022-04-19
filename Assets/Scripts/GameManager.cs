@@ -5,15 +5,20 @@ using Tom;
 using Unity.Netcode;
 using UnityEngine;
 using Gerallt;
+using UnityEngine.SceneManagement;
 
 public class GameManager : ManagerBase<GameManager>
 {
-    public List<string> levels = new List<string>();
+    public List<UnityEngine.Object> levels = new List<UnityEngine.Object>();
+
     public NetworkPlayerList networkList;
 
     public CameraFollow camera;
-
     public event Action StartedGameEvent;
+
+    public event Action<bool> OnChangeLobbyVisibility;
+    public event Action<bool> OnChangeLevelsVisibility;
+    
 
     // public void Start()
     // {
@@ -48,44 +53,46 @@ public class GameManager : ManagerBase<GameManager>
     [ClientRpc]
     public void SetupLocalPlayerControllerClientRpc(ulong clientID, NetworkObjectReference playerInstanceRef,  NetworkObjectReference playerControllerRef)
     {
-        //if (clientID == NetworkManager.Singleton.LocalClientId)
-        {
-            GameObject playerInstance = playerInstanceRef;
-            PlayerController playerController = ((GameObject)playerControllerRef).GetComponent<PlayerController>();
-            playerController.controlled = playerInstance;
-        }
+        GameObject playerInstance = playerInstanceRef;
+        PlayerController playerController = ((GameObject)playerControllerRef).GetComponent<PlayerController>();
+        playerController.controlled = playerInstance;
     }
 
     public void StartGame()
     {
         //spawn players
-        foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
-            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+        // foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
+        // {
+        //     NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
+        //     PlayerController playerController = playerObject.GetComponent<PlayerController>();
+        //     
+        //     Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
+        //
+        //     GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
+        //     playerController.controlled = spawnedCharacter;
+        //     
+        //     spawnedCharacter.GetComponent<NetworkObject>().Spawn();
+        //     spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
+        //     NetworkObjectReference characterReference = spawnedCharacter;
+        //     SetupCameraClientRpc(player, characterReference);
+        //
+        //     if (IsServer)
+        //     {
+        //         NetworkObjectReference playerControllerReference = playerController.gameObject;
+        //         //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
+        //         SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
+        //     }
+        //
+        //     // We have a LobbyPlayerData for the current player created by the client.
+        //     LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
+        //     playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
+        //     playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+
             
-            Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
-
-            GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
-            playerController.controlled = spawnedCharacter;
             
-            spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
-            NetworkObjectReference characterReference = spawnedCharacter;
-            SetupCameraClientRpc(player, characterReference);
-
-            if (IsServer)
-            {
-                NetworkObjectReference playerControllerReference = playerController.gameObject;
-                //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
-                SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
-            }
-
-            // We have a LobbyPlayerData for the current player created by the client.
-            LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
-            playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
-            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-
+            // OLD CODE
+            
+            
             //There has to be a less fragile way of linking the prefab to the index?
             // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
             //     .GetComponent<PlayerController>()
@@ -104,16 +111,30 @@ public class GameManager : ManagerBase<GameManager>
             //     go.GetComponent<NetworkObject>().Spawn();
             //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
             // }
-        }
+        //}
 
-        //StartedGameEvent?.Invoke();
         if (NetworkManager.Singleton.IsServer)
         {
-            RaiseStartEventClientRpc();
+            RaiseChangeLobbyVisibilityClientRpc(false); // Hide lobby UI
+            
+            RaiseChangeLevelsVisibilityClientRpc(true); // Host selects level.
+
+            //RaiseStartEventClientRpc(); // Now called in Level Select when level is loaded.
         }
     }
 
-
+    [ClientRpc]
+    public void RaiseChangeLobbyVisibilityClientRpc(bool visibility)
+    {
+        OnChangeLobbyVisibility?.Invoke(visibility);
+    }
+    
+    [ClientRpc]
+    public void RaiseChangeLevelsVisibilityClientRpc(bool visibility)
+    {
+        OnChangeLevelsVisibility?.Invoke(visibility);
+    }
+    
     [ClientRpc]
     public void RaiseStartEventClientRpc()
     {

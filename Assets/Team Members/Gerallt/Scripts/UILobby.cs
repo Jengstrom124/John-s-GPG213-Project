@@ -16,9 +16,9 @@ namespace Gerallt
         public TMP_InputField UIPlayerNameInput;
         
         public ServerManager ServerManager;
-        public NetworkPlayerList GNetworkedListBehaviour;
         
-        //public event Action OnGameStart;
+        private NetworkPlayerList GNetworkedListBehaviour;
+        
         public event Action<LobbyPlayerData> OnPlayerDataChanged;
         
         public void PlayerName_ValueChanged()
@@ -48,28 +48,22 @@ namespace Gerallt
             GameManager gameManager = GameManager.Instance;
             if (gameManager != null)
             {
+                gameManager.OnChangeLobbyVisibility += GameManager_OnChangeLobbyVisibility;
                 gameManager.StartedGameEvent += GameManager_OnStartedGameEvent;
             }
-            
-            // if (!ServerManager.IsClient)
-            // {
-            //     this.enabled = false;
-            //
-            //     return;
-            // }
 
-            //GNetworkedListBehaviour.OnAwakeComplete += GNetworkedListBehaviour_AwakeComplete;
+            GNetworkedListBehaviour = NetworkPlayerList.Instance;
             GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
+        }
+
+        private void GameManager_OnChangeLobbyVisibility(bool visibility)
+        {
+            view.SetActive(visibility);
         }
 
         private void GameManager_OnStartedGameEvent()
         {
             view.SetActive(false);
-        }
-
-        private void GNetworkedListBehaviour_AwakeComplete()
-        {
-            GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
 
         public void OnDestroy()
@@ -98,21 +92,16 @@ namespace Gerallt
 
         public void UpdateClientsList()
         {
-             //if (!NetworkManager.Singleton.IsClient)
-             //    return;
-            
             // Destroy all client UI instances in joined clients list
             for (int idx = 0; idx < JoinedClients.transform.childCount; idx++ )
             {
                 Transform child = JoinedClients.transform.GetChild(idx);
                 
-                GameObject.Destroy(child.gameObject);
+                Destroy(child.gameObject);
             }
 
             if (GNetworkedListBehaviour.NetworkedObjects != null)
             {
-                //GNetworkedListBehaviour.NetworkedObjects
-                //var x = ServerManager.ConnectedClientsIds;
                 // Refresh client UI with newly connected clients:
                 foreach(LobbyPlayerData lobbyPlayerData in GNetworkedListBehaviour.NetworkedObjects)
                 {
@@ -120,21 +109,6 @@ namespace Gerallt
                     UIClient uiClient = clientInstance.GetComponent<UIClient>();
                     uiClient.parentView = this;
                     uiClient.UpdateUI(lobbyPlayerData);
-                    
-                    // NetworkObject spawnedObj = ServerManager.Resolve(lobbyPlayerData.ClientId);
-                    //
-                    // if (spawnedObj != null)
-                    // {
-                    //     PlayerController playerController = spawnedObj.GetComponent<PlayerController>();
-                    //
-                    //     if (playerController != null)
-                    //     {
-                    //         GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                    //         var uiClient = clientInstance.GetComponent<UIClient>();
-                    //         uiClient.UpdateUI(playerController);
-                    //
-                    //     }
-                    // }
                 }
             }
         }
