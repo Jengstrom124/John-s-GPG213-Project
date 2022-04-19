@@ -44,40 +44,7 @@ namespace MayaStuff
 
         public void Steer(float input)
         {
-            if (Input.GetKey(KeyCode.D))
-            {
-                //sharkForce.AddForceAtPosition(new Vector3(rotateSpeed, 0, (-localVelocity.z * rotateSpeed)), sharkRotatePoint.position);
-                //sharkSteering.AddTorque(Vector3.left * rotateSpeed);
-                //sharkSteering.AddRelativeTorque(Vector3.left * rotateSpeed);
-                //sharkForce.AddRelativeTorque(new Vector3(0, rotateSpeed, 0));
-                sharkForce.AddForceAtPosition(input*rotateSpeed*transform.TransformDirection(Vector3.right), transform.position, 0);
-                sharkForce.AddRelativeTorque(new Vector3(0, (input*rotateSpeed), 0));
-                //sharkHead.transform.localRotation = Quaternion.Euler(0, input*rotateSpeed*2, (0));
-                sharkHead.DOLocalRotate(new Vector3(0, rotateSpeed+7, 0), 1f, RotateMode.Fast);
-
-
-
-            }
-
-            else if (Input.GetKey(KeyCode.A))
-            {
-                //sharkForce.AddForceAtPosition(new Vector3(-rotateSpeed, 0, (-localVelocity.z * rotateSpeed)), sharkRotatePoint.position);
-                sharkForce.AddForceAtPosition(-input*rotateSpeed*transform.TransformDirection(Vector3.left), transform.position, 0);
-                sharkForce.AddRelativeTorque(new Vector3(0, (-input*-rotateSpeed), 0));
-                //sharkHead.transform.localRotation = Quaternion.Euler(0, (-input*-rotateSpeed*2), 0);
-                sharkHead.DOLocalRotate(new Vector3(0, -rotateSpeed -7, 0), 1f, RotateMode.Fast);
-
-
-
-
-                //sharkSteering.AddRelativeForce(Vector3.right * rotateSpeed);
-                //sharkSteering.AddTorque(Vector3.right * rotateSpeed);
-            }
-            else
-            {
-                sharkHead.DOLocalRotate(Vector3.zero, 0.5f, RotateMode.Fast);
-                //sharkHead.transform.localRotation = quaternion.identity;
-            }
+            sharkHead.DOLocalRotate(new Vector3(0, (input*15), 0), 1f, RotateMode.Fast);
         }
 
         public void Accelerate(float input)
@@ -107,11 +74,11 @@ namespace MayaStuff
                 tailBit4.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
             }
 
-            if (tailBit1.localRotation.z == 16f)
+            if (Math.Abs(tailBit1.localRotation.eulerAngles.z - 16f) < 1f)
             {
                 swingLeft = false;
             }
-            if(tailBit1.localRotation.z == -16f)
+            else if(Math.Abs(tailBit1.localRotation.eulerAngles.z - -16f) < 1f)
             {
                 swingLeft = true;
             }
@@ -132,12 +99,7 @@ namespace MayaStuff
 
         public void Action()
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = 100;
-            }
-            else
-                speed = 25;
+            speed = 100;
         }
 
         public void Action2()

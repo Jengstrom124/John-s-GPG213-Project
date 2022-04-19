@@ -19,16 +19,8 @@ public class AStar : ManagerBase<AStar>
     public Vector3 startPos;
     public Node targetNode;
 
-    //[Header("Test Only/Ignore")]
-    //public PathTracker thingToMove;
-
     private void Start()
     {
-        // if(thingToMove != null)
-        // {
-        // thingToMove.atEndNodeEvent += FindPath;
-        // }
-
         WorldScanner.instance.onReScanEvent += ReScanPath;
     }
 
@@ -166,7 +158,6 @@ public class AStar : ManagerBase<AStar>
             FindPath(startPos, targetPos);
         }
     }
-
     int DistanceCheck(Node a, Node b)
     {
         return (int)Vector2.Distance(WorldScanner.instance.NodeToWorldPos(a), WorldScanner.instance.NodeToWorldPos(b));

@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualizeOpenCloseLists: 0
-  thingToMove: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &5365400553432169572
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,10 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be1c54e7a96e634295d1d32c5996916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {fileID: 0}
-  endPos: {fileID: 0}
   gridSize: {x: 0, y: 0}
   obstacle:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  autoGenerateGridOnAwake: 0
   constantScan: 0
