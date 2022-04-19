@@ -29,9 +29,13 @@ public class PathTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AStar.Instance.pathFoundEvent += GeneratePathList;
+        if(AStar.Instance != null)
+        {
+            AStar.Instance.pathFoundEvent += GeneratePathList;
 
-        AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
+            //For testing a random waypoint whilst we have no way to set a waypoint
+            AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
+        }
     }
 
     // Update is called once per frame

@@ -80,8 +80,14 @@ public class AvoidObstacle : MonoBehaviour
             //Adjust speed based on distance to closest collision - clamped between 1 & the max speed
             if (moveForwards != null)
             {
-                moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance - speedReductionMultiplier, minSpeed, moveForwards.maxSpeed);
-
+                if(isEmergencyFeeler)
+                {
+                    moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance - speedReductionMultiplier, minSpeed, moveForwards.maxSpeed);
+                }
+                else
+                {
+                    moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance/3, minSpeed, moveForwards.maxSpeed);
+                }
             }
             //Apply torque based on ray direction (if the left ray hits an object turn right to dodge it)
             if (myTurnDirection == RayDirection.Right)

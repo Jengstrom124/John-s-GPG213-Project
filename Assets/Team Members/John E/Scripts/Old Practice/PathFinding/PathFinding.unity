@@ -705,6 +705,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1422218037190890246, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
+      propertyPath: myTransform
+      value: 
+      objectReference: {fileID: 1466914079}
+    - target: {fileID: -1422218037190890246, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
+      propertyPath: turnMultiplier
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2219981257583123345, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -752,6 +760,10 @@ PrefabInstance:
     - target: {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
       propertyPath: m_Name
       value: FishModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2219981257583123357, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
+      propertyPath: m_AngularDrag
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
@@ -1042,8 +1054,6 @@ MonoBehaviour:
   distanceThreshold: 2
   maxRayLength: 50
   drawRaycasts: 1
-  waypoint: {fileID: 0}
-  randomWaypointTest: 0
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
 --- !u!54 &807946611
@@ -1074,10 +1084,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTransform: {fileID: 0}
+  turnMultiplier: 0.05
   target: {fileID: 0}
   destinationTarget: {x: 0, y: 0, z: 0}
-  turnMultiplier: 0.05
-  targetXPos: 0
+  angle: 0
 --- !u!114 &807946613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1104,6 @@ MonoBehaviour:
   visualizeOpenCloseLists: 0
   targetPos: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
-  thingToMove: {fileID: 0}
 --- !u!1 &1008158196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,8 +1483,6 @@ MonoBehaviour:
   distanceThreshold: 5
   maxRayLength: 10
   drawRaycasts: 0
-  waypoint: {fileID: 0}
-  randomWaypointTest: 1
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
 --- !u!1001 &1500009884
@@ -1494,6 +1502,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
       propertyPath: gridSize.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
+      propertyPath: gridSize.z
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}

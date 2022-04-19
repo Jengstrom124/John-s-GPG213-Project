@@ -16,15 +16,15 @@ public class AlignManager : MonoBehaviour
 	{
 		FishModel.onPlayerFishEvent += UpdatePlayerInfluences;
 
-		Neighbours.newNeighbourEvent += NewFishUpdate;
-		Neighbours.neighbourLeaveEvent += RemovePlayerInfluence;
+		//Neighbours.newNeighbourEvent += NewFishUpdate;
+		//Neighbours.neighbourLeaveEvent += RemovePlayerInfluence;
 	}
     private void OnDisable()
 	{
 		FishModel.onPlayerFishEvent -= UpdatePlayerInfluences;
 
-		Neighbours.newNeighbourEvent -= NewFishUpdate;
-		Neighbours.neighbourLeaveEvent -= RemovePlayerInfluence;
+		//Neighbours.newNeighbourEvent -= NewFishUpdate;
+		//Neighbours.neighbourLeaveEvent -= RemovePlayerInfluence;
 	}
 
     private void Update()
