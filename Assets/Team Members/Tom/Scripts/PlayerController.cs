@@ -83,6 +83,8 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void ReplicatedActionClientRpc(ReplicatedActionType actionType)
     {
+        if (actionsArray == null) return;
+        
         Action runOnClient = actionsArray[(int) actionType];
         
         runOnClient();
@@ -91,6 +93,8 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc]
     private void ReplicatedActionServerRpc(ReplicatedActionType actionType)
     {
+        if (actionsArray == null) return;
+        
         Action replicatedAction = actionsArray[(int)actionType];
         
         replicatedAction();
@@ -101,6 +105,8 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void ReplicatedActionClientRpc(ReplicatedActionType actionType, float input)
     {
+        if (actionsArrayWithParam == null) return;
+        
         Action<float> runOnClient = actionsArrayWithParam[(int)actionType];
         
         runOnClient(input);
@@ -109,6 +115,8 @@ public class PlayerController : NetworkBehaviour
     [ServerRpc]
     private void ReplicatedActionServerRpc(ReplicatedActionType actionType, float input)
     {
+        if (actionsArrayWithParam == null) return;
+        
         Action<float> replicatedAction = actionsArrayWithParam[(int)actionType];
         
         replicatedAction(input);
