@@ -33,234 +33,171 @@ public class PlayerController : NetworkBehaviour
     
     private IControllable controllable;
 
-    #region Networked Behaviours 
+    #region Networked Actions and RPCs
+
+    private Action[] actionsArray;
+    private Action<float>[] actionsArrayWithParam;
     
-    #region RPCs
-    
-    [ClientRpc]
-    private void SteerClientRpc(float input)
+    public enum ReplicatedActionType : int
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Steer(input);
+        Steer = 5,
+        Accelerate = 4,
+        Reverse = 3,
+        Action = 2,
+        Action2 = 1,
+        Action3 = 0
     }
 
-    [ServerRpc]
-    private void SteerServerRpc(float input)
+    private void ReplicatedAction(ReplicatedActionType actionType, Action replicatedAction)
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Steer(input);
-            
-        SteerClientRpc(input);
+        if (actionsArray == null)
+        {
+            actionsArray = new Action[1];
+        }
+
+        int actionInd = (int) actionType;
+        if (actionInd >= actionsArray.Length)
+        {
+            Array.Resize(ref actionsArray, actionInd + 1);
+        }
+
+        actionsArray[actionInd] = replicatedAction;
     }
     
-    [ClientRpc]
-    private void AccelerateClientRpc(float input)
+    private void ReplicatedAction(ReplicatedActionType actionType, Action<float> replicatedAction)
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Accelerate(input);
-    }
+        if (actionsArrayWithParam == null)
+        {
+            actionsArrayWithParam = new Action<float>[1];
+        }
 
-    [ServerRpc]
-    private void AccelerateServerRpc(float input)
-    {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Accelerate(input);
-            
-        AccelerateClientRpc(input);
-    }
-    
-    [ClientRpc]
-    private void ReverseClientRpc(float input)
-    {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Reverse(input);
-    }
+        int actionInd = (int) actionType;
+        if (actionInd >= actionsArrayWithParam.Length)
+        {
+            Array.Resize(ref actionsArrayWithParam, actionInd + 1);
+        }
 
-    [ServerRpc]
-    private void ReverseServerRpc(float input)
-    {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Reverse(input);
-            
-        ReverseClientRpc(input);
+        actionsArrayWithParam[actionInd] = replicatedAction;
     }
     
     [ClientRpc]
-    private void ActionClientRpc()
+    private void ReplicatedActionClientRpc(ReplicatedActionType actionType)
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Action();
+        Action runOnClient = actionsArray[(int) actionType];
+        
+        runOnClient();
     }
 
     [ServerRpc]
-    private void ActionServerRpc()
+    private void ReplicatedActionServerRpc(ReplicatedActionType actionType)
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Action();
+        Action replicatedAction = actionsArray[(int)actionType];
+        
+        replicatedAction();
             
-        ActionClientRpc();
+        ReplicatedActionClientRpc(actionType);
     }
     
     [ClientRpc]
-    private void Action2ClientRpc()
+    private void ReplicatedActionClientRpc(ReplicatedActionType actionType, float input)
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Action2();
+        Action<float> runOnClient = actionsArrayWithParam[(int)actionType];
+        
+        runOnClient(input);
     }
 
     [ServerRpc]
-    private void Action2ServerRpc()
+    private void ReplicatedActionServerRpc(ReplicatedActionType actionType, float input)
     {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Action2();
+        Action<float> replicatedAction = actionsArrayWithParam[(int)actionType];
+        
+        replicatedAction(input);
             
-        Action2ClientRpc();
+        ReplicatedActionClientRpc(actionType, input);
     }
-
-    [ClientRpc]
-    private void Action3ClientRpc()
-    {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Action3();
-    }
-
-    [ServerRpc]
-    private void Action3ServerRpc()
-    {
-        controllable = controlled.GetComponentInChildren<IControllable>();
-        controllable.Action3();
-            
-        Action3ClientRpc();
-    }
-    
-    #endregion
-    
-    // private void ApplyTransform(PlayerTransform playerTransform)
-    // {
-    //     Transform _transform = controlled.transform;
-    //     Rigidbody rb = controlled.GetComponent<Rigidbody>();
-    //     
-    //     _transform.position = playerTransform.position;
-    //     _transform.rotation = playerTransform.rotation;
-    //     
-    //     if (rb != null)
-    //     {
-    //         rb.velocity = playerTransform.velocity;
-    //         rb.angularVelocity = playerTransform.angularVelocity;
-    //     }
-    // }
-    //
-    // private PlayerTransform PackageTransform()
-    // {
-    //     Transform _transform = controlled.transform;
-    //     Rigidbody rb = controlled.GetComponent<Rigidbody>();
-    //
-    //     Vector3 velocity = Vector3.zero;
-    //     Vector3 angularVelocity = Vector3.zero;
-    //
-    //     if (rb != null)
-    //     {
-    //         velocity = rb.velocity;
-    //         angularVelocity = rb.angularVelocity;
-    //     }
-    //         
-    //     PlayerTransform playerTransform = new PlayerTransform(
-    //         clientInfo.Value.ClientId,
-    //         _transform.position,
-    //         _transform.rotation,
-    //         velocity,
-    //         angularVelocity
-    //     );
-    //
-    //     return playerTransform;
-    // }
 
     /// <summary>
-    /// The networked version of Steer(float).
+    /// The networked replicated action.
     /// </summary>
-    private void Steer(float input)
+    private void ReplicatedAction(ReplicatedActionType actionType)
     {
-        //controllable.Steer(input); // Client side prediction
+        //Action replicatedAction = actionsArray[(int)actionType];
+        
+        //replicatedAction();  // Client side prediction
 
         if (isNetworked)
         {
             // Update the server model. The server will later update the clients.
-            SteerServerRpc(input);
+            ReplicatedActionServerRpc(actionType);
+        }
+        else
+        {
+            actionsArray[(int)actionType]();
         }
     }
     
     /// <summary>
-    /// The networked version of Accelerate(float).
+    /// The networked replicated parameterised action.
     /// </summary>
-    private void Accelerate(float input)
+    private void ReplicatedAction(ReplicatedActionType actionType, float input)
     {
-        //controllable.Accelerate(input); // Client side prediction
+        //Action<float> replicatedAction = actionsArrayWithParam[(int)actionType];
+        
+        //replicatedAction(input);  // Client side prediction
 
         if (isNetworked)
         {
             // Update the server model. The server will later update the clients.
-            AccelerateServerRpc(input);
+            ReplicatedActionServerRpc(actionType, input);
         }
-    }
-    
-    /// <summary>
-    /// The networked version of Reverse(float).
-    /// </summary>
-    private void Reverse(float input)
-    {
-        //controllable.Reverse(input);  // Client side prediction
-
-        if (isNetworked)
+        else
         {
-            // Update the server model. The server will later update the clients.
-            ReverseServerRpc(input);
-        }
-    }
-    
-    /// <summary>
-    /// The networked version of Action().
-    /// </summary>
-    private void Action()
-    {
-        //controllable.Action();  // Client side prediction
-
-        if (isNetworked)
-        {
-            // Update the server model. The server will later update the clients.
-            ActionServerRpc();
-        }
-    }
-    
-    /// <summary>
-    /// The networked version of Action2().
-    /// </summary>
-    private void Action2()
-    {
-        //controllable.Action2();  // Client side prediction
-
-        if (isNetworked)
-        {
-            // Update the server model. The server will later update the clients.
-            Action2ServerRpc();
-        }
-    }
-    
-    /// <summary>
-    /// The networked version of Action().
-    /// </summary>
-    private void Action3()
-    {
-        //controllable.Action3();  // Client side prediction
-
-        if (isNetworked)
-        {
-            // Update the server model. The server will later update the clients.
-            Action3ServerRpc();
+            actionsArrayWithParam[(int)actionType](input);
         }
     }
     
     #endregion
-
+    
+    private void Start()
+    {
+        // Scheduled replicated actions that run on the server side and client side when requested to run.
+        ReplicatedAction(ReplicatedActionType.Steer, (float input) =>
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Steer(input);
+        });
+        
+        ReplicatedAction(ReplicatedActionType.Accelerate, (float input) =>
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Accelerate(input);
+        });
+        
+        ReplicatedAction(ReplicatedActionType.Reverse, (float input) =>
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Reverse(input);
+        });
+        
+        ReplicatedAction(ReplicatedActionType.Action, () =>
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Action();
+        });
+        
+        ReplicatedAction(ReplicatedActionType.Action2, () =>
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Action2();
+        });
+        
+        ReplicatedAction(ReplicatedActionType.Action3, () =>
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Action3();
+        });
+    }
+    
     //From here on down is taken from Cam's PlayerController - Aaron
 
     void Update()
@@ -279,46 +216,46 @@ public class PlayerController : NetworkBehaviour
                 if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Steer(-1f);
+                    ReplicatedAction(ReplicatedActionType.Steer, -1f);
                 }
                 else if (InputSystem.GetDevice<Keyboard>().dKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Steer(1f);
+                    ReplicatedAction(ReplicatedActionType.Steer, 1f);
                 }
                 else
                 {
-                    Steer(0f);
+                    ReplicatedAction(ReplicatedActionType.Steer, 0f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Accelerate(1f);
+                    ReplicatedAction(ReplicatedActionType.Accelerate, 1f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Reverse(1f);
+                    ReplicatedAction(ReplicatedActionType.Reverse, 1f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().fKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Action();
+                    ReplicatedAction(ReplicatedActionType.Action);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Action2();
+                    ReplicatedAction(ReplicatedActionType.Action2);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().qKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    Action3();
+                    ReplicatedAction(ReplicatedActionType.Action3);
                 }
             }
         }
