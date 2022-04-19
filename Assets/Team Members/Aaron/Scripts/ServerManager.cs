@@ -25,22 +25,22 @@ public class ServerManager : NetworkManager
     private bool isServerUp = false;
     [SerializeField] private float connectionTimeout = 0.5f;
 
-    private void OnGUI()
-    {
-        GUILayout.BeginArea(new Rect(10, 10, 300, 300));
-
-        if (!IsClient && !IsServer)
-        {
-            StartButtons();
-        }
-
-        if (IsServer || IsHost)
-        {
-            StopButton();
-        }
-
-        GUILayout.EndArea();
-    }
+    // private void OnGUI()
+    // {
+    //     GUILayout.BeginArea(new Rect(10, 10, 300, 300));
+    //
+    //     if (!IsClient && !IsServer)
+    //     {
+    //         StartButtons();
+    //     }
+    //
+    //     if (IsServer || IsHost)
+    //     {
+    //         StopButton();
+    //     }
+    //
+    //     GUILayout.EndArea();
+    // }
 
     // Start is called before the first frame update
     void Start()

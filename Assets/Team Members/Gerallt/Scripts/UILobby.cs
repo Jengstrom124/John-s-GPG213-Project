@@ -79,9 +79,22 @@ namespace Gerallt
 
         public void OnJoinButtonClicked()
         {
-            LobbyPlayerData lobbyPlayerData = GNetworkedListBehaviour.GetPlayerData();
+            //LobbyPlayerData lobbyPlayerData = GNetworkedListBehaviour.GetPlayerData();
+            
+            LobbyPlayerData? lobbyPlayerData = null;
             
             ServerManager.JoinServer(lobbyPlayerData, autoCreateHost: true);
+        }
+
+        public void StartHost_ButtonClicked()
+        {
+            ServerManager.StartHost();
+            ServerManager.JoinServer();
+        }
+
+        public void StartGame_ButtonClicked()
+        {
+            ServerManager.StartGame();
         }
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)

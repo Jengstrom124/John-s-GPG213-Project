@@ -118,8 +118,9 @@ public class GameManager : ManagerBase<GameManager>
         {
             RaiseChangeLobbyVisibilityClientRpc(false); // Hide lobby UI
             
-            RaiseChangeLevelsVisibilityClientRpc(true); // Host selects level.
-
+            //RaiseChangeLevelsVisibilityClientRpc(true); // Host selects level.
+            OnChangeLevelsVisibility?.Invoke(true); // Only host selects level
+            
             //RaiseStartEventClientRpc(); // Now called in Level Select when level is loaded.
         }
     }

@@ -248,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7688179867083144777, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00006927807
+      value: -0.0000003315758
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
@@ -733,19 +733,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 834627342990244590, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 834627342990244590, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 834627342990244590, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -298
       objectReference: {fileID: 0}
     - target: {fileID: 834627342990244590, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 943836967113861281, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_Name
@@ -797,19 +797,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943836967287398618, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943836967287398618, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 943836968011924422, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943836968011924422, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943836968011924422, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_SizeDelta.x
@@ -817,18 +817,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943836968011924422, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 943836968103755751, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943836968103755751, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 943836968103755751, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 943836968489311222, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 943836968542790514, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
@@ -861,11 +865,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943836968896489398, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 943836968896489398, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
