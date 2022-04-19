@@ -28,7 +28,7 @@ public class PlayerController : NetworkBehaviour
 
     public NetworkVariable<Color> playerColour;
 
-    public bool isNetworked;
+    public bool isNetworked = true;
 
     //From here on down is taken from Cam's PlayerController - Aaron
     public GameObject controlled;
