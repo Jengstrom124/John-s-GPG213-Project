@@ -44,7 +44,9 @@ namespace MayaStuff
 
         public void Steer(float input)
         {
-            sharkHead.DOLocalRotate(new Vector3(0, (input*15), 0), 1f, RotateMode.Fast);
+                sharkForce.AddForceAtPosition(input*rotateSpeed*transform.TransformDirection(Vector3.right), transform.position, 0);
+                sharkForce.AddRelativeTorque(new Vector3(0, (input*rotateSpeed), 0));
+                sharkHead.DOLocalRotate(new Vector3(0, input * 15, 0), 1f, RotateMode.Fast);
         }
 
         public void Accelerate(float input)
@@ -82,14 +84,6 @@ namespace MayaStuff
             {
                 swingLeft = true;
             }
-            /*tailBit1.DOLocalRotate(new Vector3(0, 0, 0), input * 3);
-            tailBit2.DOLocalRotate(new Vector3(0, 0, 0), input * 3);
-            tailBit3.DOLocalRotate(new Vector3(0, 0, 0), input * 3);
-            tailBit4.DOLocalRotate(new Vector3(0, 0, 0), input * 3);
-            tailBit1.DOLocalRotate(new Vector3(0, 0, -15), input * 3);
-            tailBit2.DOLocalRotate(new Vector3(0, 0, -15), input * 3);
-            tailBit3.DOLocalRotate(new Vector3(0, 0, 15), input * 3);
-            tailBit4.DOLocalRotate(new Vector3(0, 0, 15), input * 3);*/
         }
 
         public void Reverse(float input)
