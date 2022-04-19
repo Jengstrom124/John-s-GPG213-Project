@@ -9,13 +9,13 @@ public class WorldScanner : MonoBehaviour
     public static WorldScanner instance;
 
     //General Variables
-    // public Transform startPos, endPos;
     public Node startNode, endNode;
     public Vector2 gridSize;
     public Node[,] gridNodeReferences;
     public LayerMask obstacle;
 
     [Header("Option")]
+    public bool autoGenerateGridOnAwake = false;
     public bool constantScan = false;
 
     //List for visualizing nodes only
@@ -36,18 +36,8 @@ public class WorldScanner : MonoBehaviour
     {
         instance = this;
 
-        CreateGrid();
-
-        //Sub to all obstacle objects in the world
-        //obstacleArray = FindObjectsOfType<Obstacle>(); 
-
-        //foreach(Obstacle obstacle in obstacleArray)
-        {
-            //obstacle.gameObject.GetComponent<Obstacle>().OnMovedEvent += ReScan;
-        }
-
-        //Sub to single static event
-        //StaticEvents.ReScanEvent += ReScan;
+        if (autoGenerateGridOnAwake)
+            CreateGrid();
     }
 
     void Update()

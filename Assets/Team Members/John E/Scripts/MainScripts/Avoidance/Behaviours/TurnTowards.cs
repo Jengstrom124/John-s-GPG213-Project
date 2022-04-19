@@ -17,19 +17,21 @@ public class TurnTowards : MonoBehaviour
     public float targetXPos;
 
     //TEST
+    PathTracker pathTracker;
     FishModel fish;
 
     private void Awake()
     {
         fish = GetComponent<FishModel>();
+        pathTracker = GetComponent<PathTracker>();
     }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         fish.runFromPredatorEvent += EscapePredator;
-        fish.onDestinationAssignedEvent += SetDestinationTarget;
+
+        pathTracker.newTargetAssignedEvent += SetDestinationTarget;
     }
     private void Update()
     {
@@ -54,8 +56,10 @@ public class TurnTowards : MonoBehaviour
             targetPos = transform.InverseTransformPoint(destinationTarget);
         }
 
-
+        //Change to vector
         targetXPos = targetPos.x;
+
+        //Include speed change based on wider angle to stop circuling around a target
     }
 
     // Update is called once per frame
