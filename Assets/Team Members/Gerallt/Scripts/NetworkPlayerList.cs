@@ -13,8 +13,6 @@ namespace Gerallt
         public ServerManager ServerManager;
         public NetworkList<LobbyPlayerData> NetworkedObjects;
 
-        public Action OnAwakeComplete;
-        
         public override void Awake()
         {
             base.Awake();
@@ -24,11 +22,6 @@ namespace Gerallt
             //ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
             ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
             ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
-
-            if (OnAwakeComplete != null)
-            {
-                OnAwakeComplete();
-            }
         }
 
         // private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate connectionApprovedCallback)
