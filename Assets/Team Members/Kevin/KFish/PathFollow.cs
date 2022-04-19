@@ -21,7 +21,7 @@ namespace Kevin
 
         public void Enter()
         {
-            
+            Debug.Log("Following");
         }
 
         public void Execute()
@@ -31,7 +31,7 @@ namespace Kevin
 
         public void Exit()
         {
-            
+            Debug.Log("No Longer Following");
         }
     }
 }

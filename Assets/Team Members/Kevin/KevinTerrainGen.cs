@@ -21,7 +21,10 @@ public class KevinTerrainGen : MonoBehaviour
     public int yHeight = 20;
     
     public float cliffLevel = 30f;
-    public float seaLevel = 10f; 
+    public float seaLevel = 10f;
+    public float highLands = 0.75f;
+    public float landDrop = 0.4f;
+    public float control = 0.5f;
     
     public GameObject sandPrefab;
     //public GameObject treePrefab;
@@ -88,16 +91,49 @@ public class KevinTerrainGen : MonoBehaviour
         
         
         float perlinValue = Mathf.PerlinNoise(xCoord*frequencyX+offsetX,yCoord*frequencyY+offsetY);
-        if (perlinValue > 0.51f)
+        float perlinHighLand = 0.9f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);
+        float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);
+
+        if (perlinHighLand > highLands)
         {
-            return perlinValue*2f;
+            return perlinHighLand + perlinDropLand;
         }
 
-        if (perlinValue < 0.5f)
+        if (perlinHighLand < landDrop) ;
+        {
+            return perlinHighLand * 0.75f;
+        }
+        //return perlinHighLand;
+        
+        /*if (posTerrain.y < 9)
+        {
+            float perlinValue1 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
+            return perlinValue1 * 0.1f;
+        }*/
+        /*if (perlinValue > 0.86f && perlinValue < 1f)
+        {
+            return Mathf.Clamp(perlinValue * 0.9f,0.01f,0.99f);
+        }
+        if (perlinValue > 0.75f && perlinValue < 0.85f)
+        {
+            float perlinValue1 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
+            return Mathf.Clamp(perlinValue1 * 0.75f,0.01f,0.99f);
+        }
+        if (perlinValue > 0.61f && perlinValue < 0.74f)
         {
             float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
-            return perlinValue2*-0.5f;
+            return Mathf.Clamp(perlinValue2 * 0.6f,0.01f,0.99f);
         }
+        if (perlinValue > 0.51f && perlinValue < 0.6f)
+        {
+            float perlinValue3 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
+            return Mathf.Clamp(perlinValue3 * 0.5f,0.01f,0.99f);
+        }
+        if (perlinValue < 0.5f)
+        {
+            float perlinValue4 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
+            return Mathf.Clamp(perlinValue4 * 0.1f,0.01f,0.99f);
+        }*/
 
         
         /*if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))

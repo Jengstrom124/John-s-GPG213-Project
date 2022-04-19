@@ -38,7 +38,7 @@ public class Kshark : MonoBehaviour, IControllable
         {
             StartCoroutine(Decelerate());
         }
-        if (Input.GetKey(KeyCode.W))
+        /*if (Input.GetKey(KeyCode.W))
         {
             Accelerate(1f);
         }
@@ -53,7 +53,7 @@ public class Kshark : MonoBehaviour, IControllable
         if (Input.GetKey(KeyCode.D))
         {
             Steer(1f);
-        }
+        }*/
     }
 
     IEnumerator Decelerate()
