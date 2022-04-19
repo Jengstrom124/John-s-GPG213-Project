@@ -8,8 +8,8 @@ public class Neighbours : MonoBehaviour
     public List<GameObject> neighboursList = new List<GameObject>();
     public List<Collider> fishColliders = new List<Collider>();
     
-    public static  event Action<GameObject> newNeighbourEvent;
-    public static event Action<GameObject> neighbourLeaveEvent;
+    public event Action<GameObject> newNeighbourEvent;
+    public event Action<GameObject> neighbourLeaveEvent;
 
     private void OnTriggerEnter(Collider other)
     {

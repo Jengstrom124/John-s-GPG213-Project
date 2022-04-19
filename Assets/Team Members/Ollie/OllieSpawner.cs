@@ -14,6 +14,8 @@ public class OllieSpawner : MonoBehaviour
     
     //public list, drag desired prefabs into it
     public List<GameObject> treePrefabList;
+    public List<GameObject> shorelinePrefabList;
+    public List<GameObject> underwaterDebrisList;
 
     [Header("Array")]
     [SerializeField] public float[,] heightsArray;
@@ -29,10 +31,9 @@ public class OllieSpawner : MonoBehaviour
             {
                 Vector3 pos = new Vector3(x,0,z);
                 pos.y = myTerrain.SampleHeight(pos);
-                if (pos.y > 15f)
+                if (pos.y > 15f && pos.y < 18)
                 {
-                    print("height check reached");
-                    if (UnityEngine.Random.Range(0, 100) > 90)
+                    if (UnityEngine.Random.Range(0, 100) > 95)
                     {
                         //basically - 25% chance to spawn a random tree, at every point above y=15
                         int prefabIndex = UnityEngine.Random.Range(0, treePrefabList.Capacity);
@@ -42,9 +43,29 @@ public class OllieSpawner : MonoBehaviour
                         go.transform.parent = this.transform;
                     }
                 }
-                else if (pos.y > 12f)
+                else if (pos.y < 15f && pos.y > 12f)
+                {
+                    if (UnityEngine.Random.Range(0, 100) > 95)
+                    {
+                        //basically - 25% chance to spawn a random tree, at every point above y=15
+                        int prefabIndex = UnityEngine.Random.Range(0, shorelinePrefabList.Capacity);
+                        GameObject go = Instantiate(shorelinePrefabList[prefabIndex]);
+                        go.transform.position = pos;
+                        go.transform.localScale = scaleUp;
+                        go.transform.parent = this.transform;
+                    }
+                }
+                else if (pos.y < 9f)
                 {
                     //spawn bushes/rocks/shells/debris?
+                    if (UnityEngine.Random.Range(0, 100) > 97.5)
+                    {
+                        int prefabIndex = UnityEngine.Random.Range(0, underwaterDebrisList.Capacity);
+                        GameObject go = Instantiate(underwaterDebrisList[prefabIndex]);
+                        go.transform.position = new Vector3(pos.x, 0.05f, pos.z);
+                        go.transform.localScale = scaleUp;
+                        go.transform.parent = this.transform;
+                    }
                 }
             }
         }
