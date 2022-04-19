@@ -6,6 +6,8 @@ using UnityEngine;
 public class LevelInfo : MonoBehaviour
 {
 	public Bounds bounds = new Bounds(Vector3.zero, new Vector3(50f,25f,50f));
+
+	public string author;
 	
     private void OnDrawGizmosSelected()
     {

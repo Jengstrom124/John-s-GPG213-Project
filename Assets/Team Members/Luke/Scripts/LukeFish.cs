@@ -21,14 +21,9 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 	public float maxWiggleAngle = 5f;
 	public float maxSteeringAngle = 45f;
 
-	public float currentSteeringAngle = 0f;
+	public float currentSteeringAngle;
 	public Vector3 localVelocity;
 	public Vector3 tailLocalVelocity;
-
-	public bool boostReady = true;
-	public float boostFactor = 3f;
-	public float boostTimeSeconds = 1f;
-	public float boostCooldownSeconds = 2f;
 
 	public void Accelerate(float input)
 	{
@@ -60,33 +55,11 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 		mainJointTransform.eulerAngles = new Vector3(0, currentYEuler+currentSteeringAngle, 0);
 		tailTipTransform.eulerAngles = new Vector3(0, currentYEuler+2f*currentSteeringAngle, 0);
 	}
-
-
-	private IEnumerator Boost()
-	{
-		acceleratingForce *= boostFactor;
-		yield return new WaitForSeconds(boostTimeSeconds);
-		acceleratingForce /= boostFactor;
-
-		StartCoroutine(BoostCooldown());
-	}
 	
-	private IEnumerator BoostCooldown()
-	{
-		yield return new WaitForSeconds(boostCooldownSeconds);
-		boostReady = true;
-	}
-	
+
 	public void Action()
 	{
-		//Boost
-		Debug.Log("Action1");
-		if (boostReady)
-		{
-			Debug.Log("Boosting");
-			boostReady = false;
-			StartCoroutine(Boost());
-		}
+		
 	}
 
 	public void Action2()
@@ -121,28 +94,6 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 	    //tail steering friction.
 	    rb.AddForceAtPosition(steeringFrictionCoefficient*rb.mass*mainJointTransform.
 		    TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailTipPosition);
-
-	    if (Input.GetKey(KeyCode.UpArrow)||Input.GetKey(KeyCode.W))
-	    {
-		    Accelerate(1);
-	    }
-	    else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-	    {
-		    Reverse(1);
-	    }
-	    
-		if (Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A))
-	    {
-		    Steer(-1);
-	    }
-	    else if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
-	    {
-		    Steer(1);
-	    }
-	    else
-	    {
-		    Steer(0);
-	    }
     }
 
     void IControllable.Steer(float input)

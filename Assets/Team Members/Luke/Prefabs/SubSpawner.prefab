@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3911949051204171370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3911949051204171372}
+  - component: {fileID: 3911949051204171371}
+  - component: {fileID: 3911949051204171373}
+  m_Layer: 0
+  m_Name: SubSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3911949051204171372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911949051204171370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10, y: 25, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3911949051204171371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911949051204171370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 275ca40496b1c244f9a8d26b03245330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 0}
+  coralPrefab: {fileID: 3852676163906203864, guid: 5b5d8c5ca66a1d84a890a99409619277, type: 3}
+  threshold: 0.75
+  frequency: 30
+  xOffset: 0
+  yOffset: 0
+  fringe: 0
+--- !u!114 &3911949051204171373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911949051204171370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5916359919866f44b2dda6a8db42852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainGenerator: {fileID: 0}
+  treePrefabs:
+  - {fileID: 919132149155446097, guid: 953500af4257d0e47bdf0a0d5614f019, type: 3}
+  - {fileID: 919132149155446097, guid: dd57acf1568cdfb4c965fdcc715dc956, type: 3}
+  - {fileID: 919132149155446097, guid: 4dca411edcf6fa543a5c5511fa34dd95, type: 3}
+  - {fileID: 919132149155446097, guid: 8bb56d8f8ae394547b8b6bb128900c4b, type: 3}
+  - {fileID: 919132149155446097, guid: 8d2a22b9c0518134b943ccf01494e475, type: 3}
+  - {fileID: 919132149155446097, guid: 808ddfa6a1f37b94cb8d58f55743e435, type: 3}
+  threshold: 0.45
+  frequency: 15
+  xOffset: 0
+  yOffset: 0
+  fringe: 0

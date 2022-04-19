@@ -22,7 +22,7 @@ namespace Kevin
 
         public void Enter()
         {
-            
+            Debug.Log("Flocking");
         }
 
         public void Execute()
@@ -32,7 +32,7 @@ namespace Kevin
 
         public void Exit()
         {
-            
+            Debug.Log("No Longer Flocking");
         }
     }
 }
