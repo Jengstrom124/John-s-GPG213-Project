@@ -42,12 +42,14 @@ public class PlayerController : NetworkBehaviour
     {
         ApplyTransform(playerTransform);
             
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Steer(input);
     }
 
     [ServerRpc]
     private void SteerServerRpc(float input)
     {
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Steer(input);
             
         SteerClientRpc(input, PackageTransform());
@@ -58,12 +60,14 @@ public class PlayerController : NetworkBehaviour
     {
         ApplyTransform(playerTransform);
             
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Accelerate(input);
     }
 
     [ServerRpc]
     private void AccelerateServerRpc(float input)
     {
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Accelerate(input);
             
         AccelerateClientRpc(input, PackageTransform());
@@ -74,12 +78,14 @@ public class PlayerController : NetworkBehaviour
     {
         ApplyTransform(playerTransform);
             
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Reverse(input);
     }
 
     [ServerRpc]
     private void ReverseServerRpc(float input)
     {
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Reverse(input);
             
         ReverseClientRpc(input, PackageTransform());
@@ -90,12 +96,14 @@ public class PlayerController : NetworkBehaviour
     {
         ApplyTransform(playerTransform);
             
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action();
     }
 
     [ServerRpc]
     private void ActionServerRpc()
     {
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action();
             
         ActionClientRpc(PackageTransform());
@@ -106,12 +114,14 @@ public class PlayerController : NetworkBehaviour
     {
         ApplyTransform(playerTransform);
             
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action2();
     }
 
     [ServerRpc]
     private void Action2ServerRpc()
     {
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action2();
             
         Action2ClientRpc(PackageTransform());
@@ -122,12 +132,14 @@ public class PlayerController : NetworkBehaviour
     {
         ApplyTransform(playerTransform);
             
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action3();
     }
 
     [ServerRpc]
     private void Action3ServerRpc()
     {
+        controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action3();
             
         Action3ClientRpc(PackageTransform());
@@ -262,15 +274,7 @@ public class PlayerController : NetworkBehaviour
     #endregion
 
     //From here on down is taken from Cam's PlayerController - Aaron
-    
-    private void Start()
-    {
-        if (controlled != null)
-        {
-            controllable = controlled.GetComponentInChildren<IControllable>();
-        }
-    }
-    
+
     void Update()
     {
 	    // Client side physical controls only for owned creature
@@ -280,6 +284,8 @@ public class PlayerController : NetworkBehaviour
         // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
         if (controlled != null)
         {
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            
             if (controllable != null)
             {
                 if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
