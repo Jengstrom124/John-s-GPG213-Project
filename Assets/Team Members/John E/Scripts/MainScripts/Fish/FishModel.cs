@@ -5,11 +5,6 @@ using System;
 
 public class FishModel : MonoBehaviour
 {
-    //Neighbours neighbours;
-    TurnTowards turnTowards;
-    AStar aStar;
-    PathTracker pathTracker;
-
     [Header("Reference Only:")]
     public bool isPlayerFish;
     public bool hasWaypoint;
@@ -22,24 +17,10 @@ public class FishModel : MonoBehaviour
     public event Action<bool, Transform> runFromPredatorEvent;
     public event Action<Vector3> onDestinationAssignedEvent;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        //neighbours = GetComponent<Neighbours>();
-        turnTowards = GetComponent<TurnTowards>();
-        aStar = GetComponent<AStar>();
-        pathTracker = GetComponent<PathTracker>();
-    }
-
     private void Start()
     {
         Neighbours.newNeighbourEvent += CheckForPredator;
         Neighbours.neighbourLeaveEvent += PredatorOutOfSight;
-
-        //John.TestController.destinationSelectedEvent += SetDestination;
-        //pathTracker.newTargetAssignedEvent += SetDestination;
-
-        //aStar.FindPath(transform, WorldScanner.instance.WorldToNodePos(new Vector3(10, 0, 41)));
     }
 
     private void Update()
@@ -66,7 +47,6 @@ public class FishModel : MonoBehaviour
     {
         if (other.GetComponent<IPredator>() != null)
         {
-            //turnTowards.target = other.transform;
             runFromPredatorEvent?.Invoke(true, other.transform);
         }
     }
@@ -75,7 +55,6 @@ public class FishModel : MonoBehaviour
     {
         if (other.GetComponent<IPredator>() != null)
         {
-            //turnTowards.target = Vector3.zero;
             runFromPredatorEvent?.Invoke(false, null);
         }
     }

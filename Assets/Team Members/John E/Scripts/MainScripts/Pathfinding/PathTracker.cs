@@ -15,11 +15,6 @@ public class PathTracker : MonoBehaviour
     public float maxRayLength = 10f;
     public bool drawRaycasts;
 
-    [Header("Test stuff only / Ignore")]
-    public WaypointFinder waypoint;
-    public bool randomWaypointTest;
-    // public event Action<Node, Node> atEndNodeEvent;
-
     [Header("References Only - Don't Touch")]
     public Vector2 finalDestinationPos;
     public Vector2 currentTargetPos;
@@ -37,11 +32,6 @@ public class PathTracker : MonoBehaviour
         AStar.Instance.pathFoundEvent += GeneratePathList;
 
         AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
-        
-        // if(randomWaypointTest)
-        // {
-	        // AStar.Instance.FindPath(transform, waypoint.RandomNodePosition());
-        // }
     }
 
     // Update is called once per frame
@@ -92,7 +82,7 @@ public class PathTracker : MonoBehaviour
             if (Vector2.Distance(currentTargetPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold)
             {
                 //Check for next path target
-                CheckPath();
+                GetNextOptimizedPathPoint();
             }
         }
     }
@@ -109,11 +99,6 @@ public class PathTracker : MonoBehaviour
             //Fire off event
             atEnd = true;
             destinationReachedEvent?.Invoke();
-
-
-            //Ignore (for testing random waypoints)
-            // if(randomWaypointTest)
-                // atEndNodeEvent?.Invoke(transform, waypoint.RandomNodePosition());
         }
     }
 
@@ -127,10 +112,10 @@ public class PathTracker : MonoBehaviour
         currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
         newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
 
-        finalDestinationPos = new Vector2(AStar.Instance.targetPos.x, AStar.Instance.targetPos.y);
+        finalDestinationPos = new Vector2(AStar.Instance.targetPos.x, AStar.Instance.targetPos.z);
     }
 
-    void CheckPath()
+    void GetNextOptimizedPathPoint()
     {
         //Loop through each remaining path and find a path position we can head straight to that is not blocked
         for (int i = 0; i < pathToFollow.Count; i++)

@@ -32,10 +32,24 @@ public class WorldScanner : MonoBehaviour
 
     public event Action onReScanEvent;
 
+    LevelInfo level;
+
     private void Awake()
     {
         instance = this;
 
+        //TODO: Change to listen to event from game manager
+        level = FindObjectOfType<LevelInfo>();
+
+        if(level != null)
+        {
+            gridSize.x = Mathf.RoundToInt(level.bounds.extents.x);
+            gridSize.y = Mathf.RoundToInt(level.bounds.extents.z);
+        }
+    }
+
+    private void Start()
+    {
         if (autoGenerateGridOnAwake)
             CreateGrid();
     }

@@ -8,78 +8,27 @@ using UnityEngine;
 
 namespace Gerallt
 {
-    public class NetworkPlayerList : NetworkBehaviour
+    public class NetworkPlayerList : ManagerBase<NetworkPlayerList>
     {
-        public static NetworkPlayerList Instance;
-        
         public ServerManager ServerManager;
         public NetworkList<LobbyPlayerData> NetworkedObjects;
 
-        public Action OnAwakeComplete;
-        
-        public void Awake()
+        public override void Awake()
         {
-            Instance = this;
+            base.Awake();
             
-            //NetworkedObjects = new NetworkList<LobbyPlayerData>(NetworkVariableReadPermission.Everyone, new List<LobbyPlayerData>());
             NetworkedObjects = new NetworkList<LobbyPlayerData>();
 
-            //if (ServerManager.IsServer)
-            {
-                ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
-                ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-                ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
-            }
-
-            if (OnAwakeComplete != null)
-            {
-                OnAwakeComplete();
-            }
+            //ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
+            ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+            ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
         }
 
-        private void Start()
-        {
-
-        }
-        
-        private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate connectionApprovedCallback)
-        {
-            Debug.Log("Client connection approval " + clientId.ToString());
-        }
-
-        public override void OnNetworkSpawn()
-        {
-            // {
-            //     ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
-            //     ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-            //     ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
-            // }
-            
-            // if (!IsClient || !IsHost)
-            // {
-            //     //enabled = false;
-            // }
-            // else
-            // {
-            //     ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-            //     ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
-            // }
-            
-            //ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-            //ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
-        }
-        //
-        // public override void OnNetworkDespawn()
+        // private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate connectionApprovedCallback)
         // {
-        //     ServerManager.OnClientConnectedCallback -= ServerManager_OnOnClientConnectedCallback;
-        //     ServerManager.OnClientDisconnectCallback -= ServerManager_OnOnClientDisconnectCallback;
+        //     Debug.Log("Client connection approval " + clientId.ToString());
         // }
         
-        public void OnDisable()
-        {
-            //ServerManager.OnClientConnectedCallback -= ServerManager_OnOnClientConnectedCallback;
-            //ServerManager.OnClientDisconnectCallback -= ServerManager_OnOnClientDisconnectCallback;
-        }
 
         private void ServerManager_OnOnClientConnectedCallback(ulong clientId)
         {
@@ -88,17 +37,6 @@ namespace Gerallt
             lobbyPlayerData.ClientIPAddress = GetClientIPAddress();
             
             NetworkedObjects.Add(lobbyPlayerData);
-
-            // if (NetworkedObjects.Count == 0)
-            // {
-            //     NetworkedObjects.Add(lobbyPlayerData);
-            // }
-            // else
-            // {
-            //     NetworkedObjects.Insert((int)clientId, lobbyPlayerData);
-            // }
-            
-            //UpdateOnConnectedClientRpc(clientId);
         }
         
         private void ServerManager_OnOnClientDisconnectCallback(ulong clientId)

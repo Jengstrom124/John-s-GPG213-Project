@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedCharacter: {fileID: 7227251270856557637, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
-  playerName: Test Name
   playerColour:
     m_InternalValue: {r: 0, g: 0, b: 0, a: 0}
-  controlledThing: {fileID: 0}
+  isNetworked: 1
+  controlled: {fileID: 0}
 --- !u!114 &8028888742822982695
 MonoBehaviour:
   m_ObjectHideFlags: 0
