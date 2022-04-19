@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LukeEagle : MonoBehaviour
 {
-	public bool[,] water;
+	public bool circuitBreaker;
 	public List<Vector3> controlPoints = new (2);
 
 	public Vector3 BezierFunction(List<Vector3> points, float t) 
@@ -33,14 +33,18 @@ public class LukeEagle : MonoBehaviour
 
 	private IEnumerator RunBezier()
 	{
+		//transform.position = BezierFunction();
+		
 		
 		yield return new WaitForSeconds(0.1f);
-		
+		if(!circuitBreaker)
+			RunBezier();
 	}
 	
-	private void Steer()
+	private void TurnBody(Vector3 p1, Vector3 p2)
 	{
-		transform.eulerAngles
+		Vector3 angles = transform.eulerAngles;
+		//angles = new Vector3(angles.x, , angles.z);
 	}
 
 	private void RandomizeBezierPoints()
