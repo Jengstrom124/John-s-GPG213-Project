@@ -38,10 +38,8 @@ public class PlayerController : NetworkBehaviour
     #region RPCs
     
     [ClientRpc]
-    private void SteerClientRpc(float input, PlayerTransform playerTransform)
+    private void SteerClientRpc(float input)
     {
-        ApplyTransform(playerTransform);
-            
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Steer(input);
     }
@@ -52,14 +50,12 @@ public class PlayerController : NetworkBehaviour
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Steer(input);
             
-        SteerClientRpc(input, PackageTransform());
+        SteerClientRpc(input);
     }
     
     [ClientRpc]
-    private void AccelerateClientRpc(float input, PlayerTransform playerTransform)
+    private void AccelerateClientRpc(float input)
     {
-        ApplyTransform(playerTransform);
-            
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Accelerate(input);
     }
@@ -70,14 +66,12 @@ public class PlayerController : NetworkBehaviour
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Accelerate(input);
             
-        AccelerateClientRpc(input, PackageTransform());
+        AccelerateClientRpc(input);
     }
     
     [ClientRpc]
-    private void ReverseClientRpc(float input, PlayerTransform playerTransform)
+    private void ReverseClientRpc(float input)
     {
-        ApplyTransform(playerTransform);
-            
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Reverse(input);
     }
@@ -88,14 +82,12 @@ public class PlayerController : NetworkBehaviour
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Reverse(input);
             
-        ReverseClientRpc(input, PackageTransform());
+        ReverseClientRpc(input);
     }
     
     [ClientRpc]
-    private void ActionClientRpc(PlayerTransform playerTransform)
+    private void ActionClientRpc()
     {
-        ApplyTransform(playerTransform);
-            
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action();
     }
@@ -106,14 +98,12 @@ public class PlayerController : NetworkBehaviour
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action();
             
-        ActionClientRpc(PackageTransform());
+        ActionClientRpc();
     }
     
     [ClientRpc]
-    private void Action2ClientRpc(PlayerTransform playerTransform)
+    private void Action2ClientRpc()
     {
-        ApplyTransform(playerTransform);
-            
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action2();
     }
@@ -124,14 +114,12 @@ public class PlayerController : NetworkBehaviour
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action2();
             
-        Action2ClientRpc(PackageTransform());
+        Action2ClientRpc();
     }
 
     [ClientRpc]
-    private void Action3ClientRpc(PlayerTransform playerTransform)
+    private void Action3ClientRpc()
     {
-        ApplyTransform(playerTransform);
-            
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action3();
     }
@@ -142,57 +130,57 @@ public class PlayerController : NetworkBehaviour
         controllable = controlled.GetComponentInChildren<IControllable>();
         controllable.Action3();
             
-        Action3ClientRpc(PackageTransform());
+        Action3ClientRpc();
     }
     
     #endregion
     
-    private void ApplyTransform(PlayerTransform playerTransform)
-    {
-        Transform _transform = controlled.transform;
-        Rigidbody rb = controlled.GetComponent<Rigidbody>();
-        
-        _transform.position = playerTransform.position;
-        _transform.rotation = playerTransform.rotation;
-        
-        if (rb != null)
-        {
-            rb.velocity = playerTransform.velocity;
-            rb.angularVelocity = playerTransform.angularVelocity;
-        }
-    }
-    
-    private PlayerTransform PackageTransform()
-    {
-        Transform _transform = controlled.transform;
-        Rigidbody rb = controlled.GetComponent<Rigidbody>();
-
-        Vector3 velocity = Vector3.zero;
-        Vector3 angularVelocity = Vector3.zero;
-
-        if (rb != null)
-        {
-            velocity = rb.velocity;
-            angularVelocity = rb.angularVelocity;
-        }
-            
-        PlayerTransform playerTransform = new PlayerTransform(
-            clientInfo.Value.ClientId,
-            _transform.position,
-            _transform.rotation,
-            velocity,
-            angularVelocity
-        );
-
-        return playerTransform;
-    }
+    // private void ApplyTransform(PlayerTransform playerTransform)
+    // {
+    //     Transform _transform = controlled.transform;
+    //     Rigidbody rb = controlled.GetComponent<Rigidbody>();
+    //     
+    //     _transform.position = playerTransform.position;
+    //     _transform.rotation = playerTransform.rotation;
+    //     
+    //     if (rb != null)
+    //     {
+    //         rb.velocity = playerTransform.velocity;
+    //         rb.angularVelocity = playerTransform.angularVelocity;
+    //     }
+    // }
+    //
+    // private PlayerTransform PackageTransform()
+    // {
+    //     Transform _transform = controlled.transform;
+    //     Rigidbody rb = controlled.GetComponent<Rigidbody>();
+    //
+    //     Vector3 velocity = Vector3.zero;
+    //     Vector3 angularVelocity = Vector3.zero;
+    //
+    //     if (rb != null)
+    //     {
+    //         velocity = rb.velocity;
+    //         angularVelocity = rb.angularVelocity;
+    //     }
+    //         
+    //     PlayerTransform playerTransform = new PlayerTransform(
+    //         clientInfo.Value.ClientId,
+    //         _transform.position,
+    //         _transform.rotation,
+    //         velocity,
+    //         angularVelocity
+    //     );
+    //
+    //     return playerTransform;
+    // }
 
     /// <summary>
     /// The networked version of Steer(float).
     /// </summary>
     private void Steer(float input)
     {
-        controllable.Steer(input);
+        //controllable.Steer(input); // Client side prediction
 
         if (isNetworked)
         {
@@ -206,7 +194,7 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Accelerate(float input)
     {
-        controllable.Accelerate(input);
+        //controllable.Accelerate(input); // Client side prediction
 
         if (isNetworked)
         {
@@ -220,7 +208,7 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Reverse(float input)
     {
-        controllable.Reverse(input);
+        //controllable.Reverse(input);  // Client side prediction
 
         if (isNetworked)
         {
@@ -234,7 +222,7 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Action()
     {
-        controllable.Action();
+        //controllable.Action();  // Client side prediction
 
         if (isNetworked)
         {
@@ -248,7 +236,7 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Action2()
     {
-        controllable.Action2();
+        //controllable.Action2();  // Client side prediction
 
         if (isNetworked)
         {
@@ -262,7 +250,7 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Action3()
     {
-        controllable.Action3();
+        //controllable.Action3();  // Client side prediction
 
         if (isNetworked)
         {
