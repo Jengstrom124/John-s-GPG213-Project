@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ManagerScene.unity
+    guid: 9e810b6ac59c8904f985506a648222ec
+  - enabled: 1
+    path: Assets/Team Members/Ollie/Ollie Scenes/Ollie Terrain Test.unity
+    guid: 2ca4c1280d8b5204f9260ae118f36037
   m_configObjects: {}
