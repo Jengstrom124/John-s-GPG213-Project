@@ -130,6 +130,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3428266415367426380, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428266415367426380, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428266415367426380, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428266415367426380, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428266415367426380, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 106
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428266415367426380, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -74
+      objectReference: {fileID: 0}
     - target: {fileID: 7688179865361111780, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_BlockingMask.m_Bits
       value: 247
@@ -248,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7688179867083144777, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000003315758
+      value: 0.00058789743
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
