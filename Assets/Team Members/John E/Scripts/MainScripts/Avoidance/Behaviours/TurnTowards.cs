@@ -29,9 +29,7 @@ public class TurnTowards : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         fish.runFromPredatorEvent += EscapePredator;
-        //fish.onDestinationAssignedEvent += SetDestinationTarget;
 
         pathTracker.newTargetAssignedEvent += SetDestinationTarget;
     }
@@ -81,7 +79,6 @@ public class TurnTowards : MonoBehaviour
 
     void SetDestinationTarget(Vector3 currentTarget)
     {
-        Debug.Log(currentTarget);
         destinationTarget = currentTarget;
     }
 }
