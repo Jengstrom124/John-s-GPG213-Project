@@ -21,7 +21,14 @@ public class AStar : ManagerBase<AStar>
 
     private void Start()
     {
-        WorldScanner.instance.onReScanEvent += ReScanPath;
+        if(WorldScanner.instance != null)
+        {
+            WorldScanner.instance.onReScanEvent += ReScanPath;
+        }
+        else
+        {
+            Debug.Log("WorldScanner Reference Missing");
+        }
     }
 
     //Overload Function for FindPath accepting a transform reference

@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 7803384113620637917}
   - component: {fileID: -7430627336242286335}
   - component: {fileID: -1422218037190890246}
+  - component: {fileID: 5162793547566278969}
   m_Layer: 7
   m_Name: FishModel
   m_TagString: Untagged
@@ -166,7 +167,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 1.3
+  m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -333,7 +334,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTransform: {fileID: 2219981257583123345}
+  turnMultiplier: 0.2
   target: {fileID: 0}
-  turnMultiplier: 0.025
-  targetXPos: 0
-  fish: {fileID: 0}
+  destinationTarget: {x: 0, y: 0, z: 0}
+  angle: 0
+--- !u!114 &5162793547566278969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219981257583123356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ca7b9d47aea144cb585b7b5b75ec9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 2219981257583123345}
+  distanceThreshold: 2
+  maxRayLength: 10
+  drawRaycasts: 0
+  finalDestinationPos: {x: 0, y: 0}
+  currentTargetPos: {x: 0, y: 0}

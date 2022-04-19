@@ -134,24 +134,6 @@ public class KevinTerrainGen : MonoBehaviour
             float perlinValue4 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
             return Mathf.Clamp(perlinValue4 * 0.1f,0.01f,0.99f);
         }*/
-
-        
-        /*if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
-        {
-            return perlinValue; 
-        }
-
-        return previousHeights[x, y];*/
-        /*if (perlinValue < 0.7f)
-        {
-            float perlinValue2 = Mathf.PerlinNoise(10f*xCoord*frequencyX+offsetX,10f*yCoord*frequencyY+offsetY);
-            return perlinValue2;
-        }
-        else
-        {
-            
-        }*/
-        return perlinValue;
     }
 }
     

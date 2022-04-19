@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLength: 30
-  dragMultiplier: 27
+  dragMultiplier: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 119
