@@ -5,6 +5,7 @@ using Gerallt;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -27,37 +28,112 @@ public class PlayerController : NetworkBehaviour
     }
 
     public NetworkVariable<Color> playerColour;
-
     public bool isNetworked = true;
-
-    //From here on down is taken from Cam's PlayerController - Aaron
     public GameObject controlled;
+    
+    private IControllable controllable;
 
+    #region Networked Behaviours 
+    
+    #region RPCs
+    
     [ClientRpc]
     private void SteerClientRpc(float input, PlayerTransform playerTransform)
     {
-        IControllable controllable = controlled.GetComponentInChildren<IControllable>();
-
-        if (controllable != null)
-        {
-            ApplyTransform(playerTransform);
+        ApplyTransform(playerTransform);
             
-            controllable.Steer(input);
-        }
+        controllable.Steer(input);
     }
 
     [ServerRpc]
     private void SteerServerRpc(float input)
     {
-        IControllable controllable = controlled.GetComponentInChildren<IControllable>();
-
-        if (controllable != null)
-        {
-            controllable.Steer(input);
+        controllable.Steer(input);
             
-            SteerClientRpc(input, PackageTransform());
-        }
+        SteerClientRpc(input, PackageTransform());
     }
+    
+    [ClientRpc]
+    private void AccelerateClientRpc(float input, PlayerTransform playerTransform)
+    {
+        ApplyTransform(playerTransform);
+            
+        controllable.Accelerate(input);
+    }
+
+    [ServerRpc]
+    private void AccelerateServerRpc(float input)
+    {
+        controllable.Accelerate(input);
+            
+        AccelerateClientRpc(input, PackageTransform());
+    }
+    
+    [ClientRpc]
+    private void ReverseClientRpc(float input, PlayerTransform playerTransform)
+    {
+        ApplyTransform(playerTransform);
+            
+        controllable.Reverse(input);
+    }
+
+    [ServerRpc]
+    private void ReverseServerRpc(float input)
+    {
+        controllable.Reverse(input);
+            
+        ReverseClientRpc(input, PackageTransform());
+    }
+    
+    [ClientRpc]
+    private void ActionClientRpc(PlayerTransform playerTransform)
+    {
+        ApplyTransform(playerTransform);
+            
+        controllable.Action();
+    }
+
+    [ServerRpc]
+    private void ActionServerRpc()
+    {
+        controllable.Action();
+            
+        ActionClientRpc(PackageTransform());
+    }
+    
+    [ClientRpc]
+    private void Action2ClientRpc(PlayerTransform playerTransform)
+    {
+        ApplyTransform(playerTransform);
+            
+        controllable.Action2();
+    }
+
+    [ServerRpc]
+    private void Action2ServerRpc()
+    {
+        controllable.Action2();
+            
+        Action2ClientRpc(PackageTransform());
+    }
+
+    [ClientRpc]
+    private void Action3ClientRpc(PlayerTransform playerTransform)
+    {
+        ApplyTransform(playerTransform);
+            
+        controllable.Action3();
+    }
+
+    [ServerRpc]
+    private void Action3ServerRpc()
+    {
+        controllable.Action3();
+            
+        Action3ClientRpc(PackageTransform());
+    }
+    
+    #endregion
     
     private void ApplyTransform(PlayerTransform playerTransform)
     {
@@ -104,17 +180,94 @@ public class PlayerController : NetworkBehaviour
     /// </summary>
     private void Steer(float input)
     {
-        IControllable controllable = controlled.GetComponentInChildren<IControllable>();
+        controllable.Steer(input);
 
-        if (controllable != null)
+        if (isNetworked)
         {
-            controllable.Steer(input);
+            // Update the server model. The server will later update the clients.
+            SteerServerRpc(input);
+        }
+    }
+    
+    /// <summary>
+    /// The networked version of Accelerate(float).
+    /// </summary>
+    private void Accelerate(float input)
+    {
+        controllable.Accelerate(input);
 
-            if (isNetworked)
-            {
-                // Update the server model. The server will later update the clients.
-                SteerServerRpc(input);
-            }
+        if (isNetworked)
+        {
+            // Update the server model. The server will later update the clients.
+            AccelerateServerRpc(input);
+        }
+    }
+    
+    /// <summary>
+    /// The networked version of Reverse(float).
+    /// </summary>
+    private void Reverse(float input)
+    {
+        controllable.Reverse(input);
+
+        if (isNetworked)
+        {
+            // Update the server model. The server will later update the clients.
+            ReverseServerRpc(input);
+        }
+    }
+    
+    /// <summary>
+    /// The networked version of Action().
+    /// </summary>
+    private void Action()
+    {
+        controllable.Action();
+
+        if (isNetworked)
+        {
+            // Update the server model. The server will later update the clients.
+            ActionServerRpc();
+        }
+    }
+    
+    /// <summary>
+    /// The networked version of Action2().
+    /// </summary>
+    private void Action2()
+    {
+        controllable.Action2();
+
+        if (isNetworked)
+        {
+            // Update the server model. The server will later update the clients.
+            Action2ServerRpc();
+        }
+    }
+    
+    /// <summary>
+    /// The networked version of Action().
+    /// </summary>
+    private void Action3()
+    {
+        controllable.Action3();
+
+        if (isNetworked)
+        {
+            // Update the server model. The server will later update the clients.
+            Action3ServerRpc();
+        }
+    }
+    
+    #endregion
+
+    //From here on down is taken from Cam's PlayerController - Aaron
+    
+    private void Start()
+    {
+        if (controlled != null)
+        {
+            controllable = controlled.GetComponentInChildren<IControllable>();
         }
     }
     
@@ -127,8 +280,6 @@ public class PlayerController : NetworkBehaviour
         // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
         if (controlled != null)
         {
-            IControllable controllable = controlled.GetComponentInChildren<IControllable>();
-
             if (controllable != null)
             {
                 if (InputSystem.GetDevice<Keyboard>().aKey.isPressed)
@@ -149,31 +300,31 @@ public class PlayerController : NetworkBehaviour
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    controllable.Accelerate(1f);
+                    Accelerate(1f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    controllable.Reverse(1f);
+                    Reverse(1f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().fKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    controllable.Action();
+                    Action();
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    controllable.Action2();
+                    Action2();
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().qKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    controllable.Action3();
+                    Action3();
                 }
             }
         }
