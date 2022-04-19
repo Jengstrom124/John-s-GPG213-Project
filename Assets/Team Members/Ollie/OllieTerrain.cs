@@ -26,7 +26,7 @@ public class OllieTerrain : MonoBehaviour
         width = 256;
         height = 256;
         scale = 20;
-        border = 0.05f;
+        border = 0.5f;
         xFrequency = 0.25f;
         yFrequency = 0.25f;
         offsetX = Random.Range(0f, 1000000f);
@@ -44,17 +44,24 @@ public class OllieTerrain : MonoBehaviour
         //store value
         //multiply if below
         //return final value
-        
-        float xCoord = (float)x / width * scale + offsetX;
-        float yCoord = (float)y / height * scale + offsetY;
+
+        float xCoord = (float) x / width * scale + offsetX;
+        float yCoord = (float) y / height * scale + offsetY;
 
       
         float value = Mathf.PerlinNoise(xCoord*xFrequency, yCoord*yFrequency);
-        if (value < 0.5f)
+        if (!(xCoord < border+offsetX || yCoord < border+offsetY || xCoord > ((scale+offsetX) - border) || yCoord > ((scale+offsetY) - border)))
         {
-            value = value * 0.9f;
+            if (value < 0.55f)
+            {
+                //flattens the bottom of the water to 0
+                value = 0; //value * 0.9f; // - this bit was used for creating a sharp drop off from the beaches, but shark could still get caught
+            }
+            return value; //generates the hills/beaches
         }
-
-        return value;
+        else //gives a flat, high border around the map. Should be modular based on scale
+        {
+            return 1;
+        }
     }
 }
