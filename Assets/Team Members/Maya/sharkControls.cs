@@ -44,7 +44,7 @@ namespace MayaStuff
 
         public void Steer(float input)
         {
-            sharkHead.DOLocalRotate(new Vector3(0, (input*10), 0), 1f, RotateMode.Fast);
+            sharkHead.DOLocalRotate(new Vector3(0, (input*15), 0), 1f, RotateMode.Fast);
         }
 
         public void Accelerate(float input)
