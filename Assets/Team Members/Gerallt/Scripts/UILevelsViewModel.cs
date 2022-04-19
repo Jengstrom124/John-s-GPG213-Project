@@ -15,8 +15,6 @@ namespace Gerallt
         [SerializeField] private GameObject levelUIPrefab;
         [SerializeField] private string managerScene = "ManagerScene";
         
-        public NetworkVariable<NetworkableString> selectedLevel = new NetworkVariable<NetworkableString>(string.Empty);
-
         public void LoadLevel(string levelName)
         {
             // Tell all the clients to load the specified level.
@@ -61,7 +59,7 @@ namespace Gerallt
                     SetActiveSceneClientRpc(sceneName);
             
                     // Update the selected level to the new one.
-                    selectedLevel.Value = sceneName;
+                    GameManager.Instance.selectedLevel.Value = sceneName;
                     
                     // Level has loaded so hide all UIs.
                     GameManager.Instance.RaiseChangeLevelsVisibilityClientRpc(false);

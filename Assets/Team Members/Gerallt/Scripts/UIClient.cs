@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Gerallt
@@ -16,23 +17,6 @@ namespace Gerallt
             UITextMeshPro.SetText(lobbyPlayerData.ClientId.ToString() 
                                   + " - " + lobbyPlayerData.PlayerName
                                   + " - " + lobbyPlayerData.ClientIPAddress);
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            parentView.OnPlayerDataChanged += ParentView_OnPlayerDataChanged;
-        }
-
-        private void ParentView_OnPlayerDataChanged(LobbyPlayerData newPlayerData)
-        {
-            UpdateUI(newPlayerData);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
     }
 }

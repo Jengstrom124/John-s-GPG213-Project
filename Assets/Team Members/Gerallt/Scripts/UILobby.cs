@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using Unity.Netcode;
@@ -18,9 +19,7 @@ namespace Gerallt
         public ServerManager ServerManager;
         
         private NetworkPlayerList GNetworkedListBehaviour;
-        
-        public event Action<LobbyPlayerData> OnPlayerDataChanged;
-        
+
         public void PlayerName_ValueChanged()
         {
             string playerName = UIPlayerNameInput.text;
@@ -34,13 +33,14 @@ namespace Gerallt
                 {
                     playerData.PlayerName = playerName;
                     playerData.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
-                    //GNetworkedListBehaviour.UpdatePlayerName(i, playerName);
+
                     GNetworkedListBehaviour.UpdatePlayerData(i, playerData);
-                    
-                    OnPlayerDataChanged?.Invoke(playerData);
                     break;
                 }
             }
+            
+            // Update the view given model changes.
+            UpdateClientsList();
         }
 
         public void Start()
@@ -86,7 +86,17 @@ namespace Gerallt
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)
         {
-            UpdateClientsList();
+            switch (changeEvent.Type)
+            {
+                case NetworkListEvent<LobbyPlayerData>.EventType.Add:
+                case NetworkListEvent<LobbyPlayerData>.EventType.Remove:
+                case NetworkListEvent<LobbyPlayerData>.EventType.RemoveAt:
+                case NetworkListEvent<LobbyPlayerData>.EventType.Insert:
+                case NetworkListEvent<LobbyPlayerData>.EventType.Clear:
+                case NetworkListEvent<LobbyPlayerData>.EventType.Value:
+                    UpdateClientsList();
+                    break;
+            }
         }
 
 
@@ -103,12 +113,19 @@ namespace Gerallt
             if (GNetworkedListBehaviour.NetworkedObjects != null)
             {
                 // Refresh client UI with newly connected clients:
+                List<LobbyPlayerData> duplicates = new List<LobbyPlayerData>();
+                
                 foreach(LobbyPlayerData lobbyPlayerData in GNetworkedListBehaviour.NetworkedObjects)
                 {
-                    GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
-                    UIClient uiClient = clientInstance.GetComponent<UIClient>();
-                    uiClient.parentView = this;
-                    uiClient.UpdateUI(lobbyPlayerData);
+                    if (!duplicates.Any(dup => dup.ClientId == lobbyPlayerData.ClientId))
+                    {
+                        GameObject clientInstance = Instantiate(UIClientPrefab, JoinedClients.transform);
+                        UIClient uiClient = clientInstance.GetComponent<UIClient>();
+                        uiClient.parentView = this;
+                        uiClient.UpdateUI(lobbyPlayerData);
+                    
+                        duplicates.Add(lobbyPlayerData);   
+                    }
                 }
             }
         }

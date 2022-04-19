@@ -36,7 +36,7 @@ namespace Gerallt
             lobbyPlayerData.ClientId = clientId;
             lobbyPlayerData.ClientIPAddress = GetClientIPAddress();
             
-            NetworkedObjects.Add(lobbyPlayerData);
+            NetworkedObjects.Add(lobbyPlayerData); 
         }
         
         private void ServerManager_OnOnClientDisconnectCallback(ulong clientId)
@@ -100,7 +100,7 @@ namespace Gerallt
         {
             if (ServerManager.IsClient)
             {
-                UpdatePlayerDataServerRpc(i, newData);    
+                UpdatePlayerDataServerRpc(i, newData);
             }
         }
         
@@ -119,6 +119,18 @@ namespace Gerallt
         
         [ServerRpc(RequireOwnership = false)]
         void UpdatePlayerDataServerRpc(int i, LobbyPlayerData newData)
+        {
+            if (i < 0 || i >= NetworkedObjects.Count)
+                return;
+            
+            NetworkedObjects[i] = newData;
+            
+            // Tell the clients the updated data:
+            //UpdatePlayerDataClientRpc(i, newData);
+        }
+        
+        [ClientRpc]
+        void UpdatePlayerDataClientRpc(int i, LobbyPlayerData newData)
         {
             if (i < 0 || i >= NetworkedObjects.Count)
                 return;

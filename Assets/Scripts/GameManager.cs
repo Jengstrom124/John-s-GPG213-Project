@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : ManagerBase<GameManager>
 {
     public List<UnityEngine.Object> levels = new List<UnityEngine.Object>();
+    public NetworkVariable<NetworkableString> selectedLevel = new NetworkVariable<NetworkableString>(string.Empty);
 
     public NetworkPlayerList networkList;
 
