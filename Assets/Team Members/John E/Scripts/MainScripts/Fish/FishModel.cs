@@ -36,8 +36,8 @@ public class FishModel : MonoBehaviour
         Neighbours.newNeighbourEvent += CheckForPredator;
         Neighbours.neighbourLeaveEvent += PredatorOutOfSight;
 
-        John.TestController.destinationSelectedEvent += SetDestination;
-        pathTracker.newTargetAssignedEvent += SetDestination;
+        //John.TestController.destinationSelectedEvent += SetDestination;
+        //pathTracker.newTargetAssignedEvent += SetDestination;
 
         //aStar.FindPath(transform, WorldScanner.instance.WorldToNodePos(new Vector3(10, 0, 41)));
     }
@@ -80,7 +80,8 @@ public class FishModel : MonoBehaviour
         }
     }
 
-    void SetDestination(Vector2 destination)
+    /*
+    void SetDestination(Vector3 destination)
     {
         //Generate Path
         //aStar.FindPath(transform, WorldScanner.instance.WorldToNodePos(new Vector3(destination.x, 0, destination.y)));
@@ -91,4 +92,5 @@ public class FishModel : MonoBehaviour
         onDestinationAssignedEvent?.Invoke(new Vector3(destination.x, 0, destination.y));
         //Debug.Log("DESTINATION SET");
     }
+    */
 }

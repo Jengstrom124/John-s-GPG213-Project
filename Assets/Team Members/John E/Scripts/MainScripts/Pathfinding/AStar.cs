@@ -5,46 +5,47 @@ using System;
 
 public class AStar : ManagerBase<AStar>
 {
-	
-    //public WorldScanner WorldScannerinstance;
-
     //List of nodes that create the path
     List<Node> path = new List<Node>();
 
     //Event to send through path once found
     public event Action<List<Node>> pathFoundEvent;
 
-    //For Reference Only
-    public Node targetNode;
-    public Vector3 targetPos;
-    Vector3 startPos;
-    Node startNode;
-
     [Header("Options:")]
     public bool visualizeOpenCloseLists = false;
 
-    [Header("Test Only/Ignore")]
-    public PathTracker thingToMove;
+    [Header("Reference Only: ")]
+    public Vector3 targetPos;
+    public Vector3 startPos;
+    public Node targetNode;
+
+    //[Header("Test Only/Ignore")]
+    //public PathTracker thingToMove;
 
     private void Start()
     {
         // if(thingToMove != null)
         // {
-            // thingToMove.atEndNodeEvent += FindPath;
+        // thingToMove.atEndNodeEvent += FindPath;
         // }
 
         WorldScanner.instance.onReScanEvent += ReScanPath;
-	}
+    }
 
-    
-    // public void FindPath(Node _startNode, Node _targetNode)
+    //Overload Function for FindPath accepting a transform reference
+    public void FindPath(Transform startTransform, Vector3 destination)
+    {
+        FindPath(startTransform.position, destination);
+    }
+
     public void FindPath(Vector3 _startPos, Vector3 _targetPos)
     {
-
-        // targetNode = _targetNode;
+        //Keep for ReScan Reference
+        targetPos = _targetPos;
         startPos = _startPos;
-        startNode = WorldScanner.instance.WorldToNodePos(_targetPos);
-        //Node targetNode = worldScanner.WorldToNodePos(targetPos);
+
+        Node startNode = WorldScanner.instance.WorldToNodePos(_startPos);
+        targetNode = WorldScanner.instance.WorldToNodePos(_targetPos);
 
         List<Node> openList = new List<Node>();
         List<Node> closedList = new List<Node>();
@@ -136,6 +137,7 @@ public class AStar : ManagerBase<AStar>
         }
     }
 
+    //Retrace the finalized path
     void RetracePath(Node start, Node end)
     {
         Node currentNode = end;
@@ -155,11 +157,7 @@ public class AStar : ManagerBase<AStar>
         pathFoundEvent?.Invoke(path);
     }
 
-    int DistanceCheck(Node a, Node b)
-    {
-        return (int)Vector2.Distance(WorldScanner.instance.NodeToWorldPos(a), WorldScanner.instance.NodeToWorldPos(b));
-    }
-
+    //Rescan a new path when objects in the world move (may need to take an alternate route - or a new better route has become available)
     void ReScanPath()
     {
         //If we have a path, rescan it
@@ -167,5 +165,10 @@ public class AStar : ManagerBase<AStar>
         {
             FindPath(startPos, targetPos);
         }
+    }
+
+    int DistanceCheck(Node a, Node b)
+    {
+        return (int)Vector2.Distance(WorldScanner.instance.NodeToWorldPos(a), WorldScanner.instance.NodeToWorldPos(b));
     }
 }
