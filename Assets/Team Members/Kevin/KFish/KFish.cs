@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using JetBrains.Annotations;
 using Luke;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,13 +14,19 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     public IStateBase flock;
     public IStateBase pathFollow;
 
+    public List<IStateBase> stateManager; 
+    
+    public bool flocking;
+    public bool following;
+    
     //Bool Checker
     public bool iWet;
     
     //Fish Movement Variables
     public Rigidbody fRb;
     public Transform tailObjectTransform;
-
+    
+    
     public float acceleration = 10f;
     public float currentSteeringAngle;
     public float steeringMax = 45f;
@@ -38,6 +45,7 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
         localVelocity = transform.InverseTransformDirection(fRb.velocity);
         tailLocalVelocity = tailObjectTransform.InverseTransformDirection(fRb.GetPointVelocity(tailPosition));
         
+        fRb.AddRelativeForce(fRb.mass*new Vector3 (-localVelocity.x, 0, 0));
         
         fRb.AddForceAtPosition(fRb.mass*tailObjectTransform.
             TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
@@ -62,7 +70,47 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
         {
             Steer(1f);
         }
+        
+        if(Input.GetKey(KeyCode.T))
+        {
+            flocking = true;
+            following = false;
+        }
+
+        if (Input.GetKey(KeyCode.Y))
+        {
+            following = true;
+            flocking = false; 
+        }
+
+        if (flocking)
+        {
+            flock.Enter();
+            pathFollow.Exit();
+        }
+
+        if (following)
+        {
+            pathFollow.Enter();
+            flock.Exit();
+        }
+        
+
+        if (IsWet)
+        {
+            transform.localScale = new Vector3(10f, 10f, 10f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(5f, 5f, 5f);
+        }
     }
+
+    void IControllable.Steer(float input)
+    {
+        Steer(input);
+    }
+    
     public bool IsWet { get; set; }
     public void Steer(float input)
     {
@@ -87,7 +135,6 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
         currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
         tailObjectTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
     }
-
     public void Accelerate(float input)
     {
         fRb.AddForceAtPosition(input*acceleration*transform.TransformDirection(Vector3.down), transform.position,0);

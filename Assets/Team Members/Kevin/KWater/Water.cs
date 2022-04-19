@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    public GameObject waterPrefab;
-    public Collider waterCollision; 
-    
+
     public void Update()
     {
         
