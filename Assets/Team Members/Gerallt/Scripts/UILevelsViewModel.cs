@@ -63,31 +63,10 @@ namespace Gerallt
                     
                     // Level has loaded so hide all UIs.
                     GameManager.Instance.RaiseChangeLevelsVisibilityClientRpc(false);
-                    
-                    // Destroy all cameras in scene, since Manager Scene has the main camera
-                    Scene currentScene = SceneManager.GetSceneByName(sceneName);
-                    
-                    GameObject[] roots = currentScene.GetRootGameObjects();
-                    for (int i = 0; i < currentScene.rootCount; i++)
-                    {
-                        GameObject rootObj = roots[i];
 
-                        Camera annoyingCamera2 = rootObj.GetComponent<Camera>();
+                    // Destroy cameras on new scene for each client
+                    DestroyCamerasClientRpc(sceneName);
 
-                        if (annoyingCamera2 != null)
-                        {
-                            Destroy(annoyingCamera2.gameObject);
-                        }
-                        
-                        Camera[] cameras = rootObj.GetComponentsInChildren<Camera>();
-
-                        for (int j = 0; j < cameras.Length; j++)
-                        {
-                            Camera annoyingCamera = cameras[j];
-                            
-                            Destroy(annoyingCamera.gameObject);
-                        }
-                    }
                     
                     GameManager.Instance.StartGame(); // Spawn the characters in the level
 
@@ -95,6 +74,35 @@ namespace Gerallt
             }
         }
 
+        [ClientRpc]
+        public void DestroyCamerasClientRpc(string sceneName)
+        {
+            // Destroy all cameras in scene, since Manager Scene has the main camera
+            Scene currentScene = SceneManager.GetSceneByName(sceneName);
+            
+            GameObject[] roots = currentScene.GetRootGameObjects();
+            for (int i = 0; i < currentScene.rootCount; i++)
+            {
+                GameObject rootObj = roots[i];
+
+                Camera annoyingCamera2 = rootObj.GetComponent<Camera>();
+
+                if (annoyingCamera2 != null)
+                {
+                    Destroy(annoyingCamera2.gameObject);
+                }
+                        
+                Camera[] cameras = rootObj.GetComponentsInChildren<Camera>();
+
+                for (int j = 0; j < cameras.Length; j++)
+                {
+                    Camera annoyingCamera = cameras[j];
+                            
+                    Destroy(annoyingCamera.gameObject);
+                }
+            }
+        }
+        
         public void PopulateLevels()
         {
             // Clear everything in view.
