@@ -3,14 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Water : MonoBehaviour
+public class Water : ManagerBase<Water>
 {
-
-    public void Update()
-    {
-        
-    }
-
     void OnTriggerEnter(Collider other)
     {
         IReactsToWater reactsToWater = other.GetComponent<IReactsToWater>();

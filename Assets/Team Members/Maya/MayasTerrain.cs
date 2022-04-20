@@ -20,12 +20,21 @@ public class MayasTerrain : MonoBehaviour
 
     public float xOffset = 100f;
     public float yOffset = 100f;
+    public float maxY;
+    public float maxX;
 
     void Awake()
     {
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LetsDoIt();
+        }
+    }
 
 
     void LetsDoIt()
@@ -34,10 +43,10 @@ public class MayasTerrain : MonoBehaviour
         height = 256;
         scale = 25;
         border = 0.25f;
-        xFreq = 0.333f;
-        yFreq = 0.333f;
-        xOffset = Random.Range(0f, 1000f);
-        yOffset = Random.Range(0f, 1000f);
+        xFreq = 0.3f;
+        yFreq = 0.5f;
+        xOffset = Random.Range(0f, 100000f);
+        yOffset = Random.Range(0f, 100000f);
         
         terrainGenerator.calculateHeightCallback = MayasTerrainHeight;
         terrainGenerator.GenerateTerrain(mayaTerrainData);
@@ -50,10 +59,6 @@ public class MayasTerrain : MonoBehaviour
         
         if (!(xVal < border+xOffset || yVal < border+yOffset || xVal > ((scale+xOffset) - border) || yVal > ((scale+yOffset) - border)))
         {
-            if (finalVal < 0.2222222f)
-            {
-                finalVal = 0;
-            }
             return finalVal;
         }
         

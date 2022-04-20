@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 153882590}
   - component: {fileID: 153882589}
   - component: {fileID: 153882588}
+  - component: {fileID: 4319590837459114068}
   m_Layer: 0
   m_Name: MayasShark3
   m_TagString: Untagged
@@ -163,6 +164,20 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!136 &4319590837459114068
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897934615503815064}
+  m_Material: {fileID: 13400000, guid: cba076aa5654a2b4a8917697628e0f01, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.25
+  m_Height: 6.13
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.86}
 --- !u!1 &949377707332300677
 GameObject:
   m_ObjectHideFlags: 0

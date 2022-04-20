@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IControllable
 {
     void Steer(float input);
@@ -8,15 +10,32 @@ public interface IControllable
     void Action3();
 }
 
-public interface IEdible
+public enum EdibleType
 {
-    void GetEaten(IPredator eatenBy);
+	Food,
+	Poison,
+	Booster
 }
 
+public struct EdibleInfo
+{
+	public EdibleType edibleType;
+	public float      amount;
+}
+
+// Anything that can be eaten
+public interface IEdible
+{
+    void       GetEaten(IPredator eatenBy);
+	EdibleInfo GetInfo();
+}
+
+
+// Anything that can eat
+// WHY: 
 public interface IPredator
 {
-	void GotFood(float amount);
-	void ChangeBoost(float amount);
+	Vector3 GetBumPosition();
 }
 
 public interface IReactsToWater

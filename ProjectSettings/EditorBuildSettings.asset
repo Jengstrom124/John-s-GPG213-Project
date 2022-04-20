@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Team Members/Ollie/Ollie Scenes/Ollie Terrain Test.unity
     guid: 2ca4c1280d8b5204f9260ae118f36037
+  - enabled: 1
+    path: Assets/Team Members/Kevin/KevinMainScene.unity
+    guid: 135565e11b0e06944850e634c6066bb6
   m_configObjects: {}

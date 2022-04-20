@@ -147,4 +147,15 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
     {
 	    
     }
+
+	public EdibleInfo GetInfo()
+	{
+		return new EdibleInfo();
+	}
+
+	public Vector3 GetBumPosition()
+	{
+		// TODO: Use a child GO or a tail GO
+		return Vector3.zero;
+	}
 }
