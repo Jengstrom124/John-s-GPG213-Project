@@ -133,7 +133,7 @@ public class PlayerController : NetworkBehaviour
         
         //replicatedAction();  // Client side prediction
 
-        if (isNetworked)
+        if (NetworkManager.Singleton.IsConnectedClient)
         {
             // Update the server model. The server will later update the clients.
             ReplicatedActionServerRpc(actionType);
@@ -153,7 +153,7 @@ public class PlayerController : NetworkBehaviour
         
         //replicatedAction(input);  // Client side prediction
 
-        if (isNetworked)
+        if (NetworkManager.Singleton.IsConnectedClient)
         {
             // Update the server model. The server will later update the clients.
             ReplicatedActionServerRpc(actionType, input);

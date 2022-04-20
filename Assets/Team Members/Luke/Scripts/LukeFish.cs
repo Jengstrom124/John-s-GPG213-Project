@@ -105,4 +105,9 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
     {
 	    
     }
+
+	public EdibleInfo GetInfo()
+	{
+		return new EdibleInfo();
+	}
 }

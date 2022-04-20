@@ -22,6 +22,8 @@ public class KevinTerrainGen : MonoBehaviour
     
     public float cliffLevel = 30f;
     public float seaLevel = 15f;
+    public float seaweedLevel = 12f;
+    public float coralLevel = 7f;
     public float highLands = 0.75f;
     public float landDrop = 0.4f;
     public float control = 0.5f;
@@ -69,12 +71,12 @@ public class KevinTerrainGen : MonoBehaviour
                     int randomTree = Random.Range(0, treePrefab.Count);
                     Instantiate(treePrefab[randomTree], pos,Quaternion.identity);
                 }
-                if (pos.y < seaLevel && perlinValue1 > 0.75 && seaweed)
+                if (pos.y < seaweedLevel && pos.y > coralLevel && perlinValue1 > 0.75 && seaweed)
                 {
                     Instantiate(seaweedPrefab, pos,Quaternion.identity);
                 }
 
-                if (pos.y < seaLevel && perlinValue1 > 0.4f && perlinValue1 < 0.5f && coral)
+                if (pos.y < coralLevel && perlinValue1 > 0.4f && perlinValue1 < 0.5f && coral)
                 {
                     //Debug.Log(perlinValue1);
                     Instantiate(coralPrefab, pos,Quaternion.identity);
@@ -91,13 +93,19 @@ public class KevinTerrainGen : MonoBehaviour
         
         
         float perlinValue = Mathf.PerlinNoise(xCoord*frequencyX+offsetX,yCoord*frequencyY+offsetY);
+        float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*20f,yCoord*frequencyY+offsetY*20f);
         /*float perlinHighLand = 0.9f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);
         float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);*/
-
-        if (perlinValue > 0.95f)
+        if (perlinValue > 0.9f)
         {
-            return perlinValue * Random.Range(5f,10f);
+            return perlinValue * Random.Range(1f,10f);
         }
+        /*
+        if (perlinValue > 0.85f && perlinValue < 0.89f)
+        {
+            return perlinValue - perlinValue2;
+        }
+        */
         
         
         /*if (perlinValue > 0.8f && perlinValue < 0.98f)

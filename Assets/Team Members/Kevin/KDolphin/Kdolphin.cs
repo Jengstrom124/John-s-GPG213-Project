@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Kshark : MonoBehaviour, IControllable, IReactsToWater
+public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
 {
     
     public Rigidbody sharkRb;
     
     public float sharkSpeed;
-    
+    public float jumpPower;
     public float currentSteeringAngle;
     public float steeringMax = 30f; 
     
@@ -22,6 +22,7 @@ public class Kshark : MonoBehaviour, IControllable, IReactsToWater
     public Vector3 tailLocalVelocity;
     public Vector3 tailPosition;
 
+    public Transform headTipTransform; 
     public Transform tailTransform; 
     
     // Start is called before the first frame update
@@ -51,6 +52,15 @@ public class Kshark : MonoBehaviour, IControllable, IReactsToWater
         {
             StartCoroutine(Decelerate());
         }
+
+        if (IsWet == true)
+        {
+            sharkRb.useGravity = false; 
+        }
+        else
+        {
+            sharkRb.useGravity = true; 
+        }
     }
 
     IEnumerator Decelerate()
@@ -68,7 +78,7 @@ public class Kshark : MonoBehaviour, IControllable, IReactsToWater
         
 
         currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
-        tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+        tailTransform.eulerAngles = new Vector3(0f, (currentYEuler + 2f * currentSteeringAngle), 0f);
         /*if (input < 0)
         {
             sharkRb.AddRelativeForce(new Vector3(0f, 0f, pivotAmount));
@@ -96,7 +106,8 @@ public class Kshark : MonoBehaviour, IControllable, IReactsToWater
 
     public void Action()
     {
-        
+        sharkRb.AddForceAtPosition(jumpPower*transform.TransformDirection(Vector3.up), headTipTransform.position, 0);
+        sharkRb.AddForceAtPosition(jumpPower*transform.TransformDirection(Vector3.forward), transform.position, 0);
     }
 
     public void Action2()

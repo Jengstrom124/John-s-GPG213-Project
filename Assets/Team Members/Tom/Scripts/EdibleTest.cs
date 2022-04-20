@@ -8,4 +8,9 @@ public class EdibleTest : MonoBehaviour, IEdible
     {
         Destroy(gameObject);
     }
+
+    public EdibleInfo GetInfo()
+    {
+        return new EdibleInfo();
+    }
 }
