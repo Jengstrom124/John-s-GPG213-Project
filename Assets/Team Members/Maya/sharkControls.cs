@@ -61,7 +61,7 @@ namespace MayaStuff
             float swingSpeed = (input * 10) / 3;
             float maxSwingAngle = 16;
             sharkForce.AddForceAtPosition(input*speed*transform.TransformDirection(Vector3.forward), transform.position, 0);
-            if (swingLeft)
+            /*if (swingLeft)
             {
                 tailBit1.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
                 tailBit2.DOLocalRotate(new Vector3(0, 0, maxSwingAngle), swingSpeed);
@@ -83,7 +83,7 @@ namespace MayaStuff
             else if(Math.Abs(tailBit1.localRotation.eulerAngles.z - -16f) < 1f)
             {
                 swingLeft = true;
-            }
+            }*/
         }
 
         public void Reverse(float input)
