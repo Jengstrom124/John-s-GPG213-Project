@@ -420,7 +420,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb2891d2f45a05a469fd4ffa36379fe0, type: 2}
+  - {fileID: 2100000, guid: 2b3874773039ca44ab2d1eac6697f678, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -564,7 +564,6 @@ MonoBehaviour:
   terrainGenerator: {fileID: 203358344}
   offsetX: 100
   offsetY: 100
-  fringe: 0.05
   xOctave1Frequency: 4
   xOctave2Frequency: 40
   yOctave1Frequency: 4
@@ -573,6 +572,7 @@ MonoBehaviour:
   amplitudeOctave2: 0.1
   dropOffHeight: 0.46
   highLandHeight: 0.7
+  fringe: 0.07
 --- !u!154 &665927328
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -659,11 +659,12 @@ MonoBehaviour:
   terrainGenerator: {fileID: 203358344}
   birdPrefabs:
   - {fileID: 1537502993957880, guid: cb3f7d144cf61584599adf3d4ccdc7cc, type: 3}
-  threshold: 0.9
-  frequency: 60
+  threshold: 0.95
+  frequency: 30
   xOffset: 0
   yOffset: 0
   fringe: 0
+  totalBirds: 0
 --- !u!1001 &1689796610
 PrefabInstance:
   m_ObjectHideFlags: 0

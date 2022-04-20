@@ -10,8 +10,7 @@ public class LukeTerrain : MonoBehaviour
 	
 	public float offsetX = 100f;
 	public float offsetY = 100f;
-	public float fringe = 0.05f;
-	
+
 	public float xOctave1Frequency = 4f;
 	public float xOctave2Frequency = 40f;
 	public float yOctave1Frequency = 4f;
@@ -20,6 +19,12 @@ public class LukeTerrain : MonoBehaviour
 	public float amplitudeOctave2 = 0.1f;
 	public float dropOffHeight = 0.42f;
 	public float highLandHeight = 0.7f;
+
+	public float fringe = 0.05f;
+	private float halfFringeHeight = 0.3f;
+	private float cosineFactor = 1f;
+	private float fringeDetaillessFactor = 1.1f;
+	private float fringeTranslationFactor = 1f;
 
 	//public float[,] previousHeights;
 
@@ -44,49 +49,65 @@ public class LukeTerrain : MonoBehaviour
 		
 		if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
 		{
-			if (octave1 > highLandHeight)
+			if (!(xCoord < fringe * fringeDetaillessFactor || xCoord > 1 - fringe * fringeDetaillessFactor
+			                                               || yCoord < fringe * fringeDetaillessFactor ||
+			                                               yCoord > 1 - fringe * fringeDetaillessFactor))
 			{
-				return octave1 + octave2;
+				if (octave1 > highLandHeight)
+				{
+					return octave1 + octave2;
+				}
+
+				if (octave1 < dropOffHeight)
+				{
+					return octave1 * 0.8f;
+				}
 			}
-			
-			if(octave1 < dropOffHeight)
-			{
-				return octave1 * 0.8f;
-			}
-		
+
 			return octave1;
 		}
 		
+		float t;
 		//fringe stuff
 		if (xCoord < fringe)
 		{
 			if (yCoord < fringe && xCoord > yCoord)
 			{
-				return 0.4f*Mathf.Cos(yCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(yCoord/fringe);
+				t = yCoord / fringe;
 			}
-			if (yCoord > 1 - fringe && xCoord > 1-yCoord)
-			{ 
-				return 0.4f*Mathf.Cos((1-yCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-yCoord)/fringe);
+			else if (yCoord > 1 - fringe && xCoord > 1-yCoord)
+			{
+				t = (1 - yCoord) / fringe;
 			}
-			return 0.4f*Mathf.Cos(xCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(xCoord/fringe);
+			else
+			{
+				t = xCoord / fringe;
+			}
 		}
-		if (xCoord > 1 - fringe)
+		else if (xCoord > 1 - fringe)
 		{
 			if (yCoord < fringe && 1-xCoord > yCoord)
 			{
-				return 0.4f*Mathf.Cos(yCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(yCoord/fringe);
+				t = yCoord / fringe;
 			}
-			if (yCoord > 1 - fringe && 1-xCoord > 1-yCoord)
+			else if (yCoord > 1 - fringe && 1-xCoord > 1-yCoord)
 			{
-				return 0.4f*Mathf.Cos((1-yCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-yCoord)/fringe);
+				t = (1 - yCoord) / fringe;
 			}
-			return 0.4f*Mathf.Cos((1-xCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-xCoord)/fringe);
+			else
+			{
+				t = (1 - xCoord) / fringe;
+			}
 		}
-		if (yCoord < fringe)
+		else if (yCoord < fringe)
 		{
-			return 0.4f*Mathf.Cos(yCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(yCoord/fringe);
+			t = yCoord / fringe;
 		}
-		return 0.4f*Mathf.Cos((1-yCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-yCoord)/fringe);
+		else
+		{
+			t = (1 - yCoord) / fringe;
+		}
+		return (halfFringeHeight*Mathf.Cos(t*Mathf.PI/cosineFactor)+halfFringeHeight/fringeTranslationFactor)*(-t+1) + octave1*Mathf.Clamp(4*t-3,0, 1);
 		
 		//return previousHeights[x,y];
 	}
@@ -109,9 +130,4 @@ public class LukeTerrain : MonoBehaviour
 		terrainGenerator.calculateHeightCallback = CalculateHeight;
 		terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
 	}
-	
-	void Update()
-    {
-
-    }
 }
