@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class SharkModel : MonoBehaviour, IPredator
 {
-    public void ChangeBoost(float amount)
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public void GotFood(float amount)
+    public Vector3 GetBumPosition()
     {
-        throw new System.NotImplementedException();
+        return Vector3.zero;
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
 {
@@ -9,6 +11,7 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
     
     public float sharkSpeed;
     public float jumpPower;
+    public float divePower;
     public float currentSteeringAngle;
     public float steeringMax = 30f; 
     
@@ -23,8 +26,9 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
     public Vector3 tailPosition;
 
     public Transform headTipTransform; 
-    public Transform tailTransform; 
-    
+    public Transform tailTransform;
+
+    public bool canLeap;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,13 +57,17 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
             StartCoroutine(Decelerate());
         }
 
-        if (IsWet == true)
+        if (IsWet == true|| transform.position.y < 8f)
         {
-            sharkRb.useGravity = false; 
+            sharkRb.useGravity = false;
+            canLeap = true;
+            sharkRb.AddForceAtPosition(transform.TransformDirection(Vector3.up)/2f, headTipTransform.position, 0);
         }
         else
         {
-            sharkRb.useGravity = true; 
+            sharkRb.useGravity = true;
+            canLeap = false;
+            sharkRb.AddForceAtPosition(transform.TransformDirection(Vector3.down)/2f, headTipTransform.position, 0);
         }
     }
 
@@ -67,6 +75,12 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
     {
         sharkRb.AddRelativeForce(new Vector3(0f,0f,-1f));
         yield return new WaitForSeconds(reduction);
+    }
+
+    IEnumerator Dive()
+    {
+        sharkRb.AddForceAtPosition(divePower*transform.TransformDirection(Vector3.down),headTipTransform.position,0f);
+        yield return new WaitForSeconds(0.5f);
     }
 
     public void Steer(float input)
@@ -106,8 +120,13 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
 
     public void Action()
     {
-        sharkRb.AddForceAtPosition(jumpPower*transform.TransformDirection(Vector3.up), headTipTransform.position, 0);
-        sharkRb.AddForceAtPosition(jumpPower*transform.TransformDirection(Vector3.forward), transform.position, 0);
+        if (canLeap = true)
+        {
+            sharkRb.AddForceAtPosition(jumpPower*transform.TransformDirection(Vector3.up), headTipTransform.position, 0);
+            sharkRb.AddForceAtPosition(jumpPower/2f*transform.TransformDirection(Vector3.forward), transform.position, 0);
+            StartCoroutine(Dive());
+        }
+   
     }
 
     public void Action2()

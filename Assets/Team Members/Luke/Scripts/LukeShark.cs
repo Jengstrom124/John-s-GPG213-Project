@@ -152,4 +152,9 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 	{
 		return new EdibleInfo();
 	}
+
+	public Vector3 GetBumPosition()
+	{
+		return postJointTransform.position;
+	}
 }

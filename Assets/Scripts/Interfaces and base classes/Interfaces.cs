@@ -1,11 +1,20 @@
+using UnityEngine;
+
 public interface IControllable
 {
-    void Steer(float input);
-    void Accelerate(float input);
-    void Reverse(float input);
-    void Action();
-    void Action2();
-    void Action3();
+	void Steer(float      input);
+	void Accelerate(float input);
+	void Reverse(float    input);
+	void Action();
+	void Action2();
+	void Action3();
+}
+
+public interface IRTS
+{
+	void Selected();
+	void Deselected();
+	void SetDestination(Vector3 position);
 }
 
 public enum EdibleType
@@ -24,7 +33,7 @@ public struct EdibleInfo
 // Anything that can be eaten
 public interface IEdible
 {
-    void       GetEaten(IPredator eatenBy);
+	void       GetEaten(IPredator eatenBy);
 	EdibleInfo GetInfo();
 }
 
@@ -33,7 +42,7 @@ public interface IEdible
 // WHY: 
 public interface IPredator
 {
-
+	Vector3 GetBumPosition();
 }
 
 public interface IReactsToWater

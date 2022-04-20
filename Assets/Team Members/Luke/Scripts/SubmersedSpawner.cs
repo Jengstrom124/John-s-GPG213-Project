@@ -61,10 +61,4 @@ public class SubmersedSpawner : MonoBehaviour
 		yOffset = Random.Range(-1000, 1000);
 		FunctionLoop();
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
