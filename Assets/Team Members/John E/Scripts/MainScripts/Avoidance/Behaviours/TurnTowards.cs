@@ -61,7 +61,7 @@ public class TurnTowards : MonoBehaviour
     //Transform Specific Direction Calculations
     void FindTransformDirection()
     {
-        //For using a transform reference
+        //For using a transform reference as a target
         if (target != null)
         {
             if (runAway)
@@ -81,7 +81,7 @@ public class TurnTowards : MonoBehaviour
     //Raw Vector Position Direction Calculations
     void FindRawPositionDirection()
     {
-        //Raw Vector position
+        //If a direction  has been assigned + using target null here to not overwrite running from a shark
         if (destinationTarget != Vector3.zero && target == null)
         {
             targetDirection = transform.InverseTransformPoint(destinationTarget);

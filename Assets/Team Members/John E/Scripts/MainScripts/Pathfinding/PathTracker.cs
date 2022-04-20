@@ -22,8 +22,11 @@ public class PathTracker : MonoBehaviour
     bool clearPathToTarget = false;
     List<Node> pathToFollow = new List<Node>();
 
-    //Event for when entity reaches destination
+    //EVENTS:
+    //Subscribe to destinationReachedEvent for reacting to when entity reaches destination
     public event Action destinationReachedEvent;
+
+    //Used in TurnTowards for updating the turn towards target
     public event Action<Vector3> newTargetAssignedEvent;
 
     // Start is called before the first frame update
@@ -34,12 +37,14 @@ public class PathTracker : MonoBehaviour
             AStar.Instance.pathFoundEvent += GeneratePathList;
 
             //For testing a random waypoint whilst we have no way to set a waypoint
-            AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
+            //AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
         }
         else
         {
             Debug.Log("AStar Reference Missing");
         }
+
+        John.TestController.destinationSelectedEvent += GetPathToDestination;
     }
 
     // Update is called once per frame
@@ -153,5 +158,10 @@ public class PathTracker : MonoBehaviour
                 clearPathToTarget = true;
             }
         }
+    }
+
+    void GetPathToDestination(Vector3 destination)
+    {
+        AStar.Instance.FindPath(myTransform, destination);
     }
 }
