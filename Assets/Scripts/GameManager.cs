@@ -59,35 +59,46 @@ public class GameManager : ManagerBase<GameManager>
         playerController.controlled = playerInstance;
     }
 
+    public void StartLevelSelect()
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            RaiseChangeLobbyVisibilityClientRpc(false); // Hide lobby UI
+            
+            //RaiseChangeLevelsVisibilityClientRpc(true); // Host selects level.
+            OnChangeLevelsVisibility?.Invoke(true); // Only host selects level
+        }
+    }
+    
     public void StartGame()
     {
         //spawn players
-        // foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
-        // {
-        //     NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
-        //     PlayerController playerController = playerObject.GetComponent<PlayerController>();
-        //     
-        //     Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
-        //
-        //     GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
-        //     playerController.controlled = spawnedCharacter;
-        //     
-        //     spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-        //     spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
-        //     NetworkObjectReference characterReference = spawnedCharacter;
-        //     SetupCameraClientRpc(player, characterReference);
-        //
-        //     if (IsServer)
-        //     {
-        //         NetworkObjectReference playerControllerReference = playerController.gameObject;
-        //         //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
-        //         SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
-        //     }
-        //
-        //     // We have a LobbyPlayerData for the current player created by the client.
-        //     LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
-        //     playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
-        //     playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+        foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
+            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+            
+            Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
+        
+            GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
+            playerController.controlled = spawnedCharacter;
+            
+            spawnedCharacter.GetComponent<NetworkObject>().Spawn();
+            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
+            NetworkObjectReference characterReference = spawnedCharacter;
+            SetupCameraClientRpc(player, characterReference);
+        
+            if (IsServer)
+            {
+                NetworkObjectReference playerControllerReference = playerController.gameObject;
+                //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
+                SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
+            }
+        
+            // We have a LobbyPlayerData for the current player created by the client.
+            LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
+            playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
+            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
 
             
             
@@ -112,17 +123,9 @@ public class GameManager : ManagerBase<GameManager>
             //     go.GetComponent<NetworkObject>().Spawn();
             //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
             // }
-        //}
-
-        if (NetworkManager.Singleton.IsServer)
-        {
-            RaiseChangeLobbyVisibilityClientRpc(false); // Hide lobby UI
-            
-            //RaiseChangeLevelsVisibilityClientRpc(true); // Host selects level.
-            OnChangeLevelsVisibility?.Invoke(true); // Only host selects level
-            
-            //RaiseStartEventClientRpc(); // Now called in Level Select when level is loaded.
         }
+
+        RaiseStartEventClientRpc(); // TODO: People subscribing to this event should spawn characters/players for the level
     }
 
     [ClientRpc]
