@@ -91,36 +91,9 @@ public class GameManager : ManagerBase<GameManager>
         //spawn players
         foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
         {
-            NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
-            PlayerController playerController = playerObject.GetComponent<PlayerController>();
+            SpawnPlayer(player);
             
-            Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
-        
-            GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
-            playerController.controlled = spawnedCharacter;
-            
-            spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
-            NetworkObjectReference characterReference = spawnedCharacter;
-            SetupCameraClientRpc(player, characterReference);
-        
-            if (IsServer)
-            {
-                NetworkObjectReference playerControllerReference = playerController.gameObject;
-                //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
-                SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
-            }
-        
-            // We have a LobbyPlayerData for the current player created by the client.
-            LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(player);
-            playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
-            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-
-            AssignPlayerStatsUIClientRpc(characterReference, lobbyPlayerData);
-
             // OLD CODE
-
-
             //There has to be a less fragile way of linking the prefab to the index?
             // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
             //     .GetComponent<PlayerController>()
@@ -142,6 +115,36 @@ public class GameManager : ManagerBase<GameManager>
         }
 
         RaiseStartEventClientRpc(); // TODO: People subscribing to this event should spawn characters/players for the level
+    }
+
+    public void SpawnPlayer(ulong clientID)
+    {
+        NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientID].PlayerObject;
+        PlayerController playerController = playerObject.GetComponent<PlayerController>();
+        
+        Debug.Log("ID " + clientID + "; " + "Char = " + playerController.selectedCharacter);
+        
+        GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
+        playerController.controlled = spawnedCharacter;
+            
+        spawnedCharacter.GetComponent<NetworkObject>().Spawn();
+        spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientID);
+        NetworkObjectReference characterReference = spawnedCharacter;
+        SetupCameraClientRpc(clientID, characterReference);
+        
+        if (IsServer)
+        {
+            NetworkObjectReference playerControllerReference = playerController.gameObject;
+            //SetupLocalPlayerControllerServerRpc(player, characterReference, playerControllerReference);
+            SetupLocalPlayerControllerClientRpc(clientID, characterReference, playerControllerReference);
+        }
+        
+        // We have a LobbyPlayerData for the current player created by the client.
+        LobbyPlayerData lobbyPlayerData = networkList.GetPlayerDataByClientId(clientID);
+        playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
+        playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+        
+        AssignPlayerStatsUIClientRpc(characterReference, lobbyPlayerData);
     }
 
     [ClientRpc]
