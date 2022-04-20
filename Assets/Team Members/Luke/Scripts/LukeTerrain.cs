@@ -20,11 +20,11 @@ public class LukeTerrain : MonoBehaviour
 	public float dropOffHeight = 0.42f;
 	public float highLandHeight = 0.7f;
 
-	public float fringe = 0.05f;
-	private float halfFringeHeight = 0.3f;
+	public float fringe = 0.07f;
+	private float halfFringeHeight = 0.25f;
 	private float cosineFactor = 1f;
-	private float fringeDetaillessFactor = 1.1f;
-	private float fringeTranslationFactor = 1f;
+	private float fringeDetaillessFactor = 1.2f;
+	private float fringeTranslationFactor = 0.5f;
 
 	//public float[,] previousHeights;
 
