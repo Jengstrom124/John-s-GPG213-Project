@@ -144,15 +144,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 25.66
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9.1
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 11.43
       objectReference: {fileID: 0}
     - target: {fileID: 8000515071473426175, guid: fc796e6f524485f4688f79da70d43cbc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -570,9 +570,10 @@ MonoBehaviour:
   yOctave2Frequency: 40
   amplitudeOctave1: 0.85
   amplitudeOctave2: 0.1
-  dropOffHeight: 0.46
+  dropOffHeight: 0.45
   highLandHeight: 0.7
   fringe: 0.07
+  fringeDetaillessFactor: 1.2
 --- !u!154 &665927328
 TerrainCollider:
   m_ObjectHideFlags: 0
