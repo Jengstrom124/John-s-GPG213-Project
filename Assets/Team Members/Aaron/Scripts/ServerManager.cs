@@ -7,6 +7,7 @@ using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -16,9 +17,8 @@ public class ServerManager : NetworkManager
     public Test test;
     public Vector3 spawn;
     public LobbyPlayerData? currentPlayer;
-    
-    [SerializeField] private NetworkPlayerList networkedListBehaviour;
-    
+    public string serverPassword = "room password";
+
     //passing a ulong for ClientId?
     public event Action<ulong> JoinServerEvent;
 
@@ -52,9 +52,15 @@ public class ServerManager : NetworkManager
         //How else to grab this besides FindObject?
         characterSelect = FindObjectOfType<CharacterSelect>();
         test = FindObjectOfType<Test>();
-        networkedListBehaviour = FindObjectOfType<NetworkPlayerList>();
-        
+
         //OnClientConnectedCallback += OnConnectedCallback;
+        
+        OnClientConnectedCallback += ServerManager_OnClientConnectedCallback;
+    }
+
+    public void OnConnectedToServer()
+    {
+        //OnClientConnectedCallback += ServerManager_OnClientConnectedCallback;
     }
 
     public NetworkObject Resolve(NetworkObjectReference networkObjectRef)
@@ -85,13 +91,13 @@ public class ServerManager : NetworkManager
     public void JoinServer(LobbyPlayerData? currentPlayerData = null, bool autoCreateHost = false)
     {
         currentPlayer = currentPlayerData;
-        
-        //client = NetworkManager.Singleton.GetInstanceID();
 
+        
+        
         if (autoCreateHost)
         {
-            StartClient();
-            
+            Client();
+
             // // Try to connect to server, if it fails connecting then start a new host.
             // // If the server hasn't been created, then StartHost() otherwise StartClient()
             //
@@ -105,14 +111,67 @@ public class ServerManager : NetworkManager
             //
             //     StartCoroutine(ConnectionTimeout());
             //     
-            //     StartClient();
+            //     Client();
             // }
+            
+            ulong client = this.LocalClientId;
+
+            // SceneManager.SetClientSynchronizationMode(LoadSceneMode.Additive);
+            // SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
         }
         
-        ulong client = this.LocalClientId;
+
         
         //Pass in ClientId
-        JoinServerEvent?.Invoke(client);
+        JoinServerEvent?.Invoke(LocalClientId);
+    }
+
+    private void SceneManager_OnSceneEvent(SceneEvent sceneEvent)
+    {
+        SceneManager.SetClientSynchronizationMode(LoadSceneMode.Additive);
+        sceneEvent.LoadSceneMode = LoadSceneMode.Additive;
+        
+        switch (sceneEvent.SceneEventType)
+        {
+            //case SceneEventType.SynchronizeComplete: // Clients have loaded all scenes that were loaded by the server.
+            //case SceneEventType.LoadEventCompleted:
+            case SceneEventType.LoadComplete:
+                string sceneName = sceneEvent.SceneName;
+                if (sceneName != UILevelsViewModel.managerScene)
+                {
+                    SceneManager.OnSceneEvent -= SceneManager_OnSceneEvent;
+
+                    LoadSceneEventServerRpc(sceneName);
+                    //UILevelsViewModel.Instance.LoadEventCompleted(sceneName, true);
+                    
+                    //UILevelsViewModel.Instance.StartPlayerServerRpc();
+                }
+
+                break;
+        }
+    }
+
+    [ServerRpc]
+    private void LoadSceneEventServerRpc(string sceneName)
+    {
+        UILevelsViewModel.Instance.LoadEventCompleted(sceneName, true);
+    }
+    
+    private void ServerManager_OnClientConnectedCallback(ulong clientId)
+    {
+        if (HasGameStartedState.Instance.hasGameStarted.Value)
+        {
+            if (currentPlayer.HasValue)
+            {
+                LobbyPlayerData lobbyPlayerData = currentPlayer.Value;
+
+                lobbyPlayerData.ClientId = clientId;
+                
+                NetworkPlayerList.Instance.UpdatePlayerDataServerRpc(lobbyPlayerData);    
+            }
+
+            GameManager.Instance.StartPlayerServerRpc(clientId);
+        }
     }
 
     IEnumerator ConnectionTimeout()
@@ -131,6 +190,38 @@ public class ServerManager : NetworkManager
         }
     }
 
+    public void Host()
+    {
+        ConnectionApprovalCallback += OnConnectionApprovalCallback;
+        NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
+        
+        StartHost();
+        
+        SceneManager.SetClientSynchronizationMode(LoadSceneMode.Additive);
+    }
+
+    public void Client()
+    {
+        NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
+
+        StartClient();
+    }
+    
+    private void OnConnectionApprovalCallback(byte[] connectionData, ulong clientId, ConnectionApprovedDelegate connectionApprovedDelegate)
+    {
+        bool approve = true;
+        bool createPlayerObject = true;
+
+        string password = System.Text.Encoding.UTF8.GetString(connectionData);
+        
+        // Position to spawn the player object at, set to null to use the default position
+        Vector3? positionToSpawnAt = Vector3.zero;
+
+        // Rotation to spawn the player object at, set to null to use the default rotation
+        Quaternion rotationToSpawnWith = Quaternion.identity;
+
+        connectionApprovedDelegate(createPlayerObject, null, approve, positionToSpawnAt, rotationToSpawnWith);
+    }
     
     //Starting Game, waiting on event from lobby
     public void StartGame()

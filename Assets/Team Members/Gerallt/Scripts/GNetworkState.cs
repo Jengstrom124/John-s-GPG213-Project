@@ -17,7 +17,7 @@ namespace Gerallt
         public void Init(ServerManager networkManager)
         {
             go = Instantiate(gNetworkedListBehaviourPrefab);
-            go.GetComponent<NetworkPlayerList>().ServerManager = networkManager;
+            //go.GetComponent<NetworkPlayerList>().ServerManager = networkManager;
         }
 
         public void Spawn()
