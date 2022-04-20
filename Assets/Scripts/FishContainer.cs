@@ -5,10 +5,37 @@ using UnityEngine;
 
 public class FishContainer : MonoBehaviour
 {
-    public List<IEdible> ContainerContents = new List<IEdible>();
+    public List<FishBase> ContainerContents = new List<FishBase>();
 
-    public void AddToStomach(IEdible thingToAdd)
+    public void AddToStomach(FishBase thingToAdd)
     {
         ContainerContents.Add(thingToAdd);
+    }
+
+    //Re-Activate all fish in the belly of the shark if it's killed/leaves the game
+    public void ReenableEatenFish()
+    {
+        foreach (var fish in ContainerContents)
+        {
+            fish.enabled = true;
+        }
+        
+        ContainerContents.Clear();
+    }
+
+    //Re-activate the last fish eaten if boost used; remove it from the list
+    public void PopFishFromGuts(FishBase lastFish)
+    {
+        //finds last fish
+        int lastIndex = ContainerContents.Count - 1;
+        lastFish = ContainerContents[lastIndex];
+        
+        //gets the shit spot of the shark
+        Vector3 shitSpot = GetComponent<IPredator>().GetBumPosition();
+        lastFish.transform.position = shitSpot;
+        
+        //reactivate and remove from list
+        lastFish.enabled = true;
+        ContainerContents.Remove(lastFish);
     }
 }
