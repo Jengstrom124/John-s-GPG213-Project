@@ -36,7 +36,7 @@ namespace MayaStuff
         // Update is called once per frame
         void FixedUpdate()
         {
-            localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
+            //localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
             Steer(Input.GetAxis("Horizontal"));
             Accelerate(Input.GetAxis("Vertical"));
             Action();
