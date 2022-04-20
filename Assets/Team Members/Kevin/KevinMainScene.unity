@@ -780,7 +780,7 @@ MonoBehaviour:
   terrainData: {fileID: 736514450}
   offsetX: 100
   offsetY: 100
-  fringe: 0.5
+  fringe: 0.03
   frequencyX: 5
   frequencyY: 5
   yHeight: 20

@@ -19,9 +19,10 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     public GameObject car;
     public bool boosting = false;
     public bool jumping;
-    public float jumpAngle;
     public float jumpHeight;
     public float jumpDistance;
+    public Transform model;
+    public RigidbodyConstraints originalConstraints;
 
     //left overs ported from Vehicles project - maybe needed later for changing sharks
     //although I think this is unlikely

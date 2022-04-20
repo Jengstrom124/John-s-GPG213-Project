@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
+public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater, IRTS
 {
     
     public Rigidbody sharkRb;
@@ -140,4 +140,18 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater
     }
 
     public bool IsWet { get; set; }
+    public void Selected()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Deselected()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SetDestination(Vector3 position)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Ollie
@@ -15,9 +16,9 @@ namespace Ollie
             turnSpeed = 10;
             car = this.gameObject;
             jumping = false;
-            jumpAngle = 45;
-            jumpHeight = 10;
-            jumpDistance = 10;
+            jumpHeight = 20;
+            jumpDistance = 00;
+            originalConstraints = rb.constraints;
         }
 
         public override void Action()
@@ -45,28 +46,43 @@ namespace Ollie
                 //turn off y constraint
                 //rotate on y axis, maybe 45 degrees up?
                 //apply force and lock controls?
-                rb.constraints = RigidbodyConstraints.None;
-                rb.constraints = RigidbodyConstraints.FreezeRotationY;
-                rb.constraints = RigidbodyConstraints.FreezeRotationZ;
-                rb.AddRelativeTorque(jumpAngle,0,0);
-                rb.constraints = RigidbodyConstraints.FreezeRotationX;
-                rb.AddForce(0,jumpHeight,jumpDistance, ForceMode.Acceleration);
+                
+                //rb.constraints = RigidbodyConstraints.None;
+                //rb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                model.localRotation = Quaternion.Euler(0,90,-45);
+                //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                rb.AddForce(0,jumpHeight,jumpDistance, ForceMode.Impulse);
             }
             else
             {
                 print("dolphin's can't double jump, dummy");
             }
         }
+        
+        //turn off drags when you're flying above water
+        //use IReactsToWater to check if in water
+        //fix capsule collider
 
         IEnumerator JumpCooldownCoroutine()
         {
             print("dolphin go yeet");
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(0.75f);
+            model.localRotation = Quaternion.Euler(0,90,45);
+            // if (rb.transform.position.y > 10)
+            // {
+            //     rb.mass = 5;
+            //     yield return null;
+            // }
+            // else
+            // {
+            //     rb.mass = 1;
+            // }
+            yield return new WaitForSeconds(0.33f);
+            model.localRotation = Quaternion.Euler(0,90,0);
             jumping = false;
-            rb.constraints = RigidbodyConstraints.None;
-            rb.constraints = RigidbodyConstraints.FreezeRotationX;
-            rb.constraints = RigidbodyConstraints.FreezePositionY;
-            rb.constraints = RigidbodyConstraints.FreezeRotationZ;
+            //rb.constraints = RigidbodyConstraints.None;
+            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ;
         }
         
         void SpeedBoost()
