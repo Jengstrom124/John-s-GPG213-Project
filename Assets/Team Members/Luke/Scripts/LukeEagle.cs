@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class LukeEagle : MonoBehaviour
 {
 	public bool circuitBreaker;
+	public float altitude = 20f;
 	public List<Vector3> controlPoints = new(4);
 	public int iterationsPerCourse = 200;
 	public float durationPerCourse = 7f;
@@ -85,6 +86,9 @@ public class LukeEagle : MonoBehaviour
 		yield return new WaitForSeconds(0.05f);
 		if (turningIteration < 10)
 		{
+			Vector3 tempPosition1 = transform.position;
+			Vector3 tempPosition2 = BezierFunction(controlPoints, progress);
+			TurnBody(tempPosition1, tempPosition2);
 			StartCoroutine(BetweenCourses());
 		}
 		else
@@ -106,11 +110,11 @@ public class LukeEagle : MonoBehaviour
 	private void TurnBody(Vector3 p1, Vector3 p2)
 	{
 		Vector3 heading = p2 - p1;
-		Vector3 currentEulers = transform.rotation.eulerAngles;
-		float fraction = 0.2f;
-		float resultantX = currentEulers.x+(heading.x-currentEulers.x)*fraction;
-		float resultantZ = currentEulers.z+(heading.z-currentEulers.z)*fraction;
-		transform.rotation = Quaternion.LookRotation(new Vector3(resultantX, heading.y, resultantZ), Vector3.up);
+		if (heading != Vector3.zero)
+		{
+			Quaternion newRotation = Quaternion.LookRotation(heading);
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 20 * Time.deltaTime);
+		}
 	}
 
 	private void InitializeBezierPoints(List<Vector3> cPs)
@@ -120,7 +124,7 @@ public class LukeEagle : MonoBehaviour
 		for (int i = 1; i < cPs.Capacity; i++)
 		{
 			float controlX = terrainPosition.x + Random.Range(0f, terrainDimensions.x);
-			float controlY = terrainPosition.y + 15f;
+			float controlY = terrainPosition.y + altitude;
 			float controlZ = terrainPosition.z + Random.Range(0f, terrainDimensions.z);
 
 			controlX = position.x + Mathf.Clamp(controlX - position.x, -rangePerCourse, rangePerCourse);
@@ -138,7 +142,7 @@ public class LukeEagle : MonoBehaviour
 		for (int i = 2; i < controlPoints.Count; i++)
 		{
 			float controlX = terrainPosition.x + Random.Range(0f, terrainDimensions.x);
-			float controlY = terrainPosition.y + 15f;
+			float controlY = terrainPosition.y + altitude;
 			float controlZ = terrainPosition.z + Random.Range(0f, terrainDimensions.z);
 
 			controlX = position.x + Mathf.Clamp(controlX - position.x, -rangePerCourse, rangePerCourse);
