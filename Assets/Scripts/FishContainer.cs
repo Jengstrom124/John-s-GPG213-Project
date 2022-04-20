@@ -6,10 +6,11 @@ using UnityEngine;
 public class FishContainer : MonoBehaviour
 {
     public List<FishBase> ContainerContents = new List<FishBase>();
-
+    
     public void AddToStomach(FishBase thingToAdd)
     {
         ContainerContents.Add(thingToAdd);
+        thingToAdd.enabled = false;
     }
 
     //Re-Activate all fish in the belly of the shark if it's killed/leaves the game
