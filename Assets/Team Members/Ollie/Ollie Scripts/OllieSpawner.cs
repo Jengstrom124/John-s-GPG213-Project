@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 
 public class OllieSpawner : MonoBehaviour
 {
-    public OllieTerrain ollieTerrain;
+    //public OllieTerrain ollieTerrain;
     public Terrain myTerrain;
-    public GameObject cube;
+    //public GameObject cube;
     private Vector3 scaleUp;
     
     //public list, drag desired prefabs into it
@@ -17,12 +17,12 @@ public class OllieSpawner : MonoBehaviour
     public List<GameObject> shorelinePrefabList;
     public List<GameObject> underwaterDebrisList;
 
-    [Header("Array")]
-    [SerializeField] public float[,] heightsArray;
+    // [Header("Array")]
+    // [SerializeField] public float[,] heightsArray;
 
     private void Start()
     {
-        heightsArray = ollieTerrain.ollieTerrainData.GetHeights(0,0,(int)256,(int)256);
+        //heightsArray = ollieTerrain.ollieTerrainData.GetHeights(0,0,(int)256,(int)256);
         scaleUp = new Vector3(2, 2, 2);
 
         for (int x = 0; x < 256; x++)

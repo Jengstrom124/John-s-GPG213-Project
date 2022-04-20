@@ -17,7 +17,11 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     public bool playerInVehicle;
     public Transform tailTurnPoint;
     public GameObject car;
-    private bool boosting = false;
+    public bool boosting = false;
+    public bool jumping;
+    public float jumpAngle;
+    public float jumpHeight;
+    public float jumpDistance;
 
     //left overs ported from Vehicles project - maybe needed later for changing sharks
     //although I think this is unlikely
@@ -30,30 +34,6 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
         //both are currently unused
         localVelocity = transform.InverseTransformDirection(rb.velocity);
         wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
-    }
-
-    
-    //Action 2 - E key
-    void SpeedBoost()
-    {
-        if (!boosting)
-        {
-            StartCoroutine(SpeedBoostCoroutine());
-        }
-    }
-
-    IEnumerator SpeedBoostCoroutine()
-    {
-        //doubles speed for 1.5 seconds
-        //prevents reapplication for 3 seconds after deactivation
-        print("shark go zoom");
-        boosting = true;
-        forwardSpeed = forwardSpeed * 2;
-        yield return new WaitForSeconds(1.5f);
-        forwardSpeed = forwardSpeed / 2;
-        yield return new WaitForSeconds(3f);
-        boosting = false;
-        
     }
 
     #region IControllable Interface
@@ -88,15 +68,15 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
         print("sharks can't reverse, dummy");
     }
 
-    public void Action() // F key
+    public virtual void Action() // F key
     {
         
     }
-    public void Action2() // E key
+    public virtual void Action2() // E key
     {
-        SpeedBoost();
+        
     }
-    public void Action3() // Q key
+    public virtual void Action3() // Q key
     {
         
     }
