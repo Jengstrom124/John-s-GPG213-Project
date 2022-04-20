@@ -147,4 +147,9 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
     {
 	    
     }
+
+	public EdibleInfo GetInfo()
+	{
+		return new EdibleInfo();
+	}
 }
