@@ -337,6 +337,8 @@ GameObject:
   - component: {fileID: 3472386528725820213}
   - component: {fileID: -1202470686224970990}
   - component: {fileID: -738190665939722821}
+  - component: {fileID: 1368012310}
+  - component: {fileID: 1368012309}
   m_Layer: 0
   m_Name: KShark
   m_TagString: Untagged
@@ -370,8 +372,8 @@ Rigidbody:
   m_GameObject: {fileID: 3378303050871511743}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 3
-  m_AngularDrag: 3
+  m_Drag: 5
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -389,12 +391,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0862aed8a1cfd4040b9ed64b24d0a226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharkRb: {fileID: 0}
-  sharkSpeed: 5
-  turningSpeed: 0
-  pivotAmount: 0
+  sharkRb: {fileID: 2709366438121233967}
+  sharkSpeed: 15
+  turningSpeed: 10
+  pivotAmount: 5
   reduction: 0.5
-  sharkObject: {fileID: 0}
+  sharkObject: {fileID: 3378303050871511743}
   localVelocity: {x: 0, y: 0, z: 0}
   tailPosition: {x: 0, y: 0, z: 0}
   tailTransform: {fileID: 0}
@@ -453,6 +455,37 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!136 &1368012310
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3378303050871511743}
+  m_Material: {fileID: 13400000, guid: 8cf9d30181692d44db9e92b6bfd5cb28, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.83
+  m_Height: 5.82
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.11, z: -0.73}
+--- !u!114 &1368012309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3378303050871511743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feeler: {fileID: 8743433351232840262, guid: a8267c37086ec6b4eb7c4223aee4f217, type: 3}
+  emergencyFeeler: {fileID: 8743433351232840262, guid: b7ec4f58d085fe24597e495e134ad3d7, type: 3}
+  standardFeelerCount: 5
+  emergencyFeelerCount: 3
+  fov: 20
 --- !u!1 &4082676592158035826
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +747,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0000028978102, y: -0.012149505, z: 0.001810691}
     m_Extent: {x: 0.0045126122, y: 0.005697552, z: 0.004988405}
   m_DirtyAABB: 0
+--- !u!1 &5413536683871283467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2295235213069584251}
+  m_Layer: 0
+  m_Name: SteeringTail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2295235213069584251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5413536683871283467}
+  m_LocalRotation: {x: 0.6981915, y: -0.0000019075082, z: 0.000001887124, w: 0.7159111}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.009927003, y: 0.009926999, z: 0.009926995}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6968443467362619957}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5625463229219218653
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +806,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0000005, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2295235213069584251}
   - {fileID: 7330421215619082455}
   m_Father: {fileID: 7863812407282315641}
   m_RootOrder: 0
@@ -840,7 +905,7 @@ Transform:
   m_Children:
   - {fileID: 5136766297444900843}
   m_Father: {fileID: 6968443467362619957}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7379502746694095761
 GameObject:
