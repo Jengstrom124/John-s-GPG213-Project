@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
 public class LukeTerrain : MonoBehaviour
@@ -20,7 +21,7 @@ public class LukeTerrain : MonoBehaviour
 	public float dropOffHeight = 0.42f;
 	public float highLandHeight = 0.7f;
 
-	public float[,] previousHeights;
+	//public float[,] previousHeights;
 
 	private IEnumerator Timer()
 	{
@@ -38,11 +39,11 @@ public class LukeTerrain : MonoBehaviour
 			StartCoroutine(Timer());
 		}
 		
+		float octave1 = amplitudeOctave1 * Mathf.PerlinNoise( xCoord*xOctave1Frequency+offsetX,  yCoord*yOctave1Frequency+offsetY);
+		float octave2 = amplitudeOctave2 * Mathf.PerlinNoise( xCoord*xOctave2Frequency+offsetX,  yCoord*yOctave2Frequency+offsetY);
+		
 		if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
 		{
-			float octave1 = amplitudeOctave1 * Mathf.PerlinNoise( xCoord*xOctave1Frequency+offsetX,  yCoord*yOctave1Frequency+offsetY);
-			float octave2 = amplitudeOctave2 * Mathf.PerlinNoise( xCoord*xOctave2Frequency+offsetX,  yCoord*yOctave2Frequency+offsetY);
-
 			if (octave1 > highLandHeight)
 			{
 				return octave1 + octave2;
@@ -55,9 +56,39 @@ public class LukeTerrain : MonoBehaviour
 		
 			return octave1;
 		}
-
-		// For some reason terrain resets to all 0s when generating, had to do it this way instead.
-		return previousHeights[x,y];
+		
+		//fringe stuff
+		if (xCoord < fringe)
+		{
+			if (yCoord < fringe && xCoord > yCoord)
+			{
+				return 0.4f*Mathf.Cos(yCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(yCoord/fringe);
+			}
+			if (yCoord > 1 - fringe && xCoord > 1-yCoord)
+			{ 
+				return 0.4f*Mathf.Cos((1-yCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-yCoord)/fringe);
+			}
+			return 0.4f*Mathf.Cos(xCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(xCoord/fringe);
+		}
+		if (xCoord > 1 - fringe)
+		{
+			if (yCoord < fringe && 1-xCoord > yCoord)
+			{
+				return 0.4f*Mathf.Cos(yCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(yCoord/fringe);
+			}
+			if (yCoord > 1 - fringe && 1-xCoord > 1-yCoord)
+			{
+				return 0.4f*Mathf.Cos((1-yCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-yCoord)/fringe);
+			}
+			return 0.4f*Mathf.Cos((1-xCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-xCoord)/fringe);
+		}
+		if (yCoord < fringe)
+		{
+			return 0.4f*Mathf.Cos(yCoord*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt(yCoord/fringe);
+		}
+		return 0.4f*Mathf.Cos((1-yCoord)*Mathf.PI/fringe) + 0.4f + octave1*Mathf.Sqrt((1-yCoord)/fringe);
+		
+		//return previousHeights[x,y];
 	}
 	
 	public delegate void FinishSpawningAction();
@@ -67,7 +98,7 @@ public class LukeTerrain : MonoBehaviour
 
 	void Awake()
 	{
-		previousHeights = terrainGenerator.terrainDataForRandomExample.GetHeights(0,0,terrainGenerator.width,terrainGenerator.height);
+		//previousHeights = terrainGenerator.terrainDataForRandomExample.GetHeights(0,0,terrainGenerator.width,terrainGenerator.height);
 	}
 	
 	void Start()

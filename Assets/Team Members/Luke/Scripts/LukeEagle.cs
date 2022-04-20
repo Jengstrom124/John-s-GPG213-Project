@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEditor.Animations;
@@ -9,6 +10,7 @@ using Random = UnityEngine.Random;
 public class LukeEagle : MonoBehaviour
 {
 	public bool circuitBreaker;
+	public float altitude = 20f;
 	public List<Vector3> controlPoints = new(4);
 	public int iterationsPerCourse = 200;
 	public float durationPerCourse = 7f;
@@ -16,6 +18,7 @@ public class LukeEagle : MonoBehaviour
 	private float progress;
 	public Vector3 terrainPosition;
 	public Vector3 terrainDimensions;
+	private int turningIteration;
 
 	public Vector3 BezierFunction(List<Vector3> points, float t)
 	{
@@ -61,38 +64,57 @@ public class LukeEagle : MonoBehaviour
 		Vector3 tempPosition2 = BezierFunction(controlPoints, progress);
 		transform.DOMove(tempPosition2, durationPerCourse / iterationsPerCourse);
 		progress += 1f / iterationsPerCourse;
+		bool check = true;
 		TurnBody(tempPosition1, tempPosition2);
-		yield return new WaitForSeconds(durationPerCourse / iterationsPerCourse);
 		if (progress >= 1f)
 		{
+			check = false;
 			progress = 0f;
 			RandomizeBezierPoints();
+			BezierLooper();
 		}
-
-		BezierLooper();
+		yield return new WaitForSeconds(durationPerCourse / iterationsPerCourse);
+		if (check)
+		{
+			BezierLooper();
+		}
 	}
 
 	private IEnumerator BetweenCourses()
 	{
-		float angle = Vector3.SignedAngle(transform.position, BezierFunction(controlPoints, 1f / iterationsPerCourse) - transform.position, Vector3.up);
-		transform.DORotate(new Vector3(0, angle, 0), durationPerCourse / 5f);
-		yield return new WaitForSeconds(durationPerCourse / 5f);
-		StartCoroutine(RunBezier());
+		turningIteration++;
+		yield return new WaitForSeconds(0.05f);
+		if (turningIteration < 10)
+		{
+			Vector3 tempPosition1 = transform.position;
+			Vector3 tempPosition2 = BezierFunction(controlPoints, progress);
+			TurnBody(tempPosition1, tempPosition2);
+			StartCoroutine(BetweenCourses());
+		}
+		else
+		{
+			turningIteration = 0;
+			StartCoroutine(RunBezier());
+		}
+		
 	}
-	
+
 	private IEnumerator RandomStartTimer()
 	{
 		yield return new WaitForSeconds(Random.Range(0f, 2f));
 		StartCoroutine(RunBezier());
 	}
 
-	//smoothing by dividing up into segments of similar length
-
+	//TO IMPLEMENT: smoothing speed by dividing up into segments of similar length
 
 	private void TurnBody(Vector3 p1, Vector3 p2)
 	{
 		Vector3 heading = p2 - p1;
-		transform.rotation = Quaternion.LookRotation(heading, Vector3.up);
+		if (heading != Vector3.zero)
+		{
+			Quaternion newRotation = Quaternion.LookRotation(heading);
+			transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 20 * Time.deltaTime);
+		}
 	}
 
 	private void InitializeBezierPoints(List<Vector3> cPs)
@@ -102,7 +124,7 @@ public class LukeEagle : MonoBehaviour
 		for (int i = 1; i < cPs.Capacity; i++)
 		{
 			float controlX = terrainPosition.x + Random.Range(0f, terrainDimensions.x);
-			float controlY = terrainPosition.y + 15f;
+			float controlY = terrainPosition.y + altitude;
 			float controlZ = terrainPosition.z + Random.Range(0f, terrainDimensions.z);
 
 			controlX = position.x + Mathf.Clamp(controlX - position.x, -rangePerCourse, rangePerCourse);
@@ -120,7 +142,7 @@ public class LukeEagle : MonoBehaviour
 		for (int i = 2; i < controlPoints.Count; i++)
 		{
 			float controlX = terrainPosition.x + Random.Range(0f, terrainDimensions.x);
-			float controlY = terrainPosition.y + 15f;
+			float controlY = terrainPosition.y + altitude;
 			float controlZ = terrainPosition.z + Random.Range(0f, terrainDimensions.z);
 
 			controlX = position.x + Mathf.Clamp(controlX - position.x, -rangePerCourse, rangePerCourse);
