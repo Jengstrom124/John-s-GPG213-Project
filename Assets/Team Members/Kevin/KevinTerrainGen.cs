@@ -15,7 +15,7 @@ public class KevinTerrainGen : MonoBehaviour
     public float offsetY;
     
     
-    public float fringe = 0.05f;
+    public float fringe = 0.01f;
     public float frequencyX = 1f;
     public float frequencyY = 1f;
     public int yHeight = 20;
@@ -96,33 +96,41 @@ public class KevinTerrainGen : MonoBehaviour
         float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*20f,yCoord*frequencyY+offsetY*20f);
         /*float perlinHighLand = 0.9f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);
         float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);*/
-        if (perlinValue > 0.8f)
+        if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
         {
-            return perlinValue * 10f;
-        }
+            if (perlinValue > 0.8f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            {
+                return perlinValue * 10f;
+            }
 
-        if (perlinValue > 0.6 && perlinValue < 0.8f)
-        {
-            return perlinValue; 
-        }
-        /*
-        if (perlinValue > 0.85f && perlinValue < 0.89f)
-        {
-            return perlinValue - perlinValue2;
-        }
-        */
+            if (perlinValue > 0.3 && perlinValue < 0.79f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            {
+                return perlinValue; 
+            }
+            /*
+            if (perlinValue > 0.85f && perlinValue < 0.89f)
+            {
+                return perlinValue - perlinValue2;
+            }
+            */
         
         
-        /*if (perlinValue > 0.8f && perlinValue < 0.98f)
-        {
-            return perlinValue - (1f - perlinValue);
-        }*/
+            /*if (perlinValue > 0.8f && perlinValue < 0.98f)
+            {
+                return perlinValue - (1f - perlinValue);
+            }*/
 
-        if (perlinValue > 0f && perlinValue < 0.3f)
-        {
-            return perlinValue * Random.Range(-2f, -3f);
+            if (perlinValue > 0f && perlinValue < 0.3f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            {
+                return perlinValue * Random.Range(-2f, -3f);
+            }
+            /*if (perlinValue > 0.31f && perlinValue < 0.59f)
+            {          
+            }*/
         }
-        return perlinValue;
+        return perlinValue2*10f;
+    }
+}
         
        
         /*if (perlinHighLand > highLands)
@@ -165,8 +173,7 @@ public class KevinTerrainGen : MonoBehaviour
             float perlinValue4 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
             return Mathf.Clamp(perlinValue4 * 0.1f,0.01f,0.99f);
         }*/
-    }
-}
+
     
     /*Vector3 pos = transform.position;
      pos.y = Terrain.activeTerrain.SampleHeight(terrainGenerator.transform.position); 
