@@ -43,7 +43,8 @@ public class SubmersedSpawner : MonoBehaviour
 				if (value > threshold)
 				{
 					Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
-					Instantiate(coralPrefabs[Random.Range(0, coralPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
+					GameObject go = Instantiate(coralPrefabs[Random.Range(0, coralPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
+					go.transform.position += new Vector3(Random.Range(-0.2f,0.2f),0,Random.Range(-0.2f,0.2f));
 				}
 			}
 		}

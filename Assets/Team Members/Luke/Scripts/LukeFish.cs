@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
+public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 {
 	public IStateBase flock;
 	public IStateBase pathfollow;
@@ -109,5 +109,22 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 	public EdibleInfo GetInfo()
 	{
 		return new EdibleInfo();
+	}
+
+	public void Selected()
+	{
+		flock.Exit();
+		pathfollow.Enter();
+	}
+
+	public void Deselected()
+	{
+		pathfollow.Exit();
+		flock.Enter();
+	}
+
+	public void SetDestination(Vector3 position)
+	{
+		
 	}
 }
