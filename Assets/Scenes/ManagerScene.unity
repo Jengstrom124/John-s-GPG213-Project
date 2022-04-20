@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7688179865768339470, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7688179866317039681, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -272,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7688179867083144777, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000059299746
+      value: 0.0000017737377
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
@@ -481,6 +485,10 @@ PrefabInstance:
       propertyPath: scenes.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
+      propertyPath: playerStatsUIPrefab
+      value: 
+      objectReference: {fileID: 6019745604058523409, guid: 1c1ecc834eafad5479c90719bd329608, type: 3}
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: levels.Array.data[0]
       value: 

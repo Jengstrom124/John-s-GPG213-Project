@@ -5,6 +5,7 @@ using Tom;
 using Unity.Netcode;
 using UnityEngine;
 using Gerallt;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GameManager : ManagerBase<GameManager>
@@ -19,6 +20,8 @@ public class GameManager : ManagerBase<GameManager>
 
     public event Action<bool> OnChangeLobbyVisibility;
     public event Action<bool> OnChangeLevelsVisibility;
+
+    public GameObject playerStatsUIPrefab;
     
 
     // public void Start()
@@ -59,6 +62,19 @@ public class GameManager : ManagerBase<GameManager>
         playerController.controlled = playerInstance;
     }
 
+    [ClientRpc]
+    public void AssignPlayerStatsUIClientRpc(NetworkObjectReference playerInstanceRef, LobbyPlayerData lobbyPlayerData)
+    {
+        GameObject playerInstance = playerInstanceRef;
+        TextMeshPro textMesh;
+
+        GameObject playerStatsUI = Instantiate(playerStatsUIPrefab, playerInstance.transform);
+        
+        textMesh = playerStatsUI.GetComponentInChildren<TextMeshPro>();
+
+        textMesh.text = lobbyPlayerData.PlayerName + " " + lobbyPlayerData.ClientIPAddress;
+    }
+    
     public void StartLevelSelect()
     {
         if (NetworkManager.Singleton.IsServer)
@@ -100,11 +116,11 @@ public class GameManager : ManagerBase<GameManager>
             playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
             playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
 
-            
-            
+            AssignPlayerStatsUIClientRpc(characterReference, lobbyPlayerData);
+
             // OLD CODE
-            
-            
+
+
             //There has to be a less fragile way of linking the prefab to the index?
             // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
             //     .GetComponent<PlayerController>()
