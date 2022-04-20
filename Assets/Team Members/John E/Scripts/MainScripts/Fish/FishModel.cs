@@ -14,8 +14,15 @@ public class FishModel : MonoBehaviour
     public static event Action<GameObject> onPlayerFishEvent;
     public static event Action<GameObject> onFishChangeEvent;
 
-    public event Action<bool, Transform> runFromPredatorEvent;
-    public event Action<Vector3> onDestinationAssignedEvent;
+    PathTracker pathTracker;
+    private void Awake()
+    {
+        pathTracker = GetComponent<PathTracker>();
+    }
+    private void Start()
+    {
+        pathTracker.destinationReachedEvent += AtDestinationReaction;
+    }
 
     private void Update()
     {
@@ -35,5 +42,10 @@ public class FishModel : MonoBehaviour
                 onFishChangeEvent?.Invoke(gameObject);
             }
         }
+    }
+
+    void AtDestinationReaction()
+    {
+        Debug.Log("MADE IT!! - return to being a fish");
     }
 }

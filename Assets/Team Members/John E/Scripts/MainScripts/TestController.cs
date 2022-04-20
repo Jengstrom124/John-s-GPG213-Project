@@ -6,15 +6,10 @@ using System;
 
 namespace John
 {
-    public class TestController : MonoBehaviour
+    public class TestController : ManagerBase<TestController>
     {
         List<FishModel> activeFish = new List<FishModel>();
-        public static event Action<Vector2> destinationSelectedEvent;
-
-        //Camera Test
-        public Tom.CameraFollow cam;
-        Transform playerFish;
-        float offsetValue;
+        public static event Action<Vector3> destinationSelectedEvent;
 
         private void FixedUpdate()
         {
@@ -37,10 +32,6 @@ namespace John
 
                         activeFish.Add(fish);
                         fish.isPlayerFish = true;
-                        if(cam != null)
-                            cam.target = fish.transform;
-
-                        playerFish = fish.transform;
                     }
                     
                 }
@@ -48,27 +39,16 @@ namespace John
                 {
                     if (activeFish.Count >= 1)
                     {
-                        Vector2 mousePos = new Vector2(Input.mousePosition.x, Input.mousePosition.z);
+                        Vector3 mousePos = new Vector3(Input.mousePosition.x, 0,  Input.mousePosition.z);
                         destinationSelectedEvent?.Invoke(mousePos);
 
-                        Debug.Log("Destination: " + mousePos);
+                        Debug.Log("Destination: " + mousePos + " Z test: " + Input.mousePosition.z);
                     }
                 }
             }
 
             //Returns a vector2
             //Mouse.current.position.ReadValue();
-        }
-
-        private void Update()
-        {
-            if(cam != null)
-            {
-                offsetValue = cam.offset.y + (InputSystem.GetDevice<Mouse>().scroll.ReadValue().normalized.y * -InputSystem.GetDevice<Mouse>().scroll.ReadValue().normalized.y);
-
-                if (cam.target == playerFish)
-                    cam.offset = new Vector3(0, Mathf.Clamp(offsetValue, 30, 100), 0);
-            }
         }
     }
 }

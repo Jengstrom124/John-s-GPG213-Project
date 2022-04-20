@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2219981257583123345}
-  distanceThreshold: 2
+  distanceThreshold: 5
   maxRayLength: 10
   drawRaycasts: 0
   finalDestinationPos: {x: 0, y: 0}
