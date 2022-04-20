@@ -812,7 +812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 312554293391460533, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.9
+      value: 10.5
       objectReference: {fileID: 0}
     - target: {fileID: 312554293391460533, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1194,7 +1194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1736315212297721850, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.9
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 1736315212297721850, guid: c5483f7f7622faa41aa2ea9a026cd6c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1543,11 +1543,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8891805061085810973, guid: 3ca594bf229c7b54ab52eec0fbb26362, type: 3}
       propertyPath: bounds.m_Extent.x
-      value: 253
+      value: 234
       objectReference: {fileID: 0}
     - target: {fileID: 8891805061085810973, guid: 3ca594bf229c7b54ab52eec0fbb26362, type: 3}
       propertyPath: bounds.m_Extent.z
-      value: 250.1
+      value: 217
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca594bf229c7b54ab52eec0fbb26362, type: 3}
@@ -2092,6 +2092,8 @@ MonoBehaviour:
   yFreq: 0
   xOffset: 100
   yOffset: 100
+  maxY: 0
+  maxX: 0
 --- !u!1001 &1884692564
 PrefabInstance:
   m_ObjectHideFlags: 0
