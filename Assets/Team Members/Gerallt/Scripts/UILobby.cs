@@ -15,15 +15,13 @@ namespace Gerallt
         public GameObject JoinedClients;
         public GameObject UIClientPrefab;
         public TMP_InputField UIPlayerNameInput;
-        
-        public ServerManager ServerManager;
-        
+
         private NetworkPlayerList GNetworkedListBehaviour;
 
         public void PlayerName_ValueChanged()
         {
             string playerName = UIPlayerNameInput.text;
-            ulong clientId = ServerManager.LocalClientId;
+            ulong clientId = ServerManager.Singleton.LocalClientId;
 
             for (int i = 0; i < GNetworkedListBehaviour.NetworkedObjects.Count; i++)
             {
@@ -83,18 +81,20 @@ namespace Gerallt
             
             LobbyPlayerData? lobbyPlayerData = null;
             
-            ServerManager.JoinServer(lobbyPlayerData, autoCreateHost: true);
+            ServerManager serverManager = ServerManager.Singleton as ServerManager;
+            serverManager.JoinServer(lobbyPlayerData, autoCreateHost: true);
         }
 
         public void StartHost_ButtonClicked()
         {
-            ServerManager.StartHost();
-            ServerManager.JoinServer();
+            ServerManager serverManager = ServerManager.Singleton as ServerManager;
+            serverManager.Host();
         }
 
         public void StartGame_ButtonClicked()
         {
-            ServerManager.StartGame();
+            ServerManager serverManager = ServerManager.Singleton as ServerManager;
+            serverManager.StartGame();
         }
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)

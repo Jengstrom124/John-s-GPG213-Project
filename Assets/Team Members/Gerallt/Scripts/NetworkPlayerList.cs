@@ -10,7 +10,6 @@ namespace Gerallt
 {
     public class NetworkPlayerList : ManagerBase<NetworkPlayerList>
     {
-        public ServerManager ServerManager;
         public NetworkList<LobbyPlayerData> NetworkedObjects;
 
         public override void Awake()
@@ -20,16 +19,10 @@ namespace Gerallt
             NetworkedObjects = new NetworkList<LobbyPlayerData>();
 
             //ServerManager.ConnectionApprovalCallback += ApprovalCheck; 
-            ServerManager.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
-            ServerManager.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
+            ServerManager.Singleton.OnClientConnectedCallback += ServerManager_OnOnClientConnectedCallback;
+            ServerManager.Singleton.OnClientDisconnectCallback += ServerManager_OnOnClientDisconnectCallback;
         }
-
-        // private void ApprovalCheck(byte[] connectionData, ulong clientId, NetworkManager.ConnectionApprovedDelegate connectionApprovedCallback)
-        // {
-        //     Debug.Log("Client connection approval " + clientId.ToString());
-        // }
         
-
         private void ServerManager_OnOnClientConnectedCallback(ulong clientId)
         {
             LobbyPlayerData lobbyPlayerData = new LobbyPlayerData();
@@ -60,7 +53,7 @@ namespace Gerallt
             {
                 LobbyPlayerData playerData = NetworkedObjects[i];
 
-                if (playerData.ClientId == ServerManager.LocalClientId)
+                if (playerData.ClientId == ServerManager.Singleton.LocalClientId)
                 {
                     return playerData;
                 }
@@ -90,7 +83,7 @@ namespace Gerallt
         
         public void UpdatePlayerName(int i, string newPlayerName)
         {
-            if (ServerManager.IsClient)
+            if (ServerManager.Singleton.IsClient)
             {
                 UpdatePlayerNameServerRpc(i, newPlayerName);    
             }
@@ -98,7 +91,7 @@ namespace Gerallt
 
         public void UpdatePlayerData(int i, LobbyPlayerData newData)
         {
-            if (ServerManager.IsClient)
+            if (ServerManager.Singleton.IsClient)
             {
                 UpdatePlayerDataServerRpc(i, newData);
             }
