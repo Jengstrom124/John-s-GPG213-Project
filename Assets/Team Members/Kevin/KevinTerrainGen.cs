@@ -21,7 +21,7 @@ public class KevinTerrainGen : MonoBehaviour
     public int yHeight = 20;
     
     public float cliffLevel = 30f;
-    public float seaLevel = 10f;
+    public float seaLevel = 15f;
     public float highLands = 0.75f;
     public float landDrop = 0.4f;
     public float control = 0.5f;
@@ -94,21 +94,22 @@ public class KevinTerrainGen : MonoBehaviour
         /*float perlinHighLand = 0.9f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);
         float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);*/
 
-        if (perlinValue > 0.99f)
+        if (perlinValue > 0.95f)
         {
-            return perlinValue * 1.5f;
+            return perlinValue * Random.Range(5f,10f);
         }
         
-        if (perlinValue > 0.8f && perlinValue < 0.94f)
+        
+        /*if (perlinValue > 0.8f && perlinValue < 0.98f)
         {
             return perlinValue - (1f - perlinValue);
-        }
+        }*/
 
-        if (perlinValue > 0.5f && perlinValue < 0.54f)
+        if (perlinValue > 0f && perlinValue < 0.3f)
         {
-            return perlinValue * -1.5f;
+            return perlinValue * Random.Range(-2f, -3f);
         }
-        return perlinValue/1.5f;
+        return perlinValue;
         
        
         /*if (perlinHighLand > highLands)

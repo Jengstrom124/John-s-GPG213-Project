@@ -13,24 +13,20 @@ public class Water : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        IReactsToWater boolInterface = other.GetComponent<IReactsToWater>();
-        if (boolInterface != null)
+        IReactsToWater reactsToWater = other.GetComponent<IReactsToWater>();
+        if (reactsToWater != null)
         {
-            boolInterface.IsWet = true;
-            other.GetComponent<KFish>().iWet = true;
-            Debug.Log("Splash!!!");
+            reactsToWater.IsWet = true;
         }
         
     }
 
     void OnTriggerExit (Collider other)
     {
-        IReactsToWater boolInterface = other.GetComponent<IReactsToWater>();
-        if (boolInterface != null)
+        IReactsToWater reactsToWater = other.GetComponent<IReactsToWater>();
+        if (reactsToWater != null)
         {
-            boolInterface.IsWet = false;
-            other.GetComponent<KFish>().iWet = false;
-            Debug.Log("Splosh!!!");
+            reactsToWater.IsWet = false;
         }
     }
     

@@ -19,8 +19,6 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     public bool flocking;
     public bool following;
     
-    //Bool Checker
-    public bool iWet;
     
     //Fish Movement Variables
     public Rigidbody fRb;
@@ -29,8 +27,8 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     
     public float acceleration = 10f;
     public float currentSteeringAngle;
-    public float steeringMax = 45f;
-    
+    public float steeringMax = 30f;
+    public float reduction = 0.5f;
     public Vector3 localVelocity;
     public Vector3 tailLocalVelocity;
 
@@ -52,7 +50,7 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
 
         if (localVelocity.z > 0)
         {
-            //StartCoroutine(Decelerate());
+            StartCoroutine(Decelerate());
         }
 
         if(Input.GetKey(KeyCode.T))
@@ -78,24 +76,17 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
             pathFollow.Enter();
             flock.Exit();
         }
-        
-
-        if (IsWet)
-        {
-            transform.localScale = new Vector3(10f, 10f, 10f);
-        }
-        else
-        {
-            transform.localScale = new Vector3(5f, 5f, 5f);
-        }
     }
 
-    void IControllable.Steer(float input)
+    IEnumerator Decelerate()
     {
-        Steer(input);
+        fRb.AddRelativeForce(new Vector3(0f,0f,-1f));
+        yield return new WaitForSeconds(reduction);
     }
     
+    
     public bool IsWet { get; set; }
+    
     public void Steer(float input)
     {
         float currentYEuler = transform.eulerAngles.y;
