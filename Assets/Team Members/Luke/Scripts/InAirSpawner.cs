@@ -16,46 +16,30 @@ public class InAirSpawner : MonoBehaviour
 	public int xOffset;
 	public int yOffset;
 	public float fringe;
-	
+	public int totalBirds;
+
 
 	private void FunctionLoop()
 	{
 		GameObject birds = Instantiate(new GameObject("Birds"), transform);
-		for (int x = 0; x < terrainGenerator.width; x++)
+		for (int i=0; i < totalBirds; i++)
 		{
-			for (int y = 0; y < terrainGenerator.height; y++)
-			{
-				SpawnTrees(x,y, birds);
-			}
+			int x = Random.Range(0, terrainGenerator.width);
+			int y = Random.Range(0, terrainGenerator.height);
+			SpawnBirds(x,y, birds);
 		}
 	}
 	
-	private void SpawnTrees(int x, int y, GameObject parent)
+	private void SpawnBirds(int x, int y, GameObject parent)
 	{
-		if (_terrainData.GetHeight(x, y) > 12f)
-		{
-			float xCoord = (float) x / terrainGenerator.width;
-			float yCoord = (float) y / terrainGenerator.height;
-			if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
-			{
-				float value = Mathf.PerlinNoise(xCoord * frequency + xOffset, yCoord * frequency + yOffset);
-				if (value > threshold)
-				{
-					GameObject go;
-					Vector3 worldPosition = new Vector3(x, 15f, y)/* + _terrain.transform.position*/;
-					if (Random.Range(0f, 1f) > 0.5f)
-					{
-						go = Instantiate(birdPrefabs[Random.Range(0, birdPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
-						LukeEagle eagleScript = go.GetComponent<LukeEagle>();
-					}
-				}
-			}
-		}
+		Vector3 worldPosition = new Vector3(x, 15f, y)/* + _terrain.transform.position*/;
+		Instantiate(birdPrefabs[Random.Range(0, birdPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
 	}
 
 	void Awake()
 	{
 		GetComponentInParent<LukeTerrain>().FinishSpawningEvent += MyStart;
+		totalBirds = Random.Range(4, 8);
 	}
 	
 	private void MyStart()
@@ -64,12 +48,6 @@ public class InAirSpawner : MonoBehaviour
 		xOffset = Random.Range(-1000, 1000);
 		yOffset = Random.Range(-1000, 1000);
 		FunctionLoop();
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-        
 	}
 }
 

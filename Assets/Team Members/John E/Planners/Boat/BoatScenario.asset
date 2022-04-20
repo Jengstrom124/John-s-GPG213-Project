@@ -24,8 +24,8 @@ MonoBehaviour:
       name: fishDelivered
   actions:
   - name: Search For Fishing Spot
-    isDefault: 0
-    state: {fileID: 0}
+    isDefault: 1
+    state: {fileID: 2123222233435008323, guid: cb913f0a6a95c5e4a9eb9e5f427e562a, type: 3}
     cost: 0
     position: {x: 371.1645, y: 95.82959}
     pre:
@@ -36,7 +36,7 @@ MonoBehaviour:
       value: 1
   - name: Catch Fish
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 7018137202375338058, guid: 1ab2b2e0a921b7b4fba1a221fff7f273, type: 3}
     cost: 0
     position: {x: 600.2998, y: 96.96403}
     pre:
@@ -49,7 +49,7 @@ MonoBehaviour:
       value: 1
   - name: Return To Dock
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 5495276663630498243, guid: f80b10cda9527c24fa9ac00ae6da69c9, type: 3}
     cost: 0
     position: {x: 846.177, y: 98.46328}
     pre:
@@ -62,7 +62,7 @@ MonoBehaviour:
       value: 1
   - name: Deliver Fish
     isDefault: 0
-    state: {fileID: 0}
+    state: {fileID: 4109080769250305486, guid: b1cac0df71dd49340b4e097162ea2f8c, type: 3}
     cost: 0
     position: {x: 1081.5591, y: 98.463264}
     pre:
