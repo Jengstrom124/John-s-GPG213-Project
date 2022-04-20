@@ -66,4 +66,9 @@ public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
     public void GetEaten(IPredator eatenBy)
     {
     }
+
+	public EdibleInfo GetInfo()
+	{
+		return new EdibleInfo();
+	}
 }

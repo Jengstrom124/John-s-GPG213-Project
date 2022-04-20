@@ -30,11 +30,18 @@ public class CamFish_Model : MonoBehaviour, IEdible, IReactsToWater
 
 
 	public void GetEaten(IPredator eatenBy)
-    {
-	    eatenBy.GotFood(amount);
-
-	    Destroy(gameObject);
+	{
+		Destroy(gameObject);
     }
+
+	public EdibleInfo GetInfo()
+	{
+		EdibleInfo edibleInfo = new EdibleInfo();
+		edibleInfo.edibleType = EdibleType.Food;
+		edibleInfo.amount = 1;
+		
+		return edibleInfo;
+	}
 
 	public bool IsWet { get; set; }
 }
