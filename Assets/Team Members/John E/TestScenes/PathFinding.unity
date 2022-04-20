@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 156365379}
   - component: {fileID: 156365380}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: TestController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f74d0134a982db4f87cdb534512c16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &266229170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,34 +1456,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1466914065 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
-  m_PrefabInstance: {fileID: 292674504}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1466914079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2219981257583123345, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
   m_PrefabInstance: {fileID: 292674504}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1466914080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466914065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ca7b9d47aea144cb585b7b5b75ec9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myTransform: {fileID: 1466914079}
-  distanceThreshold: 5
-  maxRayLength: 10
-  drawRaycasts: 0
-  finalDestinationPos: {x: 0, y: 0}
-  currentTargetPos: {x: 0, y: 0}
 --- !u!1001 &1500009884
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IControllable
 {
     void Steer(float input);
@@ -33,7 +35,7 @@ public interface IEdible
 // WHY: 
 public interface IPredator
 {
-
+	Vector3 GetBumPosition();
 }
 
 public interface IReactsToWater
