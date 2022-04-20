@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +10,7 @@ public class SubmersedSpawner : MonoBehaviour
 	public TerrainGenerator terrainGenerator;
 	/*public Terrain _terrain;*/
 	private TerrainData _terrainData;
-	public GameObject coralPrefab;
+	public List<GameObject> coralPrefabs;
 
 	public float threshold = 0.45f;
 	public float frequency = 15f;
@@ -20,16 +21,17 @@ public class SubmersedSpawner : MonoBehaviour
 
 	private void FunctionLoop()
 	{
+		GameObject coral = Instantiate(new GameObject("Coral"), transform);
 		for (int x = 0; x < terrainGenerator.width; x++)
 		{
 			for (int y = 0; y < terrainGenerator.height; y++)
 			{
-				SpawnCoral(x,y);
+				SpawnCoral(x,y, coral);
 			}
 		}
 	}
 	
-	private void SpawnCoral(int x, int y)
+	private void SpawnCoral(int x, int y, GameObject parent)
 	{
 		if (_terrainData.GetHeight(x, y) < 6)
 		{
@@ -41,7 +43,7 @@ public class SubmersedSpawner : MonoBehaviour
 				if (value > threshold)
 				{
 					Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
-					Instantiate(coralPrefab, worldPosition, Quaternion.identity, transform);
+					Instantiate(coralPrefabs[Random.Range(0, coralPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
 				}
 			}
 		}

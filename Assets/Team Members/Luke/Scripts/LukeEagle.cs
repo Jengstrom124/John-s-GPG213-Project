@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEditor.Animations;
@@ -16,6 +17,7 @@ public class LukeEagle : MonoBehaviour
 	private float progress;
 	public Vector3 terrainPosition;
 	public Vector3 terrainDimensions;
+	private int turningIteration;
 
 	public Vector3 BezierFunction(List<Vector3> points, float t)
 	{
@@ -61,38 +63,54 @@ public class LukeEagle : MonoBehaviour
 		Vector3 tempPosition2 = BezierFunction(controlPoints, progress);
 		transform.DOMove(tempPosition2, durationPerCourse / iterationsPerCourse);
 		progress += 1f / iterationsPerCourse;
+		bool check = true;
 		TurnBody(tempPosition1, tempPosition2);
-		yield return new WaitForSeconds(durationPerCourse / iterationsPerCourse);
 		if (progress >= 1f)
 		{
+			check = false;
 			progress = 0f;
 			RandomizeBezierPoints();
+			BezierLooper();
 		}
-
-		BezierLooper();
+		yield return new WaitForSeconds(durationPerCourse / iterationsPerCourse);
+		if (check)
+		{
+			BezierLooper();
+		}
 	}
 
 	private IEnumerator BetweenCourses()
 	{
-		float angle = Vector3.SignedAngle(transform.position, BezierFunction(controlPoints, 1f / iterationsPerCourse) - transform.position, Vector3.up);
-		transform.DORotate(new Vector3(0, angle, 0), durationPerCourse / 5f);
-		yield return new WaitForSeconds(durationPerCourse / 5f);
-		StartCoroutine(RunBezier());
+		turningIteration++;
+		yield return new WaitForSeconds(0.05f);
+		if (turningIteration < 10)
+		{
+			StartCoroutine(BetweenCourses());
+		}
+		else
+		{
+			turningIteration = 0;
+			StartCoroutine(RunBezier());
+		}
+		
 	}
-	
+
 	private IEnumerator RandomStartTimer()
 	{
 		yield return new WaitForSeconds(Random.Range(0f, 2f));
 		StartCoroutine(RunBezier());
 	}
 
-	//smoothing by dividing up into segments of similar length
-
+	//TO IMPLEMENT: smoothing speed by dividing up into segments of similar length
 
 	private void TurnBody(Vector3 p1, Vector3 p2)
 	{
 		Vector3 heading = p2 - p1;
-		transform.rotation = Quaternion.LookRotation(heading, Vector3.up);
+		Vector3 currentEulers = transform.rotation.eulerAngles;
+		float fraction = 0.2f;
+		float resultantX = currentEulers.x+(heading.x-currentEulers.x)*fraction;
+		float resultantZ = currentEulers.z+(heading.z-currentEulers.z)*fraction;
+		transform.rotation = Quaternion.LookRotation(new Vector3(resultantX, heading.y, resultantZ), Vector3.up);
 	}
 
 	private void InitializeBezierPoints(List<Vector3> cPs)
