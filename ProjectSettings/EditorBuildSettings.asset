@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Team Members/Kevin/KevinMainScene.unity
     guid: 135565e11b0e06944850e634c6066bb6
+  - enabled: 1
+    path: Assets/Team Members/Luke/Scene/LukeScene.unity
+    guid: d52abd2bbd60fe046ab2e4252950d58d
   m_configObjects: {}
