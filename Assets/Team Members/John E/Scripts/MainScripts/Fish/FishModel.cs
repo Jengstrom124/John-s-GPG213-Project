@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class FishModel : MonoBehaviour
+public class FishModel : FishBase
 {
     [Header("Reference Only:")]
     public bool isPlayerFish;
