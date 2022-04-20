@@ -19,6 +19,7 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 	public float wigglePeriodInSeconds = 2f;
 	public float maxWiggleAngle = 5f;
 	public float maxSteeringAngle = 45f;
+	private float timeReset = 0f;
 
 	public float currentSteeringAngle = 0f;
 	public Vector3 localVelocity;
@@ -44,16 +45,16 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 		//Debug.Log(input);
 		float currentYEuler = transform.eulerAngles.y;
 		float targetAngle;
-		
 		if (Mathf.Abs(input) < 0.5f)
 		{
 			targetAngle = -input * maxSteeringAngle +
-			                    maxWiggleAngle * Mathf.Sin(Time.time * 2 * Mathf.PI / wigglePeriodInSeconds);
+			                    maxWiggleAngle * Mathf.Sin((Time.time-timeReset) * 2 * Mathf.PI / wigglePeriodInSeconds);
 		}
 		else
 		{
 			//Debug.Log("I Shouldn't be wiggling!");
 			targetAngle = -input * maxSteeringAngle;
+			timeReset = Time.time;
 		}
 
 		currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
