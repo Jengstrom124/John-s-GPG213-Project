@@ -20,17 +20,19 @@ public class OnLandSpawner : MonoBehaviour
 
 	private void FunctionLoop()
 	{
+		GameObject trees = Instantiate(new GameObject("Trees"), transform);
 		for (int x = 0; x < terrainGenerator.width; x++)
 		{
 			for (int y = 0; y < terrainGenerator.height; y++)
 			{
-				SpawnTrees(x,y);
+				SpawnTrees(x,y, trees);
 			}
 		}
 	}
 	
-	private void SpawnTrees(int x, int y)
+	private void SpawnTrees(int x, int y, GameObject parent)
 	{
+		
 		if (_terrainData.GetHeight(x, y) > 12f)
 		{
 			float xCoord = (float) x / terrainGenerator.width;
@@ -44,7 +46,7 @@ public class OnLandSpawner : MonoBehaviour
 					Vector3 worldPosition = new Vector3(x, _terrainData.GetHeight(x, y), y)/* + _terrain.transform.position*/;
 					if (Random.Range(0f, 1f) > 0.5f)
 					{
-						go = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), transform);
+						go = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
 						go.transform.localScale *= 2f;
 						go.transform.position += new Vector3(Random.Range(-0.2f,0.2f),0,Random.Range(-0.2f,0.2f));
 					}

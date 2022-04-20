@@ -594,7 +594,7 @@ MonoBehaviour:
   yOctave2Frequency: 40
   amplitudeOctave1: 0.85
   amplitudeOctave2: 0.1
-  dropOffHeight: 0.42
+  dropOffHeight: 0.46
   highLandHeight: 0.7
 --- !u!154 &665927328
 TerrainCollider:
@@ -710,7 +710,7 @@ MonoBehaviour:
   birdPrefabs:
   - {fileID: 1537502993957880, guid: cb3f7d144cf61584599adf3d4ccdc7cc, type: 3}
   threshold: 0.9
-  frequency: 30
+  frequency: 60
   xOffset: 0
   yOffset: 0
   fringe: 0
@@ -798,6 +798,18 @@ PrefabInstance:
       propertyPath: terrainGenerator
       value: 
       objectReference: {fileID: 203358344}
+    - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
+      propertyPath: coralPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
+      propertyPath: coralPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 3852676163906203864, guid: 5b5d8c5ca66a1d84a890a99409619277, type: 3}
+    - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
+      propertyPath: coralPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6292741600736004651, guid: 3962e4c0005ade546aea915946d3be99, type: 3}
     - target: {fileID: 3911949051204171372, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -20,16 +20,17 @@ public class InAirSpawner : MonoBehaviour
 
 	private void FunctionLoop()
 	{
+		GameObject birds = Instantiate(new GameObject("Birds"), transform);
 		for (int x = 0; x < terrainGenerator.width; x++)
 		{
 			for (int y = 0; y < terrainGenerator.height; y++)
 			{
-				SpawnTrees(x,y);
+				SpawnTrees(x,y, birds);
 			}
 		}
 	}
 	
-	private void SpawnTrees(int x, int y)
+	private void SpawnTrees(int x, int y, GameObject parent)
 	{
 		if (_terrainData.GetHeight(x, y) > 12f)
 		{
@@ -44,7 +45,7 @@ public class InAirSpawner : MonoBehaviour
 					Vector3 worldPosition = new Vector3(x, 15f, y)/* + _terrain.transform.position*/;
 					if (Random.Range(0f, 1f) > 0.5f)
 					{
-						go = Instantiate(birdPrefabs[Random.Range(0, birdPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), transform);
+						go = Instantiate(birdPrefabs[Random.Range(0, birdPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
 						LukeEagle eagleScript = go.GetComponent<LukeEagle>();
 					}
 				}
