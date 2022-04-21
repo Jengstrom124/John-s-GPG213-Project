@@ -60,7 +60,7 @@ public class LukeTerrain : MonoBehaviour
 			}
 			if (octave1 < dropOffHeight)
 			{
-				return octave1 * 0.8f;
+				return octave1 * 0.7f;
 			}
 			return octave1;
 		}
