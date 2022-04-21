@@ -45,27 +45,34 @@ public class GameManager : ManagerBase<GameManager>
         PlayerController playerController = ((GameObject)playerControllerRef).GetComponent<PlayerController>();
         playerController.controlled = playerInstance;
     }
-
-    [ClientRpc]
-    public void AssignPlayerStatsUIClientRpc(NetworkObjectReference playerInstanceRef, LobbyPlayerData lobbyPlayerData)
+    
+    public void AssignPlayerStatsUI(GameObject playerInstance, LobbyPlayerData lobbyPlayerData, ulong clientId)
     {
-        GameObject playerInstance = playerInstanceRef;
-        TextMeshPro textMesh;
-
-        GameObject playerStatsUI = Instantiate(playerStatsUIPrefab, playerInstance.transform);
-        
-        playerStatsUI.transform.LookAt(Camera.main.transform.position);
-        playerStatsUI.transform.Rotate(new Vector3(0,1, 0), -180); // HACK: Had to rotate by 180 
-        textMesh = playerStatsUI.GetComponentInChildren<TextMeshPro>();
-
-        if (string.IsNullOrEmpty(lobbyPlayerData.PlayerName))
+        GameObject playerStatsUI = Instantiate(playerStatsUIPrefab);
+        NetworkObject playerStatsNetworkObj = playerStatsUI.GetComponent<NetworkObject>();
+        if (playerStatsNetworkObj != null)
         {
-            textMesh.text = lobbyPlayerData.ClientIPAddress;
+            playerStatsNetworkObj.Spawn();
+            playerStatsNetworkObj.ChangeOwnership(clientId);
+            playerStatsNetworkObj.TrySetParent(playerInstance.transform);
         }
         else
         {
-            textMesh.text = lobbyPlayerData.PlayerName;
+            playerStatsUI.transform.parent = playerInstance.transform;
         }
+
+        
+        NetworkObjectReference playerStatsUIRef = playerStatsUI;
+        UpdateStatsClientRpc(playerStatsUIRef, lobbyPlayerData);
+    }
+
+    [ClientRpc]
+    public void UpdateStatsClientRpc(NetworkObjectReference playerStatsUIRef, LobbyPlayerData lobbyPlayerData)
+    {
+        GameObject playerStatsUIObj = playerStatsUIRef;
+        PlayerStatsUI playerStatsUIModel = playerStatsUIObj.GetComponent<PlayerStatsUI>();
+        
+        playerStatsUIModel.UpdateStats(lobbyPlayerData);
     }
     
     public void StartLevelSelect()
@@ -74,7 +81,7 @@ public class GameManager : ManagerBase<GameManager>
         {
             RaiseChangeLobbyVisibilityClientRpc(false); // Hide lobby UI
             
-            //RaiseChangeLevelsVisibilityClientRpc(true); // Host selects level.
+            //RaiseChangeLevelsVisibilityClientRpc(true); // Anyone can select level.
             OnChangeLevelsVisibility?.Invoke(true); // Only host selects level
         }
     }
@@ -141,8 +148,11 @@ public class GameManager : ManagerBase<GameManager>
         playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
         playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
 
-        AssignPlayerStatsUIClientRpc(characterReference, lobbyPlayerData);
-
+        if (IsServer)
+        {
+            AssignPlayerStatsUI(spawnedCharacter, lobbyPlayerData, player);
+        }
+        
         // OLD CODE
 
 
@@ -165,27 +175,7 @@ public class GameManager : ManagerBase<GameManager>
         //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
         // }
     }
-    
-    // [ServerRpc]
-    // public void SetGameStartedServerRpc()
-    // {
-    //     HasGameStartedState.Instance.hasGameStarted.Value = true;
-    //
-    //     HasGameStartedClientRpc(HasGameStartedState.Instance.hasGameStarted.Value);
-    // }
-    //
-    // [ServerRpc(RequireOwnership = false)]
-    // public void GetGameStartedServerRpc()
-    // {
-    //     HasGameStartedClientRpc(hasGameStarted.Value);
-    // }
-    //
-    // [ClientRpc]
-    // public void HasGameStartedClientRpc(bool state)
-    // {
-    //     hasGameStarted.Value = state;
-    // }
-    
+
     [ClientRpc]
     public void RaiseChangeLobbyVisibilityClientRpc(bool visibility)
     {
