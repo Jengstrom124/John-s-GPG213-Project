@@ -26,6 +26,9 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 	public Vector3 localVelocity;
 	public Vector3 tailLocalVelocity;
 
+
+	public bool doThing = false;
+	
 	public void Accelerate(float input)
 	{
 		rb.AddForceAtPosition(input*acceleratingForce*transform.TransformDirection(Vector3.forward), transform.position, 0);
@@ -136,6 +139,6 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 
 	public void SetDestination(Vector3 position)
 	{
-		//pathTracker.GetPathToDestination(position);
+		pathTracker.GetPathToDestination(position);
 	}
 }

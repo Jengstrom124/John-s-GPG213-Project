@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveSharkIntoWater : MonoBehaviour
 {
 	public GameObject shark;
+	public GameObject fish;
 	public TerrainGenerator terrainGenerator;
 	
 	// Start is called before the first frame update
@@ -23,5 +24,6 @@ public class MoveSharkIntoWater : MonoBehaviour
 		}
 
 		shark.transform.position = target;
+		fish.GetComponent<LukeFish>().SetDestination(target);
 	}
 }
