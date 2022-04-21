@@ -174,21 +174,21 @@ public class ServerManager : NetworkManager
         }
     }
 
-    IEnumerator ConnectionTimeout()
-    {
-        yield return new WaitForSeconds(connectionTimeout);
-        if (!isServerUp)
-        {
-            Shutdown();
-            yield return new WaitForSeconds(1.0f);
-            GNetworkState state = FindObjectOfType<GNetworkState>();
-            state.Init(FindObjectOfType<ServerManager>()); // Respawn the network list as it got destroyed on shutdown.
-            
-            StartHost();
-            yield return new WaitForSeconds(1.0f);
-            //state.Spawn();
-        }
-    }
+    // IEnumerator ConnectionTimeout()
+    // {
+    //     yield return new WaitForSeconds(connectionTimeout);
+    //     if (!isServerUp)
+    //     {
+    //         Shutdown();
+    //         yield return new WaitForSeconds(1.0f);
+    //         GNetworkState state = FindObjectOfType<GNetworkState>();
+    //         state.Init(FindObjectOfType<ServerManager>()); // Respawn the network list as it got destroyed on shutdown.
+    //         
+    //         StartHost();
+    //         yield return new WaitForSeconds(1.0f);
+    //         //state.Spawn();
+    //     }
+    // }
 
     public void Host()
     {
@@ -202,9 +202,30 @@ public class ServerManager : NetworkManager
 
     public void Client()
     {
-        NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
+        bool alreadyConnected = false;
+        
+        if (LocalClientId != ulong.MaxValue)
+        {
+            if (NetworkPlayerList.Instance.HasJoined(LocalClientId))
+            {
+                alreadyConnected = true;
+            }
+        }
 
-        StartClient();
+        if (alreadyConnected)
+        {
+            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
+
+            // Tell the server that this client wants to rejoin to their existing session.
+            GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId);
+        }
+        else
+        {
+            NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
+
+            StartClient();
+        }
     }
     
     private void OnConnectionApprovalCallback(byte[] connectionData, ulong clientId, ConnectionApprovedDelegate connectionApprovedDelegate)

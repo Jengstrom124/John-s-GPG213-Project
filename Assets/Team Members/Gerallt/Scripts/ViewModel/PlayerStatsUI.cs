@@ -1,4 +1,6 @@
+using System;
 using TMPro;
+using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,9 +11,14 @@ namespace Gerallt
         public GameObject view;
         public TextMeshPro playerNameUI;
         private Transform cameraTransform;
+        private LobbyPlayerData playerDataCache;
+        private ulong clientId;
         
         public void UpdateStats(LobbyPlayerData lobbyPlayerData)
         {
+            playerDataCache = lobbyPlayerData;
+            clientId = lobbyPlayerData.ClientId;
+
             if (string.IsNullOrEmpty(lobbyPlayerData.PlayerName))
             {
                 playerNameUI.text = lobbyPlayerData.ClientIPAddress;
@@ -39,7 +46,27 @@ namespace Gerallt
 
             cameraTransform = Camera.main.transform;
         }
-        
+
+        private void Start()
+        {
+            NetworkPlayerList.Instance.OnPlayerDataChanged += OnPlayerDataChanged;
+        }
+
+        private void OnDestroy()
+        {
+            NetworkPlayerList.Instance.OnPlayerDataChanged -= OnPlayerDataChanged;
+        }
+
+        private void OnPlayerDataChanged(ulong playerId, LobbyPlayerData lobbyPlayerData)
+        {
+            if (clientId == playerId)
+            {
+                UpdateStats(lobbyPlayerData);
+                
+                transform.rotation = quaternion.identity; // HACK
+            }
+        }
+
         private void FixedUpdate()
         {
             //FollowCamera();

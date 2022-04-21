@@ -16,27 +16,29 @@ namespace Gerallt
         public GameObject UIClientPrefab;
         public TMP_InputField UIPlayerNameInput;
 
-        private NetworkPlayerList GNetworkedListBehaviour;
-
         public void PlayerName_ValueChanged()
         {
             string playerName = UIPlayerNameInput.text;
-            ulong clientId = ServerManager.Singleton.LocalClientId;
+            ulong clientId = NetworkManager.Singleton.LocalClientId;
 
-            for (int i = 0; i < GNetworkedListBehaviour.NetworkedObjects.Count; i++)
+            LobbyPlayerData playerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientId);
+            playerData.PlayerName = playerName;
+
+            // Update local and server model.
+            for (int i = 0; i < NetworkPlayerList.Instance.NetworkedObjects.Count; i++)
             {
-                LobbyPlayerData playerData = GNetworkedListBehaviour.NetworkedObjects[i];
+                LobbyPlayerData playerData2 = NetworkPlayerList.Instance.NetworkedObjects[i];
 
-                if (playerData.ClientId == clientId)
+                if (playerData2.ClientId == clientId)
                 {
-                    playerData.PlayerName = playerName;
-                    playerData.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
+                    playerData2.PlayerName = playerName;
+                    playerData2.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
 
-                    GNetworkedListBehaviour.UpdatePlayerData(i, playerData);
+                    NetworkPlayerList.Instance.UpdatePlayerData(i, playerData2);
                     break;
                 }
             }
-            
+
             // Update the view given model changes.
             UpdateClientsList();
         }
@@ -49,9 +51,8 @@ namespace Gerallt
                 gameManager.OnChangeLobbyVisibility += GameManager_OnChangeLobbyVisibility;
                 gameManager.StartedGameEvent += GameManager_OnStartedGameEvent;
             }
-
-            GNetworkedListBehaviour = NetworkPlayerList.Instance;
-            GNetworkedListBehaviour.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
+            
+            NetworkPlayerList.Instance.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
         }
 
         private void GameManager_OnChangeLobbyVisibility(bool visibility)
@@ -72,7 +73,7 @@ namespace Gerallt
                 gameManager.StartedGameEvent -= GameManager_OnStartedGameEvent;
             }
             
-            GNetworkedListBehaviour.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
+            NetworkPlayerList.Instance.NetworkedObjects.OnListChanged -= NetworkedObjectsOnOnListChanged;
         }
 
         public void OnJoinButtonClicked()
@@ -123,12 +124,12 @@ namespace Gerallt
                 Destroy(child.gameObject);
             }
 
-            if (GNetworkedListBehaviour.NetworkedObjects != null)
+            if (NetworkPlayerList.Instance.NetworkedObjects != null)
             {
                 // Refresh client UI with newly connected clients:
                 List<LobbyPlayerData> duplicates = new List<LobbyPlayerData>();
                 
-                foreach(LobbyPlayerData lobbyPlayerData in GNetworkedListBehaviour.NetworkedObjects)
+                foreach(LobbyPlayerData lobbyPlayerData in NetworkPlayerList.Instance.NetworkedObjects)
                 {
                     if (!duplicates.Any(dup => dup.ClientId == lobbyPlayerData.ClientId))
                     {
