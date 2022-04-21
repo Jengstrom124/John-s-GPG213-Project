@@ -218,13 +218,16 @@ public class ServerManager : NetworkManager
             GameManager.Instance.RaiseChangeInGameUIVisibility(true);
 
             // Tell the server that this client wants to rejoin to their existing session.
-            GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId);
+            GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId, ulong.MaxValue);
         }
         else
         {
             NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
 
             StartClient();
+            
+            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
         }
     }
     
@@ -234,12 +237,17 @@ public class ServerManager : NetworkManager
         bool createPlayerObject = true;
 
         string password = System.Text.Encoding.UTF8.GetString(connectionData);
+
+        if (password != serverPassword)
+        {
+            approve = false;
+        }
         
         // Position to spawn the player object at, set to null to use the default position
-        Vector3? positionToSpawnAt = Vector3.zero;
+        Vector3? positionToSpawnAt = null;
 
         // Rotation to spawn the player object at, set to null to use the default rotation
-        Quaternion rotationToSpawnWith = Quaternion.identity;
+        Quaternion? rotationToSpawnWith = null;
 
         connectionApprovedDelegate(createPlayerObject, null, approve, positionToSpawnAt, rotationToSpawnWith);
     }

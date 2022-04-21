@@ -93,7 +93,7 @@ public class GameManager : ManagerBase<GameManager>
             {
                 NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
 
-                SinglePlayerJoin(playerObject, player);
+                SinglePlayerJoin(playerObject, player, ulong.MaxValue);
             }
 
             RaiseStartEventClientRpc(); // TODO: People subscribing to this event should spawn characters/players for the level
@@ -107,10 +107,25 @@ public class GameManager : ManagerBase<GameManager>
         }
     }
 
+    public void StartGameUpdateLocalClient(ulong clientId)
+    {
+        // Replicate spawn players that are on the server locally
+        if (ServerManager.Singleton.IsServer)
+        {
+            foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
+            {
+                NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
+
+                SinglePlayerJoin(playerObject, player, clientId, true, true);
+            }
+        }
+    }
+
     [ServerRpc(RequireOwnership = false)]
     public void StartPlayerServerRpc(ulong clientId)
     {
-        StartGame();
+        //StartGame();
+        StartGameUpdateLocalClient(clientId);
 
         // Remove Cameras from loaded scenes
         UILevelsViewModel.Instance.DestroyCameras();
@@ -125,11 +140,42 @@ public class GameManager : ManagerBase<GameManager>
     }
     
     [ServerRpc(RequireOwnership = false)]
-    public void JoinExistingSessionServerRpc(ulong clientId)
+    public void JoinExistingSessionServerRpc(ulong clientId, ulong localClientId, bool lateJoin = false)
     {
         NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject;
+        bool spawnReady = true;
         
         PlayerController playerController = playerObject.GetComponent<PlayerController>();
+        
+        if (lateJoin && localClientId != ulong.MaxValue)
+        {
+
+            if (playerController.controlled != null)
+            {
+                return;
+            }
+            
+            // if(playerObject.IsNetworkVisibleTo(localClientId))
+            // {
+            //     playerObject.NetworkHide(localClientId);          
+            // }
+            
+            // if (playerObject.IsNetworkVisibleTo(localClientId))
+            // {
+            //     spawnReady = false;
+            //     return;
+            // }
+            
+            // if (playerObject.CheckObjectVisibility(localClientId))
+            // {
+            //     spawnReady = false;
+            //
+            //     return;
+            // }
+        }
+        
+        
+        
 
         Debug.Log("ID " + clientId + "; " + "NEW Char = " + playerController.selectedCharacter);
 
@@ -144,8 +190,12 @@ public class GameManager : ManagerBase<GameManager>
         GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
         playerController.controlled = spawnedCharacter;
 
-        spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-        spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientId);
+        if (spawnReady)
+        {
+            spawnedCharacter.GetComponent<NetworkObject>().Spawn();
+            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientId);
+        }
+
         NetworkObjectReference characterReference = spawnedCharacter;
         SetupCameraClientRpc(clientId, characterReference);
 
@@ -164,10 +214,23 @@ public class GameManager : ManagerBase<GameManager>
         RaiseChangeInGameUIVisibilityClientRpc(true, clientId);
     }
 
-    public void SinglePlayerJoin(NetworkObject playerObject, ulong player)
+    public void SinglePlayerJoin(NetworkObject playerObject, ulong player, ulong clientId, bool justLocalClient = false, bool lateJoin = false)
     {
         if (NetworkManager.Singleton.IsServer)
         {
+            if (justLocalClient)
+            {
+                JoinExistingSessionServerRpc(player,clientId, lateJoin);
+                
+                // if (!playerObject.IsSpawned)
+                // {
+                //     //playerObject.Spawn();
+                // }
+                // playerObject.Spawn();
+                
+                return;
+            }
+            
             PlayerController playerController = playerObject.GetComponent<PlayerController>();
 
             Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
@@ -177,6 +240,7 @@ public class GameManager : ManagerBase<GameManager>
 
             spawnedCharacter.GetComponent<NetworkObject>().Spawn();
             spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
+
             NetworkObjectReference characterReference = spawnedCharacter;
             SetupCameraClientRpc(player, characterReference);
 
