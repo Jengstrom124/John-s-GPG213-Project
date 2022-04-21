@@ -114,7 +114,7 @@ namespace Gerallt
             
             
             //if (!HasGameStartedState.Instance.hasGameStarted.Value)
-            if(!HasGameStartedState.Instance.hasGameStarted.Value) // lateJoin == false && 
+            if(!GameManager.Instance.hasGameStarted.Value) // lateJoin == false && 
             {
                 GameManager.Instance.StartGame();
                 

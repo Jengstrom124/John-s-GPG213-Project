@@ -14,7 +14,9 @@ public class GameManager : ManagerBase<GameManager>
     public NetworkVariable<NetworkableString> selectedLevel = new NetworkVariable<NetworkableString>(string.Empty);
 
     //public NetworkVariable<bool> hasGameStarted = new NetworkVariable<bool>(NetworkVariableReadPermission.Everyone);
-    //public NetworkVariable<bool> hasGameStarted { get; set; } = new NetworkVariable<bool>();
+    public NetworkVariable<bool> hasGameStarted { get; set; } = new NetworkVariable<bool>(NetworkVariableReadPermission.Everyone);
+
+
 
     public CameraFollow camera;
     public event Action StartedGameEvent;
@@ -91,9 +93,9 @@ public class GameManager : ManagerBase<GameManager>
 
             RaiseStartEventClientRpc(); // TODO: People subscribing to this event should spawn characters/players for the level
 
-            if (!HasGameStartedState.Instance.hasGameStarted.Value && IsServer)
+            if (!hasGameStarted.Value && IsServer)
             {
-                HasGameStartedState.Instance.hasGameStarted.Value = true; // Didn't update late joining clients
+                hasGameStarted.Value = true; // Didn't update late joining clients
 
                 //SetGameStartedServerRpc();
             }

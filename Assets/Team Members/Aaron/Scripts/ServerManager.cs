@@ -159,7 +159,7 @@ public class ServerManager : NetworkManager
     
     private void ServerManager_OnClientConnectedCallback(ulong clientId)
     {
-        if (HasGameStartedState.Instance.hasGameStarted.Value)
+        if (GameManager.Instance.hasGameStarted.Value)
         {
             if (currentPlayer.HasValue)
             {
