@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1220180664060358642}
   - component: {fileID: 1220180664060358643}
-  - component: {fileID: 4985159594647776453}
   m_Layer: 0
   m_Name: WavesTerrainMasterClone
   m_TagString: Untagged
@@ -67,14 +66,3 @@ Terrain:
   m_GroupingID: 1
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
---- !u!154 &4985159594647776453
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220180664060358641}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 5fc428ce67fdc7c4eb1358aa9bb2bd1b, type: 2}
-  m_EnableTreeColliders: 1

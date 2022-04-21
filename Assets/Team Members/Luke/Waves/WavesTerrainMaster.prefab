@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8029535161172136500}
   - component: {fileID: 8029535161172136501}
   - component: {fileID: 8029535161172136502}
-  - component: {fileID: 5404705660164636988}
   m_Layer: 0
   m_Name: WavesTerrainMaster
   m_TagString: Untagged
@@ -87,14 +86,3 @@ MonoBehaviour:
   amplitude: 0.02
   xWeight: 6
   zWeight: 6
---- !u!154 &5404705660164636988
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8029535161172136503}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 5fc428ce67fdc7c4eb1358aa9bb2bd1b, type: 2}
-  m_EnableTreeColliders: 1

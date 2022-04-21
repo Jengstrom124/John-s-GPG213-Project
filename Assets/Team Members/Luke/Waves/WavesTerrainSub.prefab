@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1474236809025092050}
   - component: {fileID: 1474236809025092048}
-  - component: {fileID: 1474236809025092051}
   - component: {fileID: 1474236809025092049}
   m_Layer: 0
   m_Name: WavesTerrainSub
@@ -68,17 +67,6 @@ Terrain:
   m_GroupingID: 1
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
---- !u!154 &1474236809025092051
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1474236809025092061}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 7478e7aef6971a44d8b1d970d8cc10ef, type: 2}
-  m_EnableTreeColliders: 1
 --- !u!114 &1474236809025092049
 MonoBehaviour:
   m_ObjectHideFlags: 0
