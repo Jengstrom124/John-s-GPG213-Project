@@ -8,7 +8,6 @@ public class SearchForFishingSpotState : AntAIState
 {
 	private Transform t;
 	BoatControl boatControl;
-
 	GameObject fish;
 
 	public override void Create(GameObject aGameObject)
@@ -19,12 +18,36 @@ public class SearchForFishingSpotState : AntAIState
 
 	public override void Enter()
 	{
-		StartCoroutine(GoToFishCoroutine());
+		//StartCoroutine(GoToFishCoroutine());
+
+		fish = FindObjectOfType<FishModel>().gameObject;
+
+		if (fish == null)
+		{
+			Debug.Log("fish not found!");
+			Finish();
+		}
+	}
+
+	public override void Execute(float aDeltaTime, float aTimeScale)
+    {
+		Vector3 fishPos = fish.transform.position;
+
+		t.position = Vector3.MoveTowards(t.position, new Vector3(fishPos.x, t.position.y, fishPos.z), boatControl.boatSpeed * aDeltaTime);
+
+		// Check distance to fish
+		if (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishPos.x, fishPos.z)) <= 2f)
+		{
+			// We arrived!
+			// Current action is finished.
+			boatControl.AtFishingSpot = true;
+			Finish();
+		}
 	}
 
 	IEnumerator GoToFishCoroutine()
     {
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.5f);
 
 		fish = FindObjectOfType<FishModel>().gameObject;
 

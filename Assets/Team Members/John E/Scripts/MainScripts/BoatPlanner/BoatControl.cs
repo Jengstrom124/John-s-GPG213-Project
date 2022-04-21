@@ -11,6 +11,8 @@ public class BoatControl : MonoBehaviour
 	Transform t;
 	Transform fishingDock;
 
+	public float boatSpeed = 10f;
+
 	[Header("Reference Only:")]
 	public List<GameObject> totalFishCaught = new List<GameObject>();
 
@@ -44,6 +46,6 @@ public class BoatControl : MonoBehaviour
 
 	public bool AtDock()
 	{
-		return (AntMath.Distance(t.position, fishingDock.position) < 5f);
+		return (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishingDock.position.x, fishingDock.position.z)) < 2f);
 	}
 }
