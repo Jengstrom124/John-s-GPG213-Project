@@ -7,6 +7,7 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 {
 	public IStateBase flock;
 	public IStateBase pathfollow;
+	public PathTracker pathTracker;
 	
 	public Rigidbody rb;
 	public Transform mainJointTransform;
@@ -70,6 +71,16 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 	{
 	}
 
+	void OnEnable()
+	{
+		//pathTracker.destinationReachedEvent += ;
+	}
+	
+	void OnDisable()
+	{
+		//pathTracker.destinationReachedEvent -= ;
+	}
+
 	// Start is called before the first frame update
     void Start()
     {
@@ -125,6 +136,6 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 
 	public void SetDestination(Vector3 position)
 	{
-		
+		//pathTracker.GetPathToDestination(position);
 	}
 }

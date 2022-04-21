@@ -752,6 +752,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 2517395056
       objectReference: {fileID: 0}
+    - target: {fileID: 596834023, guid: ae553b6ec8f77da448040072af289d65, type: 3}
+      propertyPath: perlinScale
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2902874371360471854, guid: ae553b6ec8f77da448040072af289d65, type: 3}
       propertyPath: m_Name
       value: LukeFish
@@ -798,6 +802,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4119284677214216438, guid: ae553b6ec8f77da448040072af289d65, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276638176149353577, guid: ae553b6ec8f77da448040072af289d65, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4276638176149353577, guid: ae553b6ec8f77da448040072af289d65, type: 3}

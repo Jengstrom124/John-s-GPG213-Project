@@ -74,6 +74,13 @@ GameObject:
   - component: {fileID: -158972904826370234}
   - component: {fileID: 939573171499342525}
   - component: {fileID: 1437645236}
+  - component: {fileID: 596834029}
+  - component: {fileID: 596834028}
+  - component: {fileID: 596834027}
+  - component: {fileID: 596834026}
+  - component: {fileID: 596834025}
+  - component: {fileID: 596834023}
+  - component: {fileID: 596834022}
   m_Layer: 0
   m_Name: LukeFish
   m_TagString: Untagged
@@ -105,7 +112,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2902874371360471854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b54659c00df6374ba1eff995f92ace1, type: 3}
   m_Name: 
@@ -150,8 +157,8 @@ Rigidbody:
   m_GameObject: {fileID: 2902874371360471854}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 10
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -261,6 +268,109 @@ MonoBehaviour:
   target: {fileID: 0}
   destinationTarget: {x: 0, y: 0, z: 0}
   angle: 0
+--- !u!114 &596834029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
+  standardFeelerCount: 5
+  emergencyFeelerCount: 3
+  fov: 20
+--- !u!114 &596834028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eef0b1062ff446488876b0d8490dbaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 2
+  usePlayerForce: 0
+  currentPlayerFish: {fileID: 2902874371360471854}
+--- !u!114 &596834027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11587027d746784bbdccb5d936b96fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 2
+--- !u!114 &596834026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b167424619dd649a8c47f1176bdb08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  maxSpeed: 15
+--- !u!114 &596834025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d0585697ae8f241bbaf87132c216e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 2
+  force: 2
+  myDistance: 0
+--- !u!114 &596834023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7492a98defc83324e81c4cb2d8187dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perlinScale: 0.5
+  wanderScale: 2
+  perlin: 0
+--- !u!114 &596834022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902874371360471854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38440e98a023f640b5e7e82c76e0e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighboursList: []
+  fishColliders: []
 --- !u!1 &6647763253185511798
 GameObject:
   m_ObjectHideFlags: 0

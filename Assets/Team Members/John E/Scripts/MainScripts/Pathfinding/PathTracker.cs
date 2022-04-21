@@ -160,7 +160,7 @@ public class PathTracker : MonoBehaviour
         }
     }
 
-    void GetPathToDestination(Vector3 destination)
+    public void GetPathToDestination(Vector3 destination)
     {
         AStar.Instance.FindPath(myTransform, destination);
     }
