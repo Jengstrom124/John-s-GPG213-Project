@@ -12,6 +12,8 @@ namespace Gerallt
     {
         public NetworkList<LobbyPlayerData> NetworkedObjects;
 
+        public event Action<ulong, LobbyPlayerData> OnPlayerDataChanged;
+
         public override void Awake()
         {
             base.Awake();
@@ -47,19 +49,37 @@ namespace Gerallt
             }
         }
 
+        public bool HasJoined(ulong clientId)
+        {
+            bool joined = false;
+            for (int i = 0; i < NetworkedObjects.Count; i++)
+            {
+                LobbyPlayerData playerData = NetworkedObjects[i];
+
+                if (playerData.ClientId == clientId)
+                {
+                    joined = true;
+                    break;
+                }
+            }
+
+            return joined;
+        }
+        
         public LobbyPlayerData GetPlayerData()
         {
             for (int i = 0; i < NetworkedObjects.Count; i++)
             {
                 LobbyPlayerData playerData = NetworkedObjects[i];
 
-                if (playerData.ClientId == ServerManager.Singleton.LocalClientId)
+                if (playerData.ClientId == NetworkManager.Singleton.LocalClientId)
                 {
                     return playerData;
                 }
             }
 
             LobbyPlayerData empty = new LobbyPlayerData();
+            empty.ClientId = NetworkManager.Singleton.LocalClientId;
             empty.PlayerName = "Unknown";
             return empty;
         }
@@ -108,6 +128,8 @@ namespace Gerallt
             data.PlayerName = newPlayerName;
 
             NetworkedObjects[i] = data;
+            
+            RaisePlayerDataChangedClientRpc(data);
         }
         
         [ServerRpc(RequireOwnership = false)]
@@ -120,6 +142,8 @@ namespace Gerallt
             
             // Tell the clients the updated data:
             //UpdatePlayerDataClientRpc(i, newData);
+
+            RaisePlayerDataChangedClientRpc(newData);
         }
         
         [ClientRpc]
@@ -129,6 +153,12 @@ namespace Gerallt
                 return;
             
             NetworkedObjects[i] = newData;
+        }
+        
+        [ClientRpc]
+        void RaisePlayerDataChangedClientRpc(LobbyPlayerData newData)
+        {
+            OnPlayerDataChanged?.Invoke(newData.ClientId, newData);
         }
         
         [ServerRpc(RequireOwnership = false)]
@@ -141,6 +171,8 @@ namespace Gerallt
                 if (playerData.ClientId == newData.ClientId)
                 {
                     NetworkedObjects[i] = newData;
+                    
+                    RaisePlayerDataChangedClientRpc(newData);
                 }
             }
         }

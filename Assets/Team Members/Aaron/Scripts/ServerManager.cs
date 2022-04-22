@@ -159,7 +159,7 @@ public class ServerManager : NetworkManager
     
     private void ServerManager_OnClientConnectedCallback(ulong clientId)
     {
-        if (HasGameStartedState.Instance.hasGameStarted.Value)
+        if (GameManager.Instance.hasGameStarted.Value)
         {
             if (currentPlayer.HasValue)
             {
@@ -174,21 +174,21 @@ public class ServerManager : NetworkManager
         }
     }
 
-    IEnumerator ConnectionTimeout()
-    {
-        yield return new WaitForSeconds(connectionTimeout);
-        if (!isServerUp)
-        {
-            Shutdown();
-            yield return new WaitForSeconds(1.0f);
-            GNetworkState state = FindObjectOfType<GNetworkState>();
-            state.Init(FindObjectOfType<ServerManager>()); // Respawn the network list as it got destroyed on shutdown.
-            
-            StartHost();
-            yield return new WaitForSeconds(1.0f);
-            //state.Spawn();
-        }
-    }
+    // IEnumerator ConnectionTimeout()
+    // {
+    //     yield return new WaitForSeconds(connectionTimeout);
+    //     if (!isServerUp)
+    //     {
+    //         Shutdown();
+    //         yield return new WaitForSeconds(1.0f);
+    //         GNetworkState state = FindObjectOfType<GNetworkState>();
+    //         state.Init(FindObjectOfType<ServerManager>()); // Respawn the network list as it got destroyed on shutdown.
+    //         
+    //         StartHost();
+    //         yield return new WaitForSeconds(1.0f);
+    //         //state.Spawn();
+    //     }
+    // }
 
     public void Host()
     {
@@ -202,9 +202,33 @@ public class ServerManager : NetworkManager
 
     public void Client()
     {
-        NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
+        bool alreadyConnected = false;
+        
+        if (LocalClientId != ulong.MaxValue)
+        {
+            if (NetworkPlayerList.Instance.HasJoined(LocalClientId))
+            {
+                alreadyConnected = true;
+            }
+        }
 
-        StartClient();
+        if (alreadyConnected)
+        {
+            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
+
+            // Tell the server that this client wants to rejoin to their existing session.
+            GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId, ulong.MaxValue);
+        }
+        else
+        {
+            NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
+
+            StartClient();
+            
+            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
+        }
     }
     
     private void OnConnectionApprovalCallback(byte[] connectionData, ulong clientId, ConnectionApprovedDelegate connectionApprovedDelegate)
@@ -213,12 +237,17 @@ public class ServerManager : NetworkManager
         bool createPlayerObject = true;
 
         string password = System.Text.Encoding.UTF8.GetString(connectionData);
+
+        if (password != serverPassword)
+        {
+            approve = false;
+        }
         
         // Position to spawn the player object at, set to null to use the default position
-        Vector3? positionToSpawnAt = Vector3.zero;
+        Vector3? positionToSpawnAt = null;
 
         // Rotation to spawn the player object at, set to null to use the default rotation
-        Quaternion rotationToSpawnWith = Quaternion.identity;
+        Quaternion? rotationToSpawnWith = null;
 
         connectionApprovedDelegate(createPlayerObject, null, approve, positionToSpawnAt, rotationToSpawnWith);
     }

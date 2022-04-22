@@ -7,16 +7,39 @@ using Anthill.Utils;
 public class ReturnToDockState : AntAIState
 {
 	private Transform t;
+	BoatControl boatControl;
 	GameObject fishingDock;
 
 	public override void Create(GameObject aGameObject)
 	{
 		t = aGameObject.GetComponent<Transform>();
+		boatControl = aGameObject.GetComponent<BoatControl>();
 	}
 
 	public override void Enter()
 	{
-		StartCoroutine(ReturnToDockCoroutine());
+		//StartCoroutine(ReturnToDockCoroutine());
+
+		fishingDock = GameObject.Find("FishingDock");
+
+		if(fishingDock == null)
+        {
+			Debug.Log("Dock not found!");
+			Finish();
+		}
+	}
+
+	public override void Execute(float aDeltaTime, float aTimeScale)
+	{
+		Vector3 fishingDockPos = fishingDock.transform.position;
+
+		t.position = Vector3.MoveTowards(t.position, new Vector3(fishingDockPos.x, t.position.y, fishingDockPos.z), boatControl.boatSpeed * aDeltaTime);
+
+		// Check distance to Dock
+		if (boatControl.AtDock())
+		{
+			Finish();
+		}
 	}
 
 	IEnumerator ReturnToDockCoroutine()

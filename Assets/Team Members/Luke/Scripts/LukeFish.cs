@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
+public class LukeFish : SerializedMonoBehaviour, IControllable, IRTS, IEdible
 {
 	public IStateBase flock;
 	public IStateBase pathfollow;
+	public PathTracker pathTracker;
 	
 	public Rigidbody rb;
 	public Transform mainJointTransform;
@@ -25,6 +26,9 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 	public Vector3 localVelocity;
 	public Vector3 tailLocalVelocity;
 
+
+	public bool doThing = false;
+	
 	public void Accelerate(float input)
 	{
 		rb.AddForceAtPosition(input*acceleratingForce*transform.TransformDirection(Vector3.forward), transform.position, 0);
@@ -70,6 +74,16 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 	{
 	}
 
+	void OnEnable()
+	{
+		//pathTracker.destinationReachedEvent += ;
+	}
+	
+	void OnDisable()
+	{
+		//pathTracker.destinationReachedEvent -= ;
+	}
+
 	// Start is called before the first frame update
     void Start()
     {
@@ -109,5 +123,22 @@ public class LukeFish : SerializedMonoBehaviour, IControllable, IEdible
 	public EdibleInfo GetInfo()
 	{
 		return new EdibleInfo();
+	}
+
+	public void Selected()
+	{
+		flock.Exit();
+		pathfollow.Enter();
+	}
+
+	public void Deselected()
+	{
+		pathfollow.Exit();
+		flock.Enter();
+	}
+
+	public void SetDestination(Vector3 position)
+	{
+		pathTracker.GetPathToDestination(position);
 	}
 }
