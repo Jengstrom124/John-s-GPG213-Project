@@ -45,15 +45,25 @@ public class KevinTerrainGen : MonoBehaviour
     
     void Start()
     {
+        StartCoroutine(Terrainer());
+        StartCoroutine(Spawner());
+    }
+
+    public IEnumerator Terrainer()
+    {
+        yield return new WaitForSeconds(1f);
         offsetX = Random.Range(0f, 9999f);
         offsetY = Random.Range(0f, 9999f);
         
         terrainGenerator.calculateHeightCallback = CalculateHeightCallback;
         terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
         terrainGenerator.depth = yHeight;
-        
-        
-        
+
+    }
+
+    public IEnumerator Spawner()
+    {
+        yield return new WaitForSeconds(2f);
         for (int x = 0; x < terrainGenerator.width; x++)
         {
             for (int z = 0; z < terrainGenerator.height; z++)
@@ -78,14 +88,14 @@ public class KevinTerrainGen : MonoBehaviour
 
                 if (pos.y < coralLevel && perlinValue1 > 0.4f && perlinValue1 < 0.5f && coral)
                 {
-                    //Debug.Log(perlinValue1);
                     Instantiate(coralPrefab, pos,Quaternion.identity);
                 }
 
             }
         }
+        
     }
-
+    
     private float CalculateHeightCallback(int x, int y)
     {
         float xCoord = ((float) x / terrainGenerator.width);

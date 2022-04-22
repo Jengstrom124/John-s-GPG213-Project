@@ -120,7 +120,7 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater, IRTS
 
     public void Action()
     {
-        if (canLeap = true)
+        if (canLeap == true)
         {
             sharkRb.AddForceAtPosition(jumpPower*transform.TransformDirection(Vector3.up), headTipTransform.position, 0);
             sharkRb.AddForceAtPosition(jumpPower/2f*transform.TransformDirection(Vector3.forward), transform.position, 0);
