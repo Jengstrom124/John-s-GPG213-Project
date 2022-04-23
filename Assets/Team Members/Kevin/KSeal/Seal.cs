@@ -18,7 +18,7 @@ namespace Kevin
     //Transforms
     public Transform headTransform; 
     public Transform tailTransform;
-    
+    public Transform jumpTransform;
     
     //Wiggle Transforms
     public Transform tailLeadTransform;
@@ -40,7 +40,8 @@ namespace Kevin
     //Flippers Animation
     public float maxAngle;
     public float currentFlipperAngle;
-    
+
+    public bool isJumping;
     
     // Start is called before the first frame update
     void Start()
@@ -70,6 +71,40 @@ namespace Kevin
         {
             StartCoroutine(Decelerate());
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
+        {
+            isJumping = true;
+            sealRigidbody.constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            Jump();
+            StartCoroutine(JumpTimer()); 
+
+        }
+
+        if (IsWet && isJumping == false)
+        {
+            accelerationSpeed = 5f;
+            sealRigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+    }
+
+    IEnumerator JumpTimer()
+    {
+        yield return new WaitForSeconds(1f);
+        isJumping = false; 
+    }
+
+    public void Jump()
+    {
+        accelerationSpeed = 1f;
+        sealRigidbody.AddForceAtPosition(new Vector3(0f,  Mathf.Sqrt(20f * -2 * -9.81f)*20f,0f),jumpTransform.position);
+        StartCoroutine(GravityDrop());
+    }
+
+    IEnumerator GravityDrop()
+    {
+        yield return new WaitForSeconds(0.5f);
+        sealRigidbody.AddForceAtPosition(250f * transform.TransformDirection(Vector3.down),jumpTransform.position,0f);
     }
 
   
@@ -87,7 +122,7 @@ namespace Kevin
 
         if (input == 0f)
         {
-            //targetAngle = 
+           
         }
         else
         {
@@ -102,38 +137,12 @@ namespace Kevin
         tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
         tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
         tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
-        //headTransform.eulerAngles = new Vector3(0f,0f , currentYEuler + 0.75f * currentSteeringAngle);
+        headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
     }
 
     public void Accelerate(float input)
     {
-        
-        /*Vector3 currentHeadPosition = headTransform.transform.position;
-        if (input > 0.5)
-        {
-            sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
-            headTransform.eulerAngles = new Vector3(60f, 0f, 0f);
-            //headTransform.transform.position = new Vector3(headTransform.position.x, headTransform.position.y - 0.075f, headTransform.position.z + 0.5f);
-        }
-        else
-        {
-            headTransform.transform.position = currentHeadPosition;
-        }*/
-        
         /*float currentYEuler = transform.eulerAngles.y;
-        float targetAngle = 0;
-        
-        if(input > 0.5f)
-        {
-            targetAngle = -input * maxAngle;
-        }
-        
-        currentFlipperAngle = Mathf.Lerp(currentFlipperAngle, targetAngle, 0.01f);
-
-        leftFlipper.eulerAngles = new Vector3(0f,0f ,currentYEuler * currentFlipperAngle);
-        rightFlipper.eulerAngles = new Vector3(0f, 0f, currentYEuler * currentFlipperAngle);*/
-
-        float currentYEuler = transform.eulerAngles.y;
         float currentXEuler = transform.eulerAngles.x;
         float targetAngle = 0;
         
@@ -149,9 +158,7 @@ namespace Kevin
 
         currentBobbleAngle = Mathf.Lerp(currentBobbleAngle, targetAngle, 0.5f);
         
-        headTransform.eulerAngles = new Vector3(currentXEuler + currentBobbleAngle,currentYEuler, 0f);
-        
-        //headTransform.transform.position = new Vector3(headTransform.position.x, headTransform.position.y - 0.075f, headTransform.position.z + 0.5f);
+        headTransform.eulerAngles = new Vector3(currentXEuler + currentBobbleAngle,currentYEuler, 0f);*/
         sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
 
     }

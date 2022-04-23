@@ -24,24 +24,30 @@ public class KevinTerrainGen : MonoBehaviour
     public float seaLevel = 15f;
     public float seaweedLevel = 12f;
     public float coralLevel = 7f;
+    public float maxSpawner = 30f;
+    
     public float highLands = 0.75f;
     public float landDrop = 0.4f;
     public float control = 0.5f;
-    
+
+    public List<GameObject> gameobjectParents;
     public GameObject sandPrefab;
-    //public GameObject treePrefab;
     public GameObject seaweedPrefab;
     public GameObject coralPrefab;
+    public GameObject birdPrefab;
+    public GameObject obeliskPrefab;
     public List<GameObject> treePrefab;
+   
+    
     private List<Vector3> currentPosition;
-    
-    
+
     //bools used to test the different prefabs
 
     public bool sand;
     public bool tree;
     public bool seaweed;
     public bool coral;
+    public bool bird;
     
     void Start()
     {
@@ -71,7 +77,13 @@ public class KevinTerrainGen : MonoBehaviour
                 float perlinValue1 = Mathf.PerlinNoise(10f * (float) x / terrainGenerator.width, 10f * (float) z / terrainGenerator.height);
                 Vector3 pos = new Vector3(x, 0, z);
                 pos.y = terrainData.SampleHeight(pos);
-                
+                GameObject parent = gameobjectParents[0];
+                GameObject parent1 = gameobjectParents[1];
+                GameObject parent2 = gameobjectParents[2];
+                /*if (pos.y > 30f)
+                {
+                    Instantiate(obeliskPrefab, pos, Quaternion.identity);
+                }*/
                 if (pos.y > seaLevel && sand)
                 {
                     Instantiate(sandPrefab, pos,Quaternion.identity);
@@ -79,21 +91,31 @@ public class KevinTerrainGen : MonoBehaviour
                 if (pos.y > seaLevel && perlinValue1 > 0.6f && tree)
                 {
                     int randomTree = Random.Range(0, treePrefab.Count);
-                    Instantiate(treePrefab[randomTree], pos,Quaternion.identity);
+                    Instantiate(treePrefab[randomTree], pos,Quaternion.identity,parent.transform);
                 }
                 if (pos.y < seaweedLevel && pos.y > coralLevel && perlinValue1 > 0.75 && seaweed)
                 {
-                    Instantiate(seaweedPrefab, pos,Quaternion.identity);
+                    Instantiate(seaweedPrefab, pos,Quaternion.identity,parent1.transform);
                 }
 
-                if (pos.y < coralLevel && perlinValue1 > 0.4f && perlinValue1 < 0.5f && coral)
+                if (pos.y < coralLevel && perlinValue1 > 0.475f && perlinValue1 < 0.5f && coral)
                 {
-                    Instantiate(coralPrefab, pos,Quaternion.identity);
+                    Instantiate(coralPrefab, pos,Quaternion.identity,parent2.transform);
                 }
 
             }
         }
-        
+
+        for (int i = 0; i < maxSpawner; i++)
+        {
+            if (bird)
+            {
+                Vector3 randomLocation = new Vector3(Random.Range(1f, 255f), 30f, Random.Range(1f, 255f));
+                GameObject parent3 = gameobjectParents[3];
+                Instantiate(birdPrefab, randomLocation,Quaternion.identity, parent3.transform);
+            }
+        }
+
     }
     
     private float CalculateHeightCallback(int x, int y)
@@ -108,14 +130,23 @@ public class KevinTerrainGen : MonoBehaviour
         float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);*/
         if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
         {
-            if (perlinValue > 0.8f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            if (perlinValue > 0.99f)
             {
-                return perlinValue * 10f;
+                Debug.Log(perlinValue);
+                return perlinValue + 30f;
+            }
+            if (perlinValue > 0.9f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            {
+                return perlinValue + 10f;
+            }
+            if (perlinValue > 0.8f && perlinValue < 0.89f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            {
+                return perlinValue + 5f;
             }
 
             if (perlinValue > 0.3 && perlinValue < 0.79f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue; 
+                return perlinValue * 1.2f; 
             }
             /*
             if (perlinValue > 0.85f && perlinValue < 0.89f)
@@ -138,7 +169,7 @@ public class KevinTerrainGen : MonoBehaviour
             {          
             }*/
         }
-        return perlinValue2*10f;
+        return perlinValue2 *10f;
     }
 }
         
