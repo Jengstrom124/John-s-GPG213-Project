@@ -9,9 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 717619864364975013}
+  - component: {fileID: 3286320148203778742}
   - component: {fileID: 6415848323633103670}
   - component: {fileID: 5438305767104055290}
   - component: {fileID: -3222496924962717606}
+  - component: {fileID: 2967101818858615197}
+  - component: {fileID: 5019407329439275001}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -35,6 +38,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &3286320148203778742
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389325854195522440}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 5
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!114 &6415848323633103670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354fc910c9ae3d94bac7328b91cebb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boatSpeed: 10
   totalFishCaught: []
 --- !u!114 &-3222496924962717606
 MonoBehaviour:
@@ -75,6 +95,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25dff09f32b8e849bc038ef7d4912f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2967101818858615197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389325854195522440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ca7b9d47aea144cb585b7b5b75ec9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 717619864364975013}
+  distanceThreshold: 3
+  maxRayLength: 10
+  drawRaycasts: 0
+  usePathSmoothing: 0
+  finalDestinationPos: {x: 0, y: 0}
+  currentTargetPos: {x: 0, y: 0}
+--- !u!114 &5019407329439275001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389325854195522440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41a2f8392f1d10f43bf018713763b5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTransform: {fileID: 717619864364975013}
+  turnMultiplier: 0.05
+  target: {fileID: 0}
+  destinationTarget: {x: 0, y: 0, z: 0}
+  angle: 0
 --- !u!1 &3129539845837877428
 GameObject:
   m_ObjectHideFlags: 0

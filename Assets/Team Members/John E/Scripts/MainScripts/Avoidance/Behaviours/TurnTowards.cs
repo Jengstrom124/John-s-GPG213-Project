@@ -30,8 +30,11 @@ public class TurnTowards : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        neighbours.newNeighbourEvent += CheckForPredator;
-        neighbours.neighbourLeaveEvent += PredatorOutOfSight;
+        if(neighbours != null)
+        {
+            neighbours.newNeighbourEvent += CheckForPredator;
+            neighbours.neighbourLeaveEvent += PredatorOutOfSight;
+        }
 
         pathTracker.newTargetAssignedEvent += SetDestinationTarget;
     }

@@ -1291,6 +1291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FishModel
       objectReference: {fileID: 0}
+    - target: {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
 --- !u!1 &839885869
@@ -3103,37 +3107,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 43c51d0a1dbcef44ba3d1acb88c9dbb6, type: 3}
   m_PrefabInstance: {fileID: 1906815470}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1945034652
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1945034653}
-  m_Layer: 0
-  m_Name: FishingDock
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1945034653
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945034652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 137.3, y: 10, z: 162.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1945275010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3643,3 +3616,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eb01f8240bc8b740b3a2f978f8a7320, type: 3}
+--- !u!1001 &6631958648316451714
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6631958648049730590, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_Name
+      value: FishingDock
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 137.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 162.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}

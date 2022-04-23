@@ -18,6 +18,7 @@ public class AStar : ManagerBase<AStar>
     public Vector3 targetPos;
     public Vector3 startPos;
     public Node targetNode;
+    public GameObject entityUsingAstar;
 
     private void Start()
     {
@@ -34,7 +35,9 @@ public class AStar : ManagerBase<AStar>
     //Overload Function for FindPath accepting a transform reference
     public void FindPath(Transform startTransform, Vector3 destination)
     {
+        entityUsingAstar = startTransform.gameObject;
         FindPath(startTransform.position, destination);
+        
     }
 
     public void FindPath(Vector3 _startPos, Vector3 _targetPos)
@@ -153,7 +156,9 @@ public class AStar : ManagerBase<AStar>
         WorldScanner.instance.path = path;
         WorldScanner.instance.endNode = end;
 
-        pathFoundEvent?.Invoke(path);
+        //Astar being an instance is setting a target pos for every entity that subscribes to this
+        //pathFoundEvent?.Invoke(path);
+        entityUsingAstar.GetComponent<PathTracker>().GeneratePathList(path);
     }
 
     //Rescan a new path when objects in the world move (may need to take an alternate route - or a new better route has become available)

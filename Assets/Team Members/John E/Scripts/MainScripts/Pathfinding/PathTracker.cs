@@ -10,10 +10,13 @@ public class PathTracker : MonoBehaviour
     public Transform myTransform;
     [Tooltip("How close to the targetPos does the transform need to be")]
     public float distanceThreshold = 2f;
+    public LayerMask obstacleLayerMask;
 
     [Header("Extra Settings: ")]
     public float maxRayLength = 10f;
     public bool drawRaycasts;
+    public bool usePathSmoothing = true;
+    public bool test = false;
 
     [Header("References Only - Don't Touch")]
     public Vector2 finalDestinationPos;
@@ -34,7 +37,7 @@ public class PathTracker : MonoBehaviour
     {
         if(AStar.Instance != null)
         {
-            AStar.Instance.pathFoundEvent += GeneratePathList;
+            //AStar.Instance.pathFoundEvent += GeneratePathList;
 
             //For testing a random waypoint whilst we have no way to set a waypoint
             //AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
@@ -63,11 +66,11 @@ public class PathTracker : MonoBehaviour
     private void FixedUpdate()
     {
         //check if there is a clear path to the target
-        if(finalDestinationPos != null)
+        if(finalDestinationPos != Vector2.zero && usePathSmoothing)
         {
             RaycastHit rayToTarget;
             rayToTarget = new RaycastHit();
-            Physics.Raycast(myTransform.position, new Vector3(finalDestinationPos.x, 0, finalDestinationPos.y) - myTransform.position, out rayToTarget, maxRayLength);
+            Physics.Raycast(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y, finalDestinationPos.y) - myTransform.position, out rayToTarget, maxRayLength, obstacleLayerMask.value);
 
             if(drawRaycasts)
             {
@@ -78,6 +81,7 @@ public class PathTracker : MonoBehaviour
             {
                 if(!clearPathToTarget)
                 {
+                    currentTargetPos = finalDestinationPos;
                     newTargetAssignedEvent?.Invoke(new Vector3(finalDestinationPos.x, 0, finalDestinationPos.y));
                     clearPathToTarget = true;
                 }
@@ -95,7 +99,16 @@ public class PathTracker : MonoBehaviour
             if (Vector2.Distance(currentTargetPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold)
             {
                 //Check for next path target
-                GetNextOptimizedPathPoint();
+                if(usePathSmoothing)
+                {
+                    GetNextOptimizedPathPoint();
+                }
+                else
+                {
+                    pathToFollow.Remove(pathToFollow[0]);
+                    currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
+                    newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
+                }
             }
         }
     }
@@ -112,10 +125,14 @@ public class PathTracker : MonoBehaviour
             //Fire off event
             atEnd = true;
             destinationReachedEvent?.Invoke();
+
+            //HACK for now just to reset turn towards value
+            currentTargetPos = Vector2.zero;
+            newTargetAssignedEvent?.Invoke(Vector3.zero);
         }
     }
 
-    void GeneratePathList(List<Node> path)
+    public void GeneratePathList(List<Node> path)
     {
         pathToFollow = path;
         atEnd = false;
@@ -126,6 +143,15 @@ public class PathTracker : MonoBehaviour
         newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
 
         finalDestinationPos = new Vector2(AStar.Instance.targetPos.x, AStar.Instance.targetPos.z);
+    }
+
+    public void ResetPathTracking()
+    {
+        pathToFollow.Clear();
+        atEnd = false;
+        clearPathToTarget = false;
+        currentTargetPos = Vector2.zero;
+        finalDestinationPos = Vector2.zero;
     }
 
     void GetNextOptimizedPathPoint()
@@ -139,7 +165,7 @@ public class PathTracker : MonoBehaviour
 
                 RaycastHit hitTest;
                 hitTest = new RaycastHit();
-                Physics.Raycast(myTransform.position, new Vector3(tempPathPos.x, 5, tempPathPos.y) - myTransform.position, out hitTest, maxRayLength);
+                Physics.Raycast(myTransform.position, new Vector3(tempPathPos.x, myTransform.position.y, tempPathPos.y) - myTransform.position, out hitTest, maxRayLength, obstacleLayerMask.value);
                 if (hitTest.collider)
                 {
                     //Once a path position is blocked - stop the loop and follow the path we have found
