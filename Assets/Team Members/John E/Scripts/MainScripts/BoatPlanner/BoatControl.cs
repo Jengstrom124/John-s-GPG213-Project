@@ -46,6 +46,6 @@ public class BoatControl : MonoBehaviour
 
 	public bool AtDock()
 	{
-		return (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishingDock.position.x, fishingDock.position.z)) < 2f);
+		return (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishingDock.position.x, fishingDock.position.z)) < 3.5f);
 	}
 }

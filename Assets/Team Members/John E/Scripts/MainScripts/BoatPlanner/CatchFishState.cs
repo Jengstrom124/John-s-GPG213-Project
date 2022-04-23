@@ -38,6 +38,7 @@ public class CatchFishState : AntAIState
             }
 
 			boatControl.HasFish = true;
+			boatControl.AtFishingSpot = false;
 			Finish();
 
 		}

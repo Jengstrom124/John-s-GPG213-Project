@@ -70,7 +70,7 @@ public class PathTracker : MonoBehaviour
         {
             RaycastHit rayToTarget;
             rayToTarget = new RaycastHit();
-            Physics.Raycast(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y, finalDestinationPos.y) - myTransform.position, out rayToTarget, maxRayLength, obstacleLayerMask.value);
+            Physics.Raycast(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y, finalDestinationPos.y) - myTransform.position, out rayToTarget, maxRayLength, obstacleLayerMask.value, QueryTriggerInteraction.Ignore);
 
             if(drawRaycasts)
             {
@@ -165,7 +165,7 @@ public class PathTracker : MonoBehaviour
 
                 RaycastHit hitTest;
                 hitTest = new RaycastHit();
-                Physics.Raycast(myTransform.position, new Vector3(tempPathPos.x, myTransform.position.y, tempPathPos.y) - myTransform.position, out hitTest, maxRayLength, obstacleLayerMask.value);
+                Physics.Raycast(myTransform.position, new Vector3(tempPathPos.x, myTransform.position.y, tempPathPos.y) - myTransform.position, out hitTest, maxRayLength, obstacleLayerMask.value, QueryTriggerInteraction.Ignore);
                 if (hitTest.collider)
                 {
                     //Once a path position is blocked - stop the loop and follow the path we have found

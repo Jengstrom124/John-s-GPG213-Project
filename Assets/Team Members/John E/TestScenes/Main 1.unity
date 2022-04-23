@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
       propertyPath: spawnCount
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
       propertyPath: waterOrNot
@@ -221,7 +221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &20682474
 AudioListener:
   m_ObjectHideFlags: 0
@@ -697,6 +697,10 @@ PrefabInstance:
     - target: {fileID: 2967101818858615197, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
       propertyPath: usePathSmoothing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438305767104055290, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
+      propertyPath: boatSpeed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}

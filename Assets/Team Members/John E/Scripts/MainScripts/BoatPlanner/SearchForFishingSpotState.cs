@@ -26,6 +26,7 @@ public class SearchForFishingSpotState : AntAIState
 
 	public override void Enter()
 	{
+		targetFishGO = null;
 		//StartCoroutine(GoToFishCoroutine());
 
 		//Using a coroutine to find fish as it seems to try to find a fish before they spawn causing null errors
@@ -46,11 +47,13 @@ public class SearchForFishingSpotState : AntAIState
             }
 
 			// Check distance to fish
-			if (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishPos.x, fishPos.z)) <= 2f)
+			if (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishPos.x, fishPos.z)) <= 5f)
 			{
 				// We arrived!
 				// Current action is finished.
 				boatControl.AtFishingSpot = true;
+				rb.velocity = Vector3.zero;
+				pathTracker.ResetPathTracking();
 				Finish();
 			}
 		}

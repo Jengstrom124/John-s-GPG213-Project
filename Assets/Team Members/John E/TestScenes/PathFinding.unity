@@ -947,6 +947,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6631958648049730590, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 6631958648049730590, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_Name
       value: FishingDock
       objectReference: {fileID: 0}
@@ -956,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 99.2
+      value: 94.8
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalPosition.y
@@ -964,7 +968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1199,7 +1203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008158196}
   m_LocalRotation: {x: 0, y: -0.09671428, z: 0, w: 0.9953122}
-  m_LocalPosition: {x: 53, y: 0, z: 56.4}
+  m_LocalPosition: {x: 52.2, y: 0, z: 56.2}
   m_LocalScale: {x: 74.3847, y: 17.71, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2032,7 +2036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1837100679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.4, y: 1, z: 70.9}
+  m_LocalPosition: {x: 57.2, y: 1, z: 68}
   m_LocalScale: {x: 1, y: 1, z: 1.843413}
   m_ConstrainProportionsScale: 0
   m_Children:
