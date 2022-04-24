@@ -7,6 +7,7 @@ public class SBManager : MonoBehaviour
     public List<SteeringBase> behaviours;
 
     MoveForwards moveForwards;
+    BoatControl boatControl;
 
     //Keeping track of feelers
     public AvoidObstacle[] feelers;
@@ -19,6 +20,7 @@ public class SBManager : MonoBehaviour
     {
         feelers = GetComponentsInChildren<AvoidObstacle>();
         moveForwards = GetComponent<MoveForwards>();
+        boatControl = GetComponent<BoatControl>();
     }
 
     // Update is called once per frame
@@ -30,7 +32,11 @@ public class SBManager : MonoBehaviour
 
         if(activeFeelers.Count <= 0)
         {
-            moveForwards.speed = Mathf.Lerp(moveForwards.speed, moveForwards.maxSpeed, 3f);
+            if(moveForwards != null)
+                moveForwards.speed = Mathf.Lerp(moveForwards.speed, moveForwards.maxSpeed, 3f);
+
+            if(boatControl != null)
+                boatControl.boatSpeed = Mathf.Lerp(boatControl.boatSpeed, boatControl.maxBoatSpeed, 7f);
         }
     }
 

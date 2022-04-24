@@ -37,9 +37,7 @@ public class SearchForFishingSpotState : AntAIState
     {
 		if(targetFishGO != null && targetFishGO.activeSelf == true)
         {
-			//rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed * aDeltaTime);
-
-			if(pathTracker.currentTargetPos != Vector2.zero)
+			if(pathTracker.currentTargetPos != Vector2.zero && !boatControl.useRBForces)
             {
 				Vector3 targetPos;
 				targetPos = new Vector3(pathTracker.currentTargetPos.x, t.position.y, pathTracker.currentTargetPos.y);
@@ -55,6 +53,11 @@ public class SearchForFishingSpotState : AntAIState
 				rb.velocity = Vector3.zero;
 				pathTracker.ResetPathTracking();
 				Finish();
+			}
+			else
+            {
+				if(boatControl.useRBForces)
+					rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed);
 			}
 		}
 		else

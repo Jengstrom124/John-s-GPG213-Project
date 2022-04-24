@@ -31,6 +31,7 @@ public class AvoidObstacle : MonoBehaviour
     public bool visualizeRays = false;
 
     MoveForwards moveForwards;
+    BoatControl boatControl;
     
     [Header("Reference ONLY:")]
     public float turnForce;
@@ -44,6 +45,7 @@ public class AvoidObstacle : MonoBehaviour
     {
         rb = GetComponentInParent<Rigidbody>();
         moveForwards = GetComponentInParent<MoveForwards>();
+        boatControl = GetComponentInParent<BoatControl>();
     }
 
     void FixedUpdate()
@@ -80,14 +82,11 @@ public class AvoidObstacle : MonoBehaviour
             //Adjust speed based on distance to closest collision - clamped between 1 & the max speed
             if (moveForwards != null)
             {
-                if(isEmergencyFeeler)
-                {
-                    moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance - speedReductionMultiplier, minSpeed, moveForwards.maxSpeed);
-                }
-                else
-                {
-                    moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance/3, minSpeed, moveForwards.maxSpeed);
-                }
+               moveForwards.speed = Mathf.Clamp(moveForwards.speed = distance/speedReductionMultiplier, minSpeed, moveForwards.maxSpeed);
+            }
+            if(boatControl != null)
+            {
+                boatControl.boatSpeed = Mathf.Clamp(boatControl.boatSpeed = distance / speedReductionMultiplier, minSpeed, boatControl.maxBoatSpeed);
             }
             //Apply torque based on ray direction (if the left ray hits an object turn right to dodge it)
             if (myTurnDirection == RayDirection.Right)

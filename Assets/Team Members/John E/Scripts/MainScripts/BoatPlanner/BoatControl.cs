@@ -12,6 +12,8 @@ public class BoatControl : MonoBehaviour
 	Transform fishingDock;
 
 	public float boatSpeed = 10f;
+	public float maxBoatSpeed = 3f;
+	public bool useRBForces = false;
 
 	[Header("Reference Only:")]
 	public List<GameObject> totalFishCaught = new List<GameObject>();

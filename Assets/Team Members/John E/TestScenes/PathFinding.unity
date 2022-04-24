@@ -1119,10 +1119,8 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  maxRayLength: 50
   drawRaycasts: 1
   usePathSmoothing: 1
-  test: 0
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
 --- !u!54 &807946611
@@ -1762,22 +1760,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
-    - target: {fileID: 2967101818858615197, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: drawRaycasts
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967101818858615197, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: usePathSmoothing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967101818858615197, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: obstacleLayerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5019407329439275001, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: turnMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
 --- !u!1 &1837100679
@@ -1827,10 +1809,8 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  maxRayLength: 10
   drawRaycasts: 0
   usePathSmoothing: 1
-  test: 0
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
 --- !u!114 &1837100681
@@ -2445,10 +2425,8 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  maxRayLength: 10
   drawRaycasts: 0
   usePathSmoothing: 1
-  test: 0
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
 --- !u!114 &2146100643
@@ -3018,9 +2996,7 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  maxRayLength: 10
   drawRaycasts: 0
   usePathSmoothing: 1
-  test: 0
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}

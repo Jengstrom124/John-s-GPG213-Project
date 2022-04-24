@@ -45,11 +45,7 @@ public class ReturnToDockState : AntAIState
 
 	public override void Execute(float aDeltaTime, float aTimeScale)
 	{
-		//Vector3 fishingDockPos = fishingDock.transform.position;
-
-		//t.position = Vector3.MoveTowards(t.position, new Vector3(fishingDockPos.x, t.position.y, fishingDockPos.z), boatControl.boatSpeed * aDeltaTime);
-
-		if (pathTracker.currentTargetPos != Vector2.zero)
+		if (pathTracker.currentTargetPos != Vector2.zero && !boatControl.useRBForces)
 		{
 			Vector3 targetPos;
 			targetPos = new Vector3(pathTracker.currentTargetPos.x, t.position.y, pathTracker.currentTargetPos.y);
@@ -60,7 +56,13 @@ public class ReturnToDockState : AntAIState
 		if (boatControl.AtDock())
 		{
 			rb.velocity = Vector3.zero;
+			pathTracker.ResetPathTracking();
 			Finish();
+		}
+		else
+        {
+			if (boatControl.useRBForces)
+				rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed);
 		}
 	}
 

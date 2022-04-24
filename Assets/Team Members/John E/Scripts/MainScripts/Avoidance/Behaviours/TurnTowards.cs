@@ -106,6 +106,8 @@ public class TurnTowards : MonoBehaviour
                 moveForwards.speed = Mathf.Clamp(moveForwards.speed = angle, 0, moveForwards.maxSpeed);
             }
         }
+
+
     }
 
     #region Predator Specific Implementation
