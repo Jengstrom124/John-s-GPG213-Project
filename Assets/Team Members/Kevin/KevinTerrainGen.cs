@@ -1,11 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Tree = Unity.VisualScripting.Antlr3.Runtime.Tree.Tree;
 
-public class KevinTerrainGen : MonoBehaviour
+namespace Kevin
+{
+    public class KevinTerrainGen : MonoBehaviour
 {
     public TerrainGenerator terrainGenerator;
 
@@ -21,7 +21,7 @@ public class KevinTerrainGen : MonoBehaviour
     public int yHeight = 20;
     
     public float cliffLevel = 30f;
-    public float seaLevel = 15f;
+    public float seaLevel = 7f;
     public float seaweedLevel = 12f;
     public float coralLevel = 7f;
     public float maxSpawner = 30f;
@@ -41,7 +41,7 @@ public class KevinTerrainGen : MonoBehaviour
     
     private List<Vector3> currentPosition;
 
-    //bools used to test the different prefabs
+    //bool used to test the different prefabs
 
     public bool sand;
     public bool tree;
@@ -90,17 +90,26 @@ public class KevinTerrainGen : MonoBehaviour
                 }
                 if (pos.y > seaLevel && perlinValue1 > 0.6f && tree)
                 {
-                    int randomTree = Random.Range(0, treePrefab.Count);
-                    Instantiate(treePrefab[randomTree], pos,Quaternion.identity,parent.transform);
+                    if (Random.Range(0, 100) <= 15)
+                    {
+                        int randomTree = Random.Range(0, treePrefab.Count);
+                        Instantiate(treePrefab[randomTree], pos,Quaternion.identity,parent.transform);
+                    }
                 }
-                if (pos.y < seaweedLevel && pos.y > coralLevel && perlinValue1 > 0.75 && seaweed)
+                if (pos.y < seaLevel && pos.y > coralLevel && perlinValue1 > 0.5 && seaweed)
                 {
-                    Instantiate(seaweedPrefab, pos,Quaternion.identity,parent1.transform);
+                    if (Random.Range(0, 100) <= 25)
+                    {
+                        Instantiate(seaweedPrefab, pos, Quaternion.identity, parent1.transform);
+                    }
                 }
 
                 if (pos.y < coralLevel && perlinValue1 > 0.475f && perlinValue1 < 0.5f && coral)
                 {
-                    Instantiate(coralPrefab, pos,Quaternion.identity,parent2.transform);
+                    if (Random.Range(0, 100) <= 15)
+                    {
+                        Instantiate(coralPrefab, pos, Quaternion.identity, parent2.transform);
+                    }
                 }
 
             }
@@ -130,44 +139,33 @@ public class KevinTerrainGen : MonoBehaviour
         float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);*/
         if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
         {
-            if (perlinValue > 0.99f)
-            {
-                Debug.Log(perlinValue);
-                return perlinValue + 30f;
-            }
-            if (perlinValue > 0.9f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+           
+            if (perlinValue >= 0.89f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
                 return perlinValue + 10f;
             }
-            if (perlinValue > 0.8f && perlinValue < 0.89f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            if (perlinValue >= 0.79f && perlinValue < 0.89f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
                 return perlinValue + 5f;
             }
 
-            if (perlinValue > 0.3 && perlinValue < 0.79f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            if (perlinValue >= 0.49 && perlinValue < 0.79f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
                 return perlinValue * 1.2f; 
             }
-            /*
-            if (perlinValue > 0.85f && perlinValue < 0.89f)
+         
+            if (perlinValue > 0.3f && perlinValue < 0.49f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue - perlinValue2;
+                return perlinValue * -2f;
             }
-            */
-        
-        
-            /*if (perlinValue > 0.8f && perlinValue < 0.98f)
+            
+            
+            if (perlinValue >= -1f && perlinValue <= 0.3f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue - (1f - perlinValue);
-            }*/
-
-            if (perlinValue > 0f && perlinValue < 0.3f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
-            {
-                return perlinValue * Random.Range(-2f, -3f);
+                return perlinValue * Random.Range(-3f, -5f);
             }
-            /*if (perlinValue > 0.31f && perlinValue < 0.59f)
-            {          
-            }*/
+            
+         
         }
         return perlinValue2 *10f;
     }
@@ -300,3 +298,5 @@ public class KevinTerrainGen : MonoBehaviour
     }*/
 
 
+
+}

@@ -66,7 +66,6 @@ public class Kshark : MonoBehaviour, IControllable, IReactsToWater
         
         targetAngle = -input * steeringMax;
         
-
         currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
         tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
         /*if (input < 0)
