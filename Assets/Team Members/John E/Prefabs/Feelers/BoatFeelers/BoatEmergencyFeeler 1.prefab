@@ -52,7 +52,7 @@ MonoBehaviour:
   myTurnDirection: 0
   isEmergencyFeeler: 1
   speedReductionMultiplier: 2
-  minSpeed: 1
+  minSpeed: 50
   visualizeRays: 1
   turnForce: 0
   distance: 0

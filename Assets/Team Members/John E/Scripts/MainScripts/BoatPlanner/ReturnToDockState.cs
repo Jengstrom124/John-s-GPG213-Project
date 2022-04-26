@@ -62,7 +62,7 @@ public class ReturnToDockState : AntAIState
         {
 			//Keep moving to dock (using rb forces)
 			if (boatControl.useRBForces)
-				rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed);
+				rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed * aDeltaTime);
 		}
 	}
 }

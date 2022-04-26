@@ -84,8 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354fc910c9ae3d94bac7328b91cebb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boatSpeed: 10
-  maxBoatSpeed: 10
+  boatSpeed: 250
+  maxBoatSpeed: 250
   useRBForces: 1
   totalFishCaught: []
 --- !u!114 &-3222496924962717606
