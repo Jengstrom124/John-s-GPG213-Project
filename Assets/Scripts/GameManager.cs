@@ -31,7 +31,7 @@ public class GameManager : ManagerBase<GameManager>
         {
             GameObject playerObject = playerObjectRef;
             camera.target = playerObject.transform;
-            camera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
+            //camera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
         }
     }
 
@@ -149,69 +149,13 @@ public class GameManager : ManagerBase<GameManager>
         
         if (lateJoin && localClientId != ulong.MaxValue)
         {
-
             if (playerController.controlled != null)
             {
                 return;
             }
-            
-            // if(playerObject.IsNetworkVisibleTo(localClientId))
-            // {
-            //     playerObject.NetworkHide(localClientId);          
-            // }
-            
-            // if (playerObject.IsNetworkVisibleTo(localClientId))
-            // {
-            //     spawnReady = false;
-            //     return;
-            // }
-            
-            // if (playerObject.CheckObjectVisibility(localClientId))
-            // {
-            //     spawnReady = false;
-            //
-            //     return;
-            // }
         }
         
-        
-        
-
-        Debug.Log("ID " + clientId + "; " + "NEW Char = " + playerController.selectedCharacter);
-
-        if (playerController.controlled != null)
-        {
-            // Destroy character selected previously. 
-            NetworkObjectReference oldSpawnedControllableRef = playerController.controlled;
-
-            DestroyObjClientRpc(oldSpawnedControllableRef);
-        }
-        
-        GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
-        playerController.controlled = spawnedCharacter;
-
-        if (spawnReady)
-        {
-            spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientId);
-        }
-
-        NetworkObjectReference characterReference = spawnedCharacter;
-        SetupCameraClientRpc(clientId, characterReference);
-
-        NetworkObjectReference playerControllerReference = playerController.gameObject;
-        SetupLocalPlayerControllerClientRpc(clientId, characterReference, playerControllerReference);
-
-        // We have a LobbyPlayerData for the current player created by the client.
-        LobbyPlayerData lobbyPlayerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientId);
-        playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
-        playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-
-        // Spawn the player stats UI (name/IP) as a child of the current spawned character.
-        AssignPlayerStatsUI(spawnedCharacter, lobbyPlayerData, clientId);
-
-        // Show the In Game UI just for this client
-        RaiseChangeInGameUIVisibilityClientRpc(true, clientId);
+        SetupPlayer(clientId);
     }
 
     public void SinglePlayerJoin(NetworkObject playerObject, ulong player, ulong clientId, bool justLocalClient = false, bool lateJoin = false)
@@ -231,55 +175,39 @@ public class GameManager : ManagerBase<GameManager>
                 return;
             }
             
-            PlayerController playerController = playerObject.GetComponent<PlayerController>();
-
-            Debug.Log("ID " + player + "; " + "Char = " + playerController.selectedCharacter);
-
-            GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
-            playerController.controlled = spawnedCharacter;
-
-            spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-            spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(player);
-
-            NetworkObjectReference characterReference = spawnedCharacter;
-            SetupCameraClientRpc(player, characterReference);
-
-            NetworkObjectReference playerControllerReference = playerController.gameObject;
-            SetupLocalPlayerControllerClientRpc(player, characterReference, playerControllerReference);
-
-            // We have a LobbyPlayerData for the current player created by the client.
-            LobbyPlayerData lobbyPlayerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(player);
-            playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
-            playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
-
-            // Spawn the player stats UI (name/IP) as a child of the current spawned character.
-            AssignPlayerStatsUI(spawnedCharacter, lobbyPlayerData, player);
-
-            // Show the In Game UI just for this client
-            RaiseChangeInGameUIVisibilityClientRpc(true, player);
-
-            // OLD CODE
-
-
-            //There has to be a less fragile way of linking the prefab to the index?
-            // if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
-            //     .GetComponent<PlayerController>()
-            //     .selectedCharacter == characterSelect.CharacterIndex[0])
-            // {
-            //     GameObject go = Instantiate(test.sharkPrefab);
-            //     go.GetComponent<NetworkObject>().Spawn();
-            //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
-            // }
-            //
-            // else if (NetworkManager.Singleton.ConnectedClients[player].PlayerObject
-            //     .GetComponent<PlayerController>()
-            //     .selectedCharacter == characterSelect.CharacterIndex[1])
-            // {
-            //     GameObject go = Instantiate(test.fishPrefab);
-            //     go.GetComponent<NetworkObject>().Spawn();
-            //     go.GetComponent<NetworkObject>().ChangeOwnership(player);
-            // }
+            SetupPlayer(player);
         }
+    }
+
+    public void SetupPlayer(ulong clientID)
+    {
+        NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientID].PlayerObject;
+        PlayerController playerController = playerObject.GetComponent<PlayerController>();
+
+        Debug.Log("ID " + clientID + "; " + "Char = " + playerController.selectedCharacter);
+
+        GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
+        playerController.controlled = spawnedCharacter;
+
+        spawnedCharacter.GetComponent<NetworkObject>().Spawn();
+        spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientID);
+
+        NetworkObjectReference characterReference = spawnedCharacter;
+        SetupCameraClientRpc(clientID, characterReference);
+
+        NetworkObjectReference playerControllerReference = playerController.gameObject;
+        SetupLocalPlayerControllerClientRpc(clientID, characterReference, playerControllerReference);
+
+        // We have a LobbyPlayerData for the current player created by the client.
+        LobbyPlayerData lobbyPlayerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientID);
+        playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
+        playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+
+        // Spawn the player stats UI (name/IP) as a child of the current spawned character.
+        AssignPlayerStatsUI(spawnedCharacter, lobbyPlayerData, clientID);
+
+        // Show the In Game UI just for this client
+        RaiseChangeInGameUIVisibilityClientRpc(true, clientID);
     }
 
     public void RaiseChangeLobbyVisibility(bool visibility, bool updateAllClients = false)

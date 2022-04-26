@@ -7,11 +7,10 @@ using UnityEngine.InputSystem;
 public class mayaSquid : MonoBehaviour, IControllable
 {
     public Rigidbody squidForce;
-    public float speed = 25;
     public float rotateSpeed = 2f;
-    public float charge = 0;
-    public float boostDistance = 5;
-    private float chargeRate = 3;
+
+    public bool hackyNonsense;
+    public float charge;
 
     public Animator squidAnim;
 
@@ -29,8 +28,12 @@ public class mayaSquid : MonoBehaviour, IControllable
         Steer(Input.GetAxis("Horizontal"));
         //Accelerate(Input.GetAxis("Vertical"));
         Action2();
-        Debug.Log(charge);
+        hackyNonsense = false;
+        //Debug.Log(charge);
     }
+
+
+    
 
 
     public void Steer(float input)
@@ -56,20 +59,17 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void Action2()
     {
-        if (charge <= 0f)
+        hackyNonsense = true;
+        if (hackyNonsense)
         {
-            charge *= + chargeRate;
-            if (InputSystem.GetDevice<Keyboard>().eKey.wasReleasedThisFrame || charge >= 100f) ;
+            charge *= (Time.deltaTime * 5);
+            if (!hackyNonsense)
             {
-                squidAnim.speed = (charge*boostDistance*speed)/2;
-                squidAnim.Play("Swim");
-                squidForce.AddForceAtPosition(
-                    charge * boostDistance * speed * transform.TransformDirection(Vector3.forward), transform.position,
-                    ForceMode.Impulse);
-                charge *= - chargeRate;
-                
+                squidForce.AddForceAtPosition(Vector3.forward * charge, transform.position);
             }
         }
+        else
+            charge = 0f;
     }
 
     public void Action3()
