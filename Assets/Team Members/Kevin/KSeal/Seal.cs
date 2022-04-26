@@ -168,7 +168,8 @@ namespace Kevin
 
     public void Steer(float input)
     {
-        
+        if (IsServer)
+        {
             float currentYEuler = transform.eulerAngles.y;
             float targetAngle = 0;
 
@@ -182,13 +183,19 @@ namespace Kevin
             }
         
             currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
+            if (IsClient)
+            {
+                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
+                tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
+                tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
+                headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+
+            }
+        }
             
-            
-            tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
-            tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
-            tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
-            tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
-            headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+
+       
             
         
         
@@ -211,9 +218,11 @@ namespace Kevin
 
     public void Reverse(float input)
     {
-        
-        sealRigidbody.AddForceAtPosition(input*accelerationSpeed/2f*transform.TransformDirection(Vector3.back), transform.position,0);
-        
+        if (IsServer)
+        {
+            sealRigidbody.AddForceAtPosition(
+                input * accelerationSpeed / 2f * transform.TransformDirection(Vector3.back), transform.position, 0);
+        }
     }
 
     public void Action()
@@ -224,6 +233,12 @@ namespace Kevin
 
     public void Action2()
     {
+        /*if (isjumping == false)
+        {
+            Jump();
+            StartCoroutine(JumpTimer());
+        }*/
+        
         //View
         if (IsClient)
         {

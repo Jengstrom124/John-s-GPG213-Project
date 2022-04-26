@@ -393,13 +393,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharkRb: {fileID: 2709366438121233967}
   sharkSpeed: 15
-  turningSpeed: 10
-  pivotAmount: 5
+  currentSteeringAngle: 0
+  steeringMax: 30
   reduction: 0.5
   sharkObject: {fileID: 3378303050871511743}
   localVelocity: {x: 0, y: 0, z: 0}
+  tailLocalVelocity: {x: 0, y: 0, z: 0}
   tailPosition: {x: 0, y: 0, z: 0}
-  tailTransform: {fileID: 0}
+  headTransform: {fileID: 3570721733447909753}
+  tailTransform: {fileID: 2295235213069584251}
+  tail1Transform: {fileID: 7863812407282315641}
+  tail2Transform: {fileID: 6968443467362619957}
+  tail3Transform: {fileID: 7330421215619082455}
+  tail4Transform: {fileID: 5136766297444900843}
 --- !u!114 &3472386528725820213
 MonoBehaviour:
   m_ObjectHideFlags: 0
