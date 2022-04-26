@@ -11,7 +11,7 @@ public class LukeEagle : MonoBehaviour
 {
 	public bool circuitBreaker;
 	public float altitude = 20f;
-	public List<Vector3> controlPoints = new(4);
+	public List<Vector3> controlPoints = new List<Vector3>(4);
 	public int iterationsPerCourse = 200;
 	public float durationPerCourse = 7f;
 	public float rangePerCourse = 25f;
