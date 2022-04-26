@@ -16,6 +16,8 @@ namespace Gerallt
         public GameObject UIClientPrefab;
         public TMP_InputField UIPlayerNameInput;
 
+        public LobbyPlayerData? localPlayerData;
+        
         public void PlayerName_ValueChanged()
         {
             string playerName = UIPlayerNameInput.text;
@@ -24,6 +26,8 @@ namespace Gerallt
             LobbyPlayerData playerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientId);
             playerData.PlayerName = playerName;
 
+            localPlayerData = playerData;
+            
             // Update local and server model.
             for (int i = 0; i < NetworkPlayerList.Instance.NetworkedObjects.Count; i++)
             {
@@ -79,17 +83,15 @@ namespace Gerallt
         public void OnJoinButtonClicked()
         {
             //LobbyPlayerData lobbyPlayerData = GNetworkedListBehaviour.GetPlayerData();
-            
-            LobbyPlayerData? lobbyPlayerData = null;
-            
+
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
-            serverManager.JoinServer(lobbyPlayerData, autoCreateHost: true);
+            serverManager.JoinServer(localPlayerData, autoCreateHost: true);
         }
 
         public void StartHost_ButtonClicked()
         {
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
-            serverManager.Host();
+            serverManager.Host(localPlayerData);
         }
 
         public void StartGame_ButtonClicked()

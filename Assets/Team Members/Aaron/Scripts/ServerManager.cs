@@ -156,22 +156,35 @@ public class ServerManager : NetworkManager
     {
         UILevelsViewModel.Instance.LoadEventCompleted(sceneName, true);
     }
+
+    private IEnumerator ClientConnectedCoroutine(LobbyPlayerData lobbyPlayerData)
+    {
+        yield return new WaitForSeconds(1.0f);
+        NetworkPlayerList.Instance.UpdatePlayerDataServerRpc(lobbyPlayerData);
+    }
     
     private void ServerManager_OnClientConnectedCallback(ulong clientId)
     {
+        if (currentPlayer.HasValue)
+        {
+            LobbyPlayerData lobbyPlayerData = currentPlayer.Value;
+            
+            lobbyPlayerData.ClientId = clientId;
+            
+            StartCoroutine(ClientConnectedCoroutine(lobbyPlayerData));
+        }
+        
         if (GameManager.Instance.hasGameStarted.Value)
         {
             if (currentPlayer.HasValue)
             {
-                LobbyPlayerData lobbyPlayerData = currentPlayer.Value;
-
-                lobbyPlayerData.ClientId = clientId;
-                
-                NetworkPlayerList.Instance.UpdatePlayerDataServerRpc(lobbyPlayerData);    
+                //NetworkPlayerList.Instance.UpdatePlayerDataServerRpc(currentPlayer.Value);
             }
 
             GameManager.Instance.StartPlayerServerRpc(clientId);
         }
+        
+        currentPlayer = null;
     }
 
     // IEnumerator ConnectionTimeout()
@@ -190,8 +203,10 @@ public class ServerManager : NetworkManager
     //     }
     // }
 
-    public void Host()
+    public void Host(LobbyPlayerData? localPlayerData)
     {
+        currentPlayer = localPlayerData;
+        
         ConnectionApprovalCallback += OnConnectionApprovalCallback;
         NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
         
