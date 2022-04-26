@@ -31,7 +31,7 @@ public class GameManager : ManagerBase<GameManager>
         {
             GameObject playerObject = playerObjectRef;
             camera.target = playerObject.transform;
-            camera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
+            //camera.offset = new Vector3(0f, 15f, 0f); // HACK: Hard-coded, get this value from shark's zoom level
         }
     }
 
