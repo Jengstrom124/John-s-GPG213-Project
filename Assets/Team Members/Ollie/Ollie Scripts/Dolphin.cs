@@ -19,6 +19,30 @@ namespace Ollie
             jumpHeight = 20;
             jumpDistance = 00;
             originalConstraints = rb.constraints;
+            originalDrag = rb.drag;
+            originalAngularDrag = rb.angularDrag;
+        }
+
+        private void Update()
+        {
+            if (rb.velocity.y > 0)
+            {
+                //up
+                model.localRotation = Quaternion.Euler(0,90,-45);
+            }
+            else if (rb.velocity.y < 0)
+            {
+                model.localRotation = Quaternion.Euler(0,90,45);
+            }
+            else
+            {
+                model.localRotation = Quaternion.Euler(0,90,0);
+            }
+            
+            if (!jumping)
+            {
+                WaterCheck();
+            }
         }
 
         public override void Action()
@@ -36,6 +60,21 @@ namespace Ollie
             
         }
 
+        public override void WaterCheck()
+        {
+            if (IsWet)
+            {
+                rb.constraints = originalConstraints;
+                print("wet");
+            }
+
+            if (!IsWet)
+            {
+                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                print("not wet");
+            }
+        }
+
         void JumpOut()
         {
             if (!jumping)
@@ -50,8 +89,12 @@ namespace Ollie
                 //rb.constraints = RigidbodyConstraints.None;
                 //rb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                model.localRotation = Quaternion.Euler(0,90,-45);
+                
+                //up
+                
                 //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                rb.drag = 5;
+                rb.angularDrag = 1;
                 rb.AddForce(0,jumpHeight,jumpDistance, ForceMode.Impulse);
             }
             else
@@ -67,22 +110,13 @@ namespace Ollie
         IEnumerator JumpCooldownCoroutine()
         {
             print("dolphin go yeet");
-            yield return new WaitForSeconds(0.75f);
-            model.localRotation = Quaternion.Euler(0,90,45);
-            // if (rb.transform.position.y > 10)
-            // {
-            //     rb.mass = 5;
-            //     yield return null;
-            // }
-            // else
-            // {
-            //     rb.mass = 1;
-            // }
-            yield return new WaitForSeconds(0.33f);
-            model.localRotation = Quaternion.Euler(0,90,0);
+            yield return new WaitForSeconds(1.5f);
+            //down
+            //yield return new WaitForSeconds(1f);
+            //normal
             jumping = false;
-            //rb.constraints = RigidbodyConstraints.None;
-            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ;
+            rb.drag = originalDrag;
+            rb.angularDrag = originalAngularDrag;
         }
         
         void SpeedBoost()
@@ -97,7 +131,6 @@ namespace Ollie
         {
             //doubles speed for 1.5 seconds
             //prevents reapplication for 3 seconds after deactivation
-            print("shark go zoom");
             boosting = true;
             forwardSpeed = forwardSpeed * 2;
             yield return new WaitForSeconds(1.5f);

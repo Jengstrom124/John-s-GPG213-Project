@@ -5,7 +5,7 @@ using System.Text;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
+public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsToWater
 {
     public Rigidbody rb;
     public CapsuleCollider capsuleCollider;
@@ -23,6 +23,7 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     public float jumpDistance;
     public Transform model;
     public RigidbodyConstraints originalConstraints;
+    public float originalDrag, originalAngularDrag;
 
     //left overs ported from Vehicles project - maybe needed later for changing sharks
     //although I think this is unlikely
@@ -35,6 +36,11 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
         //both are currently unused
         localVelocity = transform.InverseTransformDirection(rb.velocity);
         wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
+    }
+    
+    public virtual void WaterCheck()
+    {
+        
     }
 
     #region IControllable Interface
@@ -157,4 +163,5 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable
     }*/
     #endregion
 
+    public bool IsWet { get; set; }
 }
