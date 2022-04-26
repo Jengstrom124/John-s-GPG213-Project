@@ -211,21 +211,14 @@ public class GameManager : ManagerBase<GameManager>
                     NetworkObjectReference characterReference = playerController.controlled;
                     SetupLocalPlayerControllerClientRpc(clientId, characterReference, playerControllerReference);
                     
-                    // UPDATE VIEW
+                    // UPDATE VIEW since late joiners are out of sync
                     // We have a LobbyPlayerData for the current player created by the client.
                     LobbyPlayerData lobbyPlayerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientId);
-                    //playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
-                    //playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
 
-                    //var spawnedCharacter = playerController.controlled;
-                    // Spawn the player stats UI (name/IP) as a child of the current spawned character.
-                    //AssignPlayerStatsUI(spawnedCharacter, lobbyPlayerData, clientId);
-
-                    // lobbyPlayerData.PlayerName = "TEST 123" + lobbyPlayerData.ClientId;
-                    //
-                    // var playerStatsUI = playerController.controlled.GetComponentInChildren<PlayerStatsUI>().gameObject;
-                    // NetworkObjectReference playerStatsUIRef = playerStatsUI;
-                    // UpdateStatsClientRpc(playerStatsUIRef, lobbyPlayerData);
+                    var playerStatsUI = playerController.controlled.GetComponentInChildren<PlayerStatsUI>().gameObject;
+                    NetworkObjectReference playerStatsUIRef = playerStatsUI;
+                    NetworkObjectReference playerInstanceRef = playerController.controlled;
+                    UpdateStatsClientRpc(playerInstanceRef, playerStatsUIRef, lobbyPlayerData);
                     
                     return;
                 }
