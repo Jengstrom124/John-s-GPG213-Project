@@ -18,11 +18,16 @@ public class OllieTerrain : MonoBehaviour
 
     public float offsetX = 100f;
     public float offsetY = 100f;
+    public int seed;
 
 
     // Keep as Awake to run before Birdzier takes width & height
     void Awake()
     {
+	    
+        Random.InitState(seed);
+        
+	    
         width = 256;
         height = 256;
         scale = 20;
@@ -47,8 +52,7 @@ public class OllieTerrain : MonoBehaviour
 
         float xCoord = (float) x / width * scale + offsetX;
         float yCoord = (float) y / height * scale + offsetY;
-
-      
+        
         float value = Mathf.PerlinNoise(xCoord*xFrequency, yCoord*yFrequency);
         if (!(xCoord < border+offsetX || yCoord < border+offsetY || xCoord > ((scale+offsetX) - border) || yCoord > ((scale+offsetY) - border)))
         {
