@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Kevin
 {
-    public class Seal : MonoBehaviour, IControllable, IReactsToWater
+    public class Seal : NetworkBehaviour, IControllable, IReactsToWater
 {
     //Gameobject Variables
     public Rigidbody sealRigidbody;
@@ -167,43 +168,52 @@ namespace Kevin
 
     public void Steer(float input)
     {
-        float currentYEuler = transform.eulerAngles.y;
-        float targetAngle = 0;
+        
+            float currentYEuler = transform.eulerAngles.y;
+            float targetAngle = 0;
 
-        if (input == 0f)
-        {
-            //targetAngle =  currentSteeringMax / 2f;
-        }
-        else
-        {
-            targetAngle = -input * currentSteeringMax;
-        }
+            if (input == 0f)
+            {
+                //targetAngle =  currentSteeringMax / 2f;
+            }
+            else
+            {
+                targetAngle = -input * currentSteeringMax;
+            }
         
-        currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
+            currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
+            
+            
+            tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+            tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
+            tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
+            tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
+            headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+            
         
-        tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
-        tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
-        tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
-        tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
-        headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+        
     }
 
     public void Accelerate(float input)
     {
-        if (IsWet)
+        if (IsServer)
         {
-            sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
+            if (IsWet)
+            {
+                sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
+            }
+            else
+            {
+                sealRigidbody.AddForceAtPosition(input*accelerationSpeed*2f*transform.TransformDirection(Vector3.forward), transform.position,0);
+            }
         }
-        else
-        {
-            sealRigidbody.AddForceAtPosition(input*accelerationSpeed*2f*transform.TransformDirection(Vector3.forward), transform.position,0);
-        }
-
     }
 
     public void Reverse(float input)
     {
+        
         sealRigidbody.AddForceAtPosition(input*accelerationSpeed/2f*transform.TransformDirection(Vector3.back), transform.position,0);
+        
     }
 
     public void Action()
@@ -214,7 +224,17 @@ namespace Kevin
 
     public void Action2()
     {
+        //View
+        if (IsClient)
+        {
+            
+        }
         
+        //Model
+        if (IsServer)
+        {
+            
+        }
     }
 
     public void Action3()
