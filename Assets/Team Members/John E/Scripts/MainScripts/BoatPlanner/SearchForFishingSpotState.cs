@@ -45,7 +45,7 @@ public class SearchForFishingSpotState : AntAIState
             }
 
 			// Check distance to fish
-			if (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishPos.x, fishPos.z)) <= 5f)
+			if (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishPos.x, fishPos.z)) <= boatControl.distanceThreshold)
 			{
 				// We arrived!
 				// Current action is finished.

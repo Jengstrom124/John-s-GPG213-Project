@@ -10,6 +10,7 @@ public class BoatControl : MonoBehaviour
 
 	Transform t;
 	Transform fishingDock;
+	PathTracker pathTracker;
 
 	public float boatSpeed = 10f;
 	public float maxBoatSpeed = 3f;
@@ -17,10 +18,12 @@ public class BoatControl : MonoBehaviour
 
 	[Header("Reference Only:")]
 	public List<GameObject> totalFishCaught = new List<GameObject>();
+	public float distanceThreshold;
 
 	private void Awake()
 	{
 		t = GetComponent<Transform>();
+		pathTracker = GetComponent<PathTracker>();
 
 		// Save reference for fishing dock.
 		GameObject fishingDockGO = GameObject.Find("FishingDock");
@@ -28,7 +31,12 @@ public class BoatControl : MonoBehaviour
 		fishingDock = fishingDockGO.GetComponent<Transform>();
 	}
 
-	public bool HasFish
+    private void Start()
+    {
+		distanceThreshold = pathTracker.distanceThreshold;
+    }
+
+    public bool HasFish
 	{
 		get { return hasFish; }
 		set
@@ -48,6 +56,6 @@ public class BoatControl : MonoBehaviour
 
 	public bool AtDock()
 	{
-		return (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishingDock.position.x, fishingDock.position.z)) < 5f);
+		return (AntMath.Distance(new Vector2(t.position.x, t.position.z), new Vector2(fishingDock.position.x, fishingDock.position.z)) < distanceThreshold);
 	}
 }

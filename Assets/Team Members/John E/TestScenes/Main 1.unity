@@ -587,7 +587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.250526
+      value: 15.46
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalPosition.z
@@ -762,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 717619864364975013, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.82
+      value: 15.46
       objectReference: {fileID: 0}
     - target: {fileID: 717619864364975013, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
       propertyPath: m_LocalPosition.z
@@ -799,22 +799,6 @@ PrefabInstance:
     - target: {fileID: 2389325854195522440, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
       propertyPath: m_Name
       value: Boat
-      objectReference: {fileID: 0}
-    - target: {fileID: 2389325854195522440, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967101818858615197, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: drawRaycasts
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2967101818858615197, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: usePathSmoothing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5438305767104055290, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
-      propertyPath: boatSpeed
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
