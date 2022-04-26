@@ -172,7 +172,7 @@ public class PlayerController : NetworkBehaviour
         // Scheduled replicated actions that run on the server side and client side when requested to run.
         ReplicatedAction(ReplicatedActionType.Steer, (float input) =>
         {
-            if (controllable != null)
+            if (controlled != null)
             {
                 controllable = controlled.GetComponentInChildren<IControllable>();
                 controllable.Steer(input);
