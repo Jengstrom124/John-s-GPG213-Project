@@ -28,7 +28,7 @@ public class mayaSquid : MonoBehaviour, IControllable
         Steer(Input.GetAxis("Horizontal"));
         //Accelerate(Input.GetAxis("Vertical"));
         Action2();
-        hackyNonsense = false;
+        //hackyNonsense = false;
         //Debug.Log(charge);
     }
 
@@ -59,17 +59,25 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void Action2()
     {
-        hackyNonsense = true;
-        if (hackyNonsense)
+        if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
+
         {
-            charge *= (Time.deltaTime * 5);
-            if (!hackyNonsense)
+            hackyNonsense = true;
+            if (hackyNonsense)
             {
-                squidForce.AddForceAtPosition(Vector3.forward * charge, transform.position);
+                charge *= (Time.deltaTime * 5);
+                if (!hackyNonsense)
+                {
+                    squidForce.AddForceAtPosition(Vector3.forward * charge, transform.position);
+                }
             }
+            else
+                charge = 0f;
         }
         else
-            charge = 0f;
+        {
+            hackyNonsense = false;
+        }
     }
 
     public void Action3()
