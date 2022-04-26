@@ -137,7 +137,7 @@ public class LukeEagle : MonoBehaviour
 	private void RandomizeBezierPoints()
 	{
 		Vector3 position = transform.position;
-		controlPoints[0] = controlPoints[^1];
+		controlPoints[0] = controlPoints[controlPoints.Count-1];
 		controlPoints[1] = controlPoints[0] + transform.TransformDirection(new Vector3(Random.Range(-5f, 5f), 0f, 5f));
 		for (int i = 2; i < controlPoints.Count; i++)
 		{
