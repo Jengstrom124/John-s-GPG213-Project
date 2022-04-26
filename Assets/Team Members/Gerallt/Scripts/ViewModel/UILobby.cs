@@ -31,20 +31,25 @@ namespace Gerallt
             playerData.PlayerName = playerName;
 
             localPlayerData = playerData;
-            
-            // Update local and server model.
-            for (int i = 0; i < NetworkPlayerList.Instance.NetworkedObjects.Count; i++)
+
+            if (clientId != ulong.MaxValue) // If has a valid client ID 
             {
-                LobbyPlayerData playerData2 = NetworkPlayerList.Instance.NetworkedObjects[i];
-
-                if (playerData2.ClientId == clientId)
+                // Update local and server model.
+                for (int i = 0; i < NetworkPlayerList.Instance.NetworkedObjects.Count; i++)
                 {
-                    playerData2.PlayerName = playerName;
-                    playerData2.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
-
-                    NetworkPlayerList.Instance.UpdatePlayerData(i, playerData2);
-                    break;
+                    LobbyPlayerData playerData2 = NetworkPlayerList.Instance.NetworkedObjects[i];
+                
+                    if (playerData2.ClientId == clientId)
+                    {
+                        playerData2.PlayerName = playerName;
+                        playerData2.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
+                
+                        NetworkPlayerList.Instance.UpdatePlayerData(clientId, i, playerData2);
+                        break;
+                    }
                 }
+                
+                //NetworkPlayerList.Instance.UpdatePlayerData(clientId, playerData);
             }
 
             // Update the view given model changes.

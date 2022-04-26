@@ -47,30 +47,39 @@ public class GameManager : ManagerBase<GameManager>
     public void AssignPlayerStatsUI(GameObject playerInstance, LobbyPlayerData lobbyPlayerData, ulong clientId)
     {
         GameObject playerStatsUI = Instantiate(playerStatsUIPrefab);
+
         NetworkObject playerStatsNetworkObj = playerStatsUI.GetComponent<NetworkObject>();
         if (playerStatsNetworkObj != null)
         {
-            playerStatsNetworkObj.Spawn();
-            playerStatsNetworkObj.ChangeOwnership(clientId);
-            playerStatsNetworkObj.TrySetParent(playerInstance.transform);
+            playerStatsNetworkObj.SpawnWithOwnership(clientId);
+            //playerStatsNetworkObj.ChangeOwnership(clientId);
+            playerStatsNetworkObj.TrySetParent(playerInstance.transform, false);
+            
+            playerStatsUI.transform.parent = playerInstance.transform;
         }
         else
         {
             playerStatsUI.transform.parent = playerInstance.transform;
         }
+        //playerStatsUI.transform.position = Vector3.zero;
+        //playerStatsUI.transform.position = playerInstance.transform.position;
 
-
+        NetworkObjectReference playerInstanceRef = playerInstance;
         NetworkObjectReference playerStatsUIRef = playerStatsUI;
-        UpdateStatsClientRpc(playerStatsUIRef, lobbyPlayerData);
+        UpdateStatsClientRpc(playerInstanceRef, playerStatsUIRef, lobbyPlayerData);
     }
 
     [ClientRpc]
-    public void UpdateStatsClientRpc(NetworkObjectReference playerStatsUIRef, LobbyPlayerData lobbyPlayerData)
+    public void UpdateStatsClientRpc(NetworkObjectReference playerInstanceRef, NetworkObjectReference playerStatsUIRef, LobbyPlayerData lobbyPlayerData)
     {
         GameObject playerStatsUIObj = playerStatsUIRef;
         PlayerStatsUI playerStatsUIModel = playerStatsUIObj.GetComponent<PlayerStatsUI>();
-
         playerStatsUIModel.UpdateStats(lobbyPlayerData);
+
+        GameObject playerInstance = playerInstanceRef;
+        
+        playerStatsUIObj.transform.position = playerInstance.transform.position + playerStatsUIModel.offset;
+        playerStatsUIObj.transform.rotation = playerInstance.transform.rotation;
     }
 
     public void StartLevelSelect()
@@ -90,6 +99,7 @@ public class GameManager : ManagerBase<GameManager>
         if (ServerManager.Singleton.IsServer)
         {
             foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
+            //foreach (var player in NetworkPlayerList.Instance.NetworkedObjects)
             {
                 NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
 
@@ -113,6 +123,7 @@ public class GameManager : ManagerBase<GameManager>
         if (ServerManager.Singleton.IsServer)
         {
             foreach (var player in NetworkManager.Singleton.ConnectedClientsIds)
+            //foreach (var player in NetworkPlayerList.Instance.NetworkedObjects)
             {
                 NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[player].PlayerObject;
 
@@ -135,8 +146,19 @@ public class GameManager : ManagerBase<GameManager>
     public void DestroyObjClientRpc(NetworkObjectReference objRef)
     {
         GameObject obj = objRef;
-        
-        Destroy(obj);
+
+        // NetworkObject networkObject = obj.GetComponent<NetworkObject>();
+        // if (networkObject != null)
+        // {
+        //     if (networkObject.IsSpawned)
+        //     {
+        //         networkObject.Despawn();
+        //     }
+        // }
+        // else
+        // {
+            Destroy(obj);
+        //}
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -147,15 +169,70 @@ public class GameManager : ManagerBase<GameManager>
         
         PlayerController playerController = playerObject.GetComponent<PlayerController>();
         
+        Vector3? oldPosition = null;
+        Quaternion? oldRotation = null;
+        
         if (lateJoin && localClientId != ulong.MaxValue)
         {
             if (playerController.controlled != null)
             {
-                return;
+                if (clientId == localClientId)
+                {
+                    oldPosition = playerController.controlled.transform.position;
+                    oldRotation = playerController.controlled.transform.rotation;
+                    
+                    // Client might have selected a new character so have to recreate it
+                    var playerStats = playerController.controlled.GetComponentInChildren<PlayerStatsUI>();
+                    //DestroyObjClientRpc(playerStats.gameObject);
+                    //DestroyObjClientRpc(playerController.controlled);
+
+                    if (playerStats != null)
+                    {
+                        NetworkObject playerStatsNetworkObject = playerStats.GetComponent<NetworkObject>();
+                        if (playerStatsNetworkObject != null && playerStatsNetworkObject.IsSpawned)
+                        {
+                            playerStatsNetworkObject.Despawn();
+                        }
+                    }
+                    
+                    NetworkObject networkObject = playerController.controlled.GetComponent<NetworkObject>();
+                    if (networkObject != null && networkObject.IsSpawned)
+                    {
+                        networkObject.Despawn();
+                    }
+
+                    //playerController.controlled = null;
+                }
+                else
+                {
+                    // Always make sure PlayerController has a controlled object
+                    // (Late joiners have this set as null)
+                    NetworkObjectReference playerControllerReference = playerController.gameObject;
+                    NetworkObjectReference characterReference = playerController.controlled;
+                    SetupLocalPlayerControllerClientRpc(clientId, characterReference, playerControllerReference);
+                    
+                    // UPDATE VIEW
+                    // We have a LobbyPlayerData for the current player created by the client.
+                    LobbyPlayerData lobbyPlayerData = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientId);
+                    //playerController.clientInfo = new NetworkVariable<LobbyPlayerData>(lobbyPlayerData); // Store the client info for now.
+                    //playerController.playerColour = new NetworkVariable<Color>(RandomColour()); // Assign a random colour to the player for now.
+
+                    //var spawnedCharacter = playerController.controlled;
+                    // Spawn the player stats UI (name/IP) as a child of the current spawned character.
+                    //AssignPlayerStatsUI(spawnedCharacter, lobbyPlayerData, clientId);
+
+                    // lobbyPlayerData.PlayerName = "TEST 123" + lobbyPlayerData.ClientId;
+                    //
+                    // var playerStatsUI = playerController.controlled.GetComponentInChildren<PlayerStatsUI>().gameObject;
+                    // NetworkObjectReference playerStatsUIRef = playerStatsUI;
+                    // UpdateStatsClientRpc(playerStatsUIRef, lobbyPlayerData);
+                    
+                    return;
+                }
             }
         }
         
-        SetupPlayer(clientId);
+        SetupPlayer(clientId, oldPosition, oldRotation);
     }
 
     public void SinglePlayerJoin(NetworkObject playerObject, ulong player, ulong clientId, bool justLocalClient = false, bool lateJoin = false)
@@ -165,21 +242,15 @@ public class GameManager : ManagerBase<GameManager>
             if (justLocalClient)
             {
                 JoinExistingSessionServerRpc(player,clientId, lateJoin);
-                
-                // if (!playerObject.IsSpawned)
-                // {
-                //     //playerObject.Spawn();
-                // }
-                // playerObject.Spawn();
-                
-                return;
             }
-            
-            SetupPlayer(player);
+            else
+            {
+                SetupPlayer(player, null, null);
+            }
         }
     }
 
-    public void SetupPlayer(ulong clientID)
+    public void SetupPlayer(ulong clientID, Vector3? position, Quaternion? rotation)
     {
         NetworkObject playerObject = NetworkManager.Singleton.ConnectedClients[clientID].PlayerObject;
         PlayerController playerController = playerObject.GetComponent<PlayerController>();
@@ -187,10 +258,21 @@ public class GameManager : ManagerBase<GameManager>
         Debug.Log("ID " + clientID + "; " + "Char = " + playerController.selectedCharacter);
 
         GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
+        
+        Transform t = spawnedCharacter.transform;
+        if (position.HasValue)
+        {
+            t.position = position.Value;
+        }
+        if (rotation.HasValue)
+        {
+            t.rotation = rotation.Value;
+        }
+        
         playerController.controlled = spawnedCharacter;
 
-        spawnedCharacter.GetComponent<NetworkObject>().Spawn();
-        spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientID);
+        spawnedCharacter.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+        //spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientID);
 
         NetworkObjectReference characterReference = spawnedCharacter;
         SetupCameraClientRpc(clientID, characterReference);

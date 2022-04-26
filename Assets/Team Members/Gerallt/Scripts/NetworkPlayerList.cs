@@ -113,7 +113,15 @@ namespace Gerallt
         {
             if (ServerManager.Singleton.IsClient)
             {
-                UpdatePlayerDataServerRpc(i, newData);
+                UpdatePlayerDataServerRpc(newData.ClientId, i, newData);
+            }
+        }
+        
+        public void UpdatePlayerData(ulong clientId, int i, LobbyPlayerData newData)
+        {
+            if (ServerManager.Singleton.IsClient)
+            {
+                UpdatePlayerDataServerRpc(clientId, i, newData);
             }
         }
         
@@ -129,11 +137,11 @@ namespace Gerallt
 
             NetworkedObjects[i] = data;
             
-            RaisePlayerDataChangedClientRpc(data);
+            RaisePlayerDataChangedClientRpc(data.ClientId, data);
         }
         
         [ServerRpc(RequireOwnership = false)]
-        void UpdatePlayerDataServerRpc(int i, LobbyPlayerData newData)
+        void UpdatePlayerDataServerRpc(ulong clientId, int i, LobbyPlayerData newData)
         {
             if (i < 0 || i >= NetworkedObjects.Count)
                 return;
@@ -141,13 +149,13 @@ namespace Gerallt
             NetworkedObjects[i] = newData;
             
             // Tell the clients the updated data:
-            //UpdatePlayerDataClientRpc(i, newData);
+            UpdatePlayerDataClientRpc(clientId, i, newData);
 
-            RaisePlayerDataChangedClientRpc(newData);
+            RaisePlayerDataChangedClientRpc(clientId, newData);
         }
         
         [ClientRpc]
-        void UpdatePlayerDataClientRpc(int i, LobbyPlayerData newData)
+        void UpdatePlayerDataClientRpc(ulong clientId, int i, LobbyPlayerData newData)
         {
             if (i < 0 || i >= NetworkedObjects.Count)
                 return;
@@ -156,8 +164,9 @@ namespace Gerallt
         }
         
         [ClientRpc]
-        void RaisePlayerDataChangedClientRpc(LobbyPlayerData newData)
+        void RaisePlayerDataChangedClientRpc(ulong clientId, LobbyPlayerData newData)
         {
+            newData.ClientId = clientId;
             OnPlayerDataChanged?.Invoke(newData.ClientId, newData);
         }
         
@@ -172,7 +181,7 @@ namespace Gerallt
                 {
                     NetworkedObjects[i] = newData;
                     
-                    RaisePlayerDataChangedClientRpc(newData);
+                    RaisePlayerDataChangedClientRpc(newData.ClientId, newData);
                 }
             }
         }

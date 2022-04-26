@@ -36,7 +36,7 @@ public class PlayerController : NetworkBehaviour
     #region Networked Actions and RPCs
 
     private Action[] actionsArray;
-    private Action<float>[] actionsArrayWithParam;
+    private Dictionary<ReplicatedActionType, Action<float>> actionsArrayWithParam;
     
     public enum ReplicatedActionType : int
     {
@@ -68,16 +68,17 @@ public class PlayerController : NetworkBehaviour
     {
         if (actionsArrayWithParam == null)
         {
-            actionsArrayWithParam = new Action<float>[1];
+            actionsArrayWithParam = new Dictionary<ReplicatedActionType, Action<float>>();
         }
 
-        int actionInd = (int) actionType;
-        if (actionInd >= actionsArrayWithParam.Length)
+        if (!actionsArrayWithParam.ContainsKey(actionType))
         {
-            Array.Resize(ref actionsArrayWithParam, actionInd + 1);
+            actionsArrayWithParam.Add(actionType, replicatedAction);
         }
-
-        actionsArrayWithParam[actionInd] = replicatedAction;
+        else
+        {
+            actionsArrayWithParam[actionType] = replicatedAction;
+        }
     }
     
     [ClientRpc]
@@ -107,7 +108,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (actionsArrayWithParam == null) return;
         
-        Action<float> runOnClient = actionsArrayWithParam[(int)actionType];
+        Action<float> runOnClient = actionsArrayWithParam[actionType];
         
         runOnClient(input);
     }
@@ -117,7 +118,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (actionsArrayWithParam == null) return;
         
-        Action<float> replicatedAction = actionsArrayWithParam[(int)actionType];
+        Action<float> replicatedAction = actionsArrayWithParam[actionType];
         
         replicatedAction(input);
             
@@ -133,7 +134,7 @@ public class PlayerController : NetworkBehaviour
         
         //replicatedAction();  // Client side prediction
 
-        if (NetworkManager.Singleton.IsConnectedClient)
+        if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
         {
             // Update the server model. The server will later update the clients.
             ReplicatedActionServerRpc(actionType);
@@ -153,14 +154,14 @@ public class PlayerController : NetworkBehaviour
         
         //replicatedAction(input);  // Client side prediction
 
-        if (NetworkManager.Singleton.IsConnectedClient)
+        if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
         {
             // Update the server model. The server will later update the clients.
             ReplicatedActionServerRpc(actionType, input);
         }
         else
         {
-            actionsArrayWithParam[(int)actionType](input);
+            actionsArrayWithParam[actionType](input);
         }
     }
     
@@ -171,11 +172,8 @@ public class PlayerController : NetworkBehaviour
         // Scheduled replicated actions that run on the server side and client side when requested to run.
         ReplicatedAction(ReplicatedActionType.Steer, (float input) =>
         {
-            if (controlled != null)
-            {
-                controllable = controlled.GetComponentInChildren<IControllable>();
-                controllable.Steer(input);
-            }
+            controllable = controlled.GetComponentInChildren<IControllable>();
+            controllable.Steer(input);
         });
         
         ReplicatedAction(ReplicatedActionType.Accelerate, (float input) =>
@@ -236,7 +234,7 @@ public class PlayerController : NetworkBehaviour
                 }
                 else
                 {
-                    ReplicatedAction(ReplicatedActionType.Steer, 0f);
+                    //ReplicatedAction(ReplicatedActionType.Steer, 0f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)

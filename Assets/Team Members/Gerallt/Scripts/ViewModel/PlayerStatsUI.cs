@@ -10,6 +10,8 @@ namespace Gerallt
     {
         public GameObject view;
         public TextMeshPro playerNameUI;
+        public Vector3 offset = new Vector3(0, 0, -4);
+        
         private Transform cameraTransform;
         private LobbyPlayerData playerDataCache;
         private ulong clientId;
@@ -35,6 +37,7 @@ namespace Gerallt
         {
             transform.LookAt(cameraTransform.position);
             transform.Rotate(new Vector3(0,1, 0), -180); // HACK: Had to rotate by 180 
+            transform.rotation = quaternion.identity; // HACK
         }
         
         private void Awake()
@@ -62,8 +65,6 @@ namespace Gerallt
             if (clientId == playerId)
             {
                 UpdateStats(lobbyPlayerData);
-                
-                transform.rotation = quaternion.identity; // HACK
             }
         }
 

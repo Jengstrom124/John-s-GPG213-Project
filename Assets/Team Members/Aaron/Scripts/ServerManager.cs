@@ -182,6 +182,9 @@ public class ServerManager : NetworkManager
             }
 
             GameManager.Instance.StartPlayerServerRpc(clientId);
+            
+            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
         }
         
         currentPlayer = null;
@@ -233,16 +236,16 @@ public class ServerManager : NetworkManager
             GameManager.Instance.RaiseChangeInGameUIVisibility(true);
 
             // Tell the server that this client wants to rejoin to their existing session.
-            GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId, ulong.MaxValue);
+            //GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId, ulong.MaxValue);
+            //GameManager.Instance.JoinExistingSessionServerRpc(LocalClientId, LocalClientId, true);
+
+            GameManager.Instance.StartPlayerServerRpc(LocalClientId);
         }
         else
         {
             NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes(serverPassword);
 
             StartClient();
-            
-            //GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
-            //GameManager.Instance.RaiseChangeInGameUIVisibility(true);
         }
     }
     
