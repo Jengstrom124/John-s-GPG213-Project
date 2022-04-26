@@ -26,8 +26,8 @@ public class SearchForFishingSpotState : AntAIState
 
 	public override void Enter()
 	{
+		//As this is run multiple times - always reset fish variable upon entering this state to prevent boat travelling to wrong fish (Keep fish up to date)
 		targetFishGO = null;
-		//StartCoroutine(GoToFishCoroutine());
 
 		//Using a coroutine to find fish as it seems to try to find a fish before they spawn causing null errors
 		StartCoroutine(FindFish());
@@ -108,6 +108,8 @@ public class SearchForFishingSpotState : AntAIState
 			}
 		}
 	}
+
+	//OLD - ignore this
 	IEnumerator GoToFishCoroutine()
     {
 		yield return new WaitForSeconds(0.5f);

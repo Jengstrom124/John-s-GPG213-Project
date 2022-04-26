@@ -23,8 +23,6 @@ public class ReturnToDockState : AntAIState
 
 	public override void Enter()
 	{
-		//StartCoroutine(ReturnToDockCoroutine());
-
 		fishingDock = GameObject.Find("FishingDock");
 
 		if(fishingDock == null)
@@ -45,6 +43,7 @@ public class ReturnToDockState : AntAIState
 
 	public override void Execute(float aDeltaTime, float aTimeScale)
 	{
+		//Hard Moving Transform - Optional to use this or rb forces
 		if (pathTracker.currentTargetPos != Vector2.zero && !boatControl.useRBForces)
 		{
 			Vector3 targetPos;
@@ -61,39 +60,9 @@ public class ReturnToDockState : AntAIState
 		}
 		else
         {
+			//Keep moving to dock (using rb forces)
 			if (boatControl.useRBForces)
 				rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed);
-		}
-	}
-
-	IEnumerator ReturnToDockCoroutine()
-	{
-		yield return new WaitForSeconds(1);
-
-		fishingDock = GameObject.Find("FishingDock");
-
-		if (fishingDock != null)
-		{
-			Vector3 pos = t.position;
-
-			pos.x = fishingDock.transform.position.x / 2;
-			pos.z = fishingDock.transform.position.z / 2;
-			t.position = pos;
-
-			yield return new WaitForSeconds(1);
-
-			pos.x = fishingDock.transform.position.x;
-			pos.z = fishingDock.transform.position.z;
-			t.position = pos;
-
-			yield return new WaitForSeconds(0.1f);
-
-			Finish();
-		}
-		else
-		{
-			Debug.Log("Dock not found!");
-			Finish();
 		}
 	}
 }
