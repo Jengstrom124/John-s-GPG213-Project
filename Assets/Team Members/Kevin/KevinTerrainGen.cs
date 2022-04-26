@@ -80,10 +80,7 @@ namespace Kevin
                 GameObject parent = gameobjectParents[0];
                 GameObject parent1 = gameobjectParents[1];
                 GameObject parent2 = gameobjectParents[2];
-                /*if (pos.y > 30f)
-                {
-                    Instantiate(obeliskPrefab, pos, Quaternion.identity);
-                }*/
+                
                 if (pos.y > seaLevel && sand)
                 {
                     Instantiate(sandPrefab, pos,Quaternion.identity);
@@ -96,7 +93,7 @@ namespace Kevin
                         Instantiate(treePrefab[randomTree], pos,Quaternion.identity,parent.transform);
                     }
                 }
-                if (pos.y < seaLevel && pos.y > coralLevel && perlinValue1 > 0.5 && seaweed)
+                if (pos.y < seaweedLevel && pos.y > coralLevel && perlinValue1 > 0.5 && seaweed)
                 {
                     if (Random.Range(0, 100) <= 25)
                     {
@@ -135,168 +132,42 @@ namespace Kevin
         
         float perlinValue = Mathf.PerlinNoise(xCoord*frequencyX+offsetX,yCoord*frequencyY+offsetY);
         float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*20f,yCoord*frequencyY+offsetY*20f);
-        /*float perlinHighLand = 0.9f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);
-        float perlinDropLand = 0.1f * Mathf.PerlinNoise(xCoord * frequencyX + offsetX, yCoord * frequencyY + offsetY);*/
+        
         if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
         {
            
-            if (perlinValue >= 0.89f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            /*if (perlinValue >= 0.98f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue + 10f;
-            }
-            if (perlinValue >= 0.79f && perlinValue < 0.89f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+                return perlinValue * (Random.Range(1.3f, 1.4f));
+            }*/
+            if (perlinValue >= 0.49f && perlinValue < 1.1f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue + 5f;
+                return perlinValue *1.2f;
             }
 
-            if (perlinValue >= 0.49 && perlinValue < 0.79f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            /*if (perlinValue >= 0.49 && perlinValue < 0.79f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue * 1.2f; 
-            }
+                return perlinValue * 1.5ff; 
+            }*/
          
             if (perlinValue > 0.3f && perlinValue < 0.49f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue * -2f;
+                return perlinValue * 1f;
             }
             
-            
-            if (perlinValue >= -1f && perlinValue <= 0.3f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            if (perlinValue >= 0.2f && perlinValue <= 0.3f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
             {
-                return perlinValue * Random.Range(-3f, -5f);
+                return perlinValue * 0.7f;
+            }
+            
+            if (perlinValue >= -1f && perlinValue < 0.2f && !(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
+            {
+                return perlinValue * 0.5f;
             }
             
          
         }
-        return perlinValue2 *10f;
+        return perlinValue *20f;
     }
 }
-        
-       
-        /*if (perlinHighLand > highLands)
-        {
-            return perlinHighLand + perlinDropLand;
-        }
-
-        if (perlinHighLand < landDrop) ;
-        {
-            return perlinHighLand * 0.75f;
-        }*/
-        //return perlinHighLand;
-
-        /*if (posTerrain.y < 9)
-        {
-            float perlinValue1 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
-            return perlinValue1 * 0.1f;
-        }*/
-        /*if (perlinValue > 0.86f && perlinValue < 1f)
-        {
-            return Mathf.Clamp(perlinValue * 0.9f,0.01f,0.99f);
-        }
-        if (perlinValue > 0.75f && perlinValue < 0.85f)
-        {
-            float perlinValue1 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
-            return Mathf.Clamp(perlinValue1 * 0.75f,0.01f,0.99f);
-        }
-        if (perlinValue > 0.61f && perlinValue < 0.74f)
-        {
-            float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
-            return Mathf.Clamp(perlinValue2 * 0.6f,0.01f,0.99f);
-        }
-        if (perlinValue > 0.51f && perlinValue < 0.6f)
-        {
-            float perlinValue3 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
-            return Mathf.Clamp(perlinValue3 * 0.5f,0.01f,0.99f);
-        }
-        if (perlinValue < 0.5f)
-        {
-            float perlinValue4 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*40f,yCoord*frequencyY+offsetY*40f);
-            return Mathf.Clamp(perlinValue4 * 0.1f,0.01f,0.99f);
-        }*/
-
-    
-    /*Vector3 pos = transform.position;
-     pos.y = Terrain.activeTerrain.SampleHeight(terrainGenerator.transform.position); 
-     
-     if (perlinValue > 0.9f)
-     {
-         float perlinValue2 = Mathf.PerlinNoise(xCoord/frequencyX,yCoord/frequencyY);
-         if (perlinValue2 > 0.9f)
-         {
-             Instantiate(sandPrefab, new Vector3(x,pos.y ,y),Quaternion.identity);
-             //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x,y));
-             Debug.Log(pos.y);
-         }
-     }
-
-     if (perlinValue is > 0.8f and < 0.9f)
-     {
-         Instantiate(treePrefab, new Vector3(x , pos.y, y),Quaternion.identity);
-         //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x,y));
-     }*/
-    
-        
-        /*if (perlinValue > 0.9f)
-        {
-            float perlinValue2 = Mathf.PerlinNoise(xCoord/frequencyX,yCoord/frequencyY);
-            if (perlinValue2 > 0.9f)
-            {
-                Instantiate(sandPrefab, new Vector3(x,terrainGenerator.terrainDataForRandomExample.GetHeight(x,y) ,y),Quaternion.identity);
-                //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x,y));
-            }
-        }
-
-        if (perlinValue is > 0.8f and < 0.9f)
-        {
-           Instantiate(treePrefab, new Vector3(x , terrainGenerator.terrainDataForRandomExample.GetHeight(x,y), y),Quaternion.identity);
-           //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x,y));
-        }*/
-
-        /*if (perlinValue > 0.9f)
-        {
-            //Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x, y));
-        }
-        return perlinValue;*/
-
-        /*void SpawnSandObject()
-        {
-            for (int x = 0; x < terrainGenerator.width; x++)
-            {
-                Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x, 0));
-                /*for (int y = 0; y < terrainGenerator.height; y++)
-                {
-                    Vector3 pos = terrainGenerator.transform.position;
-                    pos.y = terrainGenerator.terrainDataForRandomExample.GetHeight(x, y);
-                    Debug.Log(terrainGenerator.terrainDataForRandomExample.GetHeight(x, y));
-                    //Instantiate(sandPrefab, new Vector3(x, pos.y, y), Quaternion.identity);
-                }#1#
-            }
-    
-        }*/
-
-
-    /*for (int i = 0; i < terrainGenerator.width; i++)
-    {
-        for (int j = 0; j < terrainGenerator.height; j++)
-        {
-            Instantiate(sandPrefab);
-            sandPrefab.transform.position = new Vector3(i, 0, j);
-        }
-    }*/
-
-    /*void SpawnSand(float perlinValue)
-    {
-        for (int i = 0; i < terrainGenerator.width; i++)
-        {
-            for (int j = 0; j < terrainGenerator.height; j++)
-                if (perlinValue > 0.90f)
-                {
-                    Instantiate(sandPrefab);
-                    sandPrefab.transform.position = new Vector3(i, 0, j); 
-
-                }
-        }
-    }*/
-
-
-
 }

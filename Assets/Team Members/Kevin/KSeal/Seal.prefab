@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &288132617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288132618}
+  - component: {fileID: 288132620}
+  - component: {fileID: 288132619}
+  m_Layer: 0
+  m_Name: WaterDepthTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288132618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288132617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2055310735626418040}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &288132620
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288132617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &288132619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288132617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa60fe6716800044bbb023b58f5c4243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sealPrefab: {fileID: 2055310735626418041}
 --- !u!1 &1744075986181614525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1644,6 +1704,10 @@ GameObject:
   - component: {fileID: 632170993663785995}
   - component: {fileID: 3049122826345489953}
   - component: {fileID: 1970519610861360289}
+  - component: {fileID: 28757504}
+  - component: {fileID: 28757505}
+  - component: {fileID: 28757506}
+  - component: {fileID: 28757511}
   m_Layer: 0
   m_Name: Seal
   m_TagString: Untagged
@@ -1664,6 +1728,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4647559717749154068}
+  - {fileID: 288132618}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1686,7 +1751,7 @@ MonoBehaviour:
   tailPosition: {x: 0, y: 0, z: 0}
   headTransform: {fileID: 2055310735017970175}
   tailTransform: {fileID: 4928855466406718431}
-  jumpTransform: {fileID: 0}
+  jumpTransform: {fileID: 4647559717749154068}
   tailLeadTransform: {fileID: 2055310735285632999}
   tailMidTransform: {fileID: 2055310735044345132}
   tailTipTransform: {fileID: 2055310734307401106}
@@ -1695,11 +1760,16 @@ MonoBehaviour:
   accelerationSpeed: 5
   currentSteeringAngle: 0
   steeringMax: 30
+  currentSteeringMax: 0
+  airSteeringMax: 15
   reduction: 0.5
   currentBobbleAngle: 0
   maxAngle: 60
   currentFlipperAngle: 0
   isJumping: 0
+  capsuleCollider: {fileID: 1970519610861360289}
+  colliderCenter: {x: 0, y: 0, z: 0}
+  isWet: 1
 --- !u!54 &3049122826345489953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1714,7 +1784,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &1970519610861360289
 CapsuleCollider:
@@ -1723,13 +1793,85 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055310735626418041}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 13400000, guid: 8cf9d30181692d44db9e92b6bfd5cb28, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 4.02
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -1.06}
+--- !u!114 &28757504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310735626418041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &28757505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310735626418041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &28757506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310735626418041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+  CanCommitToTransform: 0
+--- !u!114 &28757511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310735626418041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feeler: {fileID: 8743433351232840262, guid: a8267c37086ec6b4eb7c4223aee4f217, type: 3}
+  emergencyFeeler: {fileID: 8743433351232840262, guid: b7ec4f58d085fe24597e495e134ad3d7, type: 3}
+  standardFeelerCount: 5
+  emergencyFeelerCount: 3
+  fov: 20
 --- !u!1 &2055310735636889180
 GameObject:
   m_ObjectHideFlags: 0

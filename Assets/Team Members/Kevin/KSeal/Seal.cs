@@ -8,6 +8,7 @@ namespace Kevin
 {
     //Gameobject Variables
     public Rigidbody sealRigidbody;
+    
     public GameObject sealPrefab;
     
     //Vectors
@@ -26,10 +27,6 @@ namespace Kevin
     public Transform tailMidTransform;
     public Transform tailTipTransform;
     
-    //flipper Transforms
-    public Transform leftFlipper;
-    public Transform rightFlipper;
-    
     //Stats/Floats Variables
     public float accelerationSpeed;
     public float currentSteeringAngle;
@@ -40,10 +37,7 @@ namespace Kevin
 
     public float currentBobbleAngle;
     
-    //Flippers Animation
-    public float maxAngle;
-    public float currentFlipperAngle;
-
+    //Check if jumping
     public bool isJumping;
 
     //Collider Config
@@ -51,8 +45,7 @@ namespace Kevin
     public Vector3 colliderCenter;
 
 
-    public bool isWet;
-    // Start is called before the first frame update
+    //public bool isWet;
     void Start()
     {
         colliderCenter = GetComponent<CapsuleCollider>().center;
@@ -60,8 +53,7 @@ namespace Kevin
         tailPosition = sealPrefab.transform.position;
         
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Vector3 tailPosition = tailTransform.position;
@@ -89,10 +81,19 @@ namespace Kevin
             StartCoroutine(JumpTimer());
         }
 
-        if (IsWet && isJumping == false)
+        if (IsWet == false)
+        {
+            capsuleCollider.material = new PhysicMaterial("none");
+        }
+        else
+        {
+            capsuleCollider.material = new PhysicMaterial("SlipperyMaterial");
+        }
+
+        /*if (IsWet && isJumping == false)
         {
             InWater();
-        }
+        }*/
 
         /*if (isJumping == true || isWet == false)
         {
@@ -124,12 +125,12 @@ namespace Kevin
         GetComponent<CapsuleCollider>().center = colliderCenter;
     }*/
 
-    public void InWater()
+    /*public void InWater()
     {
         accelerationSpeed = 5f;
         currentSteeringMax = steeringMax;
         sealRigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-    }
+    }*/
     public void Jump()
     {
         isJumping = true;
@@ -158,6 +159,12 @@ namespace Kevin
         yield return new WaitForSeconds(reduction);
     }
 
+    IEnumerator BoosterLimit()
+    {
+        yield return new WaitForSeconds(3f);
+        accelerationSpeed = 5f;
+    }
+
     public void Steer(float input)
     {
         float currentYEuler = transform.eulerAngles.y;
@@ -165,7 +172,7 @@ namespace Kevin
 
         if (input == 0f)
         {
-           
+            //targetAngle =  currentSteeringMax / 2f;
         }
         else
         {
@@ -183,18 +190,26 @@ namespace Kevin
 
     public void Accelerate(float input)
     {
-        sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
+        if (IsWet)
+        {
+            sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
+        }
+        else
+        {
+            sealRigidbody.AddForceAtPosition(input*accelerationSpeed*2f*transform.TransformDirection(Vector3.forward), transform.position,0);
+        }
 
     }
 
     public void Reverse(float input)
     {
-        sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.back), transform.position,0);
+        sealRigidbody.AddForceAtPosition(input*accelerationSpeed/2f*transform.TransformDirection(Vector3.back), transform.position,0);
     }
 
     public void Action()
     {
-        
+        accelerationSpeed = 20f;
+        StartCoroutine(BoosterLimit());
     }
 
     public void Action2()
