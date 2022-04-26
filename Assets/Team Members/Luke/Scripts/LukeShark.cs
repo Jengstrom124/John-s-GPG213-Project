@@ -33,7 +33,7 @@ public class LukeShark : MonoBehaviour, IControllable, IPredator, IEdible
 
 	public void Accelerate(float input)
 	{
-		rb.AddForceAtPosition(input * acceleratingForce * Time.deltaTime * transform.TransformDirection(Vector3.forward) , transform.position, 0);
+		rb.AddForceAtPosition(input * acceleratingForce * Time.deltaTime * transform.TransformDirection(Vector3.forward), transform.position);
 	}
 
 	public void Reverse(float input)
