@@ -27,6 +27,7 @@ public class AlignManager : MonoBehaviour
 		//Neighbours.neighbourLeaveEvent -= RemovePlayerInfluence;
 	}
 
+	/*
     private void Update()
     {
         foreach(GameObject fish in currentPlayerNeighbours)
@@ -116,6 +117,7 @@ public class AlignManager : MonoBehaviour
 			}
 		}
 	}
+	*/
 
 	/*
 	void AddPlayerInfluences(GameObject fishToAddInfluenceTo)

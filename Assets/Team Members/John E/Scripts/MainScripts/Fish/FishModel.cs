@@ -5,17 +5,14 @@ using System;
 
 public class FishModel : FishBase, IRTS
 {
-    [Header("Reference Only:")]
-    public bool isPlayerFish;
-    public bool hasWaypoint;
-    public bool neighbourDebugColour = false;
-
     public event Action<bool> onPlayerFishEvent;
 
     PathTracker pathTracker;
+    Align align;
     private void Awake()
     {
         pathTracker = GetComponent<PathTracker>();
+        align = GetComponent<Align>();
     }
     private void Start()
     {

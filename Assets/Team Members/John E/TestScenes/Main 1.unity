@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f74d0134a982db4f87cdb534512c16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activePlayerFish: {fileID: 0}
 --- !u!4 &126394507
 Transform:
   m_ObjectHideFlags: 0
@@ -635,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5365400553432169572, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
       propertyPath: autoGenerateGridOnAwake

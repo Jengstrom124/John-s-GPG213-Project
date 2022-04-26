@@ -185,9 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00881bd51312af4a9b3f98d7e6875d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerFish: 0
-  hasWaypoint: 0
-  neighbourDebugColour: 0
 --- !u!114 &2219981257583123346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 6
-  usePlayerForce: 0
+  alignWithPlayer: 1
   currentPlayerFish: {fileID: 0}
 --- !u!114 &6844581979469349891
 MonoBehaviour:
@@ -334,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2219981257583123345}
-  turnMultiplier: 0.2
+  turnMultiplier: 0.05
   target: {fileID: 0}
   destinationTarget: {x: 0, y: 0, z: 0}
   angle: 0

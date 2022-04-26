@@ -75,7 +75,7 @@ public class WorldScanner : MonoBehaviour
                 gridNodeReferences[x, y].gridPos = new Vector2(x, y);
 
                 //Check for obstacle
-                if (Physics.CheckBox(new Vector3(x, 0, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                if (Physics.CheckBox(new Vector3(x, Water.Instance.transform.position.y, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
                 {
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;

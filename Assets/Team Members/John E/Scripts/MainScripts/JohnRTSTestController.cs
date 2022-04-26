@@ -9,7 +9,9 @@ namespace John
     public class JohnRTSTestController : ManagerBase<JohnRTSTestController>
     {
         List<IRTS> currentSelectedRTSEntity = new List<IRTS>();
-        public static event Action<Vector3> destinationSelectedEvent;
+        public event Action<GameObject> playerFishSelectedEvent;
+
+        public GameObject activePlayerFish;
 
         private void FixedUpdate()
         {
@@ -34,11 +36,24 @@ namespace John
                         {
                             currentSelectedRTSEntity[0].Deselected();
                             currentSelectedRTSEntity.Clear();
+
+                            if(activePlayerFish != null)
+                            {
+                                activePlayerFish = null;
+                                playerFishSelectedEvent?.Invoke(null);
+                            }
                         }
 
                         //Update new entity
                         currentSelectedRTSEntity.Add(RTSEntity);
                         RTSEntity.Selected();
+
+                        //If the entity is a fish- store this as a reference to influence aligning neighbouring fish
+                        if(hitinfo.transform.GetComponent<FishBase>())
+                        {
+                            activePlayerFish = hitinfo.transform.gameObject;
+                            playerFishSelectedEvent?.Invoke(activePlayerFish);
+                        }
                     }
                     else
                     {
@@ -50,9 +65,9 @@ namespace John
                             {
                                 Vector3 mousePos = new Vector3(hitinfo.point.x, 0, hitinfo.point.z);
 
-                                //currentSelectedRTSEntity[0].SetDestination(mousePos);
+                                currentSelectedRTSEntity[0].SetDestination(mousePos);
 
-                                Debug.Log("RTS INFO: Destination: " + mousePos + " Z test: " + Input.mousePosition.z);
+                                Debug.Log("RTS INFO: Destination: " + mousePos);
                             }
                         }
                     }
