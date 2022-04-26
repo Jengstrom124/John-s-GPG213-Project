@@ -31,7 +31,6 @@ public class CatchFishState : AntAIState
 		//if fish is within catch radius - catch it
 		if (Physics.CheckSphere(t.position, fishCatchingRadius, fishLayerMask.value, QueryTriggerInteraction.Ignore))
 		{
-			//totalFishCaught.Add(?)
 			foreach(Collider fishCollider in Physics.OverlapSphere(t.position, fishCatchingRadius, fishLayerMask.value, QueryTriggerInteraction.Ignore))
             {
 				boatControl.totalFishCaught.Add(fishCollider.gameObject);

@@ -24,6 +24,7 @@ public class DeliverFishState : AntAIState
     {
 		yield return new WaitForSeconds(1);
 
+		//Deliver all fish caught with a delay
 		do
 		{
 			boatControl.totalFishCaught.RemoveAt(0);
@@ -32,6 +33,7 @@ public class DeliverFishState : AntAIState
 		}
 		while (boatControl.totalFishCaught.Count > 0);
 
+		//Finish when all fish is delivered
 		if(boatControl.totalFishCaught.Count <= 0)
         {
 			boatControl.HasFish = false;
