@@ -48,7 +48,12 @@ namespace Kevin
     public bool seaweed;
     public bool coral;
     public bool bird;
-    
+
+    public int seed;
+    void Awake()
+    {
+        Random.InitState(seed);
+    }
     void Start()
     {
         StartCoroutine(Terrainer());
@@ -167,7 +172,7 @@ namespace Kevin
             
          
         }
-        return perlinValue *20f;
+        return perlinValue *40f;
     }
 }
 }
