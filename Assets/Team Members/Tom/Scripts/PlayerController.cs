@@ -234,7 +234,7 @@ public class PlayerController : NetworkBehaviour
                 }
                 else
                 {
-                    //ReplicatedAction(ReplicatedActionType.Steer, 0f);
+                    ReplicatedAction(ReplicatedActionType.Steer, 0f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().wKey.isPressed)
