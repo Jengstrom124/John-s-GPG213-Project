@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SBManager : MonoBehaviour
+public class FeelerManager : MonoBehaviour
 {
     public List<SteeringBase> behaviours;
 

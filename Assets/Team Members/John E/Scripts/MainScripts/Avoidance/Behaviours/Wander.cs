@@ -10,7 +10,7 @@ public class Wander : MonoBehaviour
     //public float xScale = 25f;
     [Header("Adjust variance of the perlin value")]
     [Tooltip("Minus perlinScale from the perlin value to allow it to reach both above & below 0")]
-    public float perlinScale;
+    public float perlinScale = 0.5f;
 
     [Header("Adjust the turn scale")]
     public float wanderScale = 2f;

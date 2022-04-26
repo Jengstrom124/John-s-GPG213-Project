@@ -7,7 +7,8 @@ public class Cohesion : SteeringBase
 	Rigidbody rb;
 	Neighbours neighbours;
 
-	public float force = 2f;
+	[Header("Group With Neighbour Forces")]
+	public float force = 0.5f;
 
 	private void Start()
 	{

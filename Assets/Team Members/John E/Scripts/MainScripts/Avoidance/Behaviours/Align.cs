@@ -7,9 +7,11 @@ public class Align : SteeringBase
     Rigidbody rb;
 	Neighbours neighbours;
 
-	public float force = 2f;
+	[Header("Align Forwards Direction With Group Forces")]
+	public float force = 5f;
 	
 	//Player Fish Stuff
+	[Header("Ignore this - was testing")]
 	public bool usePlayerForce = false;
 	public GameObject currentPlayerFish;
 

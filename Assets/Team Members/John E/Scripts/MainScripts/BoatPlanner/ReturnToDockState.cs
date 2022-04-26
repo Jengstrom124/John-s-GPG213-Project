@@ -55,7 +55,7 @@ public class ReturnToDockState : AntAIState
 		if (boatControl.AtDock())
 		{
 			rb.velocity = Vector3.zero;
-			pathTracker.ResetPathTracking();
+			//pathTracker.ResetPathTracking();
 			Finish();
 		}
 		else

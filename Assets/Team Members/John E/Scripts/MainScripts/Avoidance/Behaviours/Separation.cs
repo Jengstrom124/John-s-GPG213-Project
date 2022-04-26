@@ -7,7 +7,9 @@ public class Separation : SteeringBase
 	Rigidbody rb;
 	Neighbours neighbours;
 
-	public float minDistance = 2f;
+	[Header("Force to Keep Distance From Neighbours")]
+	[Tooltip("At what distance do we start applying forces")]
+	public float minDistance = 5f;
 	public float force = 2f;
 
 	[Header("Ref Only:")]

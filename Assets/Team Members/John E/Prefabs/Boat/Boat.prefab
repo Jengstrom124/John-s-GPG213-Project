@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 717619864364975013}
-  distanceThreshold: 3
+  distanceThreshold: 5
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64

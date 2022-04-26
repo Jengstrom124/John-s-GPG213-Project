@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class FishModel : FishBase
+public class FishModel : FishBase, IRTS
 {
     [Header("Reference Only:")]
     public bool isPlayerFish;
@@ -47,5 +47,20 @@ public class FishModel : FishBase
     void AtDestinationReaction()
     {
         Debug.Log("MADE IT!! - return to being a fish");
+    }
+
+    public void Selected()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Deselected()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetDestination(Vector3 position)
+    {
+        throw new NotImplementedException();
     }
 }

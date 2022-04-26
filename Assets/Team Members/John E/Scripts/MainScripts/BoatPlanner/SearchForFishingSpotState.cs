@@ -51,7 +51,7 @@ public class SearchForFishingSpotState : AntAIState
 				// Current action is finished.
 				boatControl.AtFishingSpot = true;
 				rb.velocity = Vector3.zero;
-				pathTracker.ResetPathTracking();
+				//pathTracker.ResetPathTracking();
 				Finish();
 			}
 			else
