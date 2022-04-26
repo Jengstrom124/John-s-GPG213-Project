@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9890ce1329e914caacfb07fbfb90b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 0}
+  defaultMaterial: {fileID: 2100000, guid: fda351f4e49951441a4c5e088fd57be2, type: 2}
   neighbourDebugColour: 0
 --- !u!1 &2219981257583123356
 GameObject:
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  feeler: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
   emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3
@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0557d8abc44e4db468aad1be1c5bf64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: []
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
@@ -353,7 +352,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2219981257583123345}
   distanceThreshold: 5
-  maxRayLength: 10
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   drawRaycasts: 0
+  usePathSmoothing: 1
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}

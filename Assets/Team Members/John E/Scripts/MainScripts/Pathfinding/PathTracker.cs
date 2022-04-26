@@ -32,24 +32,6 @@ public class PathTracker : MonoBehaviour
     //Used in TurnTowards for updating the turn towards target
     public event Action<Vector3> newTargetAssignedEvent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if(AStar.Instance != null)
-        {
-            //AStar.Instance.pathFoundEvent += GeneratePathList;
-
-            //For testing a random waypoint whilst we have no way to set a waypoint
-            //AStar.Instance.FindPath(myTransform, new Vector3(10, 0, 40));
-        }
-        else
-        {
-            Debug.Log("AStar Reference Missing");
-        }
-
-        John.TestController.destinationSelectedEvent += GetPathToDestination;
-    }
-
     // Update is called once per frame
     void Update()
     {

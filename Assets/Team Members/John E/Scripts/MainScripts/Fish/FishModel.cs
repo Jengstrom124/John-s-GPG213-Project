@@ -9,10 +9,8 @@ public class FishModel : FishBase, IRTS
     public bool isPlayerFish;
     public bool hasWaypoint;
     public bool neighbourDebugColour = false;
-    bool eventCalled = false;
 
-    public static event Action<GameObject> onPlayerFishEvent;
-    public static event Action<GameObject> onFishChangeEvent;
+    public event Action<bool> onPlayerFishEvent;
 
     PathTracker pathTracker;
     private void Awake()
@@ -24,26 +22,6 @@ public class FishModel : FishBase, IRTS
         pathTracker.destinationReachedEvent += AtDestinationReaction;
     }
 
-    private void Update()
-    {
-        if (isPlayerFish)
-        {
-            if (!eventCalled)
-            {
-                onPlayerFishEvent?.Invoke(gameObject);
-                eventCalled = true;
-            }
-        }
-        else
-        {
-            if (eventCalled)
-            {
-                eventCalled = false;
-                onFishChangeEvent?.Invoke(gameObject);
-            }
-        }
-    }
-
     void AtDestinationReaction()
     {
         Debug.Log("MADE IT!! - return to being a fish");
@@ -51,16 +29,16 @@ public class FishModel : FishBase, IRTS
 
     public void Selected()
     {
-        throw new NotImplementedException();
+        onPlayerFishEvent?.Invoke(true);
     }
 
     public void Deselected()
     {
-        throw new NotImplementedException();
+        onPlayerFishEvent?.Invoke(false);
     }
 
     public void SetDestination(Vector3 position)
     {
-        throw new NotImplementedException();
+        pathTracker.GetPathToDestination(position);
     }
 }

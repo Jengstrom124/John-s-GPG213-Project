@@ -4,39 +4,32 @@ using UnityEngine;
 
 public class Fish_ViewModel : MonoBehaviour
 {
-    FishModel boidModel;
-
+    FishModel fish;
     public Material defaultMaterial;
 
     [Header("Reference Only:")]
-    bool isPlayerFish;
     public bool neighbourDebugColour = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        boidModel = GetComponentInParent<FishModel>();
+        fish = GetComponentInParent<FishModel>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        isPlayerFish = boidModel.isPlayerFish;
+        fish.onPlayerFishEvent += UpdateColour;
+    }
 
-        if (isPlayerFish)
+    void UpdateColour(bool isPlayerFish)
+    {
+        if(isPlayerFish)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.cyan;
         }
         else
         {
-            if (!neighbourDebugColour)
-            {
-                gameObject.GetComponent<Renderer>().material = defaultMaterial;
-            }
-            else
-            {
-                gameObject.GetComponent<Renderer>().material.color = Color.green;
-            }
+            gameObject.GetComponent<Renderer>().material = defaultMaterial;
         }
     }
 }

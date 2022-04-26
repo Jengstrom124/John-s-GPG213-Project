@@ -14,14 +14,14 @@ public class AlignManager : MonoBehaviour
     }
     private void OnEnable()
 	{
-		FishModel.onPlayerFishEvent += UpdatePlayerInfluences;
+		//FishModel.onPlayerFishEvent += UpdatePlayerInfluences;
 
 		//Neighbours.newNeighbourEvent += NewFishUpdate;
 		//Neighbours.neighbourLeaveEvent += RemovePlayerInfluence;
 	}
     private void OnDisable()
 	{
-		FishModel.onPlayerFishEvent -= UpdatePlayerInfluences;
+		//FishModel.onPlayerFishEvent -= UpdatePlayerInfluences;
 
 		//Neighbours.newNeighbourEvent -= NewFishUpdate;
 		//Neighbours.neighbourLeaveEvent -= RemovePlayerInfluence;

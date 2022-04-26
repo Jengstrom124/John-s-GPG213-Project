@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FeelerManager : MonoBehaviour
 {
-    public List<SteeringBase> behaviours;
-
     MoveForwards moveForwards;
     BoatControl boatControl;
 
