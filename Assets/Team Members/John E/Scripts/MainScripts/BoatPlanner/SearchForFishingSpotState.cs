@@ -57,7 +57,7 @@ public class SearchForFishingSpotState : AntAIState
 			else
             {
 				if(boatControl.useRBForces)
-					rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed);
+					rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed * aDeltaTime);
 			}
 		}
 		else

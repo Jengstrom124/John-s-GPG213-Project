@@ -86,7 +86,8 @@ public class AvoidObstacle : MonoBehaviour
             }
             if(boatControl != null)
             {
-                boatControl.boatSpeed = Mathf.Clamp(boatControl.boatSpeed = distance / speedReductionMultiplier, minSpeed, boatControl.maxBoatSpeed);
+                if(myTurnDirection == RayDirection.Straight)
+                    boatControl.boatSpeed = Mathf.Clamp(boatControl.boatSpeed = distance / speedReductionMultiplier, minSpeed, boatControl.maxBoatSpeed);
             }
             //Apply torque based on ray direction (if the left ray hits an object turn right to dodge it)
             if (myTurnDirection == RayDirection.Right)

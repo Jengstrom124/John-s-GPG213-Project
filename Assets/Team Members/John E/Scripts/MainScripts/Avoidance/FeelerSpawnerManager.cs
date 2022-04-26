@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class BoidModel : MonoBehaviour
+public class FeelerSpawnerManager : MonoBehaviour
 {
     [Header("Specify Which Feelers to Spawn")]
     public GameObject feeler;
