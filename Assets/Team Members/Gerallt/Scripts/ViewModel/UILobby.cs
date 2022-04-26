@@ -15,8 +15,12 @@ namespace Gerallt
         public GameObject JoinedClients;
         public GameObject UIClientPrefab;
         public TMP_InputField UIPlayerNameInput;
-
-        public LobbyPlayerData? localPlayerData;
+        public Button buttonStartGame;
+        public Button buttonHostGame;
+        public Button buttonJoinGame;
+        
+        
+        private LobbyPlayerData? localPlayerData;
         
         public void PlayerName_ValueChanged()
         {
@@ -49,6 +53,10 @@ namespace Gerallt
 
         public void Start()
         {
+            buttonHostGame.gameObject.SetActive(true);
+            buttonStartGame.gameObject.SetActive(false);
+            buttonJoinGame.gameObject.SetActive(true);  
+            
             GameManager gameManager = GameManager.Instance;
             if (gameManager != null)
             {
@@ -62,6 +70,40 @@ namespace Gerallt
         private void GameManager_OnChangeLobbyVisibility(bool visibility)
         {
             view.SetActive(visibility);
+
+            if (visibility)
+            {
+                if (GameManager.Instance.hasGameStarted.Value)
+                {
+                    if (NetworkManager.Singleton.IsHost)
+                    {
+                        buttonHostGame.gameObject.SetActive(false);
+                        buttonStartGame.gameObject.SetActive(false);
+                        buttonJoinGame.gameObject.SetActive(true);
+                    }
+                    else if (NetworkManager.Singleton.IsClient)
+                    {
+                        buttonHostGame.gameObject.SetActive(false);
+                        buttonStartGame.gameObject.SetActive(false);
+                        buttonJoinGame.gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    if (!NetworkManager.Singleton.IsHost && NetworkManager.Singleton.IsConnectedClient)
+                    {
+                        buttonHostGame.gameObject.SetActive(false);
+                        buttonStartGame.gameObject.SetActive(false);
+                        buttonJoinGame.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        buttonHostGame.gameObject.SetActive(true);
+                        buttonStartGame.gameObject.SetActive(false);
+                        buttonJoinGame.gameObject.SetActive(true);   
+                    }
+                }   
+            }
         }
 
         private void GameManager_OnStartedGameEvent()
@@ -82,7 +124,9 @@ namespace Gerallt
 
         public void OnJoinButtonClicked()
         {
-            //LobbyPlayerData lobbyPlayerData = GNetworkedListBehaviour.GetPlayerData();
+            buttonStartGame.gameObject.SetActive(false);
+            buttonHostGame.gameObject.SetActive(false);
+            buttonJoinGame.gameObject.SetActive(false);
 
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.JoinServer(localPlayerData, autoCreateHost: true);
@@ -90,12 +134,20 @@ namespace Gerallt
 
         public void StartHost_ButtonClicked()
         {
+            buttonStartGame.gameObject.SetActive(true);
+            buttonHostGame.gameObject.SetActive(false);
+            buttonJoinGame.gameObject.SetActive(false);
+            
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.Host(localPlayerData);
         }
 
         public void StartGame_ButtonClicked()
         {
+            buttonStartGame.gameObject.SetActive(false);
+            buttonHostGame.gameObject.SetActive(false);
+            buttonJoinGame.gameObject.SetActive(false);
+            
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.StartGame();
         }

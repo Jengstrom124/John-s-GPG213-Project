@@ -168,7 +168,7 @@ public class ServerManager : NetworkManager
         if (currentPlayer.HasValue)
         {
             LobbyPlayerData lobbyPlayerData = currentPlayer.Value;
-            
+            lobbyPlayerData.ClientIPAddress = NetworkPlayerList.GetClientIPAddress();
             lobbyPlayerData.ClientId = clientId;
             
             StartCoroutine(ClientConnectedCoroutine(lobbyPlayerData));
@@ -241,8 +241,8 @@ public class ServerManager : NetworkManager
 
             StartClient();
             
-            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
-            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
+            //GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            //GameManager.Instance.RaiseChangeInGameUIVisibility(true);
         }
     }
     
