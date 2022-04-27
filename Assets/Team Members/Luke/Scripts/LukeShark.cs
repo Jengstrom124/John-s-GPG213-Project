@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 {
+	public AudioSource audio;
+	public AudioClip boost;
+	public AudioClip boosting;
+	
 	public Rigidbody rb;
 	public Transform preJointTransform;
 	public Transform mainJointTransform;
@@ -37,7 +41,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
 	private float steerTarget;
-	
+
 	public void Accelerate(float input)
 	{
 		if (IsServer)
@@ -54,7 +58,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		}
 	}
 	
-	private void Steer(float input)
+	public void Steer(float input)
 	{
 		float currentYEuler = transform.eulerAngles.y;
 		if (Mathf.Abs(input) < 0.5f)
@@ -92,10 +96,21 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			//PopFishFromGuts
 		}
 
+		if (IsClient)
+		{
+			audio.PlayOneShot(boost);
+			audio.Play();
+		}
+
 		yield return new WaitForSeconds(boostTimeSeconds);
 		if (IsServer)
 		{
 			acceleratingForce /= boostFactor;
+		}
+
+		if (IsClient)
+		{
+			audio.Stop();
 		}
 
 		StartCoroutine(BoostCooldown());
@@ -160,11 +175,6 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			    steeringFrictionCoefficient * rb.mass *
 			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipTransform.position);
 	    }
-    }
-
-    void IControllable.Steer(float input)
-    {
-	    Steer(input);
     }
 
     public void GotFood(float amount)
