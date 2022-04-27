@@ -822,7 +822,7 @@ MonoBehaviour:
   tailTipTransform: {fileID: 1001782359803232529}
   headJointTransform: {fileID: 8873145128334385027}
   acceleratingForce: 15
-  reversingForce: 300
+  reversingForce: 12
   longitudinalFrictionCoefficient: 1
   lateralFrictionCoefficient: 3
   steeringFrictionCoefficient: 2
@@ -833,13 +833,15 @@ MonoBehaviour:
   localVelocity: {x: 0, y: 0, z: 0}
   tailLocalVelocity: {x: 0, y: 0, z: 0}
   boostReady: 1
+  isBoosting: 0
   boostFactor: 3
   boostTimeSeconds: 1
   boostCooldownSeconds: 2
   oneEightyReady: 1
-  oneEightying: 0
-  oneEightyFactor: 1.5
-  oneEightTimeSeconds: 0.65
+  isOneEightying: 0
+  oneEightyFactor: 2.5
+  oneEightyVelocityFactor: 5
+  oneEightyTimeSeconds: 0.65
   oneEightyCooldownSeconds: 3
 --- !u!82 &17744540717904349
 AudioSource:
@@ -854,7 +856,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 26bbba65a9a476f41b2802f79bdc3b7a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: -1.88
   Loop: 1
   Mute: 0
   Spatialize: 0

@@ -34,14 +34,16 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public Vector3 tailLocalVelocity;
 
 	public bool boostReady = true;
+	public bool isBoosting = false;
 	public float boostFactor = 3f;
 	public float boostTimeSeconds = 1f;
 	public float boostCooldownSeconds = 2f;
 	
 	public bool oneEightyReady = true;
-	public bool oneEightying;
+	public bool isOneEightying = false;
 	public float oneEightyFactor = 3f;
-	public float oneEightTimeSeconds = 0.7f;
+	public float oneEightyVelocityFactor = 5f;
+	public float oneEightyTimeSeconds = 0.7f;
 	public float oneEightyCooldownSeconds = 3f;
 
 	private Vector3 accelForce;
@@ -52,7 +54,14 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	{
 		if (IsServer)
 		{
-			accelForce = input * acceleratingForce * transform.TransformDirection(Vector3.forward);
+			if (isBoosting || isOneEightying)
+			{
+				//accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
+			}
+			else
+			{
+				accelForce = input * acceleratingForce * transform.TransformDirection(Vector3.forward);
+			}
 		}
 	}
 
@@ -60,14 +69,17 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	{
 		if (IsServer)
 		{
-			reverseForce = -input * reversingForce * Time.deltaTime * transform.TransformDirection(Vector3.forward);
+			if (!(isBoosting | isOneEightying))
+			{
+				reverseForce = -input * reversingForce * transform.TransformDirection(Vector3.forward);
+			}
 		}
 	}
 	
 	public void Steer(float input)
 	{
 		float currentYEuler = transform.eulerAngles.y;
-		if (!oneEightying)
+		if (!isOneEightying)
 		{
 			if (Mathf.Abs(input) < 0.5f)
 			{
@@ -104,6 +116,8 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		if (IsServer)
 		{
 			acceleratingForce *= boostFactor;
+			isBoosting = true;
+			accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
 			//PopFishFromGuts
 		}
 
@@ -117,6 +131,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		
 		if (IsServer)
 		{
+			isBoosting = false;
 			acceleratingForce /= boostFactor;
 		}
 
@@ -144,15 +159,18 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		float temp = lateralFrictionCoefficient;
 		if (IsServer)
 		{
+			isOneEightying = true;
+			accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
+			float turnStrength = oneEightyFactor*(acceleratingForce-Vector3.Magnitude(rb.velocity)/oneEightyVelocityFactor)/acceleratingForce;
 			if (steerTarget < 0)
 			{
-				steerTarget = -maxSteeringAngle*oneEightyFactor;
+				steerTarget = -maxSteeringAngle*turnStrength;
 			}
 			else
 			{
-				steerTarget = maxSteeringAngle*oneEightyFactor;
+				steerTarget = maxSteeringAngle*turnStrength;
 			}
-			lateralFrictionCoefficient *= oneEightyFactor;
+			lateralFrictionCoefficient *= turnStrength;
 			//PopFishFromGuts
 		}
 
@@ -161,12 +179,12 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			audio.PlayOneShot(oneEighty);
 		}
 
-		yield return new WaitForSeconds(oneEightTimeSeconds);
+		yield return new WaitForSeconds(oneEightyTimeSeconds);
 		
 		if (IsServer)
 		{
 			lateralFrictionCoefficient = temp;
-			oneEightying = false;
+			isOneEightying = false;
 		}
 
 		StartCoroutine(OneEightyCooldown());
@@ -193,17 +211,16 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 	public void Action2()
 	{
-		if (oneEightyReady)
+		if (oneEightyReady && reverseForce.magnitude < reversingForce*0.05f)
 		{
 			oneEightyReady = false;
-			oneEightying = true;
 			StartCoroutine(OneEighty());
 		}
 	}
 
 	public void Action3()
 	{
-		
+		audio.PlayOneShot(oneEighty);
 	}
 
 	// Start is called before the first frame update
