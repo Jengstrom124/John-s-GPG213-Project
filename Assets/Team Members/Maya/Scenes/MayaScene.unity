@@ -2678,17 +2678,9 @@ PrefabInstance:
       value: 283542503
       objectReference: {fileID: 0}
     - target: {fileID: 2065292948, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
-      propertyPath: speed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065292948, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
-      propertyPath: rotateSpeed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065292951, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
-      propertyPath: m_Constraints
-      value: 84
-      objectReference: {fileID: 0}
+      propertyPath: inkSplatter
+      value: 
+      objectReference: {fileID: 105312665972366714, guid: 5a3dc164230c42843a165fefb31021ac, type: 3}
     - target: {fileID: 4554516382443037816, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
       propertyPath: m_Name
       value: Squid (Maya)

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class mayaSquid : MonoBehaviour, IControllable
 {
+    public GameObject inkSplatter;
     public Rigidbody squidForce;
     public float rotateSpeed = 2f;
     public float speed = 30;
@@ -56,8 +57,15 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void Action()
     {
+        Instantiate(inkSplatter, transform.position, Quaternion.identity);  
+        Debug.Log("Inked");
+    }
+
+    public void ScaleTheInk()
+    {
         
     }
+    
 
     public void Action2()
     {
