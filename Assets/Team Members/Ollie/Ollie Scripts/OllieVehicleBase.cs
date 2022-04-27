@@ -87,24 +87,15 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
 
     public virtual void Action() // F key
     {
-        if (IsServer)
-        {
-            
-        }
+        
     }
     public virtual void Action2() // E key
     {
-        if (IsServer)
-        {
-
-        }
+        
     }
     public virtual void Action3() // Q key
     {
-        if (IsServer)
-        {
-
-        }
+        
     }
     #endregion
 
