@@ -229,11 +229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 13632290604457518, guid: 9c39ca5d5fa73224f943c006448b0d93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 81.3
+      value: 103.31
       objectReference: {fileID: 0}
     - target: {fileID: 13632290604457518, guid: 9c39ca5d5fa73224f943c006448b0d93, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23.84
+      value: 10.3
       objectReference: {fileID: 0}
     - target: {fileID: 13632290604457518, guid: 9c39ca5d5fa73224f943c006448b0d93, type: 3}
       propertyPath: m_LocalPosition.z
@@ -316,10 +316,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55051fa486e3450479f079f94d11879e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoverForce: 100
+  HoverForce: 10000
   physicsRef: {fileID: 1443811508}
   RotationDrag: 0
-  MaxHover: 2
+  MaxHover: 1
   Speed: 5
 --- !u!1 &808191634
 GameObject:
@@ -421,9 +421,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19cdf7594dce0b4bbeb34f04f01f2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelSpeed: 5
-  steeringSpeed: 1
+  AccelSpeed: 1000
+  steeringSpeed: 500
+  JumpForce: 200000
+  SplashForce: 350000
+  ChargeForce: 100000
+  FirstAction: 113
+  SecondAction: 101
   TailPos: {fileID: 2145398961}
+  mat: {fileID: 2100000, guid: e871f748ff7663c4f82a307e3b9087d9, type: 2}
 --- !u!4 &1443811507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 13632290604457518, guid: 9c39ca5d5fa73224f943c006448b0d93, type: 3}
@@ -437,13 +443,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443811505}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Mass: 100
+  m_Drag: 2
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &1443811509
 CapsuleCollider:
@@ -518,11 +524,11 @@ Terrain:
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 0.0256
+  m_ScaleInLightmap: 1
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
   m_GroupingID: 0
   m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
+  m_AllowAutoConnect: 0
 --- !u!4 &1928355701
 Transform:
   m_ObjectHideFlags: 0
@@ -552,9 +558,11 @@ MonoBehaviour:
   width: 256
   height: 256
   depth: 15
-  scale: 3
-  offsetX: 100
+  scale: 10
+  offsetX: 150
   offsetY: 100
+  testvalue: 1.7
+  testheight: 0.65
 --- !u!1001 &1948742518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,6 +570,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 312554293391460528, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 312554293391460528, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 312554293391460529, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
       propertyPath: m_Name
       value: Water
@@ -610,8 +626,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 312554293391460528, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73aede0f04cb7aa4c98297b65aceeb1c, type: 3}
 --- !u!4 &2145398961 stripped
 Transform:

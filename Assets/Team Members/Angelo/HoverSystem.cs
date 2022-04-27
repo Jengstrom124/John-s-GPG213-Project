@@ -29,14 +29,11 @@ public class HoverSystem : MonoBehaviour
         {
             float force = 1 - hit.distance;
             force *= HoverForce;
-            if (hit.distance >= MaxHover)
-            {
-                force = force / 3;
-            }
+            
             physicsRef.AddForceAtPosition(new Vector3(0,force,0),transform.position);
             Debug.DrawLine(transform.position,hit.point,Color.magenta);
         }
-        physicsRef.AddForceAtPosition(new Vector3(0,0,Input.GetAxis("Vertical") * Speed),transform.position);
+        //physicsRef.AddForceAtPosition(new Vector3(0,0,Input.GetAxis("Vertical") * Speed),transform.position);
         
         localVelocity = transform.InverseTransformDirection(physicsRef.velocity);
         physicsRef.AddRelativeForce(-localVelocity.x * RotationDrag,0,0);
