@@ -18,8 +18,6 @@ public class SubmersedSpawner : MonoBehaviour
 	public int yOffset;
 	public float fringe;
 
-	public int seed;
-
 	private void FunctionLoop()
 	{
 		GameObject coral = Instantiate(new GameObject("Coral"), transform);
@@ -53,7 +51,6 @@ public class SubmersedSpawner : MonoBehaviour
 
 	void Awake()
 	{
-		Random.InitState(seed);
 		GetComponentInParent<LukeTerrain>().FinishSpawningEvent += MyStart;
 	}
 	

@@ -17,8 +17,6 @@ public class OnLandSpawner : MonoBehaviour
 	public int yOffset;
 	public float fringe;
 
-	public int seed;
-
 	private void FunctionLoop()
 	{
 		GameObject trees = Instantiate(new GameObject("Trees"), transform);
@@ -58,7 +56,6 @@ public class OnLandSpawner : MonoBehaviour
 
 	void Awake()
 	{
-		Random.InitState(seed);
 		GetComponentInParent<LukeTerrain>().FinishSpawningEvent += MyStart;
 	}
 	
