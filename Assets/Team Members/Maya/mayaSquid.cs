@@ -8,6 +8,7 @@ public class mayaSquid : MonoBehaviour, IControllable
 {
     public Rigidbody squidForce;
     public float rotateSpeed = 2f;
+    public float speed = 30;
 
     public bool hackyNonsense;
     public float charge;
@@ -18,7 +19,8 @@ public class mayaSquid : MonoBehaviour, IControllable
     // Start is called before the first frame update
     void Start()
     {
-        squidAnim.keepAnimatorControllerStateOnDisable = true;
+
+        
     }
 
     // Update is called once per frame
@@ -65,18 +67,17 @@ public class mayaSquid : MonoBehaviour, IControllable
             hackyNonsense = true;
             if (hackyNonsense)
             {
-                charge *= (Time.deltaTime * 5);
-                if (!hackyNonsense)
-                {
-                    squidForce.AddForceAtPosition(Vector3.forward * charge, transform.position);
-                }
+                //charge = 0;
+                charge += 16 * Time.deltaTime;
             }
-            else
-                charge = 0f;
         }
         else
         {
             hackyNonsense = false;
+            squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,1,0)), squidForce.transform.position);
+        
+            squidAnim.Play("Swim");
+            charge = 0;
         }
     }
 

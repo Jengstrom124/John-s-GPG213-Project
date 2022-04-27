@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &443523127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 443523128}
+  - component: {fileID: 443523129}
+  m_Layer: 0
+  m_Name: SquidForce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &443523128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443523127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8305161447525605678}
+  m_Father: {fileID: 5106164139609085650}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &443523129
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443523127}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 5
+  m_AngularDrag: 5
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1 &4554516382443037816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5106164139609085650}
+  m_Layer: 0
+  m_Name: MayasSquidFinal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5106164139609085650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4554516382443037816}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 7.95, y: 14.528998, z: 18.578783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 443523128}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1001 &6980497029518759885
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 443523128}
+    m_Modifications:
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.010000229
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.035385147
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04829598
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687089337371118739, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: m_Name
+      value: Squid2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720376482644702130, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+      propertyPath: squidForce
+      value: 
+      objectReference: {fileID: 443523129}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+--- !u!4 &8305161447525605678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+  m_PrefabInstance: {fileID: 6980497029518759885}
+  m_PrefabAsset: {fileID: 0}

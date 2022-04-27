@@ -1,37 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3054226874122671868
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5259361840775456536}
-  m_Layer: 0
-  m_Name: SquidForce
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5259361840775456536
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3054226874122671868}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3472371851616897745}
-  m_Father: {fileID: 1413683078419379939}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3687089337371118739
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5259361840775456536}
+  - {fileID: 3472371851616897745}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,17 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squidForce: {fileID: 0}
-  speed: 25
   rotateSpeed: 12.5
+  speed: 25
+  hackyNonsense: 0
   charge: 0
-  boostDistance: 5
   squidAnim: {fileID: 3472371851607811341}
 --- !u!1001 &3472371851617292397
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5259361840775456536}
+    m_TransformParent: {fileID: 1413683078419379939}
     m_Modifications:
     - target: {fileID: 100058, guid: 517afc79ef78c2e478f3ca5cef8beb33, type: 3}
       propertyPath: m_Name
