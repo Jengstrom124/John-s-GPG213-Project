@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 
 public class mayaSpawner : MonoBehaviour
 {
@@ -66,7 +62,7 @@ public class mayaSpawner : MonoBehaviour
 	{
 		for (int i = 0; i < spawnCount; i++)
 		{
-			GameObject newObject = PrefabUtility.InstantiatePrefab(objectToSpawn) as GameObject;
+			GameObject newObject = Instantiate(objectToSpawn) as GameObject;
 
 
 			Vector3 finalPosition = CalculateRandomPosition();
