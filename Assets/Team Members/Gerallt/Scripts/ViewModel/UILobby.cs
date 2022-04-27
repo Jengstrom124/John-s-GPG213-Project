@@ -21,7 +21,7 @@ namespace Gerallt
         public Button buttonHostGame;
         public Button buttonJoinGame;
 
-        private LobbyPlayerData? localPlayerData;
+        public LobbyPlayerData? localPlayerData;
         
         public void PlayerName_ValueChanged()
         {

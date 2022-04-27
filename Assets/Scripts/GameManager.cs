@@ -23,6 +23,12 @@ public class GameManager : ManagerBase<GameManager>
 
     public GameObject playerStatsUIPrefab;
 
+    public enum CharacterTypes
+    {
+        LukeShark,
+        OllieShark,
+        KevinSeal
+    }
 
     [ClientRpc]
     public void SetupCameraClientRpc(ulong clientID, NetworkObjectReference playerObjectRef)

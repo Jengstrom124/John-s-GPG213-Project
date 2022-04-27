@@ -12,6 +12,7 @@ namespace Gerallt
             public NetworkableString PlayerName;
             public NetworkableString ClientIPAddress;
             public int SelectedPlayerIndex;
+            public int characterIndex;
 
             public LobbyPlayerData(ulong clientId, string name, int playerNum)
             {
@@ -19,6 +20,7 @@ namespace Gerallt
                 SelectedPlayerIndex = playerNum;
                 PlayerName = name;
                 ClientIPAddress = string.Empty;
+                characterIndex = 0;
             }
 
             public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
@@ -27,6 +29,7 @@ namespace Gerallt
                 serializer.SerializeValue(ref PlayerName);
                 serializer.SerializeValue(ref SelectedPlayerIndex);
                 serializer.SerializeValue(ref ClientIPAddress);
+                serializer.SerializeValue(ref characterIndex);
             }
 
             public bool Equals(LobbyPlayerData other)
