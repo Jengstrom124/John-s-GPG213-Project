@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Gerallt;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -26,6 +27,5 @@ public class CharacterButtonCreator : MonoBehaviour
             button.eventSystem = eventSystem;
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = characters[i].name;
         }
-
     }
 }
