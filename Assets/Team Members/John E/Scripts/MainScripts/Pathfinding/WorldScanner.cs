@@ -34,6 +34,8 @@ public class WorldScanner : MonoBehaviour
 
     LevelInfo level;
 
+    public float nodeSize = 0.1f;
+
     private void Awake()
     {
         instance = this;
@@ -43,8 +45,8 @@ public class WorldScanner : MonoBehaviour
 
         if(level != null)
         {
-            gridSize.x = Mathf.RoundToInt(level.bounds.extents.x);
-            gridSize.y = Mathf.RoundToInt(level.bounds.extents.z);
+            gridSize.x = Mathf.RoundToInt(level.bounds.extents.x * nodeSize);
+            gridSize.y = Mathf.RoundToInt(level.bounds.extents.z * nodeSize);
         }
     }
 
@@ -72,10 +74,10 @@ public class WorldScanner : MonoBehaviour
             {
                 //For each grid position, create a new node and store node position
                 gridNodeReferences[x,y] = new Node();
-                gridNodeReferences[x, y].gridPos = new Vector2(x, y);
+                gridNodeReferences[x, y].gridPos = new Vector2(x * nodeSize, y* nodeSize);
 
                 //Check for obstacle
-                if (Physics.CheckBox(new Vector3(x, Water.Instance.transform.position.y, y), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                if (Physics.CheckBox(new Vector3(x* nodeSize, Water.Instance.transform.position.y, y* nodeSize), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
                 {
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;

@@ -29,7 +29,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2219981257583123345}
   m_RootOrder: 0
@@ -138,7 +137,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1.843413}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3956263565174007993}
   m_Father: {fileID: 0}
@@ -283,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  feeler: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
   emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3
