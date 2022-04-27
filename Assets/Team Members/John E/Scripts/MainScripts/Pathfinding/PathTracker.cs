@@ -145,10 +145,7 @@ public class PathTracker : MonoBehaviour
             //Once we reach the current path position
             if (Vector2.Distance(currentTargetPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold)
             {
-                if(!usePathSmoothing)
-                    pathToFollow.Remove(pathToFollow[0]);
-
-
+                pathToFollow.Remove(pathToFollow[0]);
                 currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
                 newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
             }
