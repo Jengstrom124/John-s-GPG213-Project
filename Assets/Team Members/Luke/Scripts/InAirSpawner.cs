@@ -18,8 +18,6 @@ public class InAirSpawner : MonoBehaviour
 	public float fringe;
 	public int totalBirds;
 
-	public int seed;
-
 	private void FunctionLoop()
 	{
 		GameObject birds = Instantiate(new GameObject("Birds"), transform);
@@ -39,7 +37,6 @@ public class InAirSpawner : MonoBehaviour
 
 	void Awake()
 	{
-		Random.InitState(seed);
 		GetComponentInParent<LukeTerrain>().FinishSpawningEvent += MyStart;
 		totalBirds = Random.Range(4, 8);
 	}

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -199,8 +198,7 @@ namespace Gerallt
                 TextMeshProUGUI buttonText = itemButton.GetComponentInChildren<TextMeshProUGUI>();
                 
                 Object levelObj = levels[i];
-                SceneAsset sceneAsset = levelObj as SceneAsset;
-                string sceneName = sceneAsset.name;
+                string sceneName = levelObj.name;
                 
                 buttonText.text = sceneName;
                 

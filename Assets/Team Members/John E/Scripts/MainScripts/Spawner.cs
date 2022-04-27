@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class Spawner : MonoBehaviour
 {
@@ -29,7 +28,7 @@ public class Spawner : MonoBehaviour
     {
         for(int i = 0; i < spawnCount; i++)
         {
-            GameObject newObject = PrefabUtility.InstantiatePrefab(objectToSpawn) as GameObject;
+            GameObject newObject = Instantiate(objectToSpawn) as GameObject;
 
             if(useSpawnerPosition)
             {

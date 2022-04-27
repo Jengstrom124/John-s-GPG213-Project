@@ -26,6 +26,8 @@ public class LukeTerrain : MonoBehaviour
 	public float fringeDetaillessFactor = 1.2f;
 	private float fringeTranslationFactor = 0.5f;
 
+	public int seed;
+
 	//public float[,] previousHeights;
 
 	private IEnumerator Timer()
@@ -125,6 +127,7 @@ public class LukeTerrain : MonoBehaviour
 
 	void Awake()
 	{
+		Random.InitState(seed);
 		//previousHeights = terrainGenerator.terrainDataForRandomExample.GetHeights(0,0,terrainGenerator.width,terrainGenerator.height);
 	}
 	

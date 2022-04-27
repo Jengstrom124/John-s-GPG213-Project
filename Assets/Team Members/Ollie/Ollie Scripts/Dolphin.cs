@@ -22,7 +22,7 @@ namespace Ollie
             originalDrag = rb.drag;
             originalAngularDrag = rb.angularDrag;
         }
-
+        
         private void Update()
         {
             if (rb.velocity.y > 0)
@@ -59,7 +59,7 @@ namespace Ollie
         {
             
         }
-
+        
         public override void WaterCheck()
         {
             if (IsWet)
@@ -89,9 +89,7 @@ namespace Ollie
                 //rb.constraints = RigidbodyConstraints.None;
                 //rb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                
-                //up
-                
+                model.localRotation = Quaternion.Euler(0,90,-45);
                 //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 rb.drag = 5;
                 rb.angularDrag = 1;
@@ -110,11 +108,26 @@ namespace Ollie
         IEnumerator JumpCooldownCoroutine()
         {
             print("dolphin go yeet");
+            yield return new WaitForSeconds(0.75f);
+            model.localRotation = Quaternion.Euler(0,90,45);
+            // if (rb.transform.position.y > 10)
+            // {
+            //     rb.mass = 5;
+            //     yield return null;
+            // }
+            // else
+            // {
+            //     rb.mass = 1;
+            // }
+            yield return new WaitForSeconds(0.33f);
+            model.localRotation = Quaternion.Euler(0,90,0);
             yield return new WaitForSeconds(1.5f);
             //down
             //yield return new WaitForSeconds(1f);
             //normal
             jumping = false;
+            //rb.constraints = RigidbodyConstraints.None;
+            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ;
             rb.drag = originalDrag;
             rb.angularDrag = originalAngularDrag;
         }
@@ -131,6 +144,7 @@ namespace Ollie
         {
             //doubles speed for 1.5 seconds
             //prevents reapplication for 3 seconds after deactivation
+            print("shark go zoom");
             boosting = true;
             forwardSpeed = forwardSpeed * 2;
             yield return new WaitForSeconds(1.5f);
