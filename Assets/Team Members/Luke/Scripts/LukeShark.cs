@@ -137,11 +137,11 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
     {
 	    if (IsServer)
 	    {
+		    Vector3 position = transform.position;
 		    Vector3 tailPosition = mainJointTransform.position;
-		    Vector3 tailTipPosition = tailTipTransform.position;
 		    
-		    rb.AddForceAtPosition(accelForce, transform.position);
-		    rb.AddForceAtPosition(reverseForce, transform.position);
+		    rb.AddForceAtPosition(accelForce, position);
+		    rb.AddForceAtPosition(reverseForce, position);
 		    currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, steerTarget, lerpValue);
 		    
 		    localVelocity = transform.InverseTransformDirection(rb.velocity);
@@ -158,7 +158,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		    //tail steering friction.
 		    rb.AddForceAtPosition(
 			    steeringFrictionCoefficient * rb.mass *
-			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipPosition);
+			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipTransform.position);
 	    }
     }
 
