@@ -81,7 +81,7 @@ public class WorldScanner : MonoBehaviour
                 //Hack for grid height to use in CheckBox below
                 if (Water.Instance != null)
                 {
-                    height = Water.Instance.transform.position.y;
+                    height = Water.Instance.transform.position.y - 1;
                 }
                 //Check for obstacle
                 if (Physics.CheckBox(new Vector3(x* nodeSize, height + 50f, y* nodeSize), new Vector3(0.5f, 50f, 0.5f), Quaternion.identity, obstacle))

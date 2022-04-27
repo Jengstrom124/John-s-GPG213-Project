@@ -10,10 +10,12 @@ public class SearchForFishingSpotState : AntAIState
 	Rigidbody rb;
 	GameObject targetFishGO;
 	bool fishAssigned;
+	bool resetThresholdMet = false;
 
 	BoatControl boatControl;
 	PathTracker pathTracker;
 
+	FishModel[] potentialFish;
 	Vector3 fishPos;
 
 	public override void Create(GameObject aGameObject)
@@ -28,6 +30,7 @@ public class SearchForFishingSpotState : AntAIState
 	{
 		//As this is run multiple times - always reset fish variable upon entering this state to prevent boat travelling to wrong fish (Keep fish up to date)
 		targetFishGO = null;
+		resetThresholdMet = false;
 
 		//Using a coroutine to find fish as it seems to try to find a fish before they spawn causing null errors
 		StartCoroutine(FindFish());
@@ -51,13 +54,18 @@ public class SearchForFishingSpotState : AntAIState
 				// Current action is finished.
 				boatControl.AtFishingSpot = true;
 				rb.velocity = Vector3.zero;
-				//pathTracker.ResetPathTracking();
 				Finish();
 			}
 			else
             {
 				if(boatControl.useRBForces)
 					rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed * aDeltaTime);
+			}
+
+			if (resetThresholdMet && pathTracker.currentTargetPos == Vector2.zero)
+			{
+				Debug.Log("Resetting... Changing drivers");
+				Finish();
 			}
 		}
 		else
@@ -86,7 +94,7 @@ public class SearchForFishingSpotState : AntAIState
 		else
         {
 			//HACK: Using this to find fish for now
-			FishModel[] potentialFish = FindObjectsOfType<FishModel>();
+			potentialFish = FindObjectsOfType<FishModel>();
 			FishModel fishTarget = potentialFish[0];
 
 			//Find fish with most neighbours to choose as fishing spot
@@ -107,6 +115,10 @@ public class SearchForFishingSpotState : AntAIState
 				AStar.Instance.FindPath(t, fishPos);
 			}
 		}
+
+		yield return new WaitForSeconds(10f);
+
+		resetThresholdMet = true;
 	}
 
 	IEnumerator ResetState()

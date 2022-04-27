@@ -184,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
       propertyPath: spawnCount
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
       propertyPath: waterOrNot
@@ -202,6 +202,14 @@ PrefabInstance:
       propertyPath: autoSpawnAtStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
+      propertyPath: objectsToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
+      propertyPath: objectsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
 --- !u!1 &20682473
@@ -591,7 +599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 158.36
+      value: 162
       objectReference: {fileID: 0}
     - target: {fileID: 6631958648049730591, guid: 6e5846c2810491a4b8e249acd47d3499, type: 3}
       propertyPath: m_LocalRotation.w
