@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UNET;
 using UnityEngine.UI;
 
 namespace Gerallt
@@ -15,11 +16,11 @@ namespace Gerallt
         public GameObject JoinedClients;
         public GameObject UIClientPrefab;
         public TMP_InputField UIPlayerNameInput;
+        public TMP_InputField UIServerIPInput;
         public Button buttonStartGame;
         public Button buttonHostGame;
         public Button buttonJoinGame;
-        
-        
+
         private LobbyPlayerData? localPlayerData;
         
         public void PlayerName_ValueChanged()
@@ -54,6 +55,13 @@ namespace Gerallt
 
             // Update the view given model changes.
             UpdateClientsList();
+        }
+
+        public void ServerIP_ValueChanged()
+        {
+	        string serverIP = UIServerIPInput.text;
+
+	        ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = serverIP;
         }
 
         public void Start()
@@ -202,5 +210,6 @@ namespace Gerallt
                 }
             }
         }
+
     }
 }
