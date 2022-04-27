@@ -6,7 +6,9 @@ using Unity.Netcode;
 using UnityEngine;
 using Gerallt;
 using TMPro;
+using Unity.Netcode.Components;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : ManagerBase<GameManager>
 {
@@ -23,6 +25,8 @@ public class GameManager : ManagerBase<GameManager>
 
     public GameObject playerStatsUIPrefab;
 
+    public mayaSpawner mayaSpawner;
+    
     public enum CharacterTypes
     {
         LukeShark,
@@ -208,6 +212,10 @@ public class GameManager : ManagerBase<GameManager>
                     {
                         networkObject.Despawn();
                     }
+                    else if (networkObject == null)
+                    {
+                        DestroyObjClientRpc(playerController.controlled);
+                    }
 
                     //playerController.controlled = null;
                 }
@@ -267,15 +275,33 @@ public class GameManager : ManagerBase<GameManager>
         {
             t.position = position.Value;
         }
+        else
+        {
+            t.position = mayaSpawner.CalculateRandomPosition(mayaSpawner.WaterOrNot.Water);
+        }
         if (rotation.HasValue)
         {
             t.rotation = rotation.Value;
         }
+        else
+        {
+            t.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        }
+        
         
         playerController.controlled = spawnedCharacter;
 
-        spawnedCharacter.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
-        //spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientID);
+        NetworkObject spawnedCharacterNetworkObject = spawnedCharacter.GetComponent<NetworkObject>();
+
+        if (spawnedCharacterNetworkObject == null)
+        {
+            spawnedCharacterNetworkObject = spawnedCharacter.AddComponent<NetworkObject>();
+            spawnedCharacter.AddComponent<NetworkRigidbody>();
+            spawnedCharacter.AddComponent<NetworkTransform>();
+        }
+        
+        spawnedCharacterNetworkObject.SpawnWithOwnership(clientID);
+        //spawnedCharacterNetworkObject.ChangeOwnership(clientID);
 
         NetworkObjectReference characterReference = spawnedCharacter;
         SetupCameraClientRpc(clientID, characterReference);
