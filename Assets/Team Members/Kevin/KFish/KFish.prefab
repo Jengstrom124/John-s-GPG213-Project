@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 2
-  usePlayerForce: 0
+  alignWithPlayer: 1
   currentPlayerFish: {fileID: 3525841648910458259}
 --- !u!114 &129837354
 MonoBehaviour:

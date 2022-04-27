@@ -33,7 +33,7 @@ public class BoatControl : MonoBehaviour
 
     private void Start()
     {
-		distanceThreshold = pathTracker.distanceThreshold;
+		distanceThreshold = pathTracker.distanceThreshold +1;
     }
 
     public bool HasFish

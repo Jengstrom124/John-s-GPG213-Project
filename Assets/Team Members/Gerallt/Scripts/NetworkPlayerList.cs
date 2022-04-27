@@ -185,6 +185,11 @@ namespace Gerallt
                 }
             }
         }
+
+        public void CallUpdatePlayerData(LobbyPlayerData newData)
+        {
+            UpdatePlayerDataServerRpc(newData);
+        }
         
         public static string GetClientIPAddress()
         {

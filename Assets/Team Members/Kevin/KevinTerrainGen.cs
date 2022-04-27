@@ -49,10 +49,10 @@ namespace Kevin
     public bool coral;
     public bool bird;
 
-    public int seed;
+    public List<int> seeds;
     void Awake()
     {
-        Random.InitState(seed);
+        Random.InitState(seeds[Random.Range(0,2)]);
     }
     void Start()
     {

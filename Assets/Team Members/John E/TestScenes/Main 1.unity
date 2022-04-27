@@ -639,6 +639,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
+      propertyPath: nodeSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
       propertyPath: autoGenerateGridOnAwake
       value: 1
       objectReference: {fileID: 0}

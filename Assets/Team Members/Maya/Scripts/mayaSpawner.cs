@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class mayaSpawner : MonoBehaviour
@@ -14,7 +15,7 @@ public class mayaSpawner : MonoBehaviour
 	public int zMax = 50;
 
 	[Header("Configurations:")]
-	public GameObject objectToSpawn;
+	public List<GameObject> objectsToSpawn;
 
 	public int spawnCount;
 	public int spawnHeight = 0;
@@ -62,24 +63,11 @@ public class mayaSpawner : MonoBehaviour
 	{
 		for (int i = 0; i < spawnCount; i++)
 		{
-			GameObject newObject = Instantiate(objectToSpawn) as GameObject;
+			GameObject newObject = Instantiate(objectsToSpawn[Random.Range(0,objectsToSpawn.Count-1)]) as GameObject;
 
 
-			Vector3 finalPosition = CalculateRandomPosition();
-
-
-			if (waterOrNot == WaterOrNot.Water)
-			{
-				RaycastHit HitInfo;
-				if(Physics.Raycast(new Ray(finalPosition, Vector3.down), out HitInfo, 999999f, 255, QueryTriggerInteraction.Collide));
-				{
-					if (HitInfo.transform.GetComponent<Water>())
-					{
-						finalPosition.y = HitInfo.point.y + waterOffset;
-					}
-				}
-			}
-
+			Vector3 finalPosition = CalculateRandomPosition(waterOrNot);
+			
 
 			newObject.transform.position = finalPosition;
 
@@ -95,32 +83,57 @@ public class mayaSpawner : MonoBehaviour
 		}
 	}
 
-	public Vector3 CalculateRandomPosition()
+	
+	Vector3 finalPosition;
+	public Vector3 CalculateRandomPosition(WaterOrNot _waterOrNot)
 	{
-		Vector3 finalPosition;
-		if (positionCalculation == PositionCalculation.useSpawnerPositionPlusMinMax)
+		bool foundGoodSpot = false;
+		int maxLoopCount = 1000;
+
+		int loopCount = 0;
+		
+		while (!foundGoodSpot && loopCount < maxLoopCount)
 		{
-			finalPosition =
-				new Vector3(Random.Range(transform.position.x - xMax / 2f, transform.position.x + xMax / 2f), 0,
-							Random.Range(transform.position.z - zMax / 2f, transform.position.z + zMax / 2f));
+			loopCount++;
+			
+			if (positionCalculation == PositionCalculation.useSpawnerPositionPlusMinMax)
+			{
+				finalPosition =
+					new Vector3(Random.Range(transform.position.x - xMax / 2f, transform.position.x + xMax / 2f), 0,
+						Random.Range(transform.position.z - zMax / 2f, transform.position.z + zMax / 2f));
+			}
+			else
+			{
+				finalPosition = new Vector3(Random.Range(xyzMax.x, xyzMax.x), 0,
+					Random.Range(xyzMax.z, xyzMax.z));
+			}
+
+			if (positionCalculation == PositionCalculation.useLevelInfoBounds)
+			{
+				float xRnd = Random.Range(LevelInfo.Instance.bounds.center.x + -LevelInfo.Instance.bounds.extents.x / 2f, LevelInfo.Instance.bounds.center.x + LevelInfo.Instance.bounds.extents.x / 2f);
+				float zRnd = Random.Range(LevelInfo.Instance.bounds.center.z + -LevelInfo.Instance.bounds.extents.z / 2f, LevelInfo.Instance.bounds.center.z + LevelInfo.Instance.bounds.extents.z / 2f);
+
+				finalPosition = new Vector3(xRnd, 0, zRnd);
+			}
+
+			// Always set y to highest point on LevelInfo
+			finalPosition.y = LevelInfo.Instance.bounds.center.y + LevelInfo.Instance.bounds.extents.y / 2f;
+
+		
+			if (_waterOrNot == WaterOrNot.Water)
+			{
+				RaycastHit HitInfo;
+				if(Physics.Raycast(new Ray(finalPosition, Vector3.down), out HitInfo, 999999f, 255, QueryTriggerInteraction.Collide));
+				{
+					if (HitInfo.transform.GetComponent<Water>())
+					{
+						finalPosition.y = HitInfo.point.y + waterOffset;
+						foundGoodSpot = true;
+					}
+				}
+			}
 		}
-		else
-		{
-			finalPosition = new Vector3(Random.Range(xyzMax.x, xyzMax.x), 0,
-										Random.Range(xyzMax.z, xyzMax.z));
-		}
-
-		if (positionCalculation == PositionCalculation.useLevelInfoBounds)
-		{
-			float xRnd = Random.Range(LevelInfo.Instance.bounds.center.x + -LevelInfo.Instance.bounds.extents.x / 2f, LevelInfo.Instance.bounds.center.x + LevelInfo.Instance.bounds.extents.x / 2f);
-			float zRnd = Random.Range(LevelInfo.Instance.bounds.center.z + -LevelInfo.Instance.bounds.extents.z / 2f, LevelInfo.Instance.bounds.center.z + LevelInfo.Instance.bounds.extents.z / 2f);
-
-			finalPosition = new Vector3(xRnd, 0, zRnd);
-		}
-
-		// Always set y to highest point on LevelInfo
-		finalPosition.y = LevelInfo.Instance.bounds.center.y + LevelInfo.Instance.bounds.extents.y / 2f;
-
+		
 		return finalPosition;
 	}
 }
