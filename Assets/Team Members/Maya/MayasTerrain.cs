@@ -59,6 +59,12 @@ public class MayasTerrain : MonoBehaviour
         
         if (!(xVal < border+xOffset || yVal < border+yOffset || xVal > ((scale+xOffset) - border) || yVal > ((scale+yOffset) - border)))
         {
+            if (finalVal < 0.4f)
+                
+            {
+                //flattens the bottom of the water to 0
+                finalVal = 0; //value * 0.9f; // - this bit was used for creating a sharp drop off from the beaches, but shark could still get caught
+            }
             return finalVal;
         }
         

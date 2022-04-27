@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CharacterSelectButton : NetworkBehaviour
+public class CharacterSelectButton : MonoBehaviour
 {
     public int characterIndex;
     public UILobby uiLobby;
@@ -25,11 +25,11 @@ public class CharacterSelectButton : NetworkBehaviour
         uiLobby.localPlayerData = temp;
         
         // Potentially a hack
-        if (IsServer || IsClient)
+        if (NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsClient)
         {
             if (uiLobby.localPlayerData.HasValue)
             {
-                NetworkPlayerList.Instance.UpdatePlayerDataServerRpc(uiLobby.localPlayerData.Value);
+                NetworkPlayerList.Instance.CallUpdatePlayerData(uiLobby.localPlayerData.Value);
             }
         }
 

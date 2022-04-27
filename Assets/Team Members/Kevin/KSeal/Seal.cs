@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Anthill.Effects;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -16,8 +17,9 @@ namespace Kevin
     public Vector3 localVelocity;
     public Vector3 tailLocalVelocity;
     public Vector3 tailPosition;
-    
-    
+    public Vector3 accelerationForce;
+    public Vector3 reverseForce;
+
     //Transforms
     public Transform headTransform; 
     public Transform tailTransform;
@@ -30,7 +32,9 @@ namespace Kevin
     
     //Stats/Floats Variables
     public float accelerationSpeed;
+    public float lerpValue = 0.1f;
     public float currentSteeringAngle;
+    public float targetAngle;
     public float steeringMax = 30f;
     public float currentSteeringMax;
     public float airSteeringMax = 15f;
@@ -45,43 +49,54 @@ namespace Kevin
     public CapsuleCollider capsuleCollider;
     public Vector3 colliderCenter;
 
-
+    public Transform spawnPoint;
     //public bool isWet;
+    
+    //Audio
+    public AudioSource jumpSound;
+
+    void Awake()
+    {
+        sealPrefab.transform.position = new Vector3(75f,15f,105f);
+    }
     void Start()
     {
-        colliderCenter = GetComponent<CapsuleCollider>().center;
-        sealRigidbody = sealPrefab.GetComponent<Rigidbody>();
-        tailPosition = sealPrefab.transform.position;
-        
+        if (IsServer)
+        {
+            jumpSound = GetComponent<AudioSource>();
+            colliderCenter = GetComponent<CapsuleCollider>().center;
+            sealRigidbody = sealPrefab.GetComponent<Rigidbody>();
+            tailPosition = sealPrefab.transform.position;
+        }
+
     }
     
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 tailPosition = tailTransform.position;
-        
-        localVelocity = transform.InverseTransformDirection(sealRigidbody.velocity);
-        
-        tailLocalVelocity = tailTransform.InverseTransformDirection(sealRigidbody.GetPointVelocity(tailPosition));
-        
-        sealRigidbody.AddRelativeForce(sealRigidbody.mass*new Vector3 (-localVelocity.x, 0, 0));
-        
-        sealRigidbody.AddForceAtPosition(sealRigidbody.mass*tailTransform.TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
-        
-        localVelocity = transform.InverseTransformDirection(sealRigidbody.velocity);
-        
-        sealRigidbody.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
-        
-        if (localVelocity.z > 0) 
+        if (IsServer)
         {
-            StartCoroutine(Decelerate());
+            Vector3 tailPosition = tailTransform.position;
+        
+            localVelocity = transform.InverseTransformDirection(sealRigidbody.velocity);
+            tailLocalVelocity = tailTransform.InverseTransformDirection(sealRigidbody.GetPointVelocity(tailPosition));
+        
+            sealRigidbody.AddRelativeForce(sealRigidbody.mass*new Vector3 (-localVelocity.x, 0, 0));
+            sealRigidbody.AddForceAtPosition(sealRigidbody.mass*tailTransform.TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
+        
+            //localVelocity = transform.InverseTransformDirection(sealRigidbody.velocity);
+        
+            //sealRigidbody.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
+        
+            sealRigidbody.AddForceAtPosition(accelerationForce, transform.position);
+            sealRigidbody.AddForceAtPosition(reverseForce, transform.position);
+            currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, lerpValue);
+            
+            if (localVelocity.z > 0) 
+            {
+                StartCoroutine(Decelerate());
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
-        {
-            Jump();
-            StartCoroutine(JumpTimer());
-        }
-
+        
         if (IsWet == false)
         {
             capsuleCollider.material = new PhysicMaterial("none");
@@ -90,6 +105,13 @@ namespace Kevin
         {
             capsuleCollider.material = new PhysicMaterial("SlipperyMaterial");
         }
+        /*if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
+        {
+            Jump();
+            StartCoroutine(JumpTimer());
+        }*/
+
+        
 
         /*if (IsWet && isJumping == false)
         {
@@ -134,36 +156,54 @@ namespace Kevin
     }*/
     public void Jump()
     {
-        isJumping = true;
-        sealRigidbody.constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        accelerationSpeed = 1f;
-        currentSteeringMax = airSteeringMax;
-        sealRigidbody.AddForceAtPosition(new Vector3(0f,  Mathf.Sqrt(20f * -2 * -9.81f)*20f,0f),jumpTransform.position);
-        StartCoroutine(GravityDrop());
+        if (IsServer)
+        {
+            isJumping = true;
+            sealRigidbody.constraints = RigidbodyConstraints.None | RigidbodyConstraints.FreezeRotationX |
+                                        RigidbodyConstraints.FreezeRotationZ;
+            accelerationSpeed = 1f;
+            currentSteeringMax = airSteeringMax;
+            sealRigidbody.AddForceAtPosition(new Vector3(0f, Mathf.Sqrt(20f * -2 * -9.81f) * 20f, 0f),
+                jumpTransform.position);
+            StartCoroutine(GravityDrop());
+        }
     }
 
     IEnumerator GravityDrop()
     {
-        yield return new WaitForSeconds(0.5f);
-        sealRigidbody.AddForceAtPosition(350f * transform.TransformDirection(Vector3.down),jumpTransform.position,0f);
+        if (IsServer)
+        {
+            yield return new WaitForSeconds(0.5f);
+            sealRigidbody.AddForceAtPosition(350f * transform.TransformDirection(Vector3.down), jumpTransform.position,
+                0f);
+        }
     }
 
     IEnumerator JumpTimer()
     {
-        yield return new WaitForSeconds(0.75f);
-        isJumping = false; 
+        if (IsServer)
+        {
+            yield return new WaitForSeconds(0.75f);
+            isJumping = false;
+        }
     }
 
     IEnumerator Decelerate()
     {
-        sealRigidbody.AddRelativeForce(new Vector3(0f,0f,-1f));
-        yield return new WaitForSeconds(reduction);
+        if (IsServer)
+        {
+            sealRigidbody.AddRelativeForce(new Vector3(0f, 0f, -1f));
+            yield return new WaitForSeconds(reduction);
+        }
     }
 
     IEnumerator BoosterLimit()
     {
-        yield return new WaitForSeconds(3f);
-        accelerationSpeed = 5f;
+        if (IsServer)
+        {
+            yield return new WaitForSeconds(3f);
+            accelerationSpeed = 5f;
+        }
     }
 
     public void Steer(float input)
@@ -171,48 +211,33 @@ namespace Kevin
         if (IsServer)
         {
             float currentYEuler = transform.eulerAngles.y;
-            float targetAngle = 0;
-
-            if (input == 0f)
-            {
-                //targetAngle =  currentSteeringMax / 2f;
-            }
-            else
-            {
-                targetAngle = -input * currentSteeringMax;
-            }
-        
-            currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, 0.1f);
-            if (IsClient)
-            {
-                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
-                tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
-                tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
-                tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
-                headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
-
-            }
+            
+            targetAngle = -input * currentSteeringMax;
+            
+           
+            tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+            tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
+            tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
+            tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
+            headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+            
         }
-            
-
-       
-            
-        
-        
     }
 
     public void Accelerate(float input)
     {
         if (IsServer)
         {
-            if (IsWet)
+            
+            accelerationForce = input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+            /*if (IsWet)
             {
                 sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
             }
             else
             {
                 sealRigidbody.AddForceAtPosition(input*accelerationSpeed*2f*transform.TransformDirection(Vector3.forward), transform.position,0);
-            }
+            }*/
         }
     }
 
@@ -220,24 +245,24 @@ namespace Kevin
     {
         if (IsServer)
         {
-            sealRigidbody.AddForceAtPosition(
-                input * accelerationSpeed / 2f * transform.TransformDirection(Vector3.back), transform.position, 0);
+            reverseForce = -input * accelerationSpeed * transform.TransformDirection(Vector3.back);
         }
     }
 
     public void Action()
     {
-        accelerationSpeed = 20f;
+        accelerationForce =  20f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
         StartCoroutine(BoosterLimit());
     }
 
     public void Action2()
     {
-        /*if (isjumping == false)
+        if(IsServer && isJumping == false)
         {
+            jumpSound.Play();
             Jump();
             StartCoroutine(JumpTimer());
-        }*/
+        }
         
         //View
         if (IsClient)

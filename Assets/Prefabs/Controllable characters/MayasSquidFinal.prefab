@@ -84,7 +84,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!136 &2065292952
 CapsuleCollider:
@@ -129,8 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squidForce: {fileID: 2065292951}
-  rotateSpeed: 10
-  speed: 30
+  rotateSpeed: 25
+  speed: 60
   hackyNonsense: 0
   charge: 0
   squidAnim: {fileID: 5832129482877874880}
