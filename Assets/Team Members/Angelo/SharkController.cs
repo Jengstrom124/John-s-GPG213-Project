@@ -21,7 +21,8 @@ namespace AnGelloStuff
         public Transform TailPos;
         private float timer;
 
-        public Material mat;
+        public Material regularMat;
+        public Material actioningMat;
 
         Rigidbody rb;
 
@@ -38,8 +39,7 @@ namespace AnGelloStuff
         // Start is called before the first frame update
         void Start()
         {
-            GetComponentInChildren<SkinnedMeshRenderer>().material = mat;
-            
+            regularMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
             curState = State.State_Swimming;
             rb = GetComponent<Rigidbody>();
         }
@@ -56,12 +56,14 @@ namespace AnGelloStuff
                 if (Input.GetKeyDown(FirstAction))
                 {
                     curState = State.State_Splashdown;
-                    rb.AddRelativeForce(new Vector3(0, JumpForce, 0));
+                    rb.AddForceAtPosition(new Vector3(0, JumpForce, 0), transform.position);
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
                     //transform.Rotate(-90, 0, 0);
                 }
                 else if (Input.GetKeyDown(SecondAction))
                 {
                     curState = State.State_Charge;
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
                 }
             }          
         }
@@ -84,7 +86,7 @@ namespace AnGelloStuff
 
         void DriveShark(float accelarate, float steering)
         {
-            rb.AddRelativeForce(new Vector3(0,0, AccelSpeed * accelarate));
+            rb.AddForceAtPosition(-TailPos.up * AccelSpeed * accelarate * Time.deltaTime,transform.position);
             //rb.AddForceAtPosition(TailPos.forward * AccelSpeed * accelarate, transform.position);
             rb.AddRelativeTorque(0, steering * steeringSpeed, 0);
         }
@@ -112,6 +114,7 @@ namespace AnGelloStuff
                 rb.AddRelativeForce(new Vector3(0, -SplashForce, 0));
                 curState = State.State_Swimming;
                 timer = 0;
+                GetComponentInChildren<SkinnedMeshRenderer>().material = regularMat;
                 //transform.Rotate(-180, 0, 0);
             }
 
@@ -120,7 +123,8 @@ namespace AnGelloStuff
 
         public void Action2()
         {
-            rb.AddForceAtPosition(new Vector3(0, 0, ChargeForce), transform.position);
+            rb.AddForceAtPosition(-TailPos.transform.up * ChargeForce * Time.deltaTime, transform.position);
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         public void Action3()
@@ -134,18 +138,10 @@ namespace AnGelloStuff
             if(curState == State.State_Charge)
             {
                 curState = State.State_Swimming;
+                GetComponentInChildren<SkinnedMeshRenderer>().material = regularMat;
+                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             }
         }
     }
-
-
-
-    /*Little Networking
-     * Model, View
-     * Splashdown
-     * Properly Hover
-     * IsClient and IsServer functions for the shark
-     * Animation controller
-    */
 }
 

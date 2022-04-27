@@ -421,15 +421,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19cdf7594dce0b4bbeb34f04f01f2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccelSpeed: 1000
+  AccelSpeed: 100000
   steeringSpeed: 500
   JumpForce: 200000
   SplashForce: 350000
-  ChargeForce: 100000
+  ChargeForce: 10000000
   FirstAction: 113
   SecondAction: 101
   TailPos: {fileID: 2145398961}
-  mat: {fileID: 2100000, guid: e871f748ff7663c4f82a307e3b9087d9, type: 2}
+  regularMat: {fileID: 0}
+  actioningMat: {fileID: 2100000, guid: e871f748ff7663c4f82a307e3b9087d9, type: 2}
 --- !u!4 &1443811507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 13632290604457518, guid: 9c39ca5d5fa73224f943c006448b0d93, type: 3}

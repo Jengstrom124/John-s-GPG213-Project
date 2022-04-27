@@ -53,19 +53,19 @@ namespace AnGelloStuff
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if(x >= 0 & x <= 5)
+                    if(x >= 0 & x <= 10)
                     {
                         heights[x, y] = 10f;
                     }
-                    else if (x >= width - 5 & x <= width)
+                    else if (x >= width - 10 & x <= width)
                     {
                         heights[x, y] = 10f;
                     }
-                    else if(y >= 0 & y <= 5)
+                    else if(y >= 0 & y <= 10)
                     {
                         heights[x, y] = 10f;
                     }
-                    else if (y >= height - 5 & y <= height)
+                    else if (y >= height - 10 & y <= height)
                     {
                         heights[x, y] = 10f;
                     }
