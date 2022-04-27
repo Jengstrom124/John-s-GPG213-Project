@@ -8,6 +8,8 @@ namespace Kevin
 {
     public class Seal : NetworkBehaviour, IControllable, IReactsToWater
 {
+    #region Variables
+
     //Gameobject Variables
     public Rigidbody sealRigidbody;
     
@@ -45,6 +47,7 @@ namespace Kevin
     //Check if jumping
     public bool isJumping;
 
+    public bool onLand;
     //Collider Config
     public CapsuleCollider capsuleCollider;
     public Vector3 colliderCenter;
@@ -53,8 +56,9 @@ namespace Kevin
     //public bool isWet;
     
     //Audio
-    public AudioSource jumpSound;
+    //public AudioSource jumpSound;
 
+    #endregion
     void Awake()
     {
         sealPrefab.transform.position = new Vector3(75f,15f,105f);
@@ -63,14 +67,12 @@ namespace Kevin
     {
         if (IsServer)
         {
-            jumpSound = GetComponent<AudioSource>();
             colliderCenter = GetComponent<CapsuleCollider>().center;
             sealRigidbody = sealPrefab.GetComponent<Rigidbody>();
             tailPosition = sealPrefab.transform.position;
         }
 
     }
-    
     void FixedUpdate()
     {
         if (IsServer)
@@ -99,61 +101,35 @@ namespace Kevin
         
         if (IsWet == false)
         {
+            onLand = true;
             capsuleCollider.material = new PhysicMaterial("none");
         }
         else
         {
+            onLand = false;
             capsuleCollider.material = new PhysicMaterial("SlipperyMaterial");
         }
-        /*if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
+    }
+    IEnumerator Decelerate()
+    {
+        if (IsServer)
         {
-            Jump();
-            StartCoroutine(JumpTimer());
-        }*/
-
-        
-
-        /*if (IsWet && isJumping == false)
-        {
-            InWater();
-        }*/
-
-        /*if (isJumping == true || isWet == false)
-        {
-            MoveCollider();
-            StartCoroutine(SmoothEntry());
+            sealRigidbody.AddRelativeForce(new Vector3(0f, 0f, -1f));
+            yield return new WaitForSeconds(reduction);
         }
-      
-        GetComponent<CapsuleCollider>().center = colliderCenter;
-
-        if (IsWet == true)
-        {
-            isWet = true;
-        }
-        else
-        {
-            isWet = false;
-        }*/
     }
 
-    /*public void MoveCollider()
+    IEnumerator BoosterLimit()
     {
-        colliderCenter = new Vector3(0f, 0f, -1f);
-        GetComponent<CapsuleCollider>().center = colliderCenter;
+        if (IsServer)
+        {
+            yield return new WaitForSeconds(3f);
+            accelerationSpeed = 5f;
+        }
     }
-    IEnumerator SmoothEntry()
-    {
-        yield return new WaitForSeconds(0.75f);
-        colliderCenter = new Vector3(0f, 0.6f, -1f);
-        GetComponent<CapsuleCollider>().center = colliderCenter;
-    }*/
 
-    /*public void InWater()
-    {
-        accelerationSpeed = 5f;
-        currentSteeringMax = steeringMax;
-        sealRigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-    }*/
+    #region JumpFunctions
+
     public void Jump()
     {
         if (IsServer)
@@ -188,23 +164,9 @@ namespace Kevin
         }
     }
 
-    IEnumerator Decelerate()
-    {
-        if (IsServer)
-        {
-            sealRigidbody.AddRelativeForce(new Vector3(0f, 0f, -1f));
-            yield return new WaitForSeconds(reduction);
-        }
-    }
+    #endregion
 
-    IEnumerator BoosterLimit()
-    {
-        if (IsServer)
-        {
-            yield return new WaitForSeconds(3f);
-            accelerationSpeed = 5f;
-        }
-    }
+    #region IControllable Interface
 
     public void Steer(float input)
     {
@@ -223,21 +185,19 @@ namespace Kevin
             
         }
     }
-
     public void Accelerate(float input)
     {
         if (IsServer)
         {
-            
-            accelerationForce = input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
-            /*if (IsWet)
+            if (IsWet)
             {
-                sealRigidbody.AddForceAtPosition(input*accelerationSpeed*transform.TransformDirection(Vector3.forward), transform.position,0);
+                accelerationForce = input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
             }
-            else
+
+            if (onLand && isJumping == false)
             {
-                sealRigidbody.AddForceAtPosition(input*accelerationSpeed*2f*transform.TransformDirection(Vector3.forward), transform.position,0);
-            }*/
+                accelerationForce = 10 * input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+            }
         }
     }
 
@@ -245,10 +205,18 @@ namespace Kevin
     {
         if (IsServer)
         {
-            reverseForce = -input * accelerationSpeed * transform.TransformDirection(Vector3.back);
+            if (IsWet)
+            {
+                accelerationForce = -input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+            }
+
+            if (onLand && isJumping == false)
+            {
+                accelerationForce = -input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+            }
         }
     }
-
+    
     public void Action()
     {
         accelerationForce =  20f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
@@ -259,7 +227,7 @@ namespace Kevin
     {
         if(IsServer && isJumping == false)
         {
-            jumpSound.Play();
+            //jumpSound.Play();
             Jump();
             StartCoroutine(JumpTimer());
         }
@@ -281,8 +249,14 @@ namespace Kevin
     {
        
     }
+    #endregion
+
+    #region IReactToWater Interface
 
     public bool IsWet { get; set; }
+
+    #endregion
+    
 }
 }
 
