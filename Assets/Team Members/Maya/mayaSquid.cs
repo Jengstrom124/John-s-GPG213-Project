@@ -46,17 +46,17 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void Accelerate(float input)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Reverse(float input)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Action()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Action2()
@@ -91,6 +91,6 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void Action3()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
