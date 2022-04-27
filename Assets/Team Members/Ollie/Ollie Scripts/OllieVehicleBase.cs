@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Sirenix.OdinInspector;
+using Unity.Netcode;
 using UnityEngine;
 
-public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase
+public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater, IStateBase
 {
     public Rigidbody rb;
     public CapsuleCollider capsuleCollider;
@@ -47,45 +48,63 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsT
 
     public void Steer(float amount)
     {
-        if (amount > 0)
+        if (IsServer)
         {
-            rb.AddRelativeTorque(0, turnSpeed,0,ForceMode.Acceleration);
-        }
+            if (amount > 0)
+            {
+                rb.AddRelativeTorque(0, turnSpeed,0,ForceMode.Acceleration);
+            }
            
-        else if (amount < 0)
-        {
-            rb.AddRelativeTorque(0, -turnSpeed,0,ForceMode.Acceleration);
-        }
-        else
-        {
-            // put wiggle code here if I get it working
+            else if (amount < 0)
+            {
+                rb.AddRelativeTorque(0, -turnSpeed,0,ForceMode.Acceleration);
+            }
+            else
+            {
+                // put wiggle code here if I get it working
+            }
         }
     }
 
     public void Accelerate(float amount)
     {
-        if (amount > 0)
+        if (IsServer)
         {
-            rb.AddRelativeForce(0,0,forwardSpeed);
+            if (amount > 0)
+            {
+                rb.AddRelativeForce(0, 0, forwardSpeed);
+            }
         }
     }
 
     public void Reverse(float input)
     {
-        print("sharks can't reverse, dummy");
+        if (IsServer)
+        {
+            print("sharks can't reverse, dummy");
+        }
     }
 
     public virtual void Action() // F key
     {
-        
+        if (IsServer)
+        {
+            
+        }
     }
     public virtual void Action2() // E key
     {
-        
+        if (IsServer)
+        {
+
+        }
     }
     public virtual void Action3() // Q key
     {
-        
+        if (IsServer)
+        {
+
+        }
     }
     #endregion
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,8 +6,10 @@ using UnityEngine;
 
 public class OllieFish : OllieVehicleBase, IRTS, IEdible
 {
+    public PathTracker pathTracker;
     public IStateBase flock;
     public IStateBase pathFollow;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,16 @@ public class OllieFish : OllieVehicleBase, IRTS, IEdible
         forwardSpeed = 40;
         turnSpeed = 20;
         car = this.gameObject;
+    }
+
+    private void OnEnable()
+    {
+        pathTracker.destinationReachedEvent += Deselected;
+    }
+
+    private void OnDisable()
+    {
+        pathTracker.destinationReachedEvent -= Deselected;
     }
 
     #region IRTS Interface
@@ -34,7 +47,7 @@ public class OllieFish : OllieVehicleBase, IRTS, IEdible
 
     public void SetDestination(Vector3 position)
     {
-        pathFollow.Execute(); //???? not sure what goes here?
+        pathTracker.GetPathToDestination(position);
     }
 
     #endregion
