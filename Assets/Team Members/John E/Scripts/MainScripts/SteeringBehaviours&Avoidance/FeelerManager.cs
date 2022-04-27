@@ -31,10 +31,10 @@ public class FeelerManager : MonoBehaviour
         if(activeFeelers.Count <= 0)
         {
             if(moveForwards != null)
-                moveForwards.speed = Mathf.Lerp(moveForwards.speed, moveForwards.maxSpeed, 3f);
+                moveForwards.speed = Mathf.Lerp(moveForwards.speed, moveForwards.maxSpeed, 3f * Time.deltaTime);
 
             if(boatControl != null)
-                boatControl.boatSpeed = Mathf.Lerp(boatControl.boatSpeed, boatControl.maxBoatSpeed, 7f);
+                boatControl.boatSpeed = Mathf.Lerp(boatControl.boatSpeed, boatControl.maxBoatSpeed, 7f * Time.deltaTime);
         }
     }
 

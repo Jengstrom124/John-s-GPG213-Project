@@ -569,6 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f74d0134a982db4f87cdb534512c16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activePlayerFish: {fileID: 0}
 --- !u!1 &266229170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,7 +1843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0557d8abc44e4db468aad1be1c5bf64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: []
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
@@ -1919,7 +1919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 6
-  usePlayerForce: 0
+  alignWithPlayer: 1
   currentPlayerFish: {fileID: 0}
 --- !u!114 &1837100688
 MonoBehaviour:
@@ -1976,9 +1976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00881bd51312af4a9b3f98d7e6875d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerFish: 0
-  hasWaypoint: 0
-  neighbourDebugColour: 0
 --- !u!54 &1837100692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2458,7 +2455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0557d8abc44e4db468aad1be1c5bf64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: []
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
@@ -2535,7 +2531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 6
-  usePlayerForce: 0
+  alignWithPlayer: 1
   currentPlayerFish: {fileID: 0}
 --- !u!114 &2146100650
 MonoBehaviour:
@@ -2592,9 +2588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00881bd51312af4a9b3f98d7e6875d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerFish: 0
-  hasWaypoint: 0
-  neighbourDebugColour: 0
 --- !u!54 &2146100654
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2667,9 +2660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00881bd51312af4a9b3f98d7e6875d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayerFish: 0
-  hasWaypoint: 0
-  neighbourDebugColour: 0
 --- !u!114 &1451011280606334493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2683,7 +2673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 6
-  usePlayerForce: 0
+  alignWithPlayer: 1
   currentPlayerFish: {fileID: 0}
 --- !u!23 &1453461337541437588
 MeshRenderer:
@@ -2857,7 +2847,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0557d8abc44e4db468aad1be1c5bf64e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: []
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
