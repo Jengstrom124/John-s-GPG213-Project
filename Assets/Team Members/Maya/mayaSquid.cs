@@ -62,16 +62,15 @@ public class mayaSquid : MonoBehaviour, IControllable
     public void Action2()
     {
         if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
-
         {
-            squidAnim.SetBool("Swimming", false);
-
+            
             hackyNonsense = true;
             if (hackyNonsense)
             {
                 //charge = 0;
                 charge += 16 * Time.deltaTime;
             }
+            squidAnim.SetTrigger("Swimming");
         }
         else
         {
@@ -80,11 +79,9 @@ public class mayaSquid : MonoBehaviour, IControllable
             //squidAnim.speed = charge/4;
             hackyNonsense = false;
             squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
-            if (charge >= 0f)
-            {
-                squidAnim.speed = charge / 4;
-                squidAnim.SetBool("Swimming", true);
-            }
+            squidAnim.speed = charge / 4;
+            
+
             charge = 0;
         }
     }
