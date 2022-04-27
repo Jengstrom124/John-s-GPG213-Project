@@ -3,6 +3,24 @@ using UnityEngine;
 
 public class mayaSpawner : MonoBehaviour
 {
+	public bool spawnFacingForward;
+	public bool autoSpawnAtStart;
+
+	[Space]
+	public WaterOrNot waterOrNot = WaterOrNot.Water;
+	/// <summary>
+	/// When spawning 'on the water' do we ACTUALLY want them to be SLIGHTLY below the water?
+	/// </summary>
+	public float                      waterOffset = -0.5f;
+	public PositionCalculation positionCalculation = PositionCalculation.useLevelInfoBounds;
+
+	public int spawnCount;
+	public float fudgeScale = 1f;
+	
+	
+	[Header("Configurations:")]
+	public List<GameObject> objectsToSpawn;
+
 	//Spawn Area
 	[Header("Custom Spawn Area (Not using SpawnerPos)")]
 	public Vector3Int xyzMin = new Vector3Int(0, 0, 0);
@@ -11,19 +29,8 @@ public class mayaSpawner : MonoBehaviour
 
 	[Header("Adjust Only When Using Spawner Pos (Adds to current position)")]
 	public int xMax = 50;
-
 	public int zMax = 50;
 
-	[Header("Configurations:")]
-	public List<GameObject> objectsToSpawn;
-
-	public int spawnCount;
-	public int spawnHeight = 0;
-
-	[Header("Options:")]
-	public bool spawnFacingForward;
-
-	public bool autoSpawnAtStart;
 
 
 	public enum WaterOrNot
@@ -36,8 +43,6 @@ public class mayaSpawner : MonoBehaviour
 		FixedHeight
 	}
 
-	public WaterOrNot waterOrNot;
-
 	public enum PositionCalculation
 	{
 		useSpawnerPositionPlusMinMax,
@@ -45,12 +50,6 @@ public class mayaSpawner : MonoBehaviour
 		useLevelInfoBounds
 	}
 
-	public PositionCalculation positionCalculation = PositionCalculation.useLevelInfoBounds;
-	
-	/// <summary>
-	/// When spawning 'on the water' do we ACTUALLY want them to be SLIGHTLY below the water?
-	/// </summary>
-	public float                      waterOffset = -0.5f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -64,7 +63,8 @@ public class mayaSpawner : MonoBehaviour
 		for (int i = 0; i < spawnCount; i++)
 		{
 			GameObject newObject = Instantiate(objectsToSpawn[Random.Range(0,objectsToSpawn.Count-1)]) as GameObject;
-
+			newObject.transform.localScale = new Vector3(fudgeScale, fudgeScale, fudgeScale);
+			
 
 			Vector3 finalPosition = CalculateRandomPosition(waterOrNot);
 			
@@ -78,7 +78,7 @@ public class mayaSpawner : MonoBehaviour
 			}
 			else
 			{
-				newObject.transform.rotation = new Quaternion(newObject.transform.rotation.x, Random.Range(1, 359), newObject.transform.rotation.z, 0);
+				newObject.transform.rotation = Quaternion.Euler(newObject.transform.rotation.x, Random.Range(1, 359), newObject.transform.rotation.z);
 			}
 		}
 	}
@@ -132,6 +132,33 @@ public class mayaSpawner : MonoBehaviour
 					}
 				}
 			}
+			if (_waterOrNot == WaterOrNot.Land)
+			{
+				RaycastHit HitInfo;
+				if(Physics.Raycast(new Ray(finalPosition, Vector3.down), out HitInfo, 999999f, 255, QueryTriggerInteraction.Collide));
+				{
+					if (HitInfo.transform.GetComponent<Terrain>())
+					{
+						finalPosition.y = HitInfo.point.y;
+						foundGoodSpot = true;
+					}
+				}
+			}
+			if (_waterOrNot == WaterOrNot.Seabed)
+			{
+				RaycastHit HitInfo;
+				RaycastHit[] raycastHits = Physics.RaycastAll(new Ray(finalPosition, Vector3.down), 999999f, 255, QueryTriggerInteraction.Collide);
+				
+				if(raycastHits.Length>1);
+				{
+					if (raycastHits[0].transform.GetComponent<Water>())
+					{
+						finalPosition.y = raycastHits[1].point.y;
+						foundGoodSpot = true;
+					}
+				}
+			}
+
 		}
 		
 		return finalPosition;
