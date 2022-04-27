@@ -30,6 +30,8 @@ public class GameManager : ManagerBase<GameManager>
         KevinSeal
     }
 
+    public GameObject[] characterPrefabs;
+
     [ClientRpc]
     public void SetupCameraClientRpc(ulong clientID, NetworkObjectReference playerObjectRef)
     {
@@ -256,6 +258,8 @@ public class GameManager : ManagerBase<GameManager>
 
         Debug.Log("ID " + clientID + "; " + "Char = " + playerController.selectedCharacter);
 
+        int characterIndex = NetworkPlayerList.Instance.GetPlayerDataByClientId(clientID).characterIndex;
+        playerController.selectedCharacter = characterPrefabs[characterIndex];
         GameObject spawnedCharacter = Instantiate(playerController.selectedCharacter);
         
         Transform t = spawnedCharacter.transform;

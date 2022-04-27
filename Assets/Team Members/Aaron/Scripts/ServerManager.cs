@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ServerManager : NetworkManager
 {
-    private CharacterSelect characterSelect;
+    private CharacterSelectOld _characterSelectOld;
     public Test test;
     public Vector3 spawn;
     public LobbyPlayerData? currentPlayer;
@@ -44,7 +44,7 @@ public class ServerManager : NetworkManager
         NetworkManager.Singleton.RunInBackground = true;
         
         //How else to grab this besides FindObject?
-        characterSelect = FindObjectOfType<CharacterSelect>();
+        _characterSelectOld = FindObjectOfType<CharacterSelectOld>();
         test = FindObjectOfType<Test>();
 
         //OnClientConnectedCallback += OnConnectedCallback;

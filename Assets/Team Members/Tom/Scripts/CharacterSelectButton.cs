@@ -8,13 +8,12 @@ using UnityEngine.UI;
 
 public class CharacterSelectButton : MonoBehaviour
 {
-    public GameManager.CharacterTypes characterType;
+    public int characterIndex;
     public UILobby uiLobby;
     public EventSystem eventSystem;
     
     public void SetCharacter()
     {
-        //NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerController>().selectedCharacter = character;
         LobbyPlayerData? localPlayer = uiLobby.localPlayerData;
 
         // Potentially a hack
@@ -24,9 +23,10 @@ public class CharacterSelectButton : MonoBehaviour
             uiLobby.localPlayerData = localPlayer;
         }
 
+        // Need to store as temporary variable since localPlayer is a nullable reference
         LobbyPlayerData temp = localPlayer.Value;
-        temp.characterIndex = (int)characterType;
-        localPlayer = temp;
+        temp.characterIndex = characterIndex;
+        uiLobby.localPlayerData = temp;
         
         eventSystem.SetSelectedGameObject(gameObject);
     }

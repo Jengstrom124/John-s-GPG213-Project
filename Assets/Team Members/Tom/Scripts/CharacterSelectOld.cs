@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterSelect : NetworkBehaviour
+public class CharacterSelectOld : NetworkBehaviour
 {
     [Serializable]
     public class CharacterButton
