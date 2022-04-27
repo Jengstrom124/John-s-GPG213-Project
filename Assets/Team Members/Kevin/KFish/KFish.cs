@@ -8,7 +8,7 @@ using UnityEngine;
 using Flock = Kevin.Flock;
 using Vector3 = UnityEngine.Vector3;
 
-public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase
+public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase, IRTS
 {
     //State Base
     public IStateBase flock;
@@ -85,8 +85,10 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     }
     
     
+    //IReactToWater Interface
     public bool IsWet { get; set; }
     
+    //IControllable Interface
     public void Steer(float input)
     {
         float currentYEuler = transform.eulerAngles.y;
@@ -107,7 +109,7 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     {
         fRb.AddForceAtPosition(input*acceleration*transform.TransformDirection(Vector3.back), transform.position,0);
     }
-
+    
     public void Action()
     {
         throw new System.NotImplementedException();
@@ -122,7 +124,8 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     {
         throw new System.NotImplementedException();
     }
-
+    
+    //StateBase Interface
     public void Enter()
     {
         throw new System.NotImplementedException();
@@ -138,5 +141,19 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
         throw new System.NotImplementedException();
     }
 
-   
+//RTS Interface
+    public void Selected()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Deselected()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SetDestination(Vector3 position)
+    {
+        throw new System.NotImplementedException();
+    }
 }
