@@ -29,7 +29,7 @@ public class FeelerSpawnerManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateFeelerFOV();
+        // UpdateFeelerFOV();
     }
 
     void SpawnFeelers()

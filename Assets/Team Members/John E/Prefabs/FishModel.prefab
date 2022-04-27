@@ -106,7 +106,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2219981257583123345}
-  - component: {fileID: 2219981257583123358}
   - component: {fileID: 2219981257583123357}
   - component: {fileID: -5648540852425823137}
   - component: {fileID: 2219981257583123346}
@@ -120,6 +119,7 @@ GameObject:
   - component: {fileID: -7430627336242286335}
   - component: {fileID: -1422218037190890246}
   - component: {fileID: 5162793547566278969}
+  - component: {fileID: 5782148432238425947}
   m_Layer: 7
   m_Name: FishModel
   m_TagString: Untagged
@@ -142,19 +142,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2219981257583123358
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219981257583123356}
-  m_Material: {fileID: 13400000, guid: cba076aa5654a2b4a8917697628e0f01, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2219981257583123357
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -315,6 +302,7 @@ MonoBehaviour:
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
+  activeForwardFeelers: []
   emergencyFeelerInUse: 0
 --- !u!114 &-1422218037190890246
 MonoBehaviour:
@@ -354,3 +342,16 @@ MonoBehaviour:
   usePathSmoothing: 1
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
+--- !u!135 &5782148432238425947
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219981257583123356}
+  m_Material: {fileID: 13400000, guid: 8cf9d30181692d44db9e92b6bfd5cb28, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
