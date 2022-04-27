@@ -1086,7 +1086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9174531510330277310, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
       propertyPath: NetworkConfig.NetworkPrefabs.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 9174531510330277310, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
       propertyPath: NetworkConfig.EnsureNetworkVariableLengthSafety
@@ -1100,6 +1100,10 @@ PrefabInstance:
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[12].Prefab
       value: 
       objectReference: {fileID: 2383455405154168218, guid: c4b5e757665c3e743b9741173b14d960, type: 3}
+    - target: {fileID: 9174531510330277310, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[13].Prefab
+      value: 
+      objectReference: {fileID: 6628303341848184913, guid: c5cf855297fda9b45a34bc5db8dd78e6, type: 3}
     - target: {fileID: 9174531510330277311, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
       propertyPath: ConnectAddress
       value: 127.0.0.1
