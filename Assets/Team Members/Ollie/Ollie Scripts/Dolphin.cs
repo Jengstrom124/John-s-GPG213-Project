@@ -23,25 +23,30 @@ namespace Ollie
             originalAngularDrag = rb.angularDrag;
         }
         
-        private void Update()
+        private void FixedUpdate()
         {
             if (rb.velocity.y > 0)
             {
                 //up
-                model.localRotation = Quaternion.Euler(0,90,-45);
+                model.localRotation = Quaternion.Euler(-45,0,0);
             }
             else if (rb.velocity.y < 0)
             {
-                model.localRotation = Quaternion.Euler(0,90,45);
+                model.localRotation = Quaternion.Euler(45,0,0);
             }
             else
             {
-                model.localRotation = Quaternion.Euler(0,90,0);
+                model.localRotation = Quaternion.Euler(0,0,0);
             }
             
             if (!jumping)
             {
                 WaterCheck();
+            }
+
+            if (rb.position.y < 10f && !jumping)
+            {
+                rb.constraints = originalConstraints;
             }
         }
 
@@ -77,22 +82,13 @@ namespace Ollie
 
         void JumpOut()
         {
-            if (!jumping)
+            if (!jumping && IsWet)
             {
                 jumping = true;
                 StartCoroutine(JumpCooldownCoroutine());
-                //do jump code
-                //turn off y constraint
-                //rotate on y axis, maybe 45 degrees up?
-                //apply force and lock controls?
-                
-                //rb.constraints = RigidbodyConstraints.None;
-                //rb.constraints = RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                model.localRotation = Quaternion.Euler(0,90,-45);
-                //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                 rb.drag = 5;
-                rb.angularDrag = 1;
+                rb.angularDrag = 3;
                 rb.AddForce(0,jumpHeight,jumpDistance, ForceMode.Impulse);
             }
             else
@@ -100,34 +96,14 @@ namespace Ollie
                 print("dolphin's can't double jump, dummy");
             }
         }
-        
-        //turn off drags when you're flying above water
-        //use IReactsToWater to check if in water
-        //fix capsule collider
 
         IEnumerator JumpCooldownCoroutine()
         {
             print("dolphin go yeet");
             yield return new WaitForSeconds(0.75f);
-            model.localRotation = Quaternion.Euler(0,90,45);
-            // if (rb.transform.position.y > 10)
-            // {
-            //     rb.mass = 5;
-            //     yield return null;
-            // }
-            // else
-            // {
-            //     rb.mass = 1;
-            // }
-            yield return new WaitForSeconds(0.33f);
-            model.localRotation = Quaternion.Euler(0,90,0);
-            yield return new WaitForSeconds(1.5f);
-            //down
-            //yield return new WaitForSeconds(1f);
-            //normal
+            rb.AddForce(0,-jumpHeight,jumpDistance, ForceMode.Impulse);
             jumping = false;
-            //rb.constraints = RigidbodyConstraints.None;
-            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationZ;
+            yield return new WaitForSeconds(1.5f);
             rb.drag = originalDrag;
             rb.angularDrag = originalAngularDrag;
         }
