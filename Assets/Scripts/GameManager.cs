@@ -6,6 +6,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Gerallt;
 using TMPro;
+using Unity.Netcode.Components;
 using UnityEngine.SceneManagement;
 
 public class GameManager : ManagerBase<GameManager>
@@ -208,6 +209,10 @@ public class GameManager : ManagerBase<GameManager>
                     {
                         networkObject.Despawn();
                     }
+                    else if (networkObject == null)
+                    {
+                        DestroyObjClientRpc(playerController.controlled);
+                    }
 
                     //playerController.controlled = null;
                 }
@@ -274,8 +279,17 @@ public class GameManager : ManagerBase<GameManager>
         
         playerController.controlled = spawnedCharacter;
 
-        spawnedCharacter.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
-        //spawnedCharacter.GetComponent<NetworkObject>().ChangeOwnership(clientID);
+        NetworkObject spawnedCharacterNetworkObject = spawnedCharacter.GetComponent<NetworkObject>();
+
+        if (spawnedCharacterNetworkObject == null)
+        {
+            spawnedCharacterNetworkObject = spawnedCharacter.AddComponent<NetworkObject>();
+            spawnedCharacter.AddComponent<NetworkRigidbody>();
+            spawnedCharacter.AddComponent<NetworkTransform>();
+        }
+        
+        spawnedCharacterNetworkObject.SpawnWithOwnership(clientID);
+        //spawnedCharacterNetworkObject.ChangeOwnership(clientID);
 
         NetworkObjectReference characterReference = spawnedCharacter;
         SetupCameraClientRpc(clientID, characterReference);
