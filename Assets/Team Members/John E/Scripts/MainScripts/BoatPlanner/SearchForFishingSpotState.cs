@@ -62,12 +62,12 @@ public class SearchForFishingSpotState : AntAIState
 		}
 		else
         {
-			if(fishAssigned)
-            {
+			if (fishAssigned)
+			{
 				Debug.Log("Find new fish!");
 				pathTracker.ResetPathTracking();
 				Finish();
-            }
+			}
 		}
 	}
 
@@ -107,6 +107,13 @@ public class SearchForFishingSpotState : AntAIState
 				AStar.Instance.FindPath(t, fishPos);
 			}
 		}
+	}
+
+	IEnumerator ResetState()
+	{
+		yield return new WaitForSeconds(5f);
+
+		Finish();
 	}
 
 	//OLD - ignore this
