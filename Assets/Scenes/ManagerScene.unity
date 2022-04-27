@@ -253,12 +253,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5902745464175953219, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_Text
+      value: 127.0.0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6099373276603123298, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6316911600392452648, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551462119939232876, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7358174684847233248, guid: 47bc644046d1f2d45829af0e4c028fb9, type: 3}
@@ -899,7 +907,7 @@ PrefabInstance:
       objectReference: {fileID: 102900000, guid: 2ca4c1280d8b5204f9260ae118f36037, type: 3}
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: characterPrefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: characterPrefabs.Array.data[0]
@@ -913,6 +921,10 @@ PrefabInstance:
       propertyPath: characterPrefabs.Array.data[2]
       value: 
       objectReference: {fileID: 2242488112027664221, guid: f1526f66bb4ac134e841efbd5f3180dd, type: 3}
+    - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
+      propertyPath: characterPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4554516382443037816, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
     - target: {fileID: 8060951119784412947, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: m_Name
       value: Game Manager
