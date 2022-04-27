@@ -674,7 +674,7 @@ PrefabInstance:
       objectReference: {fileID: 203358344}
     - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
       propertyPath: coralPrefabs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3911949051204171371, guid: b02ed9aacb3fead438d898c23b554de9, type: 3}
       propertyPath: coralPrefabs.Array.data[0]

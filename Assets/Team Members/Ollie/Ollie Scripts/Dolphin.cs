@@ -7,6 +7,8 @@ namespace Ollie
 {
     public class Dolphin : OllieVehicleBase
     {
+        public AudioSource splash;
+        public AudioSource boost;
         private void Start()
         {
             rb = GetComponentInChildren<Rigidbody>();
@@ -25,44 +27,66 @@ namespace Ollie
         
         private void FixedUpdate()
         {
-            if (rb.velocity.y > 0)
+            if (IsServer)
             {
-                //up
-                model.localRotation = Quaternion.Euler(-45,0,0);
-            }
-            else if (rb.velocity.y < 0)
-            {
-                model.localRotation = Quaternion.Euler(45,0,0);
-            }
-            else
-            {
-                model.localRotation = Quaternion.Euler(0,0,0);
-            }
-            
-            if (!jumping)
-            {
-                WaterCheck();
-            }
+                if (rb.velocity.y > 0)
+                {
+                    //up
+                    model.localRotation = Quaternion.Euler(-45, 0, 0);
+                }
+                else if (rb.velocity.y < 0)
+                {
+                    model.localRotation = Quaternion.Euler(45, 0, 0);
+                }
+                else
+                {
+                    model.localRotation = Quaternion.Euler(0, 0, 0);
+                }
 
-            if (rb.position.y < 10f && !jumping)
-            {
-                rb.constraints = originalConstraints;
+                if (!jumping)
+                {
+                    WaterCheck();
+                }
+
+                if (rb.position.y < 10f && !jumping)
+                {
+                    rb.constraints = originalConstraints;
+                }
             }
         }
 
         public override void Action()
         {
-            JumpOut();
+            if (IsServer)
+            {
+                JumpOut();
+            }
+
+            if (IsClient)
+            {
+                splash.Play();
+            }
         }
 
         public override void Action2()
         {
-            SpeedBoost();
+            if (IsServer)
+            {
+                SpeedBoost();
+            }
+
+            if (IsClient)
+            {
+                boost.Play();
+            }
         }
 
         public override void Action3()
         {
-            
+            if (IsServer)
+            {
+                
+            }
         }
         
         public override void WaterCheck()
@@ -82,18 +106,21 @@ namespace Ollie
 
         void JumpOut()
         {
-            if (!jumping && IsWet)
+            if (IsServer)
             {
-                jumping = true;
-                StartCoroutine(JumpCooldownCoroutine());
-                rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                rb.drag = 5;
-                rb.angularDrag = 3;
-                rb.AddForce(0,jumpHeight,jumpDistance, ForceMode.Impulse);
-            }
-            else
-            {
-                print("dolphin's can't double jump, dummy");
+                if (!jumping && IsWet)
+                {
+                    jumping = true;
+                    StartCoroutine(JumpCooldownCoroutine());
+                    rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
+                    rb.drag = 5;
+                    rb.angularDrag = 3;
+                    rb.AddForce(0, jumpHeight, jumpDistance, ForceMode.Impulse);
+                }
+                else
+                {
+                    print("dolphin's can't double jump, dummy");
+                }
             }
         }
 
@@ -110,9 +137,12 @@ namespace Ollie
         
         void SpeedBoost()
         {
-            if (!boosting)
+            if (IsServer)
             {
-                StartCoroutine(SpeedBoostCoroutine());
+                if (!boosting)
+                {
+                    StartCoroutine(SpeedBoostCoroutine());
+                }
             }
         }
 

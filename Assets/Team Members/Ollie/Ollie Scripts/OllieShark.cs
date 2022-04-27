@@ -19,24 +19,36 @@ namespace Ollie
 
         public override void Action()
         {
+            if (IsServer)
+            {
 
+            }
         }
 
         public override void Action2()
         {
-            SpeedBoost();
+            if (IsServer)
+            {
+                SpeedBoost();
+            }
         }
 
         public override void Action3()
         {
+            if (IsServer)
+            {
 
+            }
         }
         
         void SpeedBoost()
         {
-            if (!boosting)
+            if (IsServer)
             {
-                StartCoroutine(SpeedBoostCoroutine());
+                if (!boosting)
+                {
+                    StartCoroutine(SpeedBoostCoroutine());
+                }
             }
         }
 
