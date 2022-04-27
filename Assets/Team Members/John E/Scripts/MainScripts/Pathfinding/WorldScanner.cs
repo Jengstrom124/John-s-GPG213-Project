@@ -76,8 +76,15 @@ public class WorldScanner : MonoBehaviour
                 gridNodeReferences[x,y] = new Node();
                 gridNodeReferences[x, y].gridPos = new Vector2(x * nodeSize, y* nodeSize);
 
+                //Hack for grid height to use in CheckBox below
+                float height = 0;
+                if (Water.Instance != null)
+                {
+                    height = Water.Instance.transform.position.y;
+                }
+
                 //Check for obstacle
-                if (Physics.CheckBox(new Vector3(x* nodeSize, Water.Instance.transform.position.y, y* nodeSize), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                if (Physics.CheckBox(new Vector3(x* nodeSize, height, y* nodeSize), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
                 {
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;

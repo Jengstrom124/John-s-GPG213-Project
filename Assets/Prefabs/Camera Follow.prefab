@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4612785239481996668}
   - component: {fileID: 4612785239481996670}
   - component: {fileID: -1253798911361082623}
+  - component: {fileID: 6987039515312097820}
   m_Layer: 0
   m_Name: Camera Follow
   m_TagString: MainCamera
@@ -107,3 +108,11 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!81 &6987039515312097820
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612785239481996610}
+  m_Enabled: 1

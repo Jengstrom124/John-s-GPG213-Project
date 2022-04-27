@@ -1543,6 +1543,10 @@ PrefabInstance:
       value: Pathfinding
       objectReference: {fileID: 0}
     - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
+      propertyPath: nodeSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622780992527447663, guid: 9b7bf19d5210ba648bf0ad25b34da34a, type: 3}
       propertyPath: gridSize.x
       value: 100
       objectReference: {fileID: 0}
@@ -1846,6 +1850,7 @@ MonoBehaviour:
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
+  activeForwardFeelers: []
   emergencyFeelerInUse: 0
 --- !u!136 &1837100683
 CapsuleCollider:
@@ -2458,6 +2463,7 @@ MonoBehaviour:
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
+  activeForwardFeelers: []
   emergencyFeelerInUse: 0
 --- !u!136 &2146100645
 CapsuleCollider:
@@ -2850,6 +2856,7 @@ MonoBehaviour:
   feelers: []
   activeFeelers: []
   activeEmergencyFeelers: []
+  activeForwardFeelers: []
   emergencyFeelerInUse: 0
 --- !u!33 &3349647387305703993
 MeshFilter:

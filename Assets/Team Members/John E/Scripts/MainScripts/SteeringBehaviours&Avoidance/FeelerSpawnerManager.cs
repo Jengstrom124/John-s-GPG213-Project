@@ -69,7 +69,7 @@ public class FeelerSpawnerManager : MonoBehaviour
                 GameObject newEmergencyFeeler = Instantiate(emergencyFeeler, this.transform);
                 AvoidObstacle emergencyAvoidObstacle = newEmergencyFeeler.GetComponent<AvoidObstacle>();
 
-                if (i <= 1)
+                if (i == 0)
                 {
                     emergencyAvoidObstacle.myTurnDirection = AvoidObstacle.RayDirection.Straight;
                     newEmergencyFeeler.transform.localRotation = Quaternion.Euler(transform.forward);

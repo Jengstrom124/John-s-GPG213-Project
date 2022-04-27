@@ -11,6 +11,7 @@ public class FeelerManager : MonoBehaviour
     public AvoidObstacle[] feelers;
     public List<AvoidObstacle> activeFeelers = new List<AvoidObstacle>();
     public List<AvoidObstacle> activeEmergencyFeelers = new List<AvoidObstacle>();
+    public List<AvoidObstacle> activeForwardFeelers = new List<AvoidObstacle>();
     public bool emergencyFeelerInUse = false;
 
     // Start is called before the first frame update
@@ -36,6 +37,11 @@ public class FeelerManager : MonoBehaviour
             if(boatControl != null)
                 boatControl.boatSpeed = Mathf.Lerp(boatControl.boatSpeed, boatControl.maxBoatSpeed, 7f * Time.deltaTime);
         }
+
+        if(boatControl != null && activeForwardFeelers.Count <= 0)
+        {
+            boatControl.boatSpeed = Mathf.Lerp(boatControl.boatSpeed, boatControl.maxBoatSpeed, 7f * Time.deltaTime);
+        }
     }
 
     void CheckForActiveFeelers()
@@ -45,10 +51,20 @@ public class FeelerManager : MonoBehaviour
             if(feeler.feelerActive && !activeFeelers.Contains(feeler))
             {
                 activeFeelers.Add(feeler);
+
+                if(feeler.myTurnDirection == AvoidObstacle.RayDirection.Straight)
+                {
+                    activeForwardFeelers.Add(feeler);
+                }
             }
             else if(!feeler.feelerActive && activeFeelers.Contains(feeler))
             {
                 activeFeelers.Remove(feeler);
+
+                if (feeler.myTurnDirection == AvoidObstacle.RayDirection.Straight)
+                {
+                    activeForwardFeelers.Remove(feeler);
+                }
             }
         }
     }
