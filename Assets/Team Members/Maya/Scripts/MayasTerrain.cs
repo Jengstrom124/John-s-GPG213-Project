@@ -42,9 +42,9 @@ public class MayasTerrain : MonoBehaviour
         width = 256;
         height = 256;
         scale = 25;
-        border = 0.25f;
-        xFreq = 0.3f;
-        yFreq = 0.5f;
+        border = 0.2f;
+        xFreq = 0.25f;
+        yFreq = 0.3f;
         xOffset = Random.Range(0f, 100000f);
         yOffset = Random.Range(0f, 100000f);
         
@@ -59,7 +59,7 @@ public class MayasTerrain : MonoBehaviour
         
         if (!(xVal < border+xOffset || yVal < border+yOffset || xVal > ((scale+xOffset) - border) || yVal > ((scale+yOffset) - border)))
         {
-            if (finalVal < 0.4f)
+            if (finalVal < 0.575f)
                 
             {
                 //flattens the bottom of the water to 0

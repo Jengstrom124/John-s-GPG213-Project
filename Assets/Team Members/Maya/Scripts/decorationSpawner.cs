@@ -12,7 +12,7 @@ public class decorationSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-bigBoy = new Vector3(2, 2, 2);
+    bigBoy = new Vector3(2, 2, 2);
 
         for (int x = 0; x < 256; x++)
         {
@@ -20,7 +20,7 @@ bigBoy = new Vector3(2, 2, 2);
             {
                 Vector3 pos = new Vector3(x,0,z);
                 pos.y = myTerrain.SampleHeight(pos);
-                if (pos.y > 12f && pos.y < 18)
+                if (pos.y > 16f && pos.y < 18)
                 {
                     if (UnityEngine.Random.Range(0, 100) > 95)
                     {
@@ -31,7 +31,7 @@ bigBoy = new Vector3(2, 2, 2);
                         go.transform.parent = this.transform;
                     }
                 }
-                else if (pos.y < 9f)
+                else if (pos.y < 15f)
                 {
                     if (UnityEngine.Random.Range(0, 100) > 97.5)
                     {
