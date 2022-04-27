@@ -70,7 +70,7 @@ public class mayaSquid : MonoBehaviour, IControllable
                 //charge = 0;
                 charge += 16 * Time.deltaTime;
             }
-            squidAnim.SetTrigger("Swimming");
+            
         }
         else
         {
@@ -79,8 +79,12 @@ public class mayaSquid : MonoBehaviour, IControllable
             //squidAnim.speed = charge/4;
             hackyNonsense = false;
             squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
-            squidAnim.speed = charge / 4;
-            
+            if (charge >= 1)
+            {
+                squidAnim.speed = charge / 10;
+                squidAnim.SetTrigger("Swimming");
+            }
+
 
             charge = 0;
         }

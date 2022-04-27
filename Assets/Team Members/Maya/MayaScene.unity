@@ -2677,6 +2677,18 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 283542503
       objectReference: {fileID: 0}
+    - target: {fileID: 2065292948, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
+      propertyPath: speed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065292948, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
+      propertyPath: rotateSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065292951, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 4554516382443037816, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
       propertyPath: m_Name
       value: Squid (Maya)
@@ -2725,9 +2737,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5832129482877874880, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: e314a38fc1c42044090f468eb1243bb7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
