@@ -15,6 +15,15 @@ namespace AnGelloStuff
 
         public float offsetX = 100;
         public float offsetY = 100;
+
+        public float testvalue;
+        public float testheight;
+
+        private void Awake()
+        {
+            //Terrain terrain = GetComponent<Terrain>();
+            //terrain.terrainData = GenerateTerrain(terrain.terrainData);
+        }
         void Start()
         {
 
@@ -44,7 +53,27 @@ namespace AnGelloStuff
             {
                 for (int y = 0; y < height; y++)
                 {
-                    heights[x, y] = CalculateHeight(x, y);
+                    if(x >= 0 & x <= 5)
+                    {
+                        heights[x, y] = 10f;
+                    }
+                    else if (x >= width - 5 & x <= width)
+                    {
+                        heights[x, y] = 10f;
+                    }
+                    else if(y >= 0 & y <= 5)
+                    {
+                        heights[x, y] = 10f;
+                    }
+                    else if (y >= height - 5 & y <= height)
+                    {
+                        heights[x, y] = 10f;
+                    }
+                    else
+                    {
+                        heights[x, y] = CalculateHeight(x, y);
+                    }
+                    
                 }
             }
 
@@ -56,7 +85,15 @@ namespace AnGelloStuff
             float XCoord = (float)x / width * scale + offsetX;
             float YCoord = (float)y / height * scale + offsetY;
 
-            return Mathf.PerlinNoise(XCoord, YCoord);
+            float PerlinData = Mathf.PerlinNoise(XCoord, YCoord);
+            if (PerlinData >= testheight)
+            {
+                return PerlinData * testvalue;
+            }
+            else
+            {
+                return 0.5f;
+            } 
         }
     }
 }

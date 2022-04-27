@@ -13,6 +13,7 @@ public class WorldScanner : MonoBehaviour
     public Vector2 gridSize;
     public Node[,] gridNodeReferences;
     public LayerMask obstacle;
+    float height = 0;
 
     [Header("Option")]
     public bool autoGenerateGridOnAwake = false;
@@ -34,7 +35,8 @@ public class WorldScanner : MonoBehaviour
 
     LevelInfo level;
 
-    public float nodeSize = 0.1f;
+    public float nodeSize = 2f;
+    public bool debugGizmos = false;
 
     private void Awake()
     {
@@ -45,8 +47,8 @@ public class WorldScanner : MonoBehaviour
 
         if(level != null)
         {
-            gridSize.x = Mathf.RoundToInt(level.bounds.extents.x * nodeSize);
-            gridSize.y = Mathf.RoundToInt(level.bounds.extents.z * nodeSize);
+            gridSize.x = Mathf.RoundToInt(level.bounds.extents.x / nodeSize) + 1;
+            gridSize.y = Mathf.RoundToInt(level.bounds.extents.z / nodeSize) + 1;
         }
     }
 
@@ -76,8 +78,13 @@ public class WorldScanner : MonoBehaviour
                 gridNodeReferences[x,y] = new Node();
                 gridNodeReferences[x, y].gridPos = new Vector2(x * nodeSize, y* nodeSize);
 
+                //Hack for grid height to use in CheckBox below
+                if (Water.Instance != null)
+                {
+                    height = Water.Instance.transform.position.y;
+                }
                 //Check for obstacle
-                if (Physics.CheckBox(new Vector3(x* nodeSize, Water.Instance.transform.position.y, y* nodeSize), new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, obstacle))
+                if (Physics.CheckBox(new Vector3(x* nodeSize, height + 50f, y* nodeSize), new Vector3(0.5f, 50f, 0.5f), Quaternion.identity, obstacle))
                 {
                     // Something is there
                     gridNodeReferences[x, y].isBlocked = true;
@@ -191,10 +198,10 @@ public class WorldScanner : MonoBehaviour
         int x;
         int y;
 
-        if((worldPos.x <= gridSize.x && worldPos.x >= 0) && (worldPos.z <= gridSize.y && worldPos.z >= 0))
+        if((worldPos.x <= gridSize.x * nodeSize && worldPos.x >= 0) && (worldPos.z <= gridSize.y * nodeSize && worldPos.z >= 0))
         {
-            x = (int)worldPos.x;
-            y = (int)worldPos.z;
+            x = (int) (worldPos.x / nodeSize);
+            y = (int) (worldPos.z / nodeSize);
             return gridNodeReferences[x, y];
 
         }
@@ -268,6 +275,11 @@ public class WorldScanner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+	    if (!debugGizmos)
+	    {
+		    return;
+	    }
+	    
         //Stop constant null errors when not in play mode using null check
         if(gridNodeReferences != null)
         { 
@@ -324,7 +336,7 @@ public class WorldScanner : MonoBehaviour
                     }
 
                     //Draw after to prevent weird offset
-                    Gizmos.DrawCube(new Vector3(x, 0, y), Vector3.one);
+                    Gizmos.DrawCube(new Vector3(x * nodeSize, height, y * nodeSize), Vector3.one * nodeSize);
 
                 }
             }
