@@ -41,7 +41,7 @@ public class mayaSquid : MonoBehaviour, IControllable
     public void Steer(float input)
     {
         //squidForce.AddForceAtPosition(input*rotateSpeed*transform.TransformDirection(Vector3.right), transform.position, 0);
-        squidForce.AddRelativeTorque(new Vector3(0, 0, input*rotateSpeed));
+        squidForce.AddRelativeTorque(new Vector3(0, input*rotateSpeed, 0));
     }
 
     public void Accelerate(float input)
@@ -79,7 +79,7 @@ public class mayaSquid : MonoBehaviour, IControllable
             
             //squidAnim.speed = charge/4;
             hackyNonsense = false;
-            squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,1,0)), squidForce.transform.position);
+            squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
             if (charge >= 0f)
             {
                 squidAnim.speed = charge / 4;
