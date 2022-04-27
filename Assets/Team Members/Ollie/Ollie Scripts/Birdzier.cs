@@ -45,18 +45,17 @@ public class Birdzier : MonoBehaviour
     private void Update()
     {
         
-        speed = timer;
-        // print(pos1);
-        // print(positions.Capacity);
-        // print(spawnPosList.Capacity);
-        BezierCurve();
-        UpdateSpawnPos();
-        SpawnBird();
-        TimeFlip();
+        
     }
 
     private void FixedUpdate()
     {
+        speed = timer;
+        BezierCurve();
+        UpdateSpawnPos();
+        SpawnBird();
+        TimeFlip();
+        
         if (bird != null)
         {
             Vector3 tempPoint = bird.transform.position;

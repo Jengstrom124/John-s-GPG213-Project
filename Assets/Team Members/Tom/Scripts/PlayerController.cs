@@ -133,8 +133,8 @@ public class PlayerController : NetworkBehaviour
         //Action replicatedAction = actionsArray[(int)actionType];
         
         //replicatedAction();  // Client side prediction
-
-        if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
+        if (Unity.Netcode.NetworkManager.Singleton != null &&
+            (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost))
         {
             // Update the server model. The server will later update the clients.
             ReplicatedActionServerRpc(actionType);
@@ -154,7 +154,8 @@ public class PlayerController : NetworkBehaviour
         
         //replicatedAction(input);  // Client side prediction
 
-        if (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost)
+        if (Unity.Netcode.NetworkManager.Singleton != null &&
+            (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost))
         {
             // Update the server model. The server will later update the clients.
             ReplicatedActionServerRpc(actionType, input);
@@ -215,7 +216,7 @@ public class PlayerController : NetworkBehaviour
     void Update()
     {
 	    // Client side physical controls only for owned creature
-	    if (!IsOwner)
+	    if ((IsServer || IsClient) && !IsOwner)
 		    return;
 	    
         // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
@@ -245,11 +246,15 @@ public class PlayerController : NetworkBehaviour
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     ReplicatedAction(ReplicatedActionType.Accelerate, 1f);
                 }
-
-                if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
+                else if (InputSystem.GetDevice<Keyboard>().sKey.isPressed)
                 {
                     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
                     ReplicatedAction(ReplicatedActionType.Reverse, 1f);
+                }
+                else
+                {
+	                ReplicatedAction(ReplicatedActionType.Accelerate, 0f);
+	                ReplicatedAction(ReplicatedActionType.Reverse, 0f);
                 }
 
                 if (InputSystem.GetDevice<Keyboard>().fKey.isPressed)

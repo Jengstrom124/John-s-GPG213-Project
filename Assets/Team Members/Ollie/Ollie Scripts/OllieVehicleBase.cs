@@ -5,7 +5,7 @@ using System.Text;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsToWater
+public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase
 {
     public Rigidbody rb;
     public CapsuleCollider capsuleCollider;
@@ -163,5 +163,10 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsT
     }*/
     #endregion
 
+    #region IReactsToWater Interface
+
     public bool IsWet { get; set; }
+
+    #endregion
+
 }

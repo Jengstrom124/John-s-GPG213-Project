@@ -33,7 +33,7 @@ public class Neighbours : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        neighbourLeaveEvent.Invoke(other.gameObject);
+        neighbourLeaveEvent?.Invoke(other.gameObject);
 
         if (neighboursList.Contains(other.gameObject))
         {
