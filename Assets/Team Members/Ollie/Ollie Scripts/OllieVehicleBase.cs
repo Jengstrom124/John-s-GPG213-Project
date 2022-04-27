@@ -37,7 +37,7 @@ public class OllieVehicleBase : SerializedMonoBehaviour, IControllable, IReactsT
         localVelocity = transform.InverseTransformDirection(rb.velocity);
         wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
     }
-    
+
     public virtual void WaterCheck()
     {
         
