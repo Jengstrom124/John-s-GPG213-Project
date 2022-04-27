@@ -7,7 +7,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 {
 	public AudioSource audio;
 	public AudioClip boost;
-	public AudioClip boosting;
+	public AudioClip oneEighty;
 	
 	public Rigidbody rb;
 	public Transform preJointTransform;
@@ -37,6 +37,12 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public float boostFactor = 3f;
 	public float boostTimeSeconds = 1f;
 	public float boostCooldownSeconds = 2f;
+	
+	public bool oneEightyReady = true;
+	public bool oneEightying;
+	public float oneEightyFactor = 3f;
+	public float oneEightTimeSeconds = 0.7f;
+	public float oneEightyCooldownSeconds = 3f;
 
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
@@ -61,32 +67,37 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public void Steer(float input)
 	{
 		float currentYEuler = transform.eulerAngles.y;
-		if (Mathf.Abs(input) < 0.5f)
+		if (!oneEightying)
 		{
-			steerTarget = -input * maxSteeringAngle +
-			                    maxWiggleAngle * wiggleDirection * Mathf.Sin((Time.time-timeReset) * 2 * Mathf.PI / wigglePeriodInSeconds);
-		}
-		else
-		{
-			steerTarget = -input * maxSteeringAngle;
-			timeReset = Time.time;
-			if (input < 0)
+			if (Mathf.Abs(input) < 0.5f)
 			{
-				wiggleDirection = -1;
+				steerTarget = -input * maxSteeringAngle +
+				              maxWiggleAngle * wiggleDirection *
+				              Mathf.Sin((Time.time - timeReset) * 2 * Mathf.PI / wigglePeriodInSeconds);
 			}
 			else
 			{
-				wiggleDirection = 1;
+				steerTarget = -input * maxSteeringAngle;
+				timeReset = Time.time;
+				if (input < 0)
+				{
+					wiggleDirection = -1;
+				}
+				else
+				{
+					wiggleDirection = 1;
+				}
 			}
 		}
-		
+
 		preJointTransform.eulerAngles = new Vector3(90, currentYEuler + 0.5f * currentSteeringAngle, 180);
 		mainJointTransform.eulerAngles = new Vector3(0, currentYEuler + currentSteeringAngle, 0);
 		postJointTransform.eulerAngles = new Vector3(-90, currentYEuler + 1.5f * currentSteeringAngle, 0);
 		tailTipTransform.eulerAngles = new Vector3(-90, currentYEuler + 2f * currentSteeringAngle, 0);
 		headJointTransform.eulerAngles = new Vector3(90, 0, -(currentYEuler - 0.5f * currentSteeringAngle));
-	}
+		}
 
+	#region Boost Ability
 
 	private IEnumerator Boost()
 	{
@@ -103,6 +114,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		}
 
 		yield return new WaitForSeconds(boostTimeSeconds);
+		
 		if (IsServer)
 		{
 			acceleratingForce /= boostFactor;
@@ -123,6 +135,52 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		boostReady = true;
 	}
 	
+	#endregion
+	
+	#region 180 Ability
+	
+	private IEnumerator OneEighty()
+	{
+		float temp = lateralFrictionCoefficient;
+		if (IsServer)
+		{
+			if (steerTarget < 0)
+			{
+				steerTarget = -maxSteeringAngle*oneEightyFactor;
+			}
+			else
+			{
+				steerTarget = maxSteeringAngle*oneEightyFactor;
+			}
+			lateralFrictionCoefficient *= oneEightyFactor;
+			//PopFishFromGuts
+		}
+
+		if (IsClient)
+		{
+			audio.PlayOneShot(oneEighty);
+		}
+
+		yield return new WaitForSeconds(oneEightTimeSeconds);
+		
+		if (IsServer)
+		{
+			lateralFrictionCoefficient = temp;
+			oneEightying = false;
+		}
+
+		StartCoroutine(OneEightyCooldown());
+	}
+	
+	private IEnumerator OneEightyCooldown()
+	{
+		yield return new WaitForSeconds(oneEightyCooldownSeconds);
+
+		oneEightyReady = true;
+	}
+	
+	#endregion
+
 	public void Action()
 	{
 		//Boost
@@ -135,10 +193,17 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 	public void Action2()
 	{
+		if (oneEightyReady)
+		{
+			oneEightyReady = false;
+			oneEightying = true;
+			StartCoroutine(OneEighty());
+		}
 	}
 
 	public void Action3()
 	{
+		
 	}
 
 	// Start is called before the first frame update

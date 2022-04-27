@@ -814,7 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audio: {fileID: 17744540717904349}
   boost: {fileID: 8300000, guid: e95065c07fbb55d48be7e024587b0543, type: 3}
-  boosting: {fileID: 8300000, guid: 26bbba65a9a476f41b2802f79bdc3b7a, type: 3}
+  oneEighty: {fileID: 8300000, guid: 8dd0f4baf66179940a3a8f075470f8a9, type: 3}
   rb: {fileID: 0}
   preJointTransform: {fileID: 2850674920850648963}
   mainJointTransform: {fileID: 5562041122306409152}
@@ -836,6 +836,11 @@ MonoBehaviour:
   boostFactor: 3
   boostTimeSeconds: 1
   boostCooldownSeconds: 2
+  oneEightyReady: 1
+  oneEightying: 0
+  oneEightyFactor: 1.5
+  oneEightTimeSeconds: 0.65
+  oneEightyCooldownSeconds: 3
 --- !u!82 &17744540717904349
 AudioSource:
   m_ObjectHideFlags: 0
