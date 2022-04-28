@@ -1769,6 +1769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
+    - target: {fileID: 5019407329439275001, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
+      propertyPath: turnMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
 --- !u!1 &1837100679
@@ -1882,7 +1886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  feeler: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
   emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3
@@ -2495,7 +2499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  feeler: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
   emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3
@@ -2946,7 +2950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  feeler: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
   emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3

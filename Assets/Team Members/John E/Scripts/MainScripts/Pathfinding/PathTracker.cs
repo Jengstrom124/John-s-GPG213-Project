@@ -24,6 +24,8 @@ public class PathTracker : MonoBehaviour
     bool clearPathToTarget = false;
     List<Node> pathToFollow = new List<Node>();
     List<Node> skipNodeList = new List<Node>();
+    Node myDestinationNode;
+    bool pathGenerated = false;
 
     //EVENTS:
     //Subscribe to destinationReachedEvent for reacting to when entity reaches destination
@@ -35,105 +37,57 @@ public class PathTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(clearPathToTarget)
+        if(pathGenerated)
         {
-            CheckForDestinationOnly();
-        }
-        else
-        {
-            KeepTrackOfPath();
+            if (clearPathToTarget)
+            {
+                CheckForDestinationOnly();
+            }
+            else
+            {
+                KeepTrackOfPath();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        //check if there is a clear path to the target
-        if(finalDestinationPos != Vector2.zero && usePathSmoothing)
+        //Ray to destination
+        if(pathGenerated)
         {
-            foreach (Node path in pathToFollow)
-            {
-                Vector2 pathPos = WorldScanner.instance.NodeToWorldPos(path);
-                Vector3 pathPosAsV3 = new Vector3(pathPos.x, myTransform.position.y, pathPos.y);
+            Ray ray = new Ray(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y - 2, finalDestinationPos.y) - myTransform.position);
+            float rayDistance = Vector3.Distance(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y, finalDestinationPos.y));
 
-                //Calculating ray distance to not overshoot target and return inaccurate collision hits
-                Ray ray = new Ray(myTransform.position, pathPosAsV3 - myTransform.position);
-                float rayDistance = Vector3.Distance(myTransform.position, pathPosAsV3);
-                if (!Physics.Raycast(ray, rayDistance, obstacleLayerMask.value, QueryTriggerInteraction.Ignore))
-                {
-                    if (!clearPathToTarget && path == AStar.Instance.targetNode)
-                    {
-                        currentTargetPos = finalDestinationPos;
-                        newTargetAssignedEvent?.Invoke(new Vector3(finalDestinationPos.x, 0, finalDestinationPos.y));
-                        clearPathToTarget = true;
-                    }
-                    else
-                    {
-                        skipNodeList.Add(path);
-                    }
-                }
-                
-                if (drawRaycasts)
-                {
-                    Debug.DrawRay(ray.origin, ray.direction * rayDistance);
-                }
-            }
-
-            foreach(Node path in skipNodeList)
+            //If clear path to the end
+            if (!Physics.Raycast(ray, rayDistance, obstacleLayerMask.value, QueryTriggerInteraction.Ignore))
             {
-                if(pathToFollow.Contains(path))
-                {
-                    pathToFollow.Remove(path);
-                }
+                currentTargetPos = finalDestinationPos;
+                newTargetAssignedEvent?.Invoke(new Vector3(finalDestinationPos.x, 0, finalDestinationPos.y));
+                clearPathToTarget = true;
             }
         }
     }
 
-    void GetNextOptimizedPath()
+    public void GeneratePathList(List<Node> path)
     {
-        //Ray to destination
-        Ray ray = new Ray(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y - 2, finalDestinationPos.y) - myTransform.position);
-        float rayDistance = Vector3.Distance(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y -2, finalDestinationPos.y));
+        pathToFollow = path;
+        atEnd = false;
+        clearPathToTarget = false;
+        finalDestinationPos = new Vector2(AStar.Instance.targetPos.x, AStar.Instance.targetPos.z);
+        myDestinationNode = AStar.Instance.targetNode;
 
-        //If clear path to the end
-        if (!Physics.Raycast(ray, rayDistance, obstacleLayerMask.value, QueryTriggerInteraction.Ignore))
+        if (usePathSmoothing)
         {
-            currentTargetPos = finalDestinationPos;
-            newTargetAssignedEvent?.Invoke(new Vector3(finalDestinationPos.x, 0, finalDestinationPos.y));
-            clearPathToTarget = true;
+            GetNextOptimizedPath();
         }
         else
         {
-            //I dont think this works because path indexes keep changing
-            for (int i = 0; i < pathToFollow.Count; i++)
-            {
-                Vector2 tempPathPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[i]);
-                Vector3 tempPathPosAsV3 = new Vector3(tempPathPos.x, myTransform.position.y - 2, tempPathPos.y);
-
-                //Calculating ray distance to not overshoot target and return inaccurate collision hits
-                ray = new Ray(myTransform.position, tempPathPosAsV3 - myTransform.position);
-                rayDistance = Vector3.Distance(myTransform.position, tempPathPosAsV3);
-
-                //Ray to path pos - if clear remove from path list
-                if (!Physics.Raycast(ray, rayDistance, obstacleLayerMask.value, QueryTriggerInteraction.Ignore))
-                {
-                    pathToFollow.Remove(pathToFollow[i]);
-                }
-                else
-                {
-                    if (!WorldScanner.instance.GetNeighbours(pathToFollow[i]).Contains(pathToFollow[i + 1]))
-                    {
-                        pathToFollow.Remove(pathToFollow[i]);
-                    }
-                    else
-                    {
-                        currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[i]);
-                        newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
-
-                        return;
-                    }
-                }
-            }
+            //Assign first path pos as our targetPos
+            currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
+            newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
         }
+
+        pathGenerated = true;
     }
 
     //Monitor when we reach our target path Pos
@@ -146,8 +100,16 @@ public class PathTracker : MonoBehaviour
             if (Vector2.Distance(currentTargetPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold)
             {
                 pathToFollow.Remove(pathToFollow[0]);
-                currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
-                newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
+
+                if(!usePathSmoothing)
+                {
+                    currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
+                    newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
+                }
+                else
+                {
+                    GetNextOptimizedPath();
+                }
             }
         }
     }
@@ -170,32 +132,44 @@ public class PathTracker : MonoBehaviour
             currentTargetPos = Vector2.zero;
             finalDestinationPos = Vector2.zero;
             newTargetAssignedEvent?.Invoke(Vector3.zero);
+            pathGenerated = false;
         }
     }
 
-    public void GeneratePathList(List<Node> path)
+    void GetNextOptimizedPath()
     {
-        pathToFollow = path;
-        atEnd = false;
-        clearPathToTarget = false;
-        finalDestinationPos = new Vector2(AStar.Instance.targetPos.x, AStar.Instance.targetPos.z);
-
-        //Assign first path pos as our targetPos
-        currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
-        newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
-
-        /*
-        if (usePathSmoothing)
+        foreach (Node path in pathToFollow)
         {
-            GetNextOptimizedPath();
+            Vector2 tempPathPos = WorldScanner.instance.NodeToWorldPos(path);
+            Vector3 tempPathPosAsV3 = new Vector3(tempPathPos.x, myTransform.position.y - 2, tempPathPos.y);
+
+            //Calculating ray distance to not overshoot target and return inaccurate collision hits
+            Ray ray = new Ray(myTransform.position, tempPathPosAsV3 - myTransform.position);
+            float rayDistance = Vector3.Distance(myTransform.position, tempPathPosAsV3);
+
+            //Ray to path pos - if clear remove from path list
+            if (!Physics.Raycast(ray, rayDistance, obstacleLayerMask.value, QueryTriggerInteraction.Ignore))
+            {
+                skipNodeList.Add(path);
+            }
+            else
+            {
+                currentTargetPos = WorldScanner.instance.NodeToWorldPos(path);
+                newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
+
+                break;
+            }
         }
-        else
+
+        foreach (Node path in skipNodeList)
         {
-            //Assign first path pos as our targetPos
-            currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
-            newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
+            if (pathToFollow.Contains(path))
+            {
+                pathToFollow.Remove(path);
+            }
         }
-        */
+
+        skipNodeList.Clear();
     }
 
     public void ResetPathTracking()
@@ -204,6 +178,7 @@ public class PathTracker : MonoBehaviour
         skipNodeList.Clear();
         atEnd = false;
         clearPathToTarget = false;
+        pathGenerated = false;
         currentTargetPos = Vector2.zero;
         finalDestinationPos = Vector2.zero;
     }

@@ -14,7 +14,7 @@ public class Neighbours : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Don't add a neighbour if we collide with a vision cone (ie a boid vision cone behind us is not a neighbour)
-        if(other == other.GetComponent<CapsuleCollider>() && other.gameObject.GetComponent<FishBase>())
+        if(other == other.GetComponent<CapsuleCollider>() && other.gameObject.GetComponent<FishBase>() && other.GetComponent<CapsuleCollider>().isTrigger)
         {
 
         }
