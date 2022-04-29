@@ -26,6 +26,7 @@ public class PathTracker : MonoBehaviour
     List<Node> skipNodeList = new List<Node>();
     Node myDestinationNode;
     bool pathGenerated = false;
+    bool pathCleared = false;
 
     //EVENTS:
     //Subscribe to destinationReachedEvent for reacting to when entity reaches destination
@@ -53,7 +54,7 @@ public class PathTracker : MonoBehaviour
     private void FixedUpdate()
     {
         //Ray to destination
-        if(pathGenerated)
+        if(pathGenerated & !clearPathToTarget)
         {
             Ray ray = new Ray(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y - 2, finalDestinationPos.y) - myTransform.position);
             float rayDistance = Vector3.Distance(myTransform.position, new Vector3(finalDestinationPos.x, myTransform.position.y, finalDestinationPos.y));
@@ -71,6 +72,8 @@ public class PathTracker : MonoBehaviour
     public void GeneratePathList(List<Node> path)
     {
         pathToFollow = path;
+        pathGenerated = true;
+        pathCleared = false;
         atEnd = false;
         clearPathToTarget = false;
         finalDestinationPos = new Vector2(AStar.Instance.targetPos.x, AStar.Instance.targetPos.z);
@@ -86,8 +89,6 @@ public class PathTracker : MonoBehaviour
             currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
             newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
         }
-
-        pathGenerated = true;
     }
 
     //Monitor when we reach our target path Pos
@@ -117,9 +118,15 @@ public class PathTracker : MonoBehaviour
     //When distination is in line of sight - monitor only when our we reach the destination
     void CheckForDestinationOnly()
     {
+        currentTargetPos = finalDestinationPos;
+
         //Clear the path list as we can now head directly to the desired target position
-        pathToFollow.Clear();
-        skipNodeList.Clear();
+        if(!pathCleared)
+        {
+            pathToFollow.Clear();
+            skipNodeList.Clear();
+            pathCleared = true;
+        }
 
         //If our position == the targetPos we have reached the end
         if (Vector2.Distance(finalDestinationPos, new Vector2(myTransform.position.x, myTransform.position.z)) < distanceThreshold && !atEnd)
@@ -133,6 +140,7 @@ public class PathTracker : MonoBehaviour
             finalDestinationPos = Vector2.zero;
             newTargetAssignedEvent?.Invoke(Vector3.zero);
             pathGenerated = false;
+            pathCleared = false;
         }
     }
 
@@ -140,8 +148,15 @@ public class PathTracker : MonoBehaviour
     {
         foreach (Node path in pathToFollow)
         {
+            if(path == myDestinationNode)
+            {
+                clearPathToTarget = true;
+                newTargetAssignedEvent?.Invoke(new Vector3(finalDestinationPos.x, 0, finalDestinationPos.y));
+                return;
+            }
+
             Vector2 tempPathPos = WorldScanner.instance.NodeToWorldPos(path);
-            Vector3 tempPathPosAsV3 = new Vector3(tempPathPos.x, myTransform.position.y - 2, tempPathPos.y);
+            Vector3 tempPathPosAsV3 = new Vector3(tempPathPos.x, myTransform.position.y, tempPathPos.y);
 
             //Calculating ray distance to not overshoot target and return inaccurate collision hits
             Ray ray = new Ray(myTransform.position, tempPathPosAsV3 - myTransform.position);
@@ -150,13 +165,13 @@ public class PathTracker : MonoBehaviour
             //Ray to path pos - if clear remove from path list
             if (!Physics.Raycast(ray, rayDistance, obstacleLayerMask.value, QueryTriggerInteraction.Ignore))
             {
-                skipNodeList.Add(path);
+                if(path != myDestinationNode)
+                    skipNodeList.Add(path);
             }
             else
             {
                 currentTargetPos = WorldScanner.instance.NodeToWorldPos(path);
                 newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
-
                 break;
             }
         }

@@ -62,10 +62,15 @@ public class SearchForFishingSpotState : AntAIState
 					rb.AddRelativeForce(Vector3.forward * boatControl.boatSpeed * aDeltaTime);
 			}
 
+			//For resetting state when bugged
 			if (resetThresholdMet && pathTracker.currentTargetPos == Vector2.zero)
 			{
-				Debug.Log("Resetting... Changing drivers");
-				Finish();
+				if(resetThresholdMet)
+                {
+					Debug.Log("Resetting... Changing drivers");
+					Finish();
+					resetThresholdMet = false;
+				}
 			}
 		}
 		else
@@ -75,6 +80,7 @@ public class SearchForFishingSpotState : AntAIState
 				Debug.Log("Find new fish!");
 				pathTracker.ResetPathTracking();
 				Finish();
+				fishAssigned = false;
 			}
 		}
 	}

@@ -7,7 +7,7 @@ using Anthill.Utils;
 public class ReturnToDockState : AntAIState
 {
 	private Transform t;
-	GameObject fishingDock;
+	Transform fishingDock;
 	Rigidbody rb;
 
 	BoatControl boatControl;
@@ -23,7 +23,8 @@ public class ReturnToDockState : AntAIState
 
 	public override void Enter()
 	{
-		fishingDock = GameObject.Find("FishingDock");
+		//fishingDock = GameObject.Find("FishingDock");
+		fishingDock = boatControl.GetDock();
 
 		if(fishingDock == null)
         {
@@ -32,7 +33,7 @@ public class ReturnToDockState : AntAIState
 		}
 		else
         {
-			Vector3 fishingDockPos = fishingDock.transform.position;
+			Vector3 fishingDockPos = fishingDock.position;
 
 			if (AStar.Instance != null)
 			{

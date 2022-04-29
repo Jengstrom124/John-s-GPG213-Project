@@ -214,10 +214,18 @@ public class WorldScanner : MonoBehaviour
 
     public Vector2 NodeToWorldPos(Node node)
     {
-        float x = node.gridPos.x;
-        float y = node.gridPos.y;
-
-        return new Vector2(x, y);
+        //if(node.gridPos.x <= gridSize.x * nodeSize && node.gridPos.x >= 0 && node.gridPos.y <= gridSize.y * nodeSize && node.gridPos.y >= 0)
+        if(node.gridPos != null)
+        {
+            float x = node.gridPos.x;
+            float y = node.gridPos.y;
+            return new Vector2(x, y);
+        }
+        else
+        {
+            Debug.Log("Null Node Error");
+            return Vector2.zero;
+        }
     }
 
     public List<Node> GetNeighbours(Node node)

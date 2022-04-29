@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6631958648049730591}
   - component: {fileID: 3312848784250000251}
+  - component: {fileID: 8015925886745950114}
   m_Layer: 6
   m_Name: FishingDock
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,6 +47,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.94, y: 2.94, z: 20.34}
   m_Center: {x: 0, y: 0, z: -14.67}
+--- !u!114 &8015925886745950114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631958648049730590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d45b82e75d194c49aa17ff379f7f68b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2626081167811158746
 PrefabInstance:
   m_ObjectHideFlags: 0
