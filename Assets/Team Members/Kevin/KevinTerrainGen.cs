@@ -52,7 +52,7 @@ namespace Kevin
     public List<int> seeds;
     void Awake()
     {
-        Random.InitState(seeds[Random.Range(0,2)]);
+        Random.InitState(seeds[2]);
     }
     void Start()
     {

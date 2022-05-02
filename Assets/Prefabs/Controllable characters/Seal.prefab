@@ -1749,6 +1749,8 @@ MonoBehaviour:
   localVelocity: {x: 0, y: 0, z: 0}
   tailLocalVelocity: {x: 0, y: 0, z: 0}
   tailPosition: {x: 0, y: 0, z: 0}
+  accelerationForce: {x: 0, y: 0, z: 0}
+  reverseForce: {x: 0, y: 0, z: 0}
   headTransform: {fileID: 2055310735017970175}
   tailTransform: {fileID: 4928855466406718431}
   jumpTransform: {fileID: 4647559717749154068}
@@ -1756,15 +1758,21 @@ MonoBehaviour:
   tailMidTransform: {fileID: 2055310735044345132}
   tailTipTransform: {fileID: 2055310734307401106}
   accelerationSpeed: 5
+  lerpValue: 0.1
   currentSteeringAngle: 0
+  targetAngle: 0
   steeringMax: 30
   currentSteeringMax: 0
   airSteeringMax: 15
   reduction: 0.5
   currentBobbleAngle: 0
   isJumping: 0
+  onLand: 0
+  landMode: 0
+  waterMode: 0
   capsuleCollider: {fileID: 1970519610861360289}
   colliderCenter: {x: 0, y: 0, z: 0}
+  spawnPoint: {fileID: 0}
 --- !u!54 &3049122826345489953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1857,7 +1865,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055310735626418041}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 

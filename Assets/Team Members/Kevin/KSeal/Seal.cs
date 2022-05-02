@@ -46,8 +46,13 @@ namespace Kevin
     
     //Check if jumping
     public bool isJumping;
-
+    
     public bool onLand;
+    
+    //modes
+    public bool landMode;
+    public bool waterMode;
+    
     //Collider Config
     public CapsuleCollider capsuleCollider;
     public Vector3 colliderCenter;
@@ -97,18 +102,20 @@ namespace Kevin
             {
                 StartCoroutine(Decelerate());
             }
+            
         }
-        
-        if (IsWet == false)
+
+        /*if (IsWet == false)
         {
             onLand = true;
-            capsuleCollider.material = new PhysicMaterial("none");
+            //capsuleCollider.material = new PhysicMaterial("none");
         }
         else
         {
             onLand = false;
-            capsuleCollider.material = new PhysicMaterial("SlipperyMaterial");
-        }
+            //capsuleCollider.material = new PhysicMaterial("SlipperyMaterial");
+        }*/
+        
     }
     IEnumerator Decelerate()
     {
@@ -172,16 +179,29 @@ namespace Kevin
     {
         if (IsServer)
         {
-            float currentYEuler = transform.eulerAngles.y;
+            if (IsWet == false && input < 0)
+            {
+                sealRigidbody.AddRelativeTorque(new Vector3(0f,-5f,0f));
+            }
+
+            if (IsWet == false && input > 0)
+            {
+                sealRigidbody.AddRelativeTorque(new Vector3(0f,5f,0f));
+            }
+            if (IsWet)
+            {
+                float currentYEuler = transform.eulerAngles.y;
             
-            targetAngle = -input * currentSteeringMax;
+                targetAngle = -input * currentSteeringMax;
             
            
-            tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
-            tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
-            tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
-            tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
-            headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
+                tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
+                tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
+                headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
+            }
+          
             
         }
     }
@@ -225,7 +245,7 @@ namespace Kevin
 
     public void Action2()
     {
-        if(IsServer && isJumping == false)
+        if(IsServer && isJumping == false && onLand == false)
         {
             //jumpSound.Play();
             Jump();
