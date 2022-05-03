@@ -72,7 +72,6 @@ public class PathTracker : MonoBehaviour
     public void GeneratePathList(List<Node> path)
     {
         pathToFollow = path;
-        pathGenerated = true;
         pathCleared = false;
         atEnd = false;
         clearPathToTarget = false;
@@ -89,6 +88,8 @@ public class PathTracker : MonoBehaviour
             currentTargetPos = WorldScanner.instance.NodeToWorldPos(pathToFollow[0]);
             newTargetAssignedEvent?.Invoke(new Vector3(currentTargetPos.x, 0, currentTargetPos.y));
         }
+
+        pathGenerated = true;
     }
 
     //Monitor when we reach our target path Pos

@@ -10,10 +10,7 @@ namespace Kevin
     {
         public Transform currentLocation;
         
-        public void Update()
-        {
-            transform.position = new Vector3(Random.Range(0f, 256f), transform.position.y, Random.Range(0f, 256f));
-        }
+   
     }
 }
 
