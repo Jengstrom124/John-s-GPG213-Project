@@ -8,11 +8,10 @@ namespace John
 {
     public class JohnRTSTestController : ManagerBase<JohnRTSTestController>
     {
-        //List<IRTS> currentSelectedRTSEntity = new List<IRTS>();
+        List<IRTS> currentSelectedRTSEntity = new List<IRTS>();
         public event Action<GameObject> playerFishSelectedEvent;
 
-        public IRTS currentSelectedRTSEntity;
-        public GameObject currentSelectedFish;
+        public GameObject activePlayerFish;
 
         private void FixedUpdate()
         {
@@ -33,21 +32,27 @@ namespace John
                     if (RTSEntity != null)
                     {
                         //Upon selecting a new entity, reset the current one if there is one
-                        if (currentSelectedRTSEntity != null)
+                        if (currentSelectedRTSEntity.Count >= 1)
                         {
-                            currentSelectedRTSEntity.Deselected();
-                            playerFishSelectedEvent?.Invoke(null);
+                            currentSelectedRTSEntity[0].Deselected();
+                            currentSelectedRTSEntity.Clear();
+
+                            if(activePlayerFish != null)
+                            {
+                                activePlayerFish = null;
+                                playerFishSelectedEvent?.Invoke(null);
+                            }
                         }
 
                         //Update new entity
-                        currentSelectedRTSEntity = RTSEntity;
+                        currentSelectedRTSEntity.Add(RTSEntity);
                         RTSEntity.Selected();
 
                         //If the entity is a fish- store this as a reference to influence aligning neighbouring fish
                         if(hitinfo.transform.GetComponent<FishBase>())
                         {
-                            currentSelectedFish = hitinfo.transform.gameObject;
-                            playerFishSelectedEvent?.Invoke(currentSelectedFish);
+                            activePlayerFish = hitinfo.transform.gameObject;
+                            playerFishSelectedEvent?.Invoke(activePlayerFish);
                         }
                     }
                     else
@@ -56,11 +61,11 @@ namespace John
                         if(hitinfo.transform.GetComponent<Water>() != null)
                         {
                             //Only if we are controlling an entity - set a destination
-                            if (currentSelectedRTSEntity != null)
+                            if (currentSelectedRTSEntity.Count >= 1)
                             {
                                 Vector3 mousePos = new Vector3(hitinfo.point.x, 0, hitinfo.point.z);
 
-                                currentSelectedRTSEntity.SetDestination(mousePos);
+                                currentSelectedRTSEntity[0].SetDestination(mousePos);
 
                                 Debug.Log("RTS INFO: Destination: " + mousePos);
                             }
@@ -72,13 +77,6 @@ namespace John
 
             //Returns a vector2
             //Mouse.current.position.ReadValue();
-        }
-
-        public void ResetController()
-        {
-            currentSelectedRTSEntity = null;
-            currentSelectedFish = null;
-            playerFishSelectedEvent?.Invoke(null);
         }
     }
 }
