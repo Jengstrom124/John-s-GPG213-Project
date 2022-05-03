@@ -1757,7 +1757,7 @@ MonoBehaviour:
   tailLeadTransform: {fileID: 2055310735285632999}
   tailMidTransform: {fileID: 2055310735044345132}
   tailTipTransform: {fileID: 2055310734307401106}
-  accelerationSpeed: 5
+  accelerationSpeed: 10
   lerpValue: 0.1
   currentSteeringAngle: 0
   targetAngle: 0
@@ -1767,9 +1767,6 @@ MonoBehaviour:
   reduction: 0.5
   currentBobbleAngle: 0
   isJumping: 0
-  onLand: 0
-  landMode: 0
-  waterMode: 0
   capsuleCollider: {fileID: 1970519610861360289}
   colliderCenter: {x: 0, y: 0, z: 0}
   spawnPoint: {fileID: 0}
