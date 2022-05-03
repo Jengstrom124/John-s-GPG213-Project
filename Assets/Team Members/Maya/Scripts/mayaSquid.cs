@@ -62,20 +62,19 @@ public class mayaSquid : MonoBehaviour, IControllable
     public void Action()
     {
         inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, 1.1f, transform.position.z), Quaternion.identity);
-        ScaleTheInk();
-        StartCoroutine(DeleteTheInk());
+        GrowTheInk();
+        ShrinkTheInk();
         Debug.Log("Inked");
     }
 
-    public void ScaleTheInk()
+    public void GrowTheInk()
     {
         inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(3, 0, 3), 5f);
         inkSplatterSpawned.GetComponent<Transform>().DORotate(new Vector3(0, 90, 0), 5f);
     }
-    public IEnumerator DeleteTheInk()
+    public void ShrinkTheInk()
     {
-        yield return new WaitForSeconds(5);
-        Destroy(inkSplatterSpawned);
+        inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(0, 0, 0), 25f);
     }
 
 
