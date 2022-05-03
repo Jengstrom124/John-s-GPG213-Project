@@ -78,6 +78,11 @@ namespace Gerallt
             }
             
             NetworkPlayerList.Instance.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
+            
+            //Setting the joining IP address to Cam's by default; reflecting the address in the UI input field
+            string camsIP = "121.200.8.114";
+            ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = camsIP;
+            UIServerIPInput.text = camsIP;
         }
 
         private void GameManager_OnChangeLobbyVisibility(bool visibility)
@@ -210,6 +215,5 @@ namespace Gerallt
                 }
             }
         }
-
     }
 }

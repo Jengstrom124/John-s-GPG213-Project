@@ -47,27 +47,21 @@ namespace Kevin
     //Check if jumping
     public bool isJumping;
     
-    public bool onLand;
-    
-    //modes
-    public bool landMode;
-    public bool waterMode;
-    
     //Collider Config
     public CapsuleCollider capsuleCollider;
     public Vector3 colliderCenter;
 
     public Transform spawnPoint;
-    //public bool isWet;
+    
     
     //Audio
     //public AudioSource jumpSound;
 
     #endregion
-    void Awake()
+    /*void Awake()
     {
         sealPrefab.transform.position = new Vector3(75f,15f,105f);
-    }
+    }*/
     void Start()
     {
         if (IsServer)
@@ -89,11 +83,7 @@ namespace Kevin
         
             sealRigidbody.AddRelativeForce(sealRigidbody.mass*new Vector3 (-localVelocity.x, 0, 0));
             sealRigidbody.AddForceAtPosition(sealRigidbody.mass*tailTransform.TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
-        
-            //localVelocity = transform.InverseTransformDirection(sealRigidbody.velocity);
-        
-            //sealRigidbody.AddRelativeForce(new Vector3(-localVelocity.x,0f,0f));
-        
+            
             sealRigidbody.AddForceAtPosition(accelerationForce, transform.position);
             sealRigidbody.AddForceAtPosition(reverseForce, transform.position);
             currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, lerpValue);
@@ -102,20 +92,18 @@ namespace Kevin
             {
                 StartCoroutine(Decelerate());
             }
-            
-        }
 
-        /*if (IsWet == false)
-        {
-            onLand = true;
-            //capsuleCollider.material = new PhysicMaterial("none");
+            if (IsWet == false && isJumping == false)
+            {
+                sealRigidbody.drag = 2f;
+                sealRigidbody.angularDrag = 2f;
+            }
+            else
+            {
+                sealRigidbody.drag = 0f;
+                sealRigidbody.angularDrag = 0.5f;
+            }
         }
-        else
-        {
-            onLand = false;
-            //capsuleCollider.material = new PhysicMaterial("SlipperyMaterial");
-        }*/
-        
     }
     IEnumerator Decelerate()
     {
@@ -126,14 +114,14 @@ namespace Kevin
         }
     }
 
-    IEnumerator BoosterLimit()
+    /*IEnumerator BoosterLimit()
     {
         if (IsServer)
         {
             yield return new WaitForSeconds(3f);
-            accelerationSpeed = 5f;
+            accelerationSpeed = 10f;
         }
-    }
+    }*/
 
     #region JumpFunctions
 
@@ -159,6 +147,7 @@ namespace Kevin
             yield return new WaitForSeconds(0.5f);
             sealRigidbody.AddForceAtPosition(350f * transform.TransformDirection(Vector3.down), jumpTransform.position,
                 0f);
+            accelerationSpeed = 10f;
         }
     }
 
@@ -179,16 +168,35 @@ namespace Kevin
     {
         if (IsServer)
         {
-            if (IsWet == false && input < 0)
+            if (IsWet == false && input < 0 && isJumping == false)
             {
-                sealRigidbody.AddRelativeTorque(new Vector3(0f,-5f,0f));
+                sealRigidbody.AddRelativeTorque(new Vector3(0f,-3f,0f));
+                float currentYEuler = transform.eulerAngles.y;
+            
+                targetAngle = -input * currentSteeringMax;
+            
+           
+                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
+                tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
+                tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
+                headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
             }
-
-            if (IsWet == false && input > 0)
+            else if (IsWet == false && input > 0 && isJumping == false)
             {
-                sealRigidbody.AddRelativeTorque(new Vector3(0f,5f,0f));
+                sealRigidbody.AddRelativeTorque(new Vector3(0f,3f,0f));
+                float currentYEuler = transform.eulerAngles.y;
+            
+                targetAngle = -input * currentSteeringMax;
+            
+           
+                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
+                tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
+                tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
+                headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
             }
-            if (IsWet)
+            else
             {
                 float currentYEuler = transform.eulerAngles.y;
             
@@ -214,9 +222,9 @@ namespace Kevin
                 accelerationForce = input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
             }
 
-            if (onLand && isJumping == false)
+            if (IsWet == false && isJumping == false)
             {
-                accelerationForce = 10 * input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+                accelerationForce = 2f * input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
             }
         }
     }
@@ -230,7 +238,7 @@ namespace Kevin
                 accelerationForce = -input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
             }
 
-            if (onLand && isJumping == false)
+            if (IsWet == false && isJumping == false)
             {
                 accelerationForce = -input * accelerationSpeed * transform.TransformDirection(Vector3.forward);
             }
@@ -239,13 +247,13 @@ namespace Kevin
     
     public void Action()
     {
-        accelerationForce =  20f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
-        StartCoroutine(BoosterLimit());
+        /*accelerationForce =  20f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+        StartCoroutine(BoosterLimit());*/
     }
 
     public void Action2()
     {
-        if(IsServer && isJumping == false && onLand == false)
+        if(IsServer && isJumping == false)
         {
             //jumpSound.Play();
             Jump();

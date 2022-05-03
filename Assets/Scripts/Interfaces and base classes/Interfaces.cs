@@ -49,6 +49,10 @@ public interface IReactsToWater
 {
 	public bool IsWet { get; set; }
 }
+public interface IReactsToInk
+{
+	public void ChangeInkedState(bool isInked);
+}
 
 public interface IStateBase
 {

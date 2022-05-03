@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class mayaSquid : MonoBehaviour, IControllable
 {
-    public GameObject inkSplatter;
+    private GameObject inkSplatterSpawned;
+    public GameObject inkSplatterPrefab;
     public Rigidbody squidForce;
     public float rotateSpeed = 2f;
     public float speed = 30;
@@ -30,6 +32,8 @@ public class mayaSquid : MonoBehaviour, IControllable
         //localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
         Steer(Input.GetAxis("Horizontal"));
         //Accelerate(Input.GetAxis("Vertical"));
+        if (InputSystem.GetDevice<Keyboard>().vKey.wasPressedThisFrame)
+            Action();
         Action2();
         //hackyNonsense = false;
         //Debug.Log(charge);
@@ -57,15 +61,24 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void Action()
     {
-        Instantiate(inkSplatter, transform.position, Quaternion.identity);  
+        inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, 1.1f, transform.position.z), Quaternion.identity);
+        ScaleTheInk();
+        StartCoroutine(DeleteTheInk());
         Debug.Log("Inked");
     }
 
     public void ScaleTheInk()
     {
-        
+        inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(3, 0, 3), 5f);
+        inkSplatterSpawned.GetComponent<Transform>().DORotate(new Vector3(0, 90, 0), 5f);
     }
-    
+    public IEnumerator DeleteTheInk()
+    {
+        yield return new WaitForSeconds(5);
+        Destroy(inkSplatterSpawned);
+    }
+
+
 
     public void Action2()
     {
@@ -89,7 +102,7 @@ public class mayaSquid : MonoBehaviour, IControllable
             squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
             if (charge >= 1)
             {
-                squidAnim.speed = charge / 10;
+                squidAnim.speed = charge / 5;
                 squidAnim.SetTrigger("Swimming");
             }
 

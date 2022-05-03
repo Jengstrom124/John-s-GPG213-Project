@@ -195,6 +195,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
+      propertyPath: waterOffset
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8698751469394051707, guid: 4d4443b1bf560a2429c99e446e1b8035, type: 3}
       propertyPath: objectToSpawn
       value: 
       objectReference: {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
@@ -329,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f74d0134a982db4f87cdb534512c16c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePlayerFish: {fileID: 0}
+  currentSelectedFish: {fileID: 0}
 --- !u!4 &126394507
 Transform:
   m_ObjectHideFlags: 0
@@ -685,6 +689,10 @@ PrefabInstance:
     - target: {fileID: 2389325854195522440, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
       propertyPath: m_Name
       value: Boat (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389325854195522440, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
@@ -1121,7 +1129,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boat
       objectReference: {fileID: 0}
-    - target: {fileID: 3874871487424546859, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
+    - target: {fileID: 2389325854195522440, guid: 06fa9ac16b3f4d5469a6e09d7de17635, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
