@@ -69,7 +69,7 @@ public class OllieSpawner : MonoBehaviour
                     }
                 }
 
-                //levelInfo.OnLevelGenerationFinishedEvent();
+                levelInfo.OnLevelGenerationFinishedEvent();
             }
         }
     }
