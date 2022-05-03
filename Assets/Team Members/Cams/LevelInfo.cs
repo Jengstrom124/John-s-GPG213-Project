@@ -10,7 +10,7 @@ public class LevelInfo : ManagerBase<LevelInfo>
 	public string author;
 
 	public event Action LevelGenerationFinishedEvent;
-	protected virtual void OnLevelGenerationFinishedEvent()
+	public virtual void OnLevelGenerationFinishedEvent()
 	{
 		LevelGenerationFinishedEvent?.Invoke();
 	}
