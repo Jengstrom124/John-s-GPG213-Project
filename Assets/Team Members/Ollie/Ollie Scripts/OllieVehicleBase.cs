@@ -77,11 +77,14 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
         }
     }
 
-    public void Reverse(float input)
+    public void Reverse(float amount)
     {
         if (IsServer)
         {
-            print("sharks can't reverse, dummy");
+            if (amount > 0)
+            {
+                print("sharks can't reverse, dummy");
+            }
         }
     }
 

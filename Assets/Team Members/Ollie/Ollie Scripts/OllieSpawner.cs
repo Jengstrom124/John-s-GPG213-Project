@@ -9,6 +9,7 @@ public class OllieSpawner : MonoBehaviour
 {
     //public OllieTerrain ollieTerrain;
     public Terrain myTerrain;
+    public LevelInfo levelInfo;
     //public GameObject cube;
     private Vector3 scaleUp;
     
@@ -67,6 +68,8 @@ public class OllieSpawner : MonoBehaviour
                         go.transform.parent = this.transform;
                     }
                 }
+
+                //levelInfo.OnLevelGenerationFinishedEvent();
             }
         }
     }

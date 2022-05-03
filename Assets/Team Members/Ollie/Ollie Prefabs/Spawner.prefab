@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6600122509195899366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6600122509195899364}
+  - component: {fileID: 6600122509195899367}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6600122509195899364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600122509195899366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 152.04167, y: 1.8971863, z: 103.768425}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6600122509195899367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600122509195899366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a363590f02c534a880a5b3626131ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTerrain: {fileID: 0}
+  levelInfo: {fileID: 0}
+  treePrefabList:
+  - {fileID: 919132149155446097, guid: 885e5ae19d1b42d4e9c75847c3c22a5e, type: 3}
+  - {fileID: 919132149155446097, guid: 96733a8dda06d44499d98b3f05affd47, type: 3}
+  - {fileID: 919132149155446097, guid: 6ae383239111f5a48adc44518c5a720b, type: 3}
+  - {fileID: 919132149155446097, guid: 3678b25cae015a347a31048627942bc7, type: 3}
+  - {fileID: 919132149155446097, guid: 1284e448b02a1eb4a8ce44995d2c0c0f, type: 3}
+  - {fileID: 919132149155446097, guid: 953500af4257d0e47bdf0a0d5614f019, type: 3}
+  - {fileID: 919132149155446097, guid: 8d2a22b9c0518134b943ccf01494e475, type: 3}
+  - {fileID: 919132149155446097, guid: f0d2c16f2db176c41bd7e1f3beb9d7e2, type: 3}
+  - {fileID: 919132149155446097, guid: a62dfc25707aec742878a13953eaf369, type: 3}
+  - {fileID: 919132149155446097, guid: af9a304f1ba415f4da67a98f194fdaa1, type: 3}
+  shorelinePrefabList:
+  - {fileID: 919132149155446097, guid: 73f65d9c4f0b8ce4db5e6cbbb2b898d0, type: 3}
+  - {fileID: 919132149155446097, guid: 3eb9cf92a75708143a0545021e7b293f, type: 3}
+  - {fileID: 919132149155446097, guid: 691e1d692ad230549907098d8567f88a, type: 3}
+  - {fileID: 919132149155446097, guid: 06aeb071d3210124e9aaec84513b9ce8, type: 3}
+  - {fileID: 919132149155446097, guid: 3706ec83d332aff4fb2f2408cf2ef566, type: 3}
+  - {fileID: 919132149155446097, guid: 74c9fb442e75fb541a80ea1680ae7122, type: 3}
+  - {fileID: 919132149155446097, guid: 590011b58c7cb8648951dae48efe8e4e, type: 3}
+  - {fileID: 919132149155446097, guid: 07880203b2d25204d8bd7b01924a3a65, type: 3}
+  - {fileID: 919132149155446097, guid: 21fd8480d8e115b4d82386a3be32986e, type: 3}
+  - {fileID: 919132149155446097, guid: 1278d45211c46cc4aa79a03c0be84aeb, type: 3}
+  underwaterDebrisList:
+  - {fileID: 919132149155446097, guid: 1ab79bb63014557419958ba530a804bb, type: 3}
+  - {fileID: 919132149155446097, guid: a773bfcf305872d47b99f5a64b330d62, type: 3}
+  - {fileID: 919132149155446097, guid: 10f1b1cc0e409c641b7a02806fa2fb67, type: 3}
+  - {fileID: 919132149155446097, guid: f6a67c2e3d2f7ad44a5057366900308e, type: 3}
+  - {fileID: 919132149155446097, guid: c960074f1dfcbc544b7b43164d770704, type: 3}
+  - {fileID: 919132149155446097, guid: 98d8554514468c74c942b80729f975de, type: 3}
+  - {fileID: 919132149155446097, guid: f8173dd5cc6b3084784a8a43c5cbd5cf, type: 3}
+  - {fileID: 919132149155446097, guid: c04b0fbd255c1fb4fb38d4d3db25129f, type: 3}
+  - {fileID: 919132149155446097, guid: a4c07108f5909184583bfa35830ddceb, type: 3}
+  - {fileID: 919132149155446097, guid: 5ed8b720f4ef89947a4edf819ce9b4c6, type: 3}
