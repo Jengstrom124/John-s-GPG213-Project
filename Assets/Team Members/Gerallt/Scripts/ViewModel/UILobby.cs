@@ -79,8 +79,9 @@ namespace Gerallt
             
             NetworkPlayerList.Instance.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
             
-            ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = "121.200.8.114";
-            //UIServerInput
+            string camsIP = "121.200.8.114";
+            ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = camsIP;
+            UIServerIPInput.text = camsIP;
         }
 
         private void GameManager_OnChangeLobbyVisibility(bool visibility)
