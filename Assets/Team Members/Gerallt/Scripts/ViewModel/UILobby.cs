@@ -78,6 +78,9 @@ namespace Gerallt
             }
             
             NetworkPlayerList.Instance.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
+            
+            ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = "121.200.8.114";
+            //UIServerInput
         }
 
         private void GameManager_OnChangeLobbyVisibility(bool visibility)
