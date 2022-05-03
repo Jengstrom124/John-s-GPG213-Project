@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class MayasTerrain : MonoBehaviour
@@ -30,7 +31,7 @@ public class MayasTerrain : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (InputSystem.GetDevice<Keyboard>().spaceKey.isPressed)
         {
             LetsDoIt();
         }
