@@ -213,19 +213,19 @@ namespace Gerallt
         
         private void Start()
         {
-            view.SetActive(false);
+            // view.SetActive(false);
             
             GameManager.Instance.OnChangeLevelsVisibility += GameManager_OnChangeLevelsVisibility;
         }
 
         private void GameManager_OnChangeLevelsVisibility(bool visibility)
         {
-            view.SetActive(visibility);
+            // view.SetActive(visibility);
 
-            if (visibility)
-            {
+            // if (visibility)
+            // {
                 PopulateLevels();
-            }
+            // }
         }
     }
 }
