@@ -6,6 +6,7 @@ using UnityEngine;
 public class LukeTerrain : MonoBehaviour
 {
 	public TerrainGenerator terrainGenerator;
+	public LevelInfo levelInfo;
 	
 	public float offsetX = 100f;
 	public float offsetY = 100f;
@@ -22,37 +23,24 @@ public class LukeTerrain : MonoBehaviour
 	public float fringe = 0.07f;
 	private float halfFringeHeight = 0.25f;
 	private float cosineFactor = 1f;
-	public float fringeDetaillessFactor = 1.2f;
+	public float fringeExtensionFactor = 1.2f;
 	private float fringeTranslationFactor = 0.5f;
 
 	public int seed;
 
-	//public float[,] previousHeights;
-
-	private IEnumerator Timer()
-	{
-		yield return new WaitForSeconds(0.5f);
-		FinishSpawningEvent?.Invoke();
-	}
-	
 	float CalculateHeight(int x, int y)
 	{
 		float xCoord = (float) x / terrainGenerator.width;
 		float yCoord = (float) y / terrainGenerator.height;
 
-		if (x == terrainGenerator.width-1 && y == terrainGenerator.height-1)
-		{
-			StartCoroutine(Timer());
-		}
-		
 		float octave1 = amplitudeOctave1 * Mathf.PerlinNoise( xCoord*xOctave1Frequency+offsetX,  yCoord*yOctave1Frequency+offsetY);
 		float octave2 = amplitudeOctave2 * Mathf.PerlinNoise( xCoord*xOctave2Frequency+offsetX,  yCoord*yOctave2Frequency+offsetY);
 		
 		if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
 		{
-			if (!(xCoord < fringe * fringeDetaillessFactor || xCoord > 1 - fringe * fringeDetaillessFactor
-			                                               || yCoord < fringe * fringeDetaillessFactor ||
-			                                               yCoord > 1 - fringe * fringeDetaillessFactor))
+			if (!(xCoord < fringe * fringeExtensionFactor || xCoord > 1 - fringe * fringeExtensionFactor
+			                                               || yCoord < fringe * fringeExtensionFactor ||
+			                                               yCoord > 1 - fringe * fringeExtensionFactor))
 			{
 				if (octave1 > highLandHeight)
 				{
@@ -115,19 +103,14 @@ public class LukeTerrain : MonoBehaviour
 		}
 		
 		return (halfFringeHeight*Mathf.Cos(t*Mathf.PI/cosineFactor)+halfFringeHeight/fringeTranslationFactor)*(-t+1) + heightAdjusted*Mathf.Clamp(4*t-3,0, 1);
-		
-		//return previousHeights[x,y];
 	}
 	
 	public delegate void FinishSpawningAction();
 	public event FinishSpawningAction FinishSpawningEvent;
 
-	// Start is called before the first frame update
-
 	void Awake()
 	{
 		Random.InitState(seed);
-		//previousHeights = terrainGenerator.terrainDataForRandomExample.GetHeights(0,0,terrainGenerator.width,terrainGenerator.height);
 	}
 	
 	void Start()
@@ -137,5 +120,7 @@ public class LukeTerrain : MonoBehaviour
 		GetComponentInChildren<SubmersedSpawner>().fringe = fringe;
 		terrainGenerator.calculateHeightCallback = CalculateHeight;
 		terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
+		FinishSpawningEvent?.Invoke();
+		levelInfo.OnLevelGenerationFinishedEvent();
 	}
 }

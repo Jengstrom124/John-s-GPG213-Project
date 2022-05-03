@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainGenerator: {fileID: 203358344}
+  levelInfo: {fileID: 2008714374}
   offsetX: 100
   offsetY: 100
   xOctave1Frequency: 4
@@ -409,7 +410,7 @@ MonoBehaviour:
   dropOffHeight: 0.48
   highLandHeight: 0.7
   fringe: 0.07
-  fringeDetaillessFactor: 1.2
+  fringeExtensionFactor: 1.2
   seed: 59489
 --- !u!154 &665927328
 TerrainCollider:
@@ -649,6 +650,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 926f0e4445379e2458c6c62019bca0ba, type: 3}
+--- !u!114 &2008714374 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8891805061085810973, guid: 3ca594bf229c7b54ab52eec0fbb26362, type: 3}
+  m_PrefabInstance: {fileID: 319502196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaebe025d3f91e740a6694ed27237a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3911949052862069840
 PrefabInstance:
   m_ObjectHideFlags: 0

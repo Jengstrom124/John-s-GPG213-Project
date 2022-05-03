@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 {
-	public AudioSource audio;
+	public AudioSource audioSource;
 	public AudioClip boost;
 	public AudioClip oneEighty;
 	
@@ -45,6 +45,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public float oneEightyVelocityFactor = 5f;
 	public float oneEightyTimeSeconds = 0.7f;
 	public float oneEightyCooldownSeconds = 3f;
+	public float boostOneEightyCooldownSeconds = 1f;
 
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
@@ -56,7 +57,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		{
 			if (isBoosting || isOneEightying)
 			{
-				//accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
+				accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
 			}
 			else
 			{
@@ -117,14 +118,13 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		{
 			acceleratingForce *= boostFactor;
 			isBoosting = true;
-			accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
 			//PopFishFromGuts
 		}
 
 		if (IsClient)
 		{
-			audio.PlayOneShot(boost);
-			audio.Play();
+			audioSource.PlayOneShot(boost);
+			audioSource.Play();
 		}
 
 		yield return new WaitForSeconds(boostTimeSeconds);
@@ -137,7 +137,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 		if (IsClient)
 		{
-			audio.Stop();
+			audioSource.Stop();
 		}
 
 		StartCoroutine(BoostCooldown());
@@ -157,10 +157,10 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	private IEnumerator OneEighty()
 	{
 		float temp = lateralFrictionCoefficient;
+		float tempAngle = transform.rotation.eulerAngles.y+360;
 		if (IsServer)
 		{
 			isOneEightying = true;
-			accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
 			float turnStrength = oneEightyFactor*(acceleratingForce-Vector3.Magnitude(rb.velocity)/oneEightyVelocityFactor)/acceleratingForce;
 			if (steerTarget < 0)
 			{
@@ -176,11 +176,15 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 		if (IsClient)
 		{
-			audio.PlayOneShot(oneEighty);
+			audioSource.PlayOneShot(oneEighty);
 		}
 
-		yield return new WaitForSeconds(oneEightyTimeSeconds);
+		while (!((tempAngle-transform.rotation.eulerAngles.y)%360>60 && (tempAngle-transform.rotation.eulerAngles.y)%360<300))
+		{
+			yield return null;
+		}
 		
+
 		if (IsServer)
 		{
 			lateralFrictionCoefficient = temp;
@@ -220,13 +224,14 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 	public void Action3()
 	{
-		audio.PlayOneShot(oneEighty);
+		audioSource.PlayOneShot(oneEighty);
 	}
 
 	// Start is called before the first frame update
     void Start()
     {
 	    rb = GetComponent<Rigidbody>();
+	    audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
