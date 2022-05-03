@@ -40,4 +40,20 @@ public class Neighbours : MonoBehaviour
             neighboursList.Remove(other.gameObject);
         }
     }
+
+    private void Update()
+    {
+        //HACK: For now to remove neighbours that are no longer active GO's
+        if(neighboursList.Count >= 1)
+        {
+            foreach (GameObject neighbour in neighboursList)
+            {
+                if (!neighbour.activeSelf)
+                {
+                    neighboursList.Remove(neighbour.gameObject);
+                    neighbourLeaveEvent?.Invoke(neighbour.gameObject);
+                }
+            }
+        }
+    }
 }

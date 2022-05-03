@@ -33,8 +33,9 @@ public class CatchFishState : AntAIState
 		{
 			foreach(Collider fishCollider in Physics.OverlapSphere(t.position, fishCatchingRadius, fishLayerMask.value, QueryTriggerInteraction.Ignore))
             {
-				boatControl.totalFishCaught.Add(fishCollider.gameObject);
-				fishCollider.gameObject.SetActive(false);
+				GameObject fish = fishCollider.gameObject;
+				boatControl.totalFishCaught.Add(fish);
+				fish.SetActive(false);
             }
 
 			boatControl.HasFish = true;
