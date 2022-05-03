@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Kevin
 {
-    public class Seal : NetworkBehaviour, IControllable, IReactsToWater
+    public class Seal : NetworkBehaviour, IControllable, IReactsToWater, IReactsToInk
 {
     #region Variables
 
@@ -113,15 +113,6 @@ namespace Kevin
             yield return new WaitForSeconds(reduction);
         }
     }
-
-    /*IEnumerator BoosterLimit()
-    {
-        if (IsServer)
-        {
-            yield return new WaitForSeconds(3f);
-            accelerationSpeed = 10f;
-        }
-    }*/
 
     #region JumpFunctions
 
@@ -247,8 +238,7 @@ namespace Kevin
     
     public void Action()
     {
-        /*accelerationForce =  20f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
-        StartCoroutine(BoosterLimit());*/
+        
     }
 
     public void Action2()
@@ -284,7 +274,13 @@ namespace Kevin
     public bool IsWet { get; set; }
 
     #endregion
-    
+
+    #region IReactToInk
+    public void ChangeInkedState(bool isInked)
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 }
 }
 
