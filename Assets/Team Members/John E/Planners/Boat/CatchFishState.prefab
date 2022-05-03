@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e13ca9abd183904985bd99fc7fb3c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishCatchingRadius: 10
+  fishCatchingRadius: 15
   fishLayerMask:
     serializedVersion: 2
     m_Bits: 128

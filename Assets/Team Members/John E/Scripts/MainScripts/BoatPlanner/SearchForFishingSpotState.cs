@@ -127,13 +127,6 @@ public class SearchForFishingSpotState : AntAIState
 		resetThresholdMet = true;
 	}
 
-	IEnumerator ResetState()
-	{
-		yield return new WaitForSeconds(5f);
-
-		Finish();
-	}
-
 	//OLD - ignore this
 	IEnumerator GoToFishCoroutine()
     {
