@@ -86,7 +86,7 @@ namespace Ollie
         {
             if (IsServer && IsOwner)
             {
-                stomach.fishContainer.PopFishFromGuts(0);
+                stomach.fishContainer.PopFishFromGuts(1); //change this from 1 to edibleInfo.amount at some point
                 print("after shitting, count equals " +stomach.fishContainer.totalFoodAmount);
             }
         }
