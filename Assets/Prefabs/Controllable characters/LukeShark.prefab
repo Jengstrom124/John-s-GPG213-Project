@@ -760,6 +760,8 @@ GameObject:
   - component: {fileID: 7851975525607619270}
   - component: {fileID: 887061758960150927}
   - component: {fileID: 3726469031803898318}
+  - component: {fileID: -5105351812121981957}
+  - component: {fileID: 4884837710720020151}
   m_Layer: 0
   m_Name: LukeShark
   m_TagString: Untagged
@@ -829,9 +831,6 @@ MonoBehaviour:
   wigglePeriodInSeconds: 2
   maxWiggleAngle: 10
   maxSteeringAngle: 45
-  currentSteeringAngle: 0
-  localVelocity: {x: 0, y: 0, z: 0}
-  tailLocalVelocity: {x: 0, y: 0, z: 0}
   boostReady: 1
   isBoosting: 0
   boostFactor: 3
@@ -841,8 +840,8 @@ MonoBehaviour:
   isOneEightying: 0
   oneEightyFactor: 2.5
   oneEightyVelocityFactor: 5
-  oneEightyTimeSeconds: 0.65
   oneEightyCooldownSeconds: 3
+  foodLevel: 10
 --- !u!82 &17744540717904349
 AudioSource:
   m_ObjectHideFlags: 0
@@ -949,7 +948,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 8cf9d30181692d44db9e92b6bfd5cb28, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.1796067
+  m_Radius: 0.96
   m_Height: 6.5892653
   m_Direction: 2
   m_Center: {x: 0.0000036066458, y: 0.15, z: -1.0532641}
@@ -1008,6 +1007,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5105351812121981957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227251270856557637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1f1a6ea2350014fb2c93b0e25333ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContainerContents: []
+--- !u!135 &4884837710720020151
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227251270856557637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.03
+  m_Center: {x: 0, y: 0, z: 1.29}
 --- !u!1 &7823118384569480985
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,6 +41,14 @@ public class CamFish_Model : MonoBehaviour, IEdible, IReactsToWater
 		edibleInfo.amount = 1;
 		
 		return edibleInfo;
+
+		// Fancy syntax for quickly newing an object AND setting variables if you don't want to have lots of lines as above
+		// return new EdibleInfo() {edibleType = EdibleType.Food, amount = 1};
+	}
+
+	public void GotShatOut(IPredator shatOutBy)
+	{
+		
 	}
 
 	public bool IsWet { get; set; }

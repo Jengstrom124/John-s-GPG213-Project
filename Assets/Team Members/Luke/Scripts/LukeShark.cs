@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -10,6 +11,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public AudioClip oneEighty;
 	
 	public Rigidbody rb;
+	private FishContainer stomach;
 	public Transform preJointTransform;
 	public Transform mainJointTransform;
 	public Transform postJointTransform;
@@ -29,9 +31,9 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 	private float lerpValue = 0.1f;
 
-	public float currentSteeringAngle = 0f;
-	public Vector3 localVelocity;
-	public Vector3 tailLocalVelocity;
+	private float currentSteeringAngle = 0f;
+	private Vector3 localVelocity;
+	private Vector3 tailLocalVelocity;
 
 	public bool boostReady = true;
 	public bool isBoosting = false;
@@ -48,6 +50,9 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
 	private float steerTarget;
+	
+	//hunger
+	public float foodLevel = 10f;
 
 	public void Accelerate(float input)
 	{
@@ -150,7 +155,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	
 	#endregion
 	
-	#region 180 Ability
+	#region OneEighty Ability
 	
 	private IEnumerator OneEighty()
 	{
@@ -233,6 +238,8 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
     {
 	    rb = GetComponent<Rigidbody>();
 	    audioSource = GetComponent<AudioSource>();
+	    stomach = GetComponent<FishContainer>();
+	    StartCoroutine(DepleteFood());
     }
 
     // Update is called once per frame
@@ -264,16 +271,32 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			    steeringFrictionCoefficient * rb.mass *
 			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipTransform.position);
 	    }
+	    
+	    transform.localScale = Vector3.one * (1f + Mathf.Sqrt(foodLevel) / 10f);
     }
 
-    public void GotFood(float amount)
+    private void OnTriggerEnter(Collider other)
     {
+	    //should check for size difference here
 	    
+	    IEdible food = other.gameObject.GetComponent<IEdible>();
+	    if (food != null)
+	    {
+		    food.GetEaten(this);
+	    }
+	    
+	    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
+	    if (fishFood != null)
+	    {
+		    stomach.AddToStomach(fishFood);
+	    }
     }
 
-    public void ChangeBoost(float amount)
+    private IEnumerator DepleteFood()
     {
-	    
+	    yield return new WaitForSeconds(1f);
+	    foodLevel--;
+	    StartCoroutine(DepleteFood());
     }
 
     public void GetEaten(IPredator eatenBy)

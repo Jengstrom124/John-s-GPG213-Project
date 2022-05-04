@@ -47,11 +47,6 @@ namespace Ollie
                 {
                     WaterCheck();
                 }
-
-                if (rb.position.y < 10f && !jumping)
-                {
-                    rb.constraints = originalConstraints;
-                }
             }
         }
 

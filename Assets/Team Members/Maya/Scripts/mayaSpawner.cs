@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class mayaSpawner : MonoBehaviour
@@ -60,25 +61,29 @@ public class mayaSpawner : MonoBehaviour
 
 	public void SpawnStuff()
 	{
-		for (int i = 0; i < spawnCount; i++)
+		if (NetworkManager.Singleton.IsServer)
 		{
-			GameObject newObject = Instantiate(objectsToSpawn[Random.Range(0,objectsToSpawn.Count-1)]) as GameObject;
-			newObject.transform.localScale = new Vector3(fudgeScale, fudgeScale, fudgeScale);
+			for (int i = 0; i < spawnCount; i++)
+			{
+				GameObject newObject = Instantiate(objectsToSpawn[Random.Range(0,objectsToSpawn.Count-1)]) as GameObject;
+				newObject.GetComponent<NetworkObject>().Spawn();
+				newObject.transform.localScale = new Vector3(fudgeScale, fudgeScale, fudgeScale);
 			
 
-			Vector3 finalPosition = CalculateRandomPosition(waterOrNot);
+				Vector3 finalPosition = CalculateRandomPosition(waterOrNot);
 			
 
-			newObject.transform.position = finalPosition;
+				newObject.transform.position = finalPosition;
 
 
-			if (spawnFacingForward)
-			{
-				newObject.transform.rotation = Quaternion.Euler(transform.forward);
-			}
-			else
-			{
-				newObject.transform.rotation = Quaternion.Euler(newObject.transform.rotation.x, Random.Range(1, 359), newObject.transform.rotation.z);
+				if (spawnFacingForward)
+				{
+					newObject.transform.rotation = Quaternion.Euler(transform.forward);
+				}
+				else
+				{
+					newObject.transform.rotation = Quaternion.Euler(newObject.transform.rotation.x, Random.Range(1, 359), newObject.transform.rotation.z);
+				}
 			}
 		}
 	}

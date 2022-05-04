@@ -69,12 +69,12 @@ public class mayaSquid : MonoBehaviour, IControllable
 
     public void GrowTheInk()
     {
-        inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(3, 0, 3), 5f);
-        inkSplatterSpawned.GetComponent<Transform>().DORotate(new Vector3(0, 90, 0), 5f);
+        inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(300, 0, 300), 5f);
+       // inkSplatterSpawned.GetComponent<Transform>().DORotate(new Vector3(0, 90, 0), 5f);
     }
     public void ShrinkTheInk()
     {
-        inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(0, 0, 0), 25f);
+        inkSplatterSpawned.GetComponent<Transform>().DOScale(new Vector3(0, 0, 0), 60f);
     }
 
 

@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9dbe715156a164283f060b759590f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkView: {fileID: 0}
-  inks: []
+  inkView: {fileID: 4418354094055849581}
+  inks:
+  - {fileID: 2100000, guid: 2253daeda6bedb04792787879e678f82, type: 2}
+  - {fileID: 2100000, guid: 7ee321e20f3e75e408603db6976a1d9d, type: 2}
+  - {fileID: 2100000, guid: 7dc1ed2b9daa49a4a9ff7a02aae057f8, type: 2}
 --- !u!1 &4418354094055849581
 GameObject:
   m_ObjectHideFlags: 0
