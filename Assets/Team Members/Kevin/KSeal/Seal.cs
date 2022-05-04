@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Anthill.Effects;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Kevin
 {
@@ -247,7 +248,7 @@ namespace Kevin
         }
     }
     
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
         if (IsServer)
         {
@@ -258,7 +259,7 @@ namespace Kevin
         }
     }
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
         if(IsServer && isJumping == false)
         {
@@ -268,7 +269,7 @@ namespace Kevin
         
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
        
     }

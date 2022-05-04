@@ -6,6 +6,7 @@ using Luke;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Flock = Kevin.Flock;
 using Vector3 = UnityEngine.Vector3;
 
@@ -122,17 +123,17 @@ public class KFish : FishBase, IControllable, IReactsToWater, IStateBase, IRTS, 
         fRb.AddForceAtPosition(input*acceleration*transform.TransformDirection(Vector3.back), transform.position,0);
     }
     
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
         throw new System.NotImplementedException();
     }
