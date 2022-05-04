@@ -28,17 +28,19 @@ public class Separation : SteeringBase
 
 	public override Vector3 CalculateMove(List<GameObject> neighbours)
 	{
+
 		if (neighbours.Count == 0)
 		{
 			return Vector3.zero;
 		}
 
 		Vector3 separationMove = Vector3.zero;
+		Vector3 myPos = transform.position;
 
 		foreach (GameObject neighbour in neighbours)
 		{
 			//Check my Distance from each neighbour
-			myDistance = Vector3.Distance(transform.position, neighbour.transform.position);
+			myDistance = Vector3.Distance(myPos, neighbour.transform.position);
 
 			//if we are too close
 			if(myDistance < minDistance)
