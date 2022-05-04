@@ -68,7 +68,7 @@ public partial class @DefaultControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a010044d-9858-4fd5-91c0-ff24e05e8dd8"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -90,7 +90,7 @@ public partial class @DefaultControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""540237d7-72b6-4f72-b0fa-33b66b1b3963"",
-                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
