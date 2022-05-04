@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Gerallt
 {
@@ -18,6 +20,8 @@ namespace Gerallt
 
         public mayaSpawner spawner;
 
+        public event Action SelectedLevelEvent;
+        
         public void LoadLevel(string levelName)
         {
             //SceneManager.sceneLoaded += SceneManager_OnsceneLoaded;
@@ -33,7 +37,6 @@ namespace Gerallt
             }
             
             NetworkManager.Singleton.SceneManager.LoadScene(levelName, LoadSceneMode.Additive); // Wouldn't synchronise the correct LoadSceneMode well for players that joined late
-            spawner.SpawnStuff();
         }
         
         //TODO : need to test when client join works again
@@ -42,8 +45,7 @@ namespace Gerallt
 	        SceneManager.UnloadSceneAsync(level);
         }
 
-        [ClientRpc]
-        public void SetActiveSceneClientRpc(string sceneName)
+        public void SetActiveScene(string sceneName)
         {
             Scene scene = SceneManager.GetSceneByName(sceneName);
             
@@ -85,8 +87,12 @@ namespace Gerallt
                     // {
                     //     GameManager.Instance.StartGame(); // Spawn the characters in the level
                     // }
+                    spawner.SpawnStuff(); // Fish to spawn ONLY AFTER level finished loading (because it needs heights etc)
                     
-                    break;
+                    // For the UI mainly to force player to choose a level first
+                    SelectedLevelEvent?.Invoke();
+                    
+				break;
             }
         }
 
@@ -109,13 +115,14 @@ namespace Gerallt
             }
 
             // Level has loaded so hide all UIs.
-            GameManager.Instance.RaiseChangeLevelsVisibilityClientRpc(false);
+            // TODO: We'll remove UI on StartGame, not level loaded
+            // GameManager.Instance.RaiseChangeLevelsVisibilityClientRpc(false);
             
             // Destroy cameras on new scene for each client
             DestroyCamerasClientRpc(sceneName);
      
-            // Tell all the clients to set this new scene as the active one.
-            //SetActiveSceneClientRpc(sceneName);
+            // For dynamic spawning of things to go in the loaded scene, not manager
+            SetActiveScene(sceneName);
 
             // GameManager.Instance.hasGameStarted.OnValueChanged += delegate(bool value, bool newValue)
             // {
@@ -129,22 +136,24 @@ namespace Gerallt
             // GameManager.Instance.GetGameStartedServerRpc();
 
             
+
+            // TODO: disabled auto start game on level select for now
             
             //if (!HasGameStartedState.Instance.hasGameStarted.Value)
-            if(!GameManager.Instance.hasGameStarted.Value) // lateJoin == false && 
-            {
-                GameManager.Instance.StartGame();
-                
-                // if (ServerManager.Singleton.IsServer)
-                // {
-                //     HasGameStartedState.Instance.hasGameStarted.Value = true;
-                // }
-                
-            }
-            else
-            {
-                //GameManager.Instance.StartPlayerServerRpc();
-            }
+            // if(!GameManager.Instance.hasGameStarted.Value) // lateJoin == false && 
+            // {
+            //     GameManager.Instance.StartGame();
+            //     
+            //     // if (ServerManager.Singleton.IsServer)
+            //     // {
+            //     //     HasGameStartedState.Instance.hasGameStarted.Value = true;
+            //     // }
+            //     
+            // }
+            // else
+            // {
+            //     //GameManager.Instance.StartPlayerServerRpc();
+            // }
         }
 
         public void DestroyCameras()

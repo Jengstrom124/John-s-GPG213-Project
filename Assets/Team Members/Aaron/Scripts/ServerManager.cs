@@ -269,7 +269,7 @@ public class ServerManager : NetworkManager
     //Starting Game, waiting on event from lobby
     public void StartGame()
     {
-        GameManager.Instance.StartLevelSelect();
+        GameManager.Instance.StartGame();
     }
 
     #region GUI Buttons

@@ -32,7 +32,8 @@ public class InAirSpawner : MonoBehaviour
 	private void SpawnBirds(int x, int y, GameObject parent)
 	{
 		Vector3 worldPosition = new Vector3(x, 15f, y)/* + _terrain.transform.position*/;
-		Instantiate(birdPrefabs[Random.Range(0, birdPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
+		GameObject instantiate = Instantiate(birdPrefabs[Random.Range(0, birdPrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
+		instantiate.isStatic = true;
 	}
 
 	void Awake()

@@ -82,6 +82,16 @@ namespace Gerallt
             //Setting the joining IP address to Cam's by default; reflecting the address in the UI input field
             //UpdateIP("121.200.8.114");
             UpdateIP(GetIPAddress());
+            
+            UILevelsViewModel.Instance.SelectedLevelEvent += OnSelectedLevelEvent;
+        }
+
+        private void OnSelectedLevelEvent()
+        {
+	        buttonStartGame.gameObject.SetActive(true);
+	        buttonStartGame.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 0.25f, 20, 4f);
+	        buttonStartGame.transform.DOPunchRotation(new Vector3(3.3f,3.3f,3.3f), 0.65f, 20, 4f);
+
         }
 
         private string GetIPAddress()
@@ -167,10 +177,7 @@ namespace Gerallt
 
         public void StartHost_ButtonClicked()
         {
-            buttonStartGame.gameObject.SetActive(true);
-            buttonStartGame.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 0.25f, 20, 4f);
-            buttonStartGame.transform.DOPunchRotation(new Vector3(3.3f,3.3f,3.3f), 0.65f, 20, 4f);
-            
+            buttonStartGame.gameObject.SetActive(false);
             buttonHostGame.gameObject.SetActive(false);
             buttonJoinGame.gameObject.SetActive(false);
             UIServerIPInput.gameObject.SetActive(false);
@@ -181,11 +188,13 @@ namespace Gerallt
 
         public void StartGame_ButtonClicked()
         {
-            buttonStartGame.gameObject.SetActive(false);
-            buttonHostGame.gameObject.SetActive(false);
-            buttonJoinGame.gameObject.SetActive(false);
-            UIServerIPInput.gameObject.SetActive(false);
-            
+        //     buttonStartGame.gameObject.SetActive(false);
+        //     buttonHostGame.gameObject.SetActive(false);
+        //     buttonJoinGame.gameObject.SetActive(false);
+        //     UIServerIPInput.gameObject.SetActive(false);
+			view.SetActive(false);
+        
+        
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.StartGame();
         }

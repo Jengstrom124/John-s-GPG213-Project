@@ -50,6 +50,9 @@ public class AvoidObstacle : MonoBehaviour
 
     void FixedUpdate()
     {
+	    if(Random.value>0.1f)
+		    return;
+	    
         RaycastHit hitinfo;
         hitinfo = new RaycastHit();
         Physics.Raycast(transform.position, transform.forward, out hitinfo, maxLength, layerMask.value, QueryTriggerInteraction.Ignore);
@@ -113,7 +116,7 @@ public class AvoidObstacle : MonoBehaviour
                 }
             }
 
-            rb.AddRelativeTorque(0, turnForce, 0, ForceMode.Acceleration);
+            rb.AddRelativeTorque(0, turnForce*10f, 0, ForceMode.Acceleration);
         }
         else
         {

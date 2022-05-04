@@ -49,6 +49,8 @@ public class OnLandSpawner : MonoBehaviour
 						go = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Count)], worldPosition, Quaternion.Euler(0, Random.Range(-179, 180),0), parent.transform);
 						go.transform.localScale *= 2f;
 						go.transform.position += new Vector3(Random.Range(-0.2f,0.2f),0,Random.Range(-0.2f,0.2f));
+						go.isStatic = true;
+
 					}
 				}
 			}
