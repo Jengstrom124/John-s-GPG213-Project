@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 
 namespace AnGelloStuff
 {
-    public class SharkController : MonoBehaviour, IControllable
+    public class SharkController : NetworkBehaviour, IControllable, IPredator
     {
         public int AccelSpeed;
         public int steeringSpeed;
         public int JumpForce;
         public int SplashForce;
         public int ChargeForce;
+        public int foodCounter;
         float AccelInput;
         float SteerInput;
         float ReverseInput;
@@ -20,10 +22,12 @@ namespace AnGelloStuff
         public KeyCode SecondAction;
 
         public Transform TailPos;
+        public Vector3 Bum;
         private float timer;
 
         public Material regularMat;
         public Material actioningMat;
+        private FishContainer fishCounter;
 
         Rigidbody rb;
 
@@ -43,6 +47,7 @@ namespace AnGelloStuff
             regularMat = GetComponentInChildren<SkinnedMeshRenderer>().material;
             curState = State.State_Swimming;
             rb = GetComponent<Rigidbody>();
+            fishCounter = GetComponent<FishContainer>();
         }
 
         // Update is called once per frame
@@ -56,40 +61,48 @@ namespace AnGelloStuff
             {
                 if (Input.GetKeyDown(FirstAction))
                 {
-                    curState = State.State_Splashdown;
-                    rb.AddForceAtPosition(new Vector3(0, JumpForce, 0), transform.position);
-                    GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
+                    
+                        rb.AddForceAtPosition(new Vector3(0, JumpForce, 0), transform.position);
+                    
+                    
+                        curState = State.State_Splashdown;
+                        GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
+                    
                     //transform.Rotate(-90, 0, 0);
                 }
                 else if (Input.GetKeyDown(SecondAction))
                 {
-                    curState = State.State_Charge;
-                    GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
+                    
+                        curState = State.State_Charge;
+                        GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
+                    
                 }
             }          
         }
 
         private void FixedUpdate()
         {
-            switch (curState)
-            {
-                case State.State_Swimming:
-                    DriveShark(AccelInput + ReverseInput, SteerInput);
-                    break;
-                case State.State_Splashdown:
-                    Action(InputActionPhase.Performed);
-                    break;
-                case State.State_Charge:
-                    Action2(InputActionPhase.Performed);
-                    break;
-            }
+            
+                switch (curState)
+                {
+                    case State.State_Swimming:
+                        DriveShark(AccelInput + ReverseInput, SteerInput);
+                        break;
+                    case State.State_Splashdown:
+                        //Action();
+                        break;
+                    case State.State_Charge:
+                        //Action2();
+                        break;
+                }
+             
         }
 
         void DriveShark(float accelarate, float steering)
         {
             rb.AddForceAtPosition(-TailPos.up * AccelSpeed * accelarate * Time.deltaTime,transform.position);
             //rb.AddForceAtPosition(TailPos.forward * AccelSpeed * accelarate, transform.position);
-            rb.AddRelativeTorque(0, steering * steeringSpeed, 0);
+            rb.AddRelativeTorque(0, steering * steeringSpeed * (AccelInput + ReverseInput), 0);
         }
 
         public void Steer(float input)
@@ -122,13 +135,13 @@ namespace AnGelloStuff
             //rb.AddRelativeForce(new Vector3(0, -SplashForce, 0));
         }
 
-        public void Action2(InputActionPhase aActionPhase)
+        public void Action2(InputActionPhase aInputActionPhase)
         {
             rb.AddForceAtPosition(-TailPos.transform.up * ChargeForce * Time.deltaTime, transform.position);
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        public void Action3(InputActionPhase aActionPhase)
+        public void Action3(InputActionPhase aInputActionPhase)
         {
             throw new System.NotImplementedException();
         }
@@ -136,12 +149,46 @@ namespace AnGelloStuff
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(curState == State.State_Charge)
+            
+                if (curState == State.State_Charge)
+                {
+                    curState = State.State_Swimming;
+                    GetComponentInChildren<SkinnedMeshRenderer>().material = regularMat;
+                    rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                }
+            
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            IEdible edible = other.GetComponent<IEdible>();
+            FishBase fish = other.GetComponent<FishBase>();
+
+            if(edible != null)
             {
-                curState = State.State_Swimming;
-                GetComponentInChildren<SkinnedMeshRenderer>().material = regularMat;
-                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                fishCounter.AddToStomach(fish);
+                Debug.Log("Eart");
             }
+
+            if(fish != null)
+            {
+                foodCounter = fishCounter.totalFoodAmount;   
+            }
+        }
+
+        public Vector3 GetBumPosition()
+        {
+            return Bum;
+        }
+
+        public void GetEaten(IPredator eatenBy)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public EdibleInfo GetInfo()
+        {
+            return new EdibleInfo();
         }
     }
 }

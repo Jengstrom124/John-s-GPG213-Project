@@ -25,9 +25,9 @@ public class HoverSystem : MonoBehaviour
         RaycastHit hit;
         direction = transform.TransformDirection(Vector3.down);
         
-        if (Physics.Raycast(transform.position, direction, out hit,1f))
+        if (Physics.Raycast(transform.position, direction, out hit, MaxHover))
         {
-            float force = 1 - hit.distance;
+            float force = MaxHover - hit.distance;
             force *= HoverForce;
             
             physicsRef.AddForceAtPosition(new Vector3(0,force,0),transform.position);

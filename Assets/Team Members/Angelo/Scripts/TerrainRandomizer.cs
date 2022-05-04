@@ -19,10 +19,14 @@ namespace AnGelloStuff
         public float testvalue;
         public float testheight;
 
+        public float testcondition;
+        public GameObject testobject;
+
         private void Awake()
         {
-            //Terrain terrain = GetComponent<Terrain>();
-            //terrain.terrainData = GenerateTerrain(terrain.terrainData);
+            Terrain terrain = GetComponent<Terrain>();
+            terrain.terrainData = GenerateTerrain(terrain.terrainData);
+            
         }
         void Start()
         {
@@ -32,8 +36,8 @@ namespace AnGelloStuff
 
         void Update()
         {
-            Terrain terrain = GetComponent<Terrain>();
-            terrain.terrainData = GenerateTerrain(terrain.terrainData);
+            //Terrain terrain = GetComponent<Terrain>();
+            //terrain.terrainData = GenerateTerrain(terrain.terrainData);
         }
 
         TerrainData GenerateTerrain(TerrainData terrainData)
