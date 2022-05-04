@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Kevin
 {
-    public class Seal : NetworkBehaviour, IControllable, IReactsToWater, IReactsToInk
+    public class Seal : NetworkBehaviour, IControllable, IReactsToWater, IReactsToInk, IPredator
 {
     #region Variables
 
@@ -21,10 +21,10 @@ namespace Kevin
     public Vector3 tailPosition;
     public Vector3 accelerationForce;
     public Vector3 reverseForce;
-
     //Transforms
+    public Transform sealSize;
     public Transform headTransform; 
-    public Transform tailTransform;
+    public Transform steeringTailTransform;
     public Transform jumpTransform;
     
     //Wiggle Transforms
@@ -41,7 +41,8 @@ namespace Kevin
     public float currentSteeringMax;
     public float airSteeringMax = 15f;
     public float reduction = 0.5f;
-
+    public float landDrag;
+    public float waterDrag;
     public float currentBobbleAngle;
     
     //Check if jumping
@@ -58,10 +59,6 @@ namespace Kevin
     //public AudioSource jumpSound;
 
     #endregion
-    /*void Awake()
-    {
-        sealPrefab.transform.position = new Vector3(75f,15f,105f);
-    }*/
     void Start()
     {
         if (IsServer)
@@ -74,19 +71,20 @@ namespace Kevin
     }
     void FixedUpdate()
     {
+        currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, lerpValue);
         if (IsServer)
         {
-            Vector3 tailPosition = tailTransform.position;
+            Vector3 tailPosition = steeringTailTransform.position;
         
             localVelocity = transform.InverseTransformDirection(sealRigidbody.velocity);
-            tailLocalVelocity = tailTransform.InverseTransformDirection(sealRigidbody.GetPointVelocity(tailPosition));
+            tailLocalVelocity = steeringTailTransform.InverseTransformDirection(sealRigidbody.GetPointVelocity(tailPosition));
         
             sealRigidbody.AddRelativeForce(sealRigidbody.mass*new Vector3 (-localVelocity.x, 0, 0));
-            sealRigidbody.AddForceAtPosition(sealRigidbody.mass*tailTransform.TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
+            sealRigidbody.AddForceAtPosition(sealRigidbody.mass*steeringTailTransform.TransformDirection(new Vector3 (-tailLocalVelocity.x, 0, 0)), tailPosition);
             
             sealRigidbody.AddForceAtPosition(accelerationForce, transform.position);
             sealRigidbody.AddForceAtPosition(reverseForce, transform.position);
-            currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, targetAngle, lerpValue);
+            
             
             if (localVelocity.z > 0) 
             {
@@ -95,13 +93,13 @@ namespace Kevin
 
             if (IsWet == false && isJumping == false)
             {
-                sealRigidbody.drag = 2f;
-                sealRigidbody.angularDrag = 2f;
+                sealRigidbody.drag = landDrag;
+                sealRigidbody.angularDrag = landDrag;
             }
             else
             {
-                sealRigidbody.drag = 0f;
-                sealRigidbody.angularDrag = 0.5f;
+                sealRigidbody.drag = waterDrag;
+                sealRigidbody.angularDrag = waterDrag;
             }
         }
     }
@@ -157,51 +155,46 @@ namespace Kevin
 
     public void Steer(float input)
     {
-        if (IsServer)
+        if (IsWet == false && input < 0 && isJumping == false)
         {
-            if (IsWet == false && input < 0 && isJumping == false)
-            {
                 sealRigidbody.AddRelativeTorque(new Vector3(0f,-3f,0f));
                 float currentYEuler = transform.eulerAngles.y;
             
                 targetAngle = -input * currentSteeringMax;
             
            
-                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                steeringTailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
                 tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
                 tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
                 tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
                 headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
-            }
-            else if (IsWet == false && input > 0 && isJumping == false)
-            {
+        }
+        else if (IsWet == false && input > 0 && isJumping == false)
+        {
                 sealRigidbody.AddRelativeTorque(new Vector3(0f,3f,0f));
                 float currentYEuler = transform.eulerAngles.y;
             
                 targetAngle = -input * currentSteeringMax;
             
            
-                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                steeringTailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
                 tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
                 tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
                 tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
                 headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
-            }
-            else
-            {
+        }
+        else
+        {
                 float currentYEuler = transform.eulerAngles.y;
             
                 targetAngle = -input * currentSteeringMax;
             
            
-                tailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
+                steeringTailTransform.eulerAngles = new Vector3(0, currentYEuler + 2f * currentSteeringAngle, 0);
                 tailLeadTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.25f * currentSteeringAngle ,0f);
                 tailMidTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.5f * currentSteeringAngle ,0f);
                 tailTipTransform.eulerAngles = new Vector3(90f,currentYEuler + 0.75f * currentSteeringAngle ,0f);
                 headTransform.eulerAngles = new Vector3(60f,currentYEuler, currentSteeringAngle/2f);
-            }
-          
-            
         }
     }
     public void Accelerate(float input)
@@ -245,22 +238,11 @@ namespace Kevin
     {
         if(IsServer && isJumping == false)
         {
-            //jumpSound.Play();
+            
             Jump();
             StartCoroutine(JumpTimer());
         }
         
-        //View
-        if (IsClient)
-        {
-            
-        }
-        
-        //Model
-        if (IsServer)
-        {
-            
-        }
     }
 
     public void Action3()
@@ -281,6 +263,23 @@ namespace Kevin
         throw new System.NotImplementedException();
     }
     #endregion
+
+    public Vector3 GetBumPosition()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 }
+
+/*//View
+    if (IsClient)
+    {
+        
+    }
+    
+    //Model
+    if (IsServer)
+    {
+        
+    }*/
 
