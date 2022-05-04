@@ -140,10 +140,11 @@ Transform:
   m_GameObject: {fileID: 2219981257583123356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1.843413}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3956263565174007993}
+  - {fileID: 6849605136325016091}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -217,8 +218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38440e98a023f640b5e7e82c76e0e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  centreOfVisionPosition: {fileID: 6849605136325016091}
+  visionRadius: 27
   neighboursList: []
-  fishColliders: []
+  Colliders: []
 --- !u!114 &3166194528815824960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +295,7 @@ CapsuleCollider:
   m_Radius: 27
   m_Height: 27.18
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 10.96}
+  m_Center: {x: 0, y: 0, z: 21.23}
 --- !u!114 &-7430627336242286335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2219981257583123345}
-  distanceThreshold: 10
+  distanceThreshold: 15
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -348,6 +351,7 @@ MonoBehaviour:
   usePathSmoothing: 1
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
+  pathGenerated: 0
 --- !u!135 &5782148432238425947
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -416,3 +420,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8048203333455612490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6849605136325016091}
+  m_Layer: 7
+  m_Name: CentreOfVision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6849605136325016091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8048203333455612490}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 21.23}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2219981257583123345}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

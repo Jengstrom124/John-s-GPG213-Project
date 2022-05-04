@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FishContainer : MonoBehaviour
 {
-	public Stack<FishBase> ContainerContents = new Stack<FishBase>();
+	private Stack<FishBase> ContainerContents = new Stack<FishBase>();
     
     public int totalFoodAmount;
 
@@ -29,6 +29,11 @@ public class FishContainer : MonoBehaviour
     //Re-activate the last fish eaten if boost used; remove it from the list
     public void PopFishFromGuts(int foodValueToPop)
     {
+	    if (ContainerContents.Count <= 0)
+	    {
+		    return;
+	    }
+	    
 	    FishBase lastFish = ContainerContents.Peek();
 	    
 	    totalFoodAmount -= lastFish.GetComponent<IEdible>().GetInfo().amount;
