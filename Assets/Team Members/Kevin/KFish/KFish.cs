@@ -178,4 +178,9 @@ public class KFish : FishBase, IControllable, IReactsToWater, IStateBase, IRTS, 
     {
         throw new System.NotImplementedException();
     }
+
+    public void GotShatOut(IPredator shatOutBy)
+    {
+        throw new System.NotImplementedException();
+    }
 }
