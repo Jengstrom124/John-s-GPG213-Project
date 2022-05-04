@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c275963767a60fc48ae3a2f8285bcf07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLength: 30
+  maxLength: 20
   dragMultiplier: 10
   layerMask:
     serializedVersion: 2
@@ -52,7 +52,7 @@ MonoBehaviour:
   myTurnDirection: 0
   isEmergencyFeeler: 0
   speedReductionMultiplier: 3
-  minSpeed: 2
+  minSpeed: 1
   visualizeRays: 0
   turnForce: 0
   distance: 0
