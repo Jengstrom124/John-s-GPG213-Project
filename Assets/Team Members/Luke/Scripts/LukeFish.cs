@@ -140,6 +140,11 @@ public class LukeFish : FishBase, IControllable, IRTS, IEdible
 		return new EdibleInfo();
 	}
 
+	public void GotShatOut(IPredator shatOutBy)
+	{
+		
+	}
+
 	public void Selected()
 	{
 		flock.Exit();
