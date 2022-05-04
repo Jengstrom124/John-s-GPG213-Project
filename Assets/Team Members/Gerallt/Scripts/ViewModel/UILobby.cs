@@ -161,8 +161,8 @@ namespace Gerallt
             buttonJoinGame.gameObject.SetActive(false);
             UIServerIPInput.gameObject.SetActive(false);
 
-            // ServerManager serverManager = ServerManager.Singleton as ServerManager;
-            // serverManager.JoinServer(localPlayerData, autoCreateHost: true);
+            ServerManager serverManager = ServerManager.Singleton as ServerManager;
+            serverManager.JoinServer(localPlayerData, autoCreateHost: true);
         }
 
         public void StartHost_ButtonClicked()
@@ -175,8 +175,8 @@ namespace Gerallt
             buttonJoinGame.gameObject.SetActive(false);
             UIServerIPInput.gameObject.SetActive(false);
             
-            // ServerManager serverManager = ServerManager.Singleton as ServerManager;
-            // serverManager.Host(localPlayerData);
+            ServerManager serverManager = ServerManager.Singleton as ServerManager;
+            serverManager.Host(localPlayerData);
         }
 
         public void StartGame_ButtonClicked()
@@ -186,8 +186,8 @@ namespace Gerallt
             buttonJoinGame.gameObject.SetActive(false);
             UIServerIPInput.gameObject.SetActive(false);
             
-            // ServerManager serverManager = ServerManager.Singleton as ServerManager;
-            // serverManager.StartGame();
+            ServerManager serverManager = ServerManager.Singleton as ServerManager;
+            serverManager.StartGame();
         }
         
         private void NetworkedObjectsOnOnListChanged(Unity.Netcode.NetworkListEvent<LobbyPlayerData> changeEvent)
