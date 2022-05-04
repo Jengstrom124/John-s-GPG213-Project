@@ -32,8 +32,7 @@ public class TurnTowards : MonoBehaviour
 
         if(neighbours != null)
         {
-            neighbours.newNeighbourEvent += CheckForPredator;
-            neighbours.neighbourLeaveEvent += PredatorOutOfSight;
+            neighbours.seePredatorEvent += CheckForPredator;
         }
 
         pathTracker.newTargetAssignedEvent += SetDestinationTarget;
@@ -113,17 +112,13 @@ public class TurnTowards : MonoBehaviour
     #region Predator Specific Implementation
     void CheckForPredator(GameObject other)
     {
-        if (other.GetComponent<IPredator>() != null)
-        {
-            EscapePredator(true, other.transform);
-        }
-    }
-
-    void PredatorOutOfSight(GameObject other)
-    {
-        if (other.GetComponent<IPredator>() != null)
+        if(other == null)
         {
             EscapePredator(false, null);
+        }
+        else if(other.GetComponent<IPredator>() != null)
+        {
+            EscapePredator(true, other.transform);
         }
     }
 
