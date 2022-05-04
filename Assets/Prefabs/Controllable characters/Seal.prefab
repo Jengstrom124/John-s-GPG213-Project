@@ -1790,7 +1790,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sealRigidbody: {fileID: 3049122826345489953}
   sealPrefab: {fileID: 2055310735626418041}
-  fishContainer: {fileID: 4823134483231061756}
+  mouthPrefab: {fileID: 2055310734427170053}
+  mouthFishContainer: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   tailLocalVelocity: {x: 0, y: 0, z: 0}
   tailPosition: {x: 0, y: 0, z: 0}

@@ -13,27 +13,21 @@ namespace Kevin
         {
             fishContainer = GetComponent<FishContainer>(); 
         }
-
-        /*public void Update()
-        {
-            scaleAmount = fishContainer.totalFoodAmount / 10f;
-        }*/
         void OnTriggerEnter(Collider other)
         {
             
             if (!other.isTrigger)
             {
                 IEdible edible = other.GetComponent<IEdible>();
-            
+                FishBase fish = other.GetComponent<FishBase>();
+                
                 if (edible != null)
                 {
-                    sealPrefab.transform.localScale += Vector3.one * scaleAmount * (1f + fishContainer.totalFoodAmount/100f); 
+                    fishContainer.AddToStomach(fish);
                 }
-            
-                FishBase fish = other.GetComponent<FishBase>();
+                
                 if (fish != null)
                 {
-                    fishContainer.AddToStomach(fish);
                     sealPrefab.GetComponent<Seal>().foodLevel = fishContainer.totalFoodAmount;
                 }
             }

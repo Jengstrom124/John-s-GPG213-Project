@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
+public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible, IReactsToWater
 {
 	public AudioSource audioSource;
 	public AudioClip boost;
@@ -128,6 +128,8 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			acceleratingForce *= boostFactor;
 			isBoosting = true;
 			stomach.PopFishFromGuts(boostFoodCost);
+			foodLevel--;
+			ChangeSize();
 		}
 		if (IsClient)
 		{
@@ -220,7 +222,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public void Action(InputActionPhase aActionPhase)
 	{
 		//Boost
-		if (boostReady && foodLevel > 0)
+		if (IsWet && boostReady && foodLevel > 0)
 		{
 			boostReady = false;
 			StartCoroutine(Boost());
@@ -229,7 +231,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 	public void Action2(InputActionPhase aActionPhase)
 	{
-		if (oneEightyReady && reverseForce.magnitude < reversingForce*0.05f)
+		if (IsWet && oneEightyReady && reverseForce.magnitude < reversingForce*0.05f)
 		{
 			oneEightyReady = false;
 			StartCoroutine(OneEighty());
@@ -280,9 +282,13 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			    steeringFrictionCoefficient * rb.mass *
 			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipTransform.position);
 		    
-		    if (finBase.position.y-defaultFinY > 0.1f || finBase.position.y-defaultFinY < -0.2f)
+		    if (finBase.position.y-defaultFinY > 0)
 		    {
-				rb.AddForce(0,Mathf.Sign(defaultFinY-finBase.position.y)/5f-rb.velocity.y/2f,0);
+				rb.AddForce(0,(Mathf.Sign(defaultFinY-finBase.position.y)-rb.velocity.y)*30f,0);
+		    }
+		    if (finBase.position.y-defaultFinY < -0.2f)
+		    {
+			    rb.AddForce(0,Mathf.Sign(defaultFinY-finBase.position.y)-rb.velocity.y/2f,0);
 		    }
 	    }
     }
@@ -339,4 +345,6 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	{
 		return postJointTransform.position;
 	}
+
+	public bool IsWet { get; set; }
 }
