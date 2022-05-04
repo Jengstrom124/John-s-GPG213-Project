@@ -31,10 +31,10 @@ public class MayasTerrain : MonoBehaviour
 
     private void Update()
     {
-        if (InputSystem.GetDevice<Keyboard>().spaceKey.isPressed)
+        /*if (InputSystem.GetDevice<Keyboard>().spaceKey.isPressed)
         {
             LetsDoIt();
-        }
+        }*/
     }
 
 

@@ -63,13 +63,15 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
     public void Action(InputActionPhase aActionPhase)
     {
-        if(canInk)
-        {
+       // if(canInk)
+       // {
+       Debug.Log("ink happened");
+       
             inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, transform.position.y +2, transform.position.z), Quaternion.identity);
             GrowTheInk();
             ShrinkTheInk();
             canInk = false;
-        }
+       // }
         // Debug.Log("Inked");
     }
 
@@ -87,7 +89,8 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
     public void Action2(InputActionPhase aActionPhase)
     {
-        if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
+        Debug.Log("movement, baby");
+        if (aActionPhase == InputActionPhase.Performed)
         {
             
             hackyNonsense = true;
@@ -98,7 +101,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
             }
             
         }
-        else
+        else if (aActionPhase == InputActionPhase.Canceled)
         {
             
             
