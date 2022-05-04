@@ -123,6 +123,8 @@ public class GameManager : ManagerBase<GameManager>
             if (!hasGameStarted.Value && IsServer)
             {
                 hasGameStarted.Value = true; // Didn't update late joining clients
+                
+                mayaSpawner.SpawnStuff();
 
                 //SetGameStartedServerRpc();
             }

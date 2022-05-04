@@ -731,6 +731,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 943836968152674113, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 189.00006
+      objectReference: {fileID: 0}
     - target: {fileID: 943836968489311222, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1160,6 +1164,10 @@ PrefabInstance:
       propertyPath: NetworkConfig.NetworkPrefabs.Array.data[14].Prefab
       value: 
       objectReference: {fileID: 2055310735626418041, guid: 4123eb553d88e994d89e54185507b77d, type: 3}
+    - target: {fileID: 9174531510330277311, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
+      propertyPath: ConnectAddress
+      value: 121.200.8.114
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3defd41b161064b41a21b4cf2ca44251, type: 3}
 --- !u!1001 &2383455405208455654

@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 
-public class LukeFish : NetworkBehaviour, IControllable, IRTS, IEdible
+public class LukeFish : FishBase, IControllable, IRTS, IEdible
 {
 	public GameObject flockObject;
 	public GameObject pathfollowObject;

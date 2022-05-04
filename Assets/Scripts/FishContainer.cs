@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class FishContainer : MonoBehaviour
 {
-	// Change to Stack, use Push/Pop
-    public List<FishBase> ContainerContents = new List<FishBase>();
+	public Stack<FishBase> ContainerContents = new Stack<FishBase>();
     
+    public int totalFoodAmount;
+
     public void AddToStomach(FishBase thingToAdd)
     {
-        ContainerContents.Add(thingToAdd);
-        thingToAdd.enabled = false;// TODO .gameObject.SetActive(true)
+	    ContainerContents.Push(thingToAdd);
+	    thingToAdd.gameObject.SetActive(false);
+
+	    totalFoodAmount += thingToAdd.GetComponent<IEdible>().GetInfo().amount;
     }
 
     //Re-Activate all fish in the belly of the shark if it's killed/leaves the game
@@ -19,26 +22,26 @@ public class FishContainer : MonoBehaviour
     {
         foreach (var fish in ContainerContents)
         {
-	        // Call Popfish
+	        PopFishFromGuts(fish.GetComponent<IEdible>().GetInfo().amount);
         }
-        
-        ContainerContents.Clear();
     }
 
     //Re-activate the last fish eaten if boost used; remove it from the list
-    public void PopFishFromGuts(FishBase lastFish) // TODO change sig to int foodValueToPop
+    public void PopFishFromGuts(int foodValueToPop)
     {
-	    // TODO: Stack you can remove most of this
-        //finds last fish
-        int lastIndex = ContainerContents.Count - 1;
-        lastFish = ContainerContents[lastIndex];
-        
-        //gets the shit spot of the shark
+	    FishBase lastFish = ContainerContents.Peek();
+	    
+	    totalFoodAmount -= lastFish.GetComponent<IEdible>().GetInfo().amount;
+	    
+	    //gets the shit spot of the shark
         Vector3 shitSpot = GetComponent<IPredator>().GetBumPosition();
-        lastFish.transform.position = shitSpot; // TODO use .Peek to get lastfish position
         
+        //this SHOULD peek at the last entries position, right?
+        lastFish.gameObject.transform.position = shitSpot;
+
         //reactivate and remove from list
-        lastFish.enabled = true; // TODO .gameObject.SetActive(true)
-        ContainerContents.Remove(lastFish);
+        lastFish.gameObject.SetActive(true);
+        
+        ContainerContents.Pop();
     }
 }

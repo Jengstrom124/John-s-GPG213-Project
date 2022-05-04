@@ -2,9 +2,9 @@ using UnityEngine;
 
 public interface IControllable
 {
-	void Steer(float      input);
+	void Steer(float input);
 	void Accelerate(float input);
-	void Reverse(float    input);
+	void Reverse(float input);
 	void Action();
 	void Action2();
 	void Action3();
@@ -27,13 +27,13 @@ public enum EdibleType
 public struct EdibleInfo
 {
 	public EdibleType edibleType;
-	public float      amount;
+	public int amount;
 }
 
 // Anything that can be eaten
 public interface IEdible
 {
-	void       GetEaten(IPredator eatenBy); // You only need to care about IPredator if you respond to specific types
+	void GetEaten(IPredator eatenBy); // You only need to care about IPredator if you respond to specific types
 	EdibleInfo GetInfo();
 }
 
@@ -49,6 +49,7 @@ public interface IReactsToWater
 {
 	public bool IsWet { get; set; }
 }
+
 public interface IReactsToInk
 {
 	public void ChangeInkedState(bool isInked);

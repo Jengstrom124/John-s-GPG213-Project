@@ -59,9 +59,7 @@ namespace Gerallt
 
         public void ServerIP_ValueChanged()
         {
-	        string serverIP = UIServerIPInput.text;
-
-	        ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = serverIP;
+            UpdateIP(UIServerIPInput.text);
         }
 
         public void Start()
@@ -80,9 +78,19 @@ namespace Gerallt
             NetworkPlayerList.Instance.NetworkedObjects.OnListChanged += NetworkedObjectsOnOnListChanged;
             
             //Setting the joining IP address to Cam's by default; reflecting the address in the UI input field
-            string camsIP = "121.200.8.114";
-            ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = camsIP;
-            UIServerIPInput.text = camsIP;
+            //UpdateIP("121.200.8.114");
+            UpdateIP(GetIPAddress());
+        }
+
+        private string GetIPAddress()
+        {
+            return ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress;
+        }
+        
+        private void UpdateIP(string ipAddress)
+        {
+            ServerManager.Singleton.GetComponent<UNetTransport>().ConnectAddress = ipAddress;
+            UIServerIPInput.text = ipAddress;
         }
 
         private void GameManager_OnChangeLobbyVisibility(bool visibility)

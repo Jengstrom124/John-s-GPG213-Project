@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Empty Scene.unity
     guid: 0806d5b52db465e4fa6ff6ebcb083219
+  - enabled: 1
+    path: Assets/Team Members/Maya/Scenes/MayaScene.unity
+    guid: 7d0e3d1c3f65eb54ca4dfb64e2881562
   m_configObjects: {}
