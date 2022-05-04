@@ -12,6 +12,7 @@ public class SubmersedSpawner : MonoBehaviour
 	private TerrainData _terrainData;
 	public List<GameObject> coralPrefabs;
 
+	public float height = 6f;
 	public float threshold = 0.45f;
 	public float frequency = 15f;
 	public int xOffset;
@@ -32,7 +33,7 @@ public class SubmersedSpawner : MonoBehaviour
 	
 	private void SpawnCoral(int x, int y, GameObject parent)
 	{
-		if (_terrainData.GetHeight(x, y) < 6)
+		if (_terrainData.GetHeight(x, y) < 6f)
 		{
 			float xCoord = (float) x / terrainGenerator.width;
 			float yCoord = (float) y / terrainGenerator.height;
