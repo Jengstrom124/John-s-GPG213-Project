@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LukeFish : FishBase, IControllable, IRTS, IEdible
 {
@@ -70,16 +71,16 @@ public class LukeFish : FishBase, IControllable, IRTS, IEdible
 	}
 	
 
-	public void Action()
+	public void Action(InputActionPhase aActionPhase)
 	{
 		
 	}
 
-	public void Action2()
+	public void Action2(InputActionPhase aActionPhase)
 	{
 	}
 
-	public void Action3()
+	public void Action3(InputActionPhase aActionPhase)
 	{
 	}
 

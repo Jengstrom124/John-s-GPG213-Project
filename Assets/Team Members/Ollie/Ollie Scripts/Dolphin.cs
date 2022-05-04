@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Ollie
 {
@@ -52,7 +53,7 @@ namespace Ollie
             }
         }
 
-        public override void Action()
+        public override void Action(InputActionPhase aActionPhase)
         {
             if (IsServer)
             {
@@ -65,7 +66,7 @@ namespace Ollie
             }
         }
 
-        public override void Action2()
+        public override void Action2(InputActionPhase aActionPhase)
         {
             if (IsServer)
             {
@@ -78,7 +79,7 @@ namespace Ollie
             }
         }
 
-        public override void Action3() // test to shit out fish
+        public override void Action3(InputActionPhase aActionPhase) // test to shit out fish
         //player controller uses "wasPressed" so shits out heaps of fish per press rather than just one
         //but it works!
         {

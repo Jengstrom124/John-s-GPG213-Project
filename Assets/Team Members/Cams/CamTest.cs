@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CamTest : NetworkBehaviour, IControllable
 {
@@ -16,16 +17,16 @@ public class CamTest : NetworkBehaviour, IControllable
     {
     }
 
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
         Debug.Log("Cam ACTION");
     }
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
     }
 }

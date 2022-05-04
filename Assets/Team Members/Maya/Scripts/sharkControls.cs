@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace MayaStuff
@@ -39,7 +40,7 @@ namespace MayaStuff
             //localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
             Steer(Input.GetAxis("Horizontal"));
             Accelerate(Input.GetAxis("Vertical"));
-            Action();
+            Action(InputActionPhase.Performed);
         }
 
         public void Steer(float input)
@@ -91,17 +92,17 @@ namespace MayaStuff
 
         }
 
-        public void Action()
+        public void Action(InputActionPhase aActionPhase)
         {
             speed = 100;
         }
 
-        public void Action2()
+        public void Action2(InputActionPhase aActionPhase)
         {
 
         }
 
-        public void Action3()
+        public void Action3(InputActionPhase aActionPhase)
         {
             speed = 2;
         }

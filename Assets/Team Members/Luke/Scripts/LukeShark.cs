@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 {
@@ -226,7 +227,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		
 	}
 	
-	public void Action()
+	public void Action(InputActionPhase aActionPhase)
 	{
 		//Boost
 		if (boostReady && foodLevel > 0)
@@ -236,7 +237,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		}
 	}
 
-	public void Action2()
+	public void Action2(InputActionPhase aActionPhase)
 	{
 		if (oneEightyReady && reverseForce.magnitude < reversingForce*0.05f)
 		{
@@ -245,7 +246,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		}
 	}
 
-	public void Action3()
+	public void Action3(InputActionPhase aActionPhase)
 	{
 		audioSource.PlayOneShot(oneEighty);
 	}

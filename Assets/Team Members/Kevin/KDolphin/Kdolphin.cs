@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Vector3 = UnityEngine.Vector3;
 
 public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater, IRTS
@@ -118,7 +119,7 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater, IRTS
         sharkRb.AddForceAtPosition(input*sharkSpeed*transform.TransformDirection(Vector3.back), transform.position,0);
     }
 
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
         if (canLeap == true)
         {
@@ -129,12 +130,12 @@ public class Kdolphin : MonoBehaviour, IControllable, IReactsToWater, IRTS
    
     }
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
         
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
        
     }

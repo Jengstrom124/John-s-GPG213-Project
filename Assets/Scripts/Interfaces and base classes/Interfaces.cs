@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public interface IControllable
 {
+	// TODO add phase to axis?
 	void Steer(float input);
 	void Accelerate(float input);
 	void Reverse(float input);
-	void Action();
-	void Action2();
-	void Action3();
+
+	void Action(InputActionPhase aInputActionPhase);
+	void Action2(InputActionPhase aInputActionPhase);
+	void Action3(InputActionPhase aInputActionPhase);
 }
 
 public interface IRTS

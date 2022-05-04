@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [Serializable]
 public class TailSection
@@ -59,7 +60,7 @@ public class CamShark_Model : NetworkBehaviour, IControllable, IPredator, IEdibl
     {
     }
 
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
 	    // Boost
 
@@ -86,11 +87,11 @@ public class CamShark_Model : NetworkBehaviour, IControllable, IPredator, IEdibl
 	    Debug.Log("After async");
     }
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
     }
 

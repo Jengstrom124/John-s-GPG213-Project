@@ -5,6 +5,7 @@ using System.Text;
 using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater, IStateBase, IPredator, IReactsToInk
 {
@@ -93,15 +94,15 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
         }
     }
 
-    public virtual void Action() // F key
+    public virtual void Action(InputActionPhase aActionPhase) // F key
     {
         
     }
-    public virtual void Action2() // E key
+    public virtual void Action2(InputActionPhase aActionPhase) // E key
     {
         
     }
-    public virtual void Action3() // Q key
+    public virtual void Action3(InputActionPhase aActionPhase) // Q key
     {
         
     }

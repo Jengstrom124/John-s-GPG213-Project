@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Kevin
 {
@@ -85,17 +86,17 @@ namespace Kevin
         sharkRb.AddForceAtPosition(input*sharkSpeed*transform.TransformDirection(Vector3.back), transform.position,0);
     }
 
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
         
     }
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
         
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
        
     }

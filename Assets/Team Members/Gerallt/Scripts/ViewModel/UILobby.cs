@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using Unity.Netcode;
@@ -66,7 +67,8 @@ namespace Gerallt
         {
             buttonHostGame.gameObject.SetActive(true);
             buttonStartGame.gameObject.SetActive(false);
-            buttonJoinGame.gameObject.SetActive(true);  
+            buttonJoinGame.gameObject.SetActive(true);
+            UIServerIPInput.gameObject.SetActive(true);
             
             GameManager gameManager = GameManager.Instance;
             if (gameManager != null)
@@ -106,12 +108,14 @@ namespace Gerallt
                         buttonHostGame.gameObject.SetActive(false);
                         buttonStartGame.gameObject.SetActive(false);
                         buttonJoinGame.gameObject.SetActive(true);
+                        UIServerIPInput.gameObject.SetActive(false);
                     }
                     else if (NetworkManager.Singleton.IsClient)
                     {
                         buttonHostGame.gameObject.SetActive(false);
                         buttonStartGame.gameObject.SetActive(false);
                         buttonJoinGame.gameObject.SetActive(true);
+                        UIServerIPInput.gameObject.SetActive(true);
                     }
                 }
                 else
@@ -121,12 +125,14 @@ namespace Gerallt
                         buttonHostGame.gameObject.SetActive(false);
                         buttonStartGame.gameObject.SetActive(false);
                         buttonJoinGame.gameObject.SetActive(true);
+                        UIServerIPInput.gameObject.SetActive(false);
                     }
                     else
                     {
                         buttonHostGame.gameObject.SetActive(true);
                         buttonStartGame.gameObject.SetActive(false);
-                        buttonJoinGame.gameObject.SetActive(true);   
+                        buttonJoinGame.gameObject.SetActive(true);  
+                        UIServerIPInput.gameObject.SetActive(true); 
                     }
                 }   
             }
@@ -153,6 +159,7 @@ namespace Gerallt
             buttonStartGame.gameObject.SetActive(false);
             buttonHostGame.gameObject.SetActive(false);
             buttonJoinGame.gameObject.SetActive(false);
+            UIServerIPInput.gameObject.SetActive(false);
 
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.JoinServer(localPlayerData, autoCreateHost: true);
@@ -161,8 +168,12 @@ namespace Gerallt
         public void StartHost_ButtonClicked()
         {
             buttonStartGame.gameObject.SetActive(true);
+            buttonStartGame.transform.DOPunchScale(new Vector3(1.3f,1.3f,1.3f), 0.25f, 20, 4f);
+            buttonStartGame.transform.DOPunchRotation(new Vector3(3.3f,3.3f,3.3f), 0.65f, 20, 4f);
+            
             buttonHostGame.gameObject.SetActive(false);
             buttonJoinGame.gameObject.SetActive(false);
+            UIServerIPInput.gameObject.SetActive(false);
             
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.Host(localPlayerData);
@@ -173,6 +184,7 @@ namespace Gerallt
             buttonStartGame.gameObject.SetActive(false);
             buttonHostGame.gameObject.SetActive(false);
             buttonJoinGame.gameObject.SetActive(false);
+            UIServerIPInput.gameObject.SetActive(false);
             
             ServerManager serverManager = ServerManager.Singleton as ServerManager;
             serverManager.StartGame();

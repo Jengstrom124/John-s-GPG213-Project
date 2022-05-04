@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Ollie
 {
@@ -17,7 +18,7 @@ namespace Ollie
             car = this.gameObject;
         }
 
-        public override void Action()
+        public override void Action(InputActionPhase aActionPhase)
         {
             if (IsServer)
             {
@@ -25,7 +26,7 @@ namespace Ollie
             }
         }
 
-        public override void Action2()
+        public override void Action2(InputActionPhase aActionPhase)
         {
             if (IsServer)
             {
@@ -33,7 +34,7 @@ namespace Ollie
             }
         }
 
-        public override void Action3()
+        public override void Action3(InputActionPhase aActionPhase)
         {
             if (IsServer)
             {

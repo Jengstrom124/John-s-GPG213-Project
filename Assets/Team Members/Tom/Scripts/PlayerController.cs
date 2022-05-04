@@ -35,7 +35,7 @@ public class PlayerController : NetworkBehaviour
 
     #region Networked Actions and RPCs
 
-    private Action[] actionsArray;
+    private Action<InputActionPhase>[] actionsArray;
     private Dictionary<ReplicatedActionType, Action<float>> actionsArrayWithParam;
     
     public enum ReplicatedActionType : int
@@ -48,11 +48,20 @@ public class PlayerController : NetworkBehaviour
         Action3 = 0
     }
 
-    private void ReplicatedAction(ReplicatedActionType actionType, Action replicatedAction)
+    private void Awake()
+    {
+	    DefaultControls defaultControls = new DefaultControls();
+	    defaultControls.Enable();
+	    defaultControls.InGame.Action1.performed += aContext => ReplicatedAction(ReplicatedActionType.Action, aContext.phase);
+	    // defaultControls.InGame.Action1.performed += aContext => ReplicatedAction(ReplicatedActionType.Action, aContext.ReadValue<Vector2>());
+    }
+
+
+    private void ReplicatedAction(ReplicatedActionType actionType, Action<InputActionPhase> replicatedAction)
     {
         if (actionsArray == null)
         {
-            actionsArray = new Action[1];
+            actionsArray = new Action<InputActionPhase>[1];
         }
 
         int actionInd = (int) actionType;
@@ -82,25 +91,25 @@ public class PlayerController : NetworkBehaviour
     }
     
     [ClientRpc]
-    private void ReplicatedActionClientRpc(ReplicatedActionType actionType)
+    private void ReplicatedActionClientRpc(ReplicatedActionType actionType, InputActionPhase aInputActionPhase)
     {
         if (actionsArray == null) return;
         
-        Action runOnClient = actionsArray[(int) actionType];
+        Action<InputActionPhase> runOnClient = actionsArray[(int) actionType];
         
-        runOnClient();
+        runOnClient(aInputActionPhase);
     }
 
     [ServerRpc]
-    private void ReplicatedActionServerRpc(ReplicatedActionType actionType)
+    private void ReplicatedActionServerRpc(ReplicatedActionType actionType, InputActionPhase aInputActionPhase)
     {
         if (actionsArray == null) return;
         
-        Action replicatedAction = actionsArray[(int)actionType];
+        Action<InputActionPhase> replicatedAction = actionsArray[(int)actionType];
         
-        replicatedAction();
+        replicatedAction(aInputActionPhase);
             
-        ReplicatedActionClientRpc(actionType);
+        ReplicatedActionClientRpc(actionType, aInputActionPhase);
     }
     
     [ClientRpc]
@@ -128,7 +137,7 @@ public class PlayerController : NetworkBehaviour
     /// <summary>
     /// The networked replicated action.
     /// </summary>
-    private void ReplicatedAction(ReplicatedActionType actionType)
+    private void ReplicatedAction(ReplicatedActionType actionType, InputActionPhase aInputActionPhase)
     {
         //Action replicatedAction = actionsArray[(int)actionType];
         
@@ -137,11 +146,11 @@ public class PlayerController : NetworkBehaviour
             (NetworkManager.Singleton.IsConnectedClient || NetworkManager.Singleton.IsHost))
         {
             // Update the server model. The server will later update the clients.
-            ReplicatedActionServerRpc(actionType);
+            ReplicatedActionServerRpc(actionType, aInputActionPhase);
         }
         else
         {
-            actionsArray[(int)actionType]();
+            actionsArray[(int)actionType](aInputActionPhase);
         }
     }
     
@@ -192,22 +201,22 @@ public class PlayerController : NetworkBehaviour
             controllable.Reverse(input);
         });
         
-        ReplicatedAction(ReplicatedActionType.Action, () =>
+        ReplicatedAction(ReplicatedActionType.Action,  (aInputActionPhase) =>
         {
-            controllable = controlled.GetComponentInChildren<IControllable>();
-            controllable.Action();
+	        controllable = controlled.GetComponentInChildren<IControllable>();
+	        controllable.Action(aInputActionPhase);
         });
         
-        ReplicatedAction(ReplicatedActionType.Action2, () =>
+        ReplicatedAction(ReplicatedActionType.Action2, (aInputActionPhase) =>
         {
             controllable = controlled.GetComponentInChildren<IControllable>();
-            controllable.Action2();
+            controllable.Action2(aInputActionPhase);
         });
         
-        ReplicatedAction(ReplicatedActionType.Action3, () =>
+        ReplicatedAction(ReplicatedActionType.Action3, (aInputActionPhase) =>
         {
             controllable = controlled.GetComponentInChildren<IControllable>();
-            controllable.Action3();
+            controllable.Action3(aInputActionPhase);
         });
     }
     
@@ -257,23 +266,23 @@ public class PlayerController : NetworkBehaviour
 	                ReplicatedAction(ReplicatedActionType.Reverse, 0f);
                 }
 
-                if (InputSystem.GetDevice<Keyboard>().fKey.isPressed)
-                {
-                    // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    ReplicatedAction(ReplicatedActionType.Action);
-                }
-
-                if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
-                {
-                    // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    ReplicatedAction(ReplicatedActionType.Action2);
-                }
-
-                if (InputSystem.GetDevice<Keyboard>().qKey.isPressed)
-                {
-                    // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
-                    ReplicatedAction(ReplicatedActionType.Action3);
-                }
+                // if (InputSystem.GetDevice<Keyboard>().fKey.isPressed)
+                // {
+                //     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
+                //     ReplicatedAction(ReplicatedActionType.Action);
+                // }
+                //
+                // if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
+                // {
+                //     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
+                //     ReplicatedAction(ReplicatedActionType.Action2);
+                // }
+                //
+                // if (InputSystem.GetDevice<Keyboard>().qKey.isPressed)
+                // {
+                //     // Can't drag interfaces directly in the inspector, so get at it from a component/GameObject reference instead
+                //     ReplicatedAction(ReplicatedActionType.Action3);
+                // }
             }
         }
     }

@@ -37,8 +37,6 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
         Steer(Input.GetAxis("Horizontal"));
         //Accelerate(Input.GetAxis("Vertical"));
     
-        Action();
-        Action2();
         //hackyNonsense = false;
         //Debug.Log(charge);
     }
@@ -63,7 +61,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
         
     }
 
-    public void Action()
+    public void Action(InputActionPhase aActionPhase)
     {
         if(canInk)
         {
@@ -87,7 +85,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
 
 
-    public void Action2()
+    public void Action2(InputActionPhase aActionPhase)
     {
         if (InputSystem.GetDevice<Keyboard>().eKey.isPressed)
         {
@@ -118,7 +116,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
         }
     }
 
-    public void Action3()
+    public void Action3(InputActionPhase aActionPhase)
     {
         
     }

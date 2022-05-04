@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AnGelloStuff
 {
@@ -76,10 +77,10 @@ namespace AnGelloStuff
                     DriveShark(AccelInput + ReverseInput, SteerInput);
                     break;
                 case State.State_Splashdown:
-                    Action();
+                    Action(InputActionPhase.Performed);
                     break;
                 case State.State_Charge:
-                    Action2();
+                    Action2(InputActionPhase.Performed);
                     break;
             }
         }
@@ -106,7 +107,7 @@ namespace AnGelloStuff
             ReverseInput = input;
         }
 
-        public void Action()
+        public void Action(InputActionPhase aActionPhase)
         {
             timer += Time.deltaTime;
             if (timer >= 1)
@@ -121,13 +122,13 @@ namespace AnGelloStuff
             //rb.AddRelativeForce(new Vector3(0, -SplashForce, 0));
         }
 
-        public void Action2()
+        public void Action2(InputActionPhase aActionPhase)
         {
             rb.AddForceAtPosition(-TailPos.transform.up * ChargeForce * Time.deltaTime, transform.position);
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        public void Action3()
+        public void Action3(InputActionPhase aActionPhase)
         {
             throw new System.NotImplementedException();
         }
