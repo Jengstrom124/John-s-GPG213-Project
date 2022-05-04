@@ -7,8 +7,10 @@ using UnityEngine.Serialization;
 
 public class mayaSquid : MonoBehaviour, IControllable, IPredator
 {
+
     private GameObject inkSplatterSpawned;
     public Vector3 bumPosition;
+    public bool canInk = false;
     public GameObject inkSplatterPrefab;
     public Rigidbody squidForce;
     public float rotateSpeed = 2f;
@@ -16,6 +18,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
     public bool hackyNonsense;
     public float charge;
+    public float chargeRate;
 
     public Animator squidAnim;
 
@@ -33,8 +36,8 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
         //localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
         Steer(Input.GetAxis("Horizontal"));
         //Accelerate(Input.GetAxis("Vertical"));
-        if (InputSystem.GetDevice<Keyboard>().vKey.wasPressedThisFrame)
-            Action();
+    
+        Action();
         Action2();
         //hackyNonsense = false;
         //Debug.Log(charge);
@@ -62,10 +65,14 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
     public void Action()
     {
-        inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, 1.1f, transform.position.z), Quaternion.identity);
-        GrowTheInk();
-        ShrinkTheInk();
-       // Debug.Log("Inked");
+        if(canInk)
+        {
+            inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, transform.position.y +2, transform.position.z), Quaternion.identity);
+            GrowTheInk();
+            ShrinkTheInk();
+            canInk = false;
+        }
+        // Debug.Log("Inked");
     }
 
     public void GrowTheInk()
@@ -89,7 +96,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
             if (hackyNonsense)
             {
                 //charge = 0;
-                charge += 16 * Time.deltaTime;
+                charge += chargeRate * Time.deltaTime;
             }
             
         }
