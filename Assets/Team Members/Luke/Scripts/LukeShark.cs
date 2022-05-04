@@ -40,25 +40,27 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public float boostFactor = 3f;
 	public float boostTimeSeconds = 1f;
 	public float boostCooldownSeconds = 2f;
+	public int boostFoodCost = 1;
 	
 	public bool oneEightyReady = true;
-	public bool isOneEightying = false;
+	public bool isDoingASickOneEighty = false;
 	public float oneEightyFactor = 3f;
 	public float oneEightyVelocityFactor = 5f;
 	public float oneEightyCooldownSeconds = 3f;
+	public int oneEightyFoodCost = 1;
 
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
 	private float steerTarget;
 	
 	//hunger
-	public float foodLevel = 10f;
+	public int foodLevel = 10;
 
 	public void Accelerate(float input)
 	{
 		if (IsServer)
 		{
-			if (isBoosting || isOneEightying)
+			if (isBoosting || isDoingASickOneEighty)
 			{
 				accelForce = acceleratingForce * transform.TransformDirection(Vector3.forward);
 			}
@@ -73,7 +75,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	{
 		if (IsServer)
 		{
-			if (!(isBoosting | isOneEightying))
+			if (!(isBoosting | isDoingASickOneEighty))
 			{
 				reverseForce = -input * reversingForce * transform.TransformDirection(Vector3.forward);
 			}
@@ -83,7 +85,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public void Steer(float input)
 	{
 		float currentYEuler = transform.eulerAngles.y;
-		if (!isOneEightying)
+		if (!isDoingASickOneEighty)
 		{
 			if (Mathf.Abs(input) < 0.5f)
 			{
@@ -121,7 +123,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		{
 			acceleratingForce *= boostFactor;
 			isBoosting = true;
-			//PopFishFromGuts
+			stomach.PopFishFromGuts(boostFoodCost);
 		}
 
 		if (IsClient)
@@ -163,7 +165,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		float tempAngle = transform.rotation.eulerAngles.y+360;
 		if (IsServer)
 		{
-			isOneEightying = true;
+			isDoingASickOneEighty = true;
 			float turnStrength = oneEightyFactor*(acceleratingForce-Vector3.Magnitude(rb.velocity)/oneEightyVelocityFactor)/acceleratingForce;
 			if (steerTarget < 0)
 			{
@@ -174,7 +176,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 				steerTarget = maxSteeringAngle*turnStrength;
 			}
 			lateralFrictionCoefficient *= turnStrength;
-			//stomach.PopFishFromGuts();
+			stomach.PopFishFromGuts(oneEightyFoodCost);
 		}
 
 		if (IsClient)
@@ -184,7 +186,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 
 		int t = 0;
 		
-		while (!(((tempAngle-transform.rotation.eulerAngles.y)%360>60 && (tempAngle-transform.rotation.eulerAngles.y)%360<300 )|| t>60))
+		while (!((tempAngle-transform.rotation.eulerAngles.y)%360>60 && (tempAngle-transform.rotation.eulerAngles.y)%360<300 || t>60))
 		{
 			t++;
 			yield return null;
@@ -194,7 +196,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		if (IsServer)
 		{
 			lateralFrictionCoefficient = temp;
-			isOneEightying = false;
+			isDoingASickOneEighty = false;
 		}
 
 		StartCoroutine(OneEightyCooldown());
@@ -289,13 +291,17 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	    if (fishFood != null)
 	    {
 		    stomach.AddToStomach(fishFood);
+		    foodLevel += stomach.totalFoodAmount;
 	    }
     }
 
     private IEnumerator DepleteFood()
     {
 	    yield return new WaitForSeconds(1f);
-	    foodLevel--;
+	    if (foodLevel > 0)
+	    {
+		    foodLevel--;
+	    }
 	    StartCoroutine(DepleteFood());
     }
 
