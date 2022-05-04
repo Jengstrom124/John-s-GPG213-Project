@@ -18,16 +18,18 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
     public bool hackyNonsense;
     public float charge;
-    public float chargeRate;
+    public float chargeRate = 100;
 
     public Animator squidAnim;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        DefaultControls defaultControls = new DefaultControls();
+        defaultControls.Enable();
+        defaultControls.InGame.Action2.canceled += aContext => Action2(InputActionPhase.Canceled);
 
-        
     }
 
     // Update is called once per frame
@@ -35,8 +37,9 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
     {
         //localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
         Steer(Input.GetAxis("Horizontal"));
+        charge += chargeRate * Time.fixedDeltaTime;
         //Accelerate(Input.GetAxis("Vertical"));
-    
+
         //hackyNonsense = false;
         //Debug.Log(charge);
     }
@@ -61,17 +64,18 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
         
     }
 
-    public void Action(InputActionPhase aActionPhase)
+    public void Action(InputActionPhase aActionPhase) //space
     {
-       // if(canInk)
-       // {
-       Debug.Log("ink happened");
+        Debug.Log("ink happened");
+        if(canInk)
+        {
+
        
             inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, transform.position.y +2, transform.position.z), Quaternion.identity);
             GrowTheInk();
             ShrinkTheInk();
             canInk = false;
-       // }
+        }
         // Debug.Log("Inked");
     }
 
@@ -87,30 +91,24 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
 
 
 
-    public void Action2(InputActionPhase aActionPhase)
+    public void Action2(InputActionPhase aActionPhase) //shift
     {
-        Debug.Log("movement, baby");
         if (aActionPhase == InputActionPhase.Performed)
         {
-            
-            hackyNonsense = true;
-            if (hackyNonsense)
-            {
-                //charge = 0;
-                charge += chargeRate * Time.deltaTime;
-            }
-            
+            charge = 0;
         }
-        else if (aActionPhase == InputActionPhase.Canceled)
+
+
+        if (aActionPhase == InputActionPhase.Canceled)
         {
-            
+            Debug.Log("NYOOOW");
             
             //squidAnim.speed = charge/4;
             hackyNonsense = false;
             squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
             if (charge >= 1)
             {
-                squidAnim.speed = charge / 5;
+                squidAnim.speed = charge /3;
                 squidAnim.SetTrigger("Swimming");
             }
 
@@ -119,7 +117,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
         }
     }
 
-    public void Action3(InputActionPhase aActionPhase)
+    public void Action3(InputActionPhase aActionPhase) //q
     {
         
     }

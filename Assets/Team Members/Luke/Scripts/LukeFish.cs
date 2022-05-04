@@ -35,7 +35,7 @@ public class LukeFish : FishBase, IControllable, IRTS, IEdible
 	private Vector3 reverseForce;
 	private float steerTarget;
 
-	public int foodValue = 10;
+	public int foodValue = 5;
 
 	public void Accelerate(float input)
 	{

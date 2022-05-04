@@ -16,6 +16,7 @@ namespace Kevin
     
     public GameObject sealPrefab;
 
+    public GameObject mouthPrefab;
     public FishContainer mouthFishContainer;
     //Vectors
     public Vector3 localVelocity;
@@ -69,6 +70,8 @@ namespace Kevin
             colliderCenter = GetComponent<CapsuleCollider>().center;
             sealRigidbody = sealPrefab.GetComponent<Rigidbody>();
             tailPosition = sealPrefab.transform.position;
+            mouthFishContainer = mouthPrefab.GetComponent<FishContainer>();
+            StartCoroutine(Shrink());
         }
     }
     void FixedUpdate()
@@ -104,24 +107,22 @@ namespace Kevin
                 sealRigidbody.angularDrag = waterDrag;
             }
 
-            if (foodLevel < 0)
-            {
-                sealPrefab.transform.localScale = sealOriginalScale;
-            }
-            else if (foodLevel > 0)
-            {
-                //sealCurrentScale = sealPrefab.transform.localScale;
-                StartCoroutine(DecreaseScale());
-            }
+            sealPrefab.transform.localScale = Vector3.one * (1f + foodLevel / 25f);
         }
     }
 
-    IEnumerator DecreaseScale()
+   
+    IEnumerator Shrink()
     {
-        yield return new WaitForSeconds(2f);
-        mouthFishContainer.totalFoodAmount--;
-
+        yield return new WaitForSeconds(5f);
+        if (foodLevel > 1)
+        {
+            
+            foodLevel--;
+        }
+        StartCoroutine(Shrink());
     }
+
     IEnumerator Decelerate()
     {
         if (IsServer)
@@ -250,21 +251,22 @@ namespace Kevin
     
     public void Action(InputActionPhase aActionPhase)
     {
+        if(IsServer && isJumping == false)
+        {
+            Jump();
+            StartCoroutine(JumpTimer());
+        }
+        
+    }
+
+    public void Action2(InputActionPhase aActionPhase)
+    {
         if (IsServer)
         {
             if (IsWet && foodLevel > 0)
             {
                 accelerationForce = 10f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
             }
-        }
-    }
-
-    public void Action2(InputActionPhase aActionPhase)
-    {
-        if(IsServer && isJumping == false)
-        {
-            Jump();
-            StartCoroutine(JumpTimer());
         }
         
     }

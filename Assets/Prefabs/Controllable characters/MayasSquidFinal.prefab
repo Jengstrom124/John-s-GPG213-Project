@@ -221,12 +221,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bumPosition: {x: 0, y: 0, z: -0.7}
+  canInk: 0
   inkSplatterPrefab: {fileID: 105312665972366714, guid: 5a3dc164230c42843a165fefb31021ac, type: 3}
   squidForce: {fileID: 2065292951}
   rotateSpeed: 25
   speed: 60
   hackyNonsense: 0
   charge: 0
+  chargeRate: 30
   squidAnim: {fileID: 5832129482877874880}
 --- !u!114 &2065292949
 MonoBehaviour:
