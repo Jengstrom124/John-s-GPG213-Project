@@ -26,6 +26,8 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
     public RigidbodyConstraints originalConstraints;
     public float originalDrag, originalAngularDrag;
     public IPredator iPredator;
+    public Transform bumPoint;
+    public Stomach stomach;
 
     //left overs ported from Vehicles project - maybe needed later for changing sharks
     //although I think this is unlikely
@@ -188,7 +190,7 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
     #region IPredator Interface
     public Vector3 GetBumPosition()
     {
-        throw new NotImplementedException();
+        return bumPoint.transform.position;
     }
     #endregion
 

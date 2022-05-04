@@ -20,7 +20,7 @@ public class Stomach : MonoBehaviour
     {
         IEdible edible = other.GetComponent<IEdible>();
 
-        if (edible != null)
+        if (edible != null && other != other.isTrigger)
         {
             edible.GetEaten(iPredator);
 
@@ -29,6 +29,7 @@ public class Stomach : MonoBehaviour
                 fishContainer.AddToStomach(other.GetComponent<FishBase>());
                 dolphin.transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.75f, 1, 0.2f);
                 StartCoroutine(EatScaleDelayCoroutine());
+                //print("in stomach count equals " +fishContainer.totalFoodAmount);
             }
         }
     }

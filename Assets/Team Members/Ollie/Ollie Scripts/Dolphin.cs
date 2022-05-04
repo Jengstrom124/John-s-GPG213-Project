@@ -13,6 +13,8 @@ namespace Ollie
         {
             rb = GetComponentInChildren<Rigidbody>();
             capsuleCollider = GetComponentInChildren<CapsuleCollider>();
+            // bumPoint = GetComponentInChildren<Transform>();
+            // stomach = GetComponentInChildren<Stomach>();
             groundSpeed = 22.5f;
             forwardSpeed = 35;
             turnSpeed = 10;
@@ -76,11 +78,14 @@ namespace Ollie
             }
         }
 
-        public override void Action3()
+        public override void Action3() // test to shit out fish
+        //player controller uses "wasPressed" so shits out heaps of fish per press rather than just one
+        //but it works!
         {
             if (IsServer)
             {
-                
+                stomach.fishContainer.PopFishFromGuts(1);
+                //print("after shitting, count equals " +stomach.fishContainer.totalFoodAmount);
             }
         }
         
