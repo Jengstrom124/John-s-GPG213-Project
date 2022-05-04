@@ -12,6 +12,8 @@ namespace Gerallt
         [SerializeField] private GameObject view;
         [SerializeField] private GameObject scrollViewContent;
         [SerializeField] private GameObject levelUIPrefab;
+        [SerializeField] private Button buttonTestPopulateLevels;
+        
         public static string managerScene = "ManagerScene";
         
         public void LoadLevel(string levelName)
@@ -216,6 +218,10 @@ namespace Gerallt
             // view.SetActive(false);
             
             GameManager.Instance.OnChangeLevelsVisibility += GameManager_OnChangeLevelsVisibility;
+            
+            buttonTestPopulateLevels.onClick.AddListener(TestPopulateLevels);
+            
+            PopulateLevels();
         }
 
         private void GameManager_OnChangeLevelsVisibility(bool visibility)
@@ -224,8 +230,13 @@ namespace Gerallt
 
             // if (visibility)
             // {
-                PopulateLevels();
+                //PopulateLevels();
             // }
+        }
+
+        private void TestPopulateLevels()
+        {
+            PopulateLevels();
         }
     }
 }

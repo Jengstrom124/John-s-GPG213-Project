@@ -83,7 +83,7 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
         {
             if (amount > 0)
             {
-                print("sharks can't reverse, dummy");
+                //print("sharks can't reverse, dummy");
             }
         }
     }

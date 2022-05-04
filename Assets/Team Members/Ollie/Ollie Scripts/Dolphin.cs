@@ -94,13 +94,13 @@ namespace Ollie
             if (IsWet)
             {
                 rb.constraints = originalConstraints;
-                print("wet");
+                //print("wet" + this);
             }
 
             if (!IsWet)
             {
                 rb.constraints &= ~RigidbodyConstraints.FreezePositionY;
-                print("not wet");
+                //print("not wet" + this);
             }
         }
 
@@ -119,14 +119,14 @@ namespace Ollie
                 }
                 else
                 {
-                    print("dolphin's can't double jump, dummy");
+                    //print("dolphin's can't double jump, dummy");
                 }
             }
         }
 
         IEnumerator JumpCooldownCoroutine()
         {
-            print("dolphin go yeet");
+            //print("dolphin go yeet");
             yield return new WaitForSeconds(0.75f);
             rb.AddForce(0,-jumpHeight,jumpDistance, ForceMode.Impulse);
             jumping = false;
@@ -150,7 +150,7 @@ namespace Ollie
         {
             //doubles speed for 1.5 seconds
             //prevents reapplication for 3 seconds after deactivation
-            print("shark go zoom");
+            //print("shark go zoom");
             boosting = true;
             forwardSpeed = forwardSpeed * 2;
             yield return new WaitForSeconds(1.5f);
