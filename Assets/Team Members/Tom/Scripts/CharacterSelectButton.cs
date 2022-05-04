@@ -39,6 +39,6 @@ public class CharacterSelectButton : MonoBehaviour
             }
         }
 
-        eventSystem.SetSelectedGameObject(gameObject);
+        // eventSystem.SetSelectedGameObject(gameObject); // Meant to highlight button just pressed, but seems to do that even without this line
     }
 }
