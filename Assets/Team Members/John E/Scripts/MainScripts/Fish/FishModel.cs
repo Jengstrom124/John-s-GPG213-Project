@@ -69,4 +69,9 @@ public class FishModel : FishBase, IRTS, IEdible
 
         return edibleInfo;
     }
+
+    public void GotShatOut(IPredator shatOutBy)
+    {
+	    
+    }
 }

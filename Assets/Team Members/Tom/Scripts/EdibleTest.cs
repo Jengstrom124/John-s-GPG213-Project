@@ -13,4 +13,9 @@ public class EdibleTest : MonoBehaviour, IEdible
     {
         return new EdibleInfo();
     }
+
+    public void GotShatOut(IPredator shatOutBy)
+    {
+	    
+    }
 }
