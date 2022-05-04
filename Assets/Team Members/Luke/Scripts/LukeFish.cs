@@ -33,7 +33,9 @@ public class LukeFish : FishBase, IControllable, IRTS, IEdible
 	public Vector3 accelForce;
 	private Vector3 reverseForce;
 	private float steerTarget;
-	
+
+	public int foodValue = 10;
+
 	public void Accelerate(float input)
 	{
 		if (IsServer)
@@ -137,7 +139,7 @@ public class LukeFish : FishBase, IControllable, IRTS, IEdible
 
 	public EdibleInfo GetInfo()
 	{
-		return new EdibleInfo();
+		return new EdibleInfo {edibleType = EdibleType.Food, amount = foodValue};
 	}
 
 	public void GotShatOut(IPredator shatOutBy)

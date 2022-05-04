@@ -274,7 +274,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipTransform.position);
 	    }
 	    
-	    transform.localScale = Vector3.one * (1f + Mathf.Sqrt(foodLevel) / 10f);
+	    transform.localScale = Vector3.one * (1f + Mathf.Sqrt(Mathf.Clamp(foodLevel, 0, 300)) / 10f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -285,13 +285,13 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	    if (food != null)
 	    {
 		    food.GetEaten(this);
+		    foodLevel += food.GetInfo().amount;
 	    }
 	    
 	    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
 	    if (fishFood != null)
 	    {
 		    stomach.AddToStomach(fishFood);
-		    foodLevel += stomach.totalFoodAmount;
 	    }
     }
 
