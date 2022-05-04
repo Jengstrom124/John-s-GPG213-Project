@@ -4,11 +4,12 @@ using System.Numerics;
 using JetBrains.Annotations;
 using Luke;
 using Sirenix.OdinInspector;
+using Unity.Netcode;
 using UnityEngine;
 using Flock = Kevin.Flock;
 using Vector3 = UnityEngine.Vector3;
 
-public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, IStateBase, IRTS
+public class KFish : FishBase, IControllable, IReactsToWater, IStateBase, IRTS, IEdible
 {
     //State Base
     public IStateBase flock;
@@ -78,6 +79,17 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        IPredator reactToPredator = other.GetComponent<IPredator>();
+        if (reactToPredator != null)
+        {
+            Debug.Log("I got eaten!!!");
+            //Destroy the fish
+        }
+        
+    }
+    
     IEnumerator Decelerate()
     {
         fRb.AddRelativeForce(new Vector3(0f,0f,-1f));
@@ -153,6 +165,21 @@ public class KFish : SerializedMonoBehaviour, IControllable, IReactsToWater, ISt
     }
 
     public void SetDestination(Vector3 position)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void GetEaten(IPredator eatenBy)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public EdibleInfo GetInfo()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void GotShatOut(IPredator shatOutBy)
     {
         throw new System.NotImplementedException();
     }

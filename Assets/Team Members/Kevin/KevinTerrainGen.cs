@@ -34,31 +34,24 @@ namespace Kevin
     private List<Vector3> currentPosition;
 
     //bool used to test the different prefabs
-
-    
     public bool tree;
     public bool seaweed;
     public bool coral;
     public bool bird;
 
     public List<int> seeds;
+    
     void Awake()
     {
         Random.InitState(seeds[2]);
     }
+    
     void Start()
     {
         StartCoroutine(Terrainer());
         StartCoroutine(Spawner());
         levelInfo.OnLevelGenerationFinishedEvent();
     }
-
-    /*public event Action LevelGenerationFinishedEvent;
-    
-    public InvokeLevelGenerationFinishEvent()
-    {
-        LevelGenerationFinishedEvent?.Invoke();
-    }*/
     
     public IEnumerator Terrainer()
     {
@@ -68,8 +61,6 @@ namespace Kevin
         
         terrainGenerator.calculateHeightCallback = CalculateHeightCallback;
         terrainGenerator.GenerateTerrain(terrainGenerator.terrainDataForRandomExample);
-        //terrainGenerator.depth = yHeight;
-
     }
 
     public IEnumerator Spawner()
@@ -132,8 +123,7 @@ namespace Kevin
         
         
         float perlinValue = Mathf.PerlinNoise(xCoord*frequencyX+offsetX,yCoord*frequencyY+offsetY);
-        //float perlinValue2 = Mathf.PerlinNoise(xCoord*frequencyX+offsetX*20f,yCoord*frequencyY+offsetY*20f);
-        
+
         if (!(xCoord < fringe || xCoord > 1 - fringe || yCoord < fringe || yCoord > 1 - fringe))
         {
             

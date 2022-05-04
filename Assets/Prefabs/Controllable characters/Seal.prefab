@@ -689,6 +689,8 @@ GameObject:
   - component: {fileID: 2055310734427170052}
   - component: {fileID: 2055310734427170057}
   - component: {fileID: 2055310734427170058}
+  - component: {fileID: 199187229215190308}
+  - component: {fileID: 3621901062007293245}
   m_Layer: 0
   m_Name: Mouth1
   m_TagString: Untagged
@@ -761,6 +763,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &199187229215190308
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310734427170053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5.36
+  m_Height: 2.0000002
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0.00000035762787}
+--- !u!114 &3621901062007293245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310734427170053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c39ba129577c747aabf061cf886e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sealPrefab: {fileID: 2055310735626418041}
 --- !u!1 &2055310734485320301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,8 +1780,9 @@ MonoBehaviour:
   tailPosition: {x: 0, y: 0, z: 0}
   accelerationForce: {x: 0, y: 0, z: 0}
   reverseForce: {x: 0, y: 0, z: 0}
+  sealSize: {fileID: 2055310735626418040}
   headTransform: {fileID: 2055310735017970175}
-  tailTransform: {fileID: 4928855466406718431}
+  steeringTailTransform: {fileID: 4928855466406718431}
   jumpTransform: {fileID: 4647559717749154068}
   tailLeadTransform: {fileID: 2055310735285632999}
   tailMidTransform: {fileID: 2055310735044345132}
@@ -1765,6 +1795,8 @@ MonoBehaviour:
   currentSteeringMax: 0
   airSteeringMax: 15
   reduction: 0.5
+  landDrag: 2
+  waterDrag: 0
   currentBobbleAngle: 0
   isJumping: 0
   capsuleCollider: {fileID: 1970519610861360289}
