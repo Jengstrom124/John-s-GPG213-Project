@@ -52,6 +52,7 @@ public class FishModel : FishBase, IRTS, IEdible
     {
         pathTracker.GetPathToDestination(position);
 
+        //Slowly turning align force to 0 so the player fish leads the school and the school follows the player fish
         Mathf.Lerp(align.force, 0, alignForceTimer * Time.deltaTime);
     }
 

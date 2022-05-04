@@ -55,9 +55,9 @@ public class Align : SteeringBase
 			{
 				alignmentMove += neighbour.transform.forward;
 			}
-		}
 
-		alignmentMove /= neighbours.Count;
+			alignmentMove /= neighbours.Count;
+		}
 
 		return alignmentMove;
 	}

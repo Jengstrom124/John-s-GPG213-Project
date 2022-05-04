@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 2219981257583123345}
-  turnMultiplier: 0.1
+  turnMultiplier: 0.075
   target: {fileID: 0}
   destinationTarget: {x: 0, y: 0, z: 0}
   angle: 0
