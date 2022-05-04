@@ -197,6 +197,7 @@ public class PathTracker : MonoBehaviour
         pathGenerated = false;
         currentTargetPos = Vector2.zero;
         finalDestinationPos = Vector2.zero;
+        newTargetAssignedEvent?.Invoke(Vector3.zero);
     }
 
     public void GetPathToDestination(Vector3 destination)

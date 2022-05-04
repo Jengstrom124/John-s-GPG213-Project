@@ -9,6 +9,7 @@ public class Fish_ViewModel : MonoBehaviour
 
     [Header("Reference Only:")]
     public bool neighbourDebugColour = false;
+    Color defaultColor;
 
     // Start is called before the first frame update
     void Awake()
@@ -19,17 +20,20 @@ public class Fish_ViewModel : MonoBehaviour
     private void Start()
     {
         fish.onPlayerFishEvent += UpdateColour;
+        defaultColor = GetComponentInChildren<Renderer>().material.color;
     }
 
     void UpdateColour(bool isPlayerFish)
     {
         if(isPlayerFish)
         {
-            gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+            //gameObject.GetComponent<Renderer>().material.color = Color.cyan;
+            GetComponentInChildren<Renderer>().material.color = Color.cyan;
         }
         else
         {
-            gameObject.GetComponent<Renderer>().material = defaultMaterial;
+            //gameObject.GetComponent<Renderer>().material = defaultMaterial;
+            GetComponentInChildren<Renderer>().material.color = defaultColor;
         }
     }
 }
