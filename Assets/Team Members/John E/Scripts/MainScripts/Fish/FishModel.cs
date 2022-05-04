@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class FishModel : FishBase, IRTS
+public class FishModel : FishBase, IRTS, IEdible
 {
     public event Action<bool> onPlayerFishEvent;
 
@@ -53,5 +53,19 @@ public class FishModel : FishBase, IRTS
         pathTracker.GetPathToDestination(position);
 
         Mathf.Lerp(align.force, 0, alignForceTimer * Time.deltaTime);
+    }
+
+    public void GetEaten(IPredator eatenBy)
+    {
+        gameObject.SetActive(false);
+    }
+
+    public EdibleInfo GetInfo()
+    {
+        EdibleInfo edibleInfo = new EdibleInfo();
+        edibleInfo.edibleType = EdibleType.Food;
+        edibleInfo.amount = 1;
+
+        return edibleInfo;
     }
 }
