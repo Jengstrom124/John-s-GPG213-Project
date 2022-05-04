@@ -230,34 +230,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"flock","value":$eref:0'
-      objectReference: {fileID: 0}
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.PrefabModifications.Array.data[1]
-      value: '"path":"pathFollow","value":$eref:1'
-      objectReference: {fileID: 0}
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 900635112}
-    - target: {fileID: -5113474684017137747, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 900635110}
     - target: {fileID: 204664297, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3142521297
@@ -266,13 +238,17 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 2593092908814094057, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
+    - target: {fileID: 2706907298739090787, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4628796791689082946, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4628796791689082946, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 100
+      value: 102
       objectReference: {fileID: 0}
     - target: {fileID: 4628796791689082946, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -280,7 +256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628796791689082946, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40
+      value: 38.08
       objectReference: {fileID: 0}
     - target: {fileID: 4628796791689082946, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -314,10 +290,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OllieFish
       objectReference: {fileID: 0}
-    - target: {fileID: 6661299745479874727, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-      propertyPath: feeler
-      value: 
-      objectReference: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
     - target: {fileID: 7699634904680340371, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
       propertyPath: serializationData.Prefab
       value: 
@@ -373,28 +345,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &900635110 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2593092908814094057, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-  m_PrefabInstance: {fileID: 673374712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c771de805355c0549a425e31fbd2f805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &900635112 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7699634904680340371, guid: 38f4db366b9ab25408c9ac2c7e2e2ecb, type: 3}
-  m_PrefabInstance: {fileID: 673374712}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57025e5931a6d6540bd47848e6c126d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &982981116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -977,18 +927,6 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 155497973
       objectReference: {fileID: 0}
-    - target: {fileID: 3450218684245683893, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
-      propertyPath: boost
-      value: 
-      objectReference: {fileID: 3450218684245683893}
-    - target: {fileID: 3450218684245683893, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
-      propertyPath: splash
-      value: 
-      objectReference: {fileID: 3450218684245683892}
-    - target: {fileID: 3450218684245683893, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 3450218684245683893, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
     - target: {fileID: 7844094578839455965, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1038,16 +976,6 @@ PrefabInstance:
 --- !u!1 &3450218684245683891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1664143151071907964, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
-  m_PrefabInstance: {fileID: 3450218684245683890}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &3450218684245683892 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5515541012610773562, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
-  m_PrefabInstance: {fileID: 3450218684245683890}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &3450218684245683893 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: -4473858619368634171, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
   m_PrefabInstance: {fileID: 3450218684245683890}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6600122511132589498

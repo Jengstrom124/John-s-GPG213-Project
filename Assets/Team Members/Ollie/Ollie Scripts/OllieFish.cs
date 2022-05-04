@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OllieFish : OllieVehicleBase, IRTS, IEdible
+public class OllieFish : FishBase, IRTS, IEdible
 {
     public PathTracker pathTracker;
     public IStateBase flock;
@@ -14,11 +14,12 @@ public class OllieFish : OllieVehicleBase, IRTS, IEdible
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponentInChildren<Rigidbody>();
-        capsuleCollider = GetComponentInChildren<CapsuleCollider>();
-        forwardSpeed = 40;
-        turnSpeed = 20;
-        car = this.gameObject;
+        //this shit was all from inheriting OllieVehicleBase - when I thought the fish needed to be controllable but IRTS replaced this
+        // rb = GetComponentInChildren<Rigidbody>();
+        // capsuleCollider = GetComponentInChildren<CapsuleCollider>();
+        // forwardSpeed = 40;
+        // turnSpeed = 20;
+        // car = this.gameObject;
     }
 
     private void OnEnable()
@@ -62,6 +63,11 @@ public class OllieFish : OllieVehicleBase, IRTS, IEdible
     public EdibleInfo GetInfo()
     {
         return new EdibleInfo();
+    }
+
+    public void GotShatOut(IPredator shatOutBy)
+    {
+        throw new NotImplementedException();
     }
 
     #endregion
