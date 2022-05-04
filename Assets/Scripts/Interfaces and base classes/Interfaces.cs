@@ -33,7 +33,7 @@ public struct EdibleInfo
 // Anything that can be eaten
 public interface IEdible
 {
-	void       GetEaten(IPredator eatenBy);
+	void       GetEaten(IPredator eatenBy); // You only need to care about IPredator if you respond to specific types
 	EdibleInfo GetInfo();
 }
 
