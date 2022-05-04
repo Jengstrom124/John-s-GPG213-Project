@@ -33,10 +33,7 @@ public class Cohesion : SteeringBase
 		// Average of all neighbours positions
 		foreach (GameObject neighbour in neighbours)
 		{
-			//if(Vector3.Distance(transform.position, neighbour.transform.position) > proximityThreshold)
-            {
-				cohesionMove += transform.InverseTransformPoint(neighbour.transform.position);
-            }
+			cohesionMove += transform.InverseTransformPoint(neighbour.transform.position);
 		}
 
 		cohesionMove /= neighbours.Count;

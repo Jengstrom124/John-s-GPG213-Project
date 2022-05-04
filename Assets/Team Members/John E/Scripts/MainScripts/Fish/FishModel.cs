@@ -7,11 +7,14 @@ public class FishModel : FishBase, IRTS, IEdible
 {
     public event Action<bool> onPlayerFishEvent;
 
-    public float alignForceTimer = 2f;
+    public float reduceForcesTimer = 2f;
     float defaultAlignForce;
+    float defaultCohesionForce;
 
     PathTracker pathTracker;
     Align align;
+
+    bool hasDestination = false;
 
     private void Awake()
     {
@@ -24,9 +27,19 @@ public class FishModel : FishBase, IRTS, IEdible
         defaultAlignForce = align.force;
     }
 
+    private void FixedUpdate()
+    {
+        if(hasDestination)
+        {
+        //Slowly reduce forces to 0 so the player fish leads the school and the school follows the player fish
+            align.force = Mathf.Lerp(align.force, 0, reduceForcesTimer);
+        }
+    }
+
     void AtDestinationReaction()
     {
         Debug.Log("MADE IT!! - return to being a fish");
+        hasDestination = false;
         Deselected();
     }
 
@@ -56,9 +69,7 @@ public class FishModel : FishBase, IRTS, IEdible
         }
 
         pathTracker.GetPathToDestination(position);
-
-        //Slowly turning align force to 0 so the player fish leads the school and the school follows the player fish
-        Mathf.Lerp(align.force, 0, alignForceTimer * Time.deltaTime);
+        hasDestination = true;
     }
 
     public void GetEaten(IPredator eatenBy)
