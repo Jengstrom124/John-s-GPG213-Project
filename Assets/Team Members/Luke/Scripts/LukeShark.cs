@@ -43,9 +43,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public bool isOneEightying = false;
 	public float oneEightyFactor = 3f;
 	public float oneEightyVelocityFactor = 5f;
-	public float oneEightyTimeSeconds = 0.7f;
 	public float oneEightyCooldownSeconds = 3f;
-	public float boostOneEightyCooldownSeconds = 1f;
 
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
@@ -108,7 +106,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		postJointTransform.eulerAngles = new Vector3(-90, currentYEuler + 1.5f * currentSteeringAngle, 0);
 		tailTipTransform.eulerAngles = new Vector3(-90, currentYEuler + 2f * currentSteeringAngle, 0);
 		headJointTransform.eulerAngles = new Vector3(90, 0, -(currentYEuler - 0.5f * currentSteeringAngle));
-		}
+	}
 
 	#region Boost Ability
 
@@ -179,8 +177,11 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			audioSource.PlayOneShot(oneEighty);
 		}
 
-		while (!((tempAngle-transform.rotation.eulerAngles.y)%360>60 && (tempAngle-transform.rotation.eulerAngles.y)%360<300))
+		int t = 0;
+		
+		while (!(((tempAngle-transform.rotation.eulerAngles.y)%360>60 && (tempAngle-transform.rotation.eulerAngles.y)%360<300 )|| t>60))
 		{
+			t++;
 			yield return null;
 		}
 		
@@ -237,6 +238,8 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
     // Update is called once per frame
     void FixedUpdate()
     {
+	    currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, steerTarget, lerpValue);
+	    
 	    if (IsServer)
 	    {
 		    Vector3 position = transform.position;
@@ -244,8 +247,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 		    
 		    rb.AddForceAtPosition(accelForce, position);
 		    rb.AddForceAtPosition(reverseForce, position);
-		    currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, steerTarget, lerpValue);
-		    
+
 		    localVelocity = transform.InverseTransformDirection(rb.velocity);
 		    tailLocalVelocity = mainJointTransform.InverseTransformDirection(rb.GetPointVelocity(tailPosition));
 
