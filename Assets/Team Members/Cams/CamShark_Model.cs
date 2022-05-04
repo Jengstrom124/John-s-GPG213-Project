@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.Netcode;
 using UnityEngine;
 
 [Serializable]
@@ -10,11 +12,12 @@ public class TailSection
 	public SectionPhysics sectionPhysics;
 }
 
-public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
+public class CamShark_Model : NetworkBehaviour, IControllable, IPredator, IEdible
 {
 
 	public List<TailSection> tailSections;
 	public Rigidbody rb;
+	private float speed;
 
 	private void Awake()
 	{
@@ -24,8 +27,20 @@ public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
 			tailSection.sectionPhysics = tailSection.bone.gameObject.AddComponent<SectionPhysics>();
 			tailSection.sectionPhysics.mainBody = rb;
 		}
+		
+		DoAThing();
 	}
 
+
+	private void Update()
+	{
+
+	}
+
+	private void FixedUpdate()
+	{
+		transform.Translate(0,0,speed);
+	}
 
 	public void Steer(float input)
     {
@@ -37,6 +52,7 @@ public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
 
     public void Accelerate(float input)
     {
+	    
     }
 
     public void Reverse(float input)
@@ -45,6 +61,29 @@ public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
 
     public void Action()
     {
+	    // Boost
+
+	    if (IsClient)
+	    {
+		    // change colour red		v
+		    // playAnimation			v
+		    // play sound				v
+		    // funky particle effect	v
+	    }
+
+	    if (IsServer)
+	    {
+		    // accel++					m
+		    // shit out fish			m
+	    }
+	     
+    }
+
+    public async void DoAThing()
+    {
+	    Debug.Log("Before async");
+	    await Task.Delay(1000);
+	    Debug.Log("After async");
     }
 
     public void Action2()
@@ -55,14 +94,6 @@ public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
     {
     }
 
-    public void GotFood(float amount)
-    {
-    }
-
-    public void ChangeBoost(float amount)
-    {
-    }
-
     public void GetEaten(IPredator eatenBy)
     {
     }
@@ -70,6 +101,11 @@ public class CamShark_Model : MonoBehaviour, IControllable, IPredator, IEdible
 	public EdibleInfo GetInfo()
 	{
 		return new EdibleInfo();
+	}
+
+	public void GotShatOut(IPredator shatOutBy)
+	{
+		
 	}
 
 	public Vector3 GetBumPosition()
