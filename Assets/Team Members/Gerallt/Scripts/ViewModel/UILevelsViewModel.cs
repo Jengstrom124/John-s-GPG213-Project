@@ -15,6 +15,8 @@ namespace Gerallt
         [SerializeField] private Button buttonTestPopulateLevels;
         
         public static string managerScene = "ManagerScene";
+
+        public mayaSpawner spawner;
         
         public void LoadLevel(string levelName)
         {
@@ -24,6 +26,7 @@ namespace Gerallt
             // Tell all the clients to load the specified level.
             NetworkManager.Singleton.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
             NetworkManager.Singleton.SceneManager.LoadScene(levelName, LoadSceneMode.Additive); // Wouldn't synchronise the correct LoadSceneMode well for players that joined late
+            spawner.SpawnStuff();
         }
 
         [ClientRpc]
