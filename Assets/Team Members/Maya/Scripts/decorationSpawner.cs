@@ -19,7 +19,7 @@ public class decorationSpawner : MonoBehaviour
             for (int z = 0; z < 256; z++)
             {
                 Vector3 pos = new Vector3(x,0,z);
-                pos.y = myTerrain.SampleHeight(pos);
+                pos.y = myTerrain.SampleHeight(pos) +3.8f;
                 if (pos.y > 16f && pos.y < 18)
                 {
                     if (UnityEngine.Random.Range(0, 100) > 95)

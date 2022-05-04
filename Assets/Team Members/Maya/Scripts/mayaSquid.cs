@@ -64,7 +64,7 @@ public class mayaSquid : MonoBehaviour, IControllable
         inkSplatterSpawned = Instantiate(inkSplatterPrefab, new Vector3(transform.position.x, 1.1f, transform.position.z), Quaternion.identity);
         GrowTheInk();
         ShrinkTheInk();
-        Debug.Log("Inked");
+       // Debug.Log("Inked");
     }
 
     public void GrowTheInk()
