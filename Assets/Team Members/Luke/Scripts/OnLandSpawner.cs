@@ -11,6 +11,7 @@ public class OnLandSpawner : MonoBehaviour
 	private TerrainData _terrainData;
 	public List<GameObject> treePrefabs;
 
+	public float height = 14f;
 	public float threshold = 0.95f;
 	public float frequency = 12f;
 	public int xOffset;
@@ -32,7 +33,7 @@ public class OnLandSpawner : MonoBehaviour
 	private void SpawnTrees(int x, int y, GameObject parent)
 	{
 		
-		if (_terrainData.GetHeight(x, y) > 12f)
+		if (_terrainData.GetHeight(x, y) > height)
 		{
 			float xCoord = (float) x / terrainGenerator.width;
 			float yCoord = (float) y / terrainGenerator.height;

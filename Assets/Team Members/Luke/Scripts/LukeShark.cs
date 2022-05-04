@@ -17,6 +17,9 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public Transform postJointTransform;
 	public Transform tailTipTransform;
 	public Transform headJointTransform;
+
+	public Transform jaw;
+	public Transform finBase;
 	
 	public float acceleratingForce = 5f;
 	public float reversingForce = 3f;
@@ -52,6 +55,11 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	private Vector3 accelForce;
 	private Vector3 reverseForce;
 	private float steerTarget;
+
+	private float jawAmp = 1f;
+	private float normalJawAmp = 1f;
+	public float eatingJawAmp = 5f;
+	private float jawFreq = 0.5f/Mathf.PI;
 	
 	//hunger
 	public int foodLevel = 10;
@@ -125,26 +133,21 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			isBoosting = true;
 			stomach.PopFishFromGuts(boostFoodCost);
 		}
-
 		if (IsClient)
 		{
 			audioSource.PlayOneShot(boost);
 			audioSource.Play();
 		}
-
 		yield return new WaitForSeconds(boostTimeSeconds);
-		
 		if (IsServer)
 		{
 			isBoosting = false;
 			acceleratingForce /= boostFactor;
 		}
-
 		if (IsClient)
 		{
 			audioSource.Stop();
 		}
-
 		StartCoroutine(BoostCooldown());
 	}
 	
@@ -211,10 +214,22 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	
 	#endregion
 
+
+	public void ChangeSize()
+	{
+		float scaleValue = 1f + Mathf.Sqrt(Mathf.Clamp(foodLevel, 0, 300)) / 10f;
+		transform.localScale = Vector3.one * scaleValue;
+	}
+
+	public void FauxBuoyancy()
+	{
+		
+	}
+	
 	public void Action()
 	{
 		//Boost
-		if (boostReady)
+		if (boostReady && foodLevel > 0)
 		{
 			boostReady = false;
 			StartCoroutine(Boost());
@@ -248,6 +263,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
     void FixedUpdate()
     {
 	    currentSteeringAngle = Mathf.Lerp(currentSteeringAngle, steerTarget, lerpValue);
+	    jaw.eulerAngles = new Vector3(jawAmp*Mathf.Sin(Time.time*jawFreq), -90, -90);
 	    
 	    if (IsServer)
 	    {
@@ -273,26 +289,36 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 			    steeringFrictionCoefficient * rb.mass *
 			    mainJointTransform.TransformDirection(new Vector3(-tailLocalVelocity.x, 0, 0)), tailTipTransform.position);
 	    }
-	    
-	    transform.localScale = Vector3.one * (1f + Mathf.Sqrt(Mathf.Clamp(foodLevel, 0, 300)) / 10f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-	    //should check for size difference here
-	    
-	    IEdible food = other.gameObject.GetComponent<IEdible>();
-	    if (food != null)
+	    if (!other.isTrigger)
 	    {
-		    food.GetEaten(this);
-		    foodLevel += food.GetInfo().amount;
+		    //should check for size difference here
+		    StartCoroutine(Chomp());
+
+		    IEdible food = other.gameObject.GetComponent<IEdible>();
+		    if (food != null)
+		    {
+			    food.GetEaten(this);
+			    foodLevel += food.GetInfo().amount;
+			    ChangeSize();
+		    }
+
+		    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
+		    if (fishFood != null)
+		    {
+			    stomach.AddToStomach(fishFood);
+		    }
 	    }
-	    
-	    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
-	    if (fishFood != null)
-	    {
-		    stomach.AddToStomach(fishFood);
-	    }
+    }
+
+    private IEnumerator Chomp()
+    {
+	    jawAmp = eatingJawAmp;
+	    yield return new WaitForSeconds(jawFreq*3);
+	    jawAmp = normalJawAmp;
     }
 
     private IEnumerator DepleteFood()
@@ -301,6 +327,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	    if (foodLevel > 0)
 	    {
 		    foodLevel--;
+		    ChangeSize();
 	    }
 	    StartCoroutine(DepleteFood());
     }
