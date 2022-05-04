@@ -864,7 +864,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1542889696
 MonoBehaviour:
@@ -887,8 +887,8 @@ MonoBehaviour:
   postJointTransform: {fileID: 3392509339360278061}
   tailTipTransform: {fileID: 1001782359803232529}
   headJointTransform: {fileID: 8873145128334385027}
-  jaw: {fileID: 2240331408256197183}
   finBase: {fileID: 2835523902415489597}
+  defaultFinY: 0
   acceleratingForce: 15
   reversingForce: 12
   longitudinalFrictionCoefficient: 1
@@ -909,7 +909,6 @@ MonoBehaviour:
   oneEightyVelocityFactor: 5
   oneEightyCooldownSeconds: 3
   oneEightyFoodCost: 1
-  eatingJawAmp: 5
   foodLevel: 10
 --- !u!82 &17744540717904349
 AudioSource:
