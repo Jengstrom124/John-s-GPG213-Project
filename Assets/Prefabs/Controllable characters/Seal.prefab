@@ -691,8 +691,9 @@ GameObject:
   - component: {fileID: 2055310734427170058}
   - component: {fileID: 199187229215190308}
   - component: {fileID: 3621901062007293245}
+  - component: {fileID: 4823134483231061756}
   m_Layer: 0
-  m_Name: Mouth1
+  m_Name: EatingMouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -790,6 +791,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sealPrefab: {fileID: 2055310735626418041}
+  scaleAmount: 0.1
+--- !u!114 &4823134483231061756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055310734427170053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1f1a6ea2350014fb2c93b0e25333ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalFoodAmount: 0
 --- !u!1 &2055310734485320301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,12 +1790,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sealRigidbody: {fileID: 3049122826345489953}
   sealPrefab: {fileID: 2055310735626418041}
+  fishContainer: {fileID: 4823134483231061756}
   localVelocity: {x: 0, y: 0, z: 0}
   tailLocalVelocity: {x: 0, y: 0, z: 0}
   tailPosition: {x: 0, y: 0, z: 0}
   accelerationForce: {x: 0, y: 0, z: 0}
   reverseForce: {x: 0, y: 0, z: 0}
-  sealSize: {fileID: 2055310735626418040}
+  sealOriginalScale: {x: 1, y: 1, z: 1}
+  sealCurrentScale: {x: 0, y: 0, z: 0}
   headTransform: {fileID: 2055310735017970175}
   steeringTailTransform: {fileID: 4928855466406718431}
   jumpTransform: {fileID: 4647559717749154068}
@@ -1802,6 +1819,7 @@ MonoBehaviour:
   capsuleCollider: {fileID: 1970519610861360289}
   colliderCenter: {x: 0, y: 0, z: 0}
   spawnPoint: {fileID: 0}
+  foodLevel: 10
 --- !u!54 &3049122826345489953
 Rigidbody:
   m_ObjectHideFlags: 0

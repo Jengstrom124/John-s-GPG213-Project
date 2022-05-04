@@ -5,20 +5,37 @@ namespace Kevin
     public class KEat : MonoBehaviour, IPredator
     {
         public GameObject sealPrefab;
-        public float foodLevel = 10f;
-        public float scaleAmount = 0.5f;
+        private FishContainer fishContainer;
+        
+        public float scaleAmount = 0.1f;
+
+        public void Start()
+        {
+            fishContainer = GetComponent<FishContainer>(); 
+        }
+
+        /*public void Update()
+        {
+            scaleAmount = fishContainer.totalFoodAmount / 10f;
+        }*/
         void OnTriggerEnter(Collider other)
         {
-            IEdible edible = other.GetComponent<IEdible>();
-            FishBase fish = other.GetComponent<FishBase>();
-            if (edible != null)
+            
+            if (!other.isTrigger)
             {
-                sealPrefab.transform.localScale += Vector3.one * scaleAmount; 
-            }
-
-            if (fish != null)
-            {
-                //fishcontainer
+                IEdible edible = other.GetComponent<IEdible>();
+            
+                if (edible != null)
+                {
+                    sealPrefab.transform.localScale += Vector3.one * scaleAmount * (1f + fishContainer.totalFoodAmount/100f); 
+                }
+            
+                FishBase fish = other.GetComponent<FishBase>();
+                if (fish != null)
+                {
+                    fishContainer.AddToStomach(fish);
+                    sealPrefab.GetComponent<Seal>().foodLevel = fishContainer.totalFoodAmount;
+                }
             }
         }
 

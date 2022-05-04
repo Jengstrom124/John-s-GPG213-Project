@@ -14,7 +14,8 @@ namespace Kevin
     public Rigidbody sealRigidbody;
     
     public GameObject sealPrefab;
-    
+
+    public FishContainer mouthFishContainer;
     //Vectors
     public Vector3 localVelocity;
     public Vector3 tailLocalVelocity;
@@ -22,7 +23,8 @@ namespace Kevin
     public Vector3 accelerationForce;
     public Vector3 reverseForce;
     //Transforms
-    public Transform sealSize;
+    public Vector3 sealOriginalScale = Vector3.one;
+    public Vector3 sealCurrentScale;
     public Transform headTransform; 
     public Transform steeringTailTransform;
     public Transform jumpTransform;
@@ -54,7 +56,7 @@ namespace Kevin
 
     public Transform spawnPoint;
     
-    
+    public int foodLevel;
     //Audio
     //public AudioSource jumpSound;
 
@@ -67,7 +69,6 @@ namespace Kevin
             sealRigidbody = sealPrefab.GetComponent<Rigidbody>();
             tailPosition = sealPrefab.transform.position;
         }
-
     }
     void FixedUpdate()
     {
@@ -101,7 +102,24 @@ namespace Kevin
                 sealRigidbody.drag = waterDrag;
                 sealRigidbody.angularDrag = waterDrag;
             }
+
+            if (foodLevel < 0)
+            {
+                sealPrefab.transform.localScale = sealOriginalScale;
+            }
+            else if (foodLevel > 0)
+            {
+                //sealCurrentScale = sealPrefab.transform.localScale;
+                StartCoroutine(DecreaseScale());
+            }
         }
+    }
+
+    IEnumerator DecreaseScale()
+    {
+        yield return new WaitForSeconds(2f);
+        mouthFishContainer.totalFoodAmount--;
+
     }
     IEnumerator Decelerate()
     {
@@ -231,14 +249,19 @@ namespace Kevin
     
     public void Action()
     {
-        
+        if (IsServer)
+        {
+            if (IsWet && foodLevel > 0)
+            {
+                accelerationForce = 10f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+            }
+        }
     }
 
     public void Action2()
     {
         if(IsServer && isJumping == false)
         {
-            
             Jump();
             StartCoroutine(JumpTimer());
         }

@@ -24,8 +24,8 @@ public class KFish : FishBase, IControllable, IReactsToWater, IStateBase, IRTS, 
     //Fish Movement Variables
     public Rigidbody fRb;
     public Transform tailObjectTransform;
-    
-    
+
+    public int foodValue;
     public float acceleration = 10f;
     public float currentSteeringAngle;
     public float steeringMax = 30f;
@@ -169,6 +169,10 @@ public class KFish : FishBase, IControllable, IReactsToWater, IStateBase, IRTS, 
         throw new System.NotImplementedException();
     }
 
+
+
+    #region IEdible
+    
     public void GetEaten(IPredator eatenBy)
     {
         throw new System.NotImplementedException();
@@ -178,9 +182,11 @@ public class KFish : FishBase, IControllable, IReactsToWater, IStateBase, IRTS, 
     {
         throw new System.NotImplementedException();
     }
-
     public void GotShatOut(IPredator shatOutBy)
     {
         throw new System.NotImplementedException();
     }
+
+    #endregion
+  
 }
