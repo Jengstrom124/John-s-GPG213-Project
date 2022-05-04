@@ -29,7 +29,7 @@ public partial class @DefaultControls : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Action 1"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""170f18af-f211-492d-8f02-f8278eace3b6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -38,7 +38,7 @@ public partial class @DefaultControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Action 2"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""f80279a6-95c1-41b2-a61a-2cd069cc72fc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -47,7 +47,7 @@ public partial class @DefaultControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Action 3"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""dc997e7b-d4b2-4427-bdfb-32f2c6408e9f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
