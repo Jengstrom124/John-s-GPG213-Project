@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Unity.Netcode;
 using UnityEngine;
 
-public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater, IStateBase
+public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater, IStateBase, IPredator, IReactsToInk
 {
     public Rigidbody rb;
     public CapsuleCollider capsuleCollider;
@@ -25,6 +25,7 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
     public Transform model;
     public RigidbodyConstraints originalConstraints;
     public float originalDrag, originalAngularDrag;
+    public IPredator iPredator;
 
     //left overs ported from Vehicles project - maybe needed later for changing sharks
     //although I think this is unlikely
@@ -39,6 +40,8 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
         wiggleSpeed = UnityEngine.Random.Range(-1f, 1f);
     }
 
+
+    
     public virtual void WaterCheck()
     {
         
@@ -182,4 +185,17 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
 
     #endregion
 
+    #region IPredator Interface
+    public Vector3 GetBumPosition()
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region IReactsToInk
+    public void ChangeInkedState(bool isInked)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
 }
