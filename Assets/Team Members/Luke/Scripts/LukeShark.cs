@@ -174,7 +174,7 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 				steerTarget = maxSteeringAngle*turnStrength;
 			}
 			lateralFrictionCoefficient *= turnStrength;
-			//PopFishFromGuts
+			//stomach.PopFishFromGuts();
 		}
 
 		if (IsClient)
@@ -307,6 +307,11 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible
 	public EdibleInfo GetInfo()
 	{
 		return new EdibleInfo();
+	}
+
+	public void GotShatOut(IPredator shatOutBy)
+	{
+		throw new NotImplementedException();
 	}
 
 	public Vector3 GetBumPosition()
