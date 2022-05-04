@@ -24,7 +24,15 @@ public class Align : SteeringBase
 
     private void Start()
     {
-		John.JohnRTSTestController.Instance.playerFishSelectedEvent += UpdatePlayerFish;
+		if(John.JohnRTSTestController.Instance != null)
+        {
+			John.JohnRTSTestController.Instance.playerFishSelectedEvent += UpdatePlayerFish;
+
+        }
+		else
+        {
+			Debug.Log("Missing John RTS Controller");
+        }
     }
 
     void FixedUpdate()
