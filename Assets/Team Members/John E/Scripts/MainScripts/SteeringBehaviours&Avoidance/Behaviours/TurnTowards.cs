@@ -15,6 +15,7 @@ public class TurnTowards : MonoBehaviour
     Vector3 targetDirection;
     bool runAway;
     public float angle;
+    float defaultTurnMultiplier;
 
     PathTracker pathTracker;
     Neighbours neighbours;
@@ -36,6 +37,8 @@ public class TurnTowards : MonoBehaviour
         }
 
         pathTracker.newTargetAssignedEvent += SetDestinationTarget;
+
+        defaultTurnMultiplier = turnMultiplier;
     }
     private void Update()
     {
@@ -115,10 +118,12 @@ public class TurnTowards : MonoBehaviour
         if(other == null)
         {
             EscapePredator(false, null);
+            turnMultiplier = defaultTurnMultiplier;
         }
         else if(other.GetComponent<IPredator>() != null)
         {
             EscapePredator(true, other.transform);
+            turnMultiplier /= 4f;
         }
     }
 

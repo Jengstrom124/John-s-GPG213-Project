@@ -29,7 +29,7 @@ public class Neighbours : MonoBehaviour
         foreach(Collider collider in colliders)
         {
             //Only add a neighbour if they are a fish and not us
-            if (collider.GetComponent<FishBase>() != null && !neighboursList.Contains(collider.gameObject) && collider.gameObject != gameObject)
+            if (collider.GetComponent<FishBase>() != null && collider.gameObject != gameObject)
             {
                 neighboursList.Add(collider.gameObject);
             }
@@ -40,7 +40,7 @@ public class Neighbours : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(UnityEngine.Random.value + 0.25f);
 
         StartCoroutine(CheckForNeighbours());
     }
