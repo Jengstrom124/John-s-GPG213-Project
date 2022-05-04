@@ -34,7 +34,8 @@ public struct EdibleInfo
 public interface IEdible
 {
 	void GetEaten(IPredator eatenBy); // You only need to care about IPredator if you respond to specific types
-	EdibleInfo GetInfo();
+	EdibleInfo GetInfo();					// Thing that ate it needs to know what TYPE of edible it is (might not be food as such) and the amount it's worth
+	void GotShatOut(IPredator shatOutBy);	// Mainly for stupid sound fx etc, BUT might be needed for reenabling physics or whatever
 }
 
 
