@@ -88,13 +88,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -958873627390968633, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
     - target: {fileID: 2219981257583123345, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2219981257583123345, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2219981257583123345, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
       propertyPath: m_LocalPosition.x

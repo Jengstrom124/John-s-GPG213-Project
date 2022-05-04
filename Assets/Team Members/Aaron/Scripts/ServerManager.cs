@@ -177,9 +177,11 @@ public class ServerManager : NetworkManager
 
             GameManager.Instance.StartPlayerServerRpc(clientId);
             
-            GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
-            GameManager.Instance.RaiseChangeInGameUIVisibility(true);
+            //GameManager.Instance.RaiseChangeLobbyVisibility(false, false);
+            //GameManager.Instance.RaiseChangeInGameUIVisibility(true);
         }
+        
+        
         
         currentPlayer = null;
     }
@@ -216,7 +218,7 @@ public class ServerManager : NetworkManager
     {
         bool alreadyConnected = false;
         
-        if (LocalClientId != ulong.MaxValue)
+        if (!IsServer || !IsClient)
         {
             if (NetworkPlayerList.Instance.HasJoined(LocalClientId))
             {

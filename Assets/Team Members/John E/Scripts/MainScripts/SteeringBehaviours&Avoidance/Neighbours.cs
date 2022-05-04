@@ -5,61 +5,43 @@ using System;
 
 public class Neighbours : MonoBehaviour
 {
+    public Transform centreOfVisionPosition;
+    public float visionRadius = 27f;
+
     public List<GameObject> neighboursList = new List<GameObject>();
-    public List<Collider> fishColliders = new List<Collider>();
+    public Collider[] colliders;
     
-    public event Action<GameObject> newNeighbourEvent;
+    public event Action<GameObject> seePredatorEvent;
     public event Action<GameObject> neighbourLeaveEvent;
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        //Don't add a neighbour if we collide with a vision cone (ie a boid vision cone behind us is not a neighbour)
-        if(other == other.GetComponent<CapsuleCollider>() && other.gameObject.GetComponent<FishBase>() && other.GetComponent<CapsuleCollider>().isTrigger)
-        {
+        StartCoroutine(CheckForNeighbours());
+    }
 
-        }
-        else
+    IEnumerator CheckForNeighbours()
+    {
+        //Physics.OverlapSphereNonAlloc(centreOfVisionPosition.position, visionRadius, colliders, 255, QueryTriggerInteraction.Ignore);
+        colliders = Physics.OverlapSphere(centreOfVisionPosition.position, visionRadius, 255, QueryTriggerInteraction.Ignore);
+        neighboursList.Clear();
+        seePredatorEvent?.Invoke(null);
+
+        foreach(Collider collider in colliders)
         {
-            //Only add a neighnour if the physical neighbour is in our vision radius (boid behind us considers us a neighbour but they are not a neighbour to us)
-            if (other.GetComponent<FishBase>() != null && !neighboursList.Contains(other.gameObject))
+            //Only add a neighbour if they are a fish and not us
+            if (collider.GetComponent<FishBase>() != null && !neighboursList.Contains(collider.gameObject) && collider.gameObject != gameObject)
             {
-                neighboursList.Add(other.gameObject);
+                neighboursList.Add(collider.gameObject);
             }
-            
-            newNeighbourEvent?.Invoke(other.gameObject);
-            
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        neighbourLeaveEvent?.Invoke(other.gameObject);
-
-        RemoveNeighbours(other.gameObject);
-    }
-
-    /*
-    private void Update()
-    {
-        //HACK: For now to remove neighbours that are no longer active GO's
-        if(neighboursList.Count >= 1)
-        {
-            foreach (GameObject neighbour in neighboursList)
+            if(collider.GetComponent<IPredator>() != null)
             {
-                if (!neighbour.activeSelf)
-                {
-                    RemoveNeighbours(neighbour);
-                }
+                seePredatorEvent?.Invoke(collider.gameObject);
             }
         }
-    }
-    */
 
-    void RemoveNeighbours(GameObject neighbour)
-    {
-        if (neighboursList.Contains(neighbour.gameObject))
-        {
-            neighboursList.Remove(neighbour.gameObject);
-        }
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(CheckForNeighbours());
     }
 }

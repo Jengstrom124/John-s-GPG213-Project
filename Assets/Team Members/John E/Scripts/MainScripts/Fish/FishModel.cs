@@ -50,6 +50,11 @@ public class FishModel : FishBase, IRTS, IEdible
 
     public void SetDestination(Vector3 position)
     {
+        if (pathTracker.pathGenerated)
+        {
+            pathTracker.ResetPathTracking();
+        }
+
         pathTracker.GetPathToDestination(position);
 
         //Slowly turning align force to 0 so the player fish leads the school and the school follows the player fish

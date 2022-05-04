@@ -62,7 +62,11 @@ public class OllieFish : FishBase, IRTS, IEdible
 
     public EdibleInfo GetInfo()
     {
-        return new EdibleInfo();
+        EdibleInfo edibleInfo = new EdibleInfo();
+        edibleInfo.edibleType = EdibleType.Food;
+        edibleInfo.amount = 1;
+        
+        return edibleInfo;
     }
 
     public void GotShatOut(IPredator shatOutBy)

@@ -25,7 +25,7 @@ public class PathTracker : MonoBehaviour
     List<Node> pathToFollow = new List<Node>();
     List<Node> skipNodeList = new List<Node>();
     Node myDestinationNode;
-    bool pathGenerated = false;
+    public bool pathGenerated = false;
     bool pathCleared = false;
 
     //EVENTS:

@@ -30,6 +30,12 @@ public class CharacterSelectButton : MonoBehaviour
             if (uiLobby.localPlayerData.HasValue)
             {
                 NetworkPlayerList.Instance.CallUpdatePlayerData(uiLobby.localPlayerData.Value);
+                
+                // Join game which spawns the selected character
+                uiLobby.OnJoinButtonClicked();
+                
+                //ServerManager serverManager = ServerManager.Singleton as ServerManager;
+                //serverManager.JoinServer(uiLobby.localPlayerData, autoCreateHost: true);
             }
         }
 
