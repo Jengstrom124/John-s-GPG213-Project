@@ -53,6 +53,8 @@ public class PlayerController : NetworkBehaviour
 	    DefaultControls defaultControls = new DefaultControls();
 	    defaultControls.Enable();
 	    defaultControls.InGame.Action1.performed += aContext => ReplicatedAction(ReplicatedActionType.Action, aContext.phase);
+	    defaultControls.InGame.Action2.performed += aContext => ReplicatedAction(ReplicatedActionType.Action2, aContext.phase);
+	    defaultControls.InGame.Action3.performed += aContext => ReplicatedAction(ReplicatedActionType.Action3, aContext.phase);
 	    // defaultControls.InGame.Action1.performed += aContext => ReplicatedAction(ReplicatedActionType.Action, aContext.ReadValue<Vector2>());
     }
 
