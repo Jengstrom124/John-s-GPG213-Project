@@ -36,16 +36,19 @@ public class Separation : SteeringBase
 
 		Vector3 separationMove = Vector3.zero;
 		Vector3 myPos = transform.position;
+		Vector3 neighbourPos;
 
 		foreach (GameObject neighbour in neighbours)
 		{
+			neighbourPos = neighbour.transform.position;
+
 			//Check my Distance from each neighbour
-			myDistance = Vector3.Distance(myPos, neighbour.transform.position);
+			myDistance = Vector3.Distance(myPos, neighbourPos);
 
 			//if we are too close
 			if(myDistance < minDistance)
             {
-				separationMove += transform.InverseTransformPoint(neighbour.transform.position);
+				separationMove += transform.InverseTransformPoint(neighbourPos);
             }
 
 		}

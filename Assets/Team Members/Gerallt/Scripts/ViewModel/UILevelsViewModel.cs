@@ -17,7 +17,7 @@ namespace Gerallt
         public static string managerScene = "ManagerScene";
 
         public mayaSpawner spawner;
-        
+
         public void LoadLevel(string levelName)
         {
             //SceneManager.sceneLoaded += SceneManager_OnsceneLoaded;
@@ -25,8 +25,21 @@ namespace Gerallt
             
             // Tell all the clients to load the specified level.
             NetworkManager.Singleton.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+
+            //unloads the level; keeps the manager scene active
+            if (SceneManager.sceneCount > 1)
+            {
+	            UnLoadLevel(SceneManager.GetSceneAt(1).name);
+            }
+            
             NetworkManager.Singleton.SceneManager.LoadScene(levelName, LoadSceneMode.Additive); // Wouldn't synchronise the correct LoadSceneMode well for players that joined late
             spawner.SpawnStuff();
+        }
+        
+        //TODO : need to test when client join works again
+        public void UnLoadLevel(string level)
+        {
+	        SceneManager.UnloadSceneAsync(level);
         }
 
         [ClientRpc]

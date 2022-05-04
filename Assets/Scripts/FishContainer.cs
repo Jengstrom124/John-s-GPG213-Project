@@ -36,7 +36,7 @@ public class FishContainer : MonoBehaviour
 	    
 	    FishBase lastFish = ContainerContents.Peek();
 	    
-	    totalFoodAmount -= lastFish.GetComponent<IEdible>().GetInfo().amount;
+	    totalFoodAmount -= foodValueToPop;
 	    
 	    //gets the shit spot of the shark
         Vector3 shitSpot = GetComponent<IPredator>().GetBumPosition();

@@ -68,6 +68,7 @@ namespace Ollie
 
         public override void Action2(InputActionPhase aActionPhase)
         {
+            print("action2");
             if (IsServer)
             {
                 SpeedBoost();
@@ -83,10 +84,10 @@ namespace Ollie
         //player controller uses "wasPressed" so shits out heaps of fish per press rather than just one
         //but it works!
         {
-            if (IsServer)
+            if (IsServer && IsOwner)
             {
-                stomach.fishContainer.PopFishFromGuts(1);
-                //print("after shitting, count equals " +stomach.fishContainer.totalFoodAmount);
+                stomach.fishContainer.PopFishFromGuts(0);
+                print("after shitting, count equals " +stomach.fishContainer.totalFoodAmount);
             }
         }
         
@@ -151,7 +152,7 @@ namespace Ollie
         {
             //doubles speed for 1.5 seconds
             //prevents reapplication for 3 seconds after deactivation
-            //print("shark go zoom");
+            print("shark go zoom");
             boosting = true;
             forwardSpeed = forwardSpeed * 2;
             yield return new WaitForSeconds(1.5f);
