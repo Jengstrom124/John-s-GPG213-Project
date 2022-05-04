@@ -5,9 +5,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class mayaSquid : MonoBehaviour, IControllable
+public class mayaSquid : MonoBehaviour, IControllable, IPredator
 {
     private GameObject inkSplatterSpawned;
+    public Vector3 bumPosition;
     public GameObject inkSplatterPrefab;
     public Rigidbody squidForce;
     public float rotateSpeed = 2f;
@@ -113,5 +114,10 @@ public class mayaSquid : MonoBehaviour, IControllable
     public void Action3()
     {
         
+    }
+
+    public Vector3 GetBumPosition()
+    {
+        return bumPosition;
     }
 }
