@@ -244,7 +244,7 @@ namespace Gerallt
             
             GameManager.Instance.OnChangeLevelsVisibility += GameManager_OnChangeLevelsVisibility;
             
-            buttonTestPopulateLevels.onClick.AddListener(TestPopulateLevels);
+            // buttonTestPopulateLevels.onClick.AddListener(TestPopulateLevels);
             
             PopulateLevels();
         }
