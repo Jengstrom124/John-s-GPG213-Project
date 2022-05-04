@@ -41,9 +41,12 @@ public class Align : SteeringBase
 
 		Vector3 alignmentMove = Vector3.zero;
 
-		if (neighbours.Contains(currentPlayerFish) && alignWithPlayer)
-		{
-			alignmentMove = currentPlayerFish.transform.forward;
+		if(currentPlayerFish != null)
+        {
+			if (neighbours.Contains(currentPlayerFish) && alignWithPlayer)
+			{
+				alignmentMove = currentPlayerFish.transform.forward;
+			}
 		}
 		else
         {
@@ -52,9 +55,9 @@ public class Align : SteeringBase
 			{
 				alignmentMove += neighbour.transform.forward;
 			}
-		}
 
-		alignmentMove /= neighbours.Count;
+			alignmentMove /= neighbours.Count;
+		}
 
 		return alignmentMove;
 	}

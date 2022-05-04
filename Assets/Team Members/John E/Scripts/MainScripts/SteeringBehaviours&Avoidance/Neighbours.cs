@@ -35,12 +35,10 @@ public class Neighbours : MonoBehaviour
     {
         neighbourLeaveEvent?.Invoke(other.gameObject);
 
-        if (neighboursList.Contains(other.gameObject))
-        {
-            neighboursList.Remove(other.gameObject);
-        }
+        RemoveNeighbours(other.gameObject);
     }
 
+    /*
     private void Update()
     {
         //HACK: For now to remove neighbours that are no longer active GO's
@@ -50,10 +48,18 @@ public class Neighbours : MonoBehaviour
             {
                 if (!neighbour.activeSelf)
                 {
-                    neighboursList.Remove(neighbour.gameObject);
-                    neighbourLeaveEvent?.Invoke(neighbour.gameObject);
+                    RemoveNeighbours(neighbour);
                 }
             }
+        }
+    }
+    */
+
+    void RemoveNeighbours(GameObject neighbour)
+    {
+        if (neighboursList.Contains(neighbour.gameObject))
+        {
+            neighboursList.Remove(neighbour.gameObject);
         }
     }
 }
