@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 namespace MayaStuff
 {
-    public class sharkControls : MonoBehaviour, IControllable
+    public class sharkControls : MonoBehaviour, IControllable, IReactsToInk
     {
         public Rigidbody sharkForce;
 
@@ -103,7 +103,13 @@ namespace MayaStuff
 
         public void Action3()
         {
+            speed = 2;
+        }
 
+        public void ChangeInkedState(bool isInked)
+        {
+            if (isInked)
+                speed = 2f;
         }
     }
 

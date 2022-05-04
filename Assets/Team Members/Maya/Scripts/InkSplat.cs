@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InkSplat : MonoBehaviour
 {
@@ -19,5 +21,25 @@ public class InkSplat : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        IReactsToInk inkable = other.GetComponent<IReactsToInk>();
+
+        if (inkable != null)
+        {
+            inkable.ChangeInkedState(true);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        IReactsToInk inkable = other.GetComponent<IReactsToInk>();
+
+        if (inkable != null)
+        {
+            inkable.ChangeInkedState(false);
+        }
     }
 }
