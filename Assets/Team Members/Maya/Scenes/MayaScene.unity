@@ -985,6 +985,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1379514831
       objectReference: {fileID: 0}
+    - target: {fileID: 2065292948, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
+      propertyPath: chargeRate
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4554516382443037816, guid: 0bde8804bf16cc2448ee39afcf13d667, type: 3}
       propertyPath: m_Name
       value: MayasSquidFinal
