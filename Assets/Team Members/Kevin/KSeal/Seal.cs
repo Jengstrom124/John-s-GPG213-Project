@@ -109,7 +109,7 @@ namespace Kevin
                 sealRigidbody.angularDrag = waterDrag;
             }
 
-            sealPrefab.transform.localScale = Vector3.one * (1f + foodLevel / 25f);
+            sealPrefab.transform.localScale = Vector3.one * (1f + foodLevel / 75f);
         }
     }
 
@@ -179,7 +179,7 @@ namespace Kevin
     {
         if (IsWet == false && input < 0 && isJumping == false)
         {
-                sealRigidbody.AddRelativeTorque(new Vector3(0f,-3f,0f));
+                sealRigidbody.AddRelativeTorque(new Vector3(0f,-4f,0f));
                 float currentYEuler = transform.eulerAngles.y;
             
                 targetAngle = -input * currentSteeringMax;
@@ -193,7 +193,7 @@ namespace Kevin
         }
         else if (IsWet == false && input > 0 && isJumping == false)
         {
-                sealRigidbody.AddRelativeTorque(new Vector3(0f,3f,0f));
+                sealRigidbody.AddRelativeTorque(new Vector3(0f,4f,0f));
                 float currentYEuler = transform.eulerAngles.y;
             
                 targetAngle = -input * currentSteeringMax;

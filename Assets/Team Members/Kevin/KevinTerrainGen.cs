@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,15 +40,12 @@ namespace Kevin
     public bool coral;
     public bool bird;
 
-    public List<int> seeds;
-    
-    void Awake()
-    {
-        Random.InitState(seeds[2]);
-    }
+    public int seed;
     
     void Start()
     {
+        Random.InitState(seed);
+        
         StartCoroutine(Terrainer());
         StartCoroutine(Spawner());
         levelInfo.OnLevelGenerationFinishedEvent();
@@ -113,7 +111,6 @@ namespace Kevin
                 Instantiate(birdPrefab, randomLocation,Quaternion.identity, parent3.transform);
             }
         }
-
     }
     
     private float CalculateHeightCallback(int x, int y)

@@ -1,8 +1,9 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Kevin
 {
-    public class KEat : MonoBehaviour, IPredator
+    public class KEat : NetworkBehaviour, IPredator
     {
         public GameObject sealPrefab;
         private FishContainer fishContainer;
@@ -16,7 +17,7 @@ namespace Kevin
         void OnTriggerEnter(Collider other)
         {
             
-            if (!other.isTrigger)
+            if (!other.isTrigger && IsServer)
             {
                 IEdible edible = other.GetComponent<IEdible>();
                 FishBase fish = other.GetComponent<FishBase>();

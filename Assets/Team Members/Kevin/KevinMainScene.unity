@@ -739,7 +739,7 @@ MonoBehaviour:
   seaweed: 1
   coral: 1
   bird: 0
-  seeds: 01000000040000000a000000
+  seed: 4
 --- !u!4 &1407382158
 Transform:
   m_ObjectHideFlags: 0
