@@ -65,7 +65,12 @@ namespace Gerallt
 
         public void Start()
         {
-            buttonHostGame.gameObject.SetActive(true);
+	        DefaultControls defaultControls = new DefaultControls();
+	        defaultControls.Enable();
+	        defaultControls.InMenu.ToggleMenu.performed += aContext => view.SetActive(!view.activeSelf);
+
+
+	        buttonHostGame.gameObject.SetActive(true);
             buttonStartGame.gameObject.SetActive(false);
             buttonJoinGame.gameObject.SetActive(true);
             UIServerIPInput.gameObject.SetActive(true);

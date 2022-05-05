@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DG.Tweening;
+using Unity.Netcode;
 
 public class FishModel : FishBase, IRTS, IEdible
 {
@@ -75,7 +76,13 @@ public class FishModel : FishBase, IRTS, IEdible
 
     public void GetEaten(IPredator eatenBy)
     {
-        gameObject.SetActive(false);
+        ChangeActiveClientRpc(false);
+    }
+
+    [ClientRpc]
+    public void ChangeActiveClientRpc(bool state)
+    {
+	    gameObject.SetActive(state);
     }
 
     public EdibleInfo GetInfo()
@@ -90,5 +97,6 @@ public class FishModel : FishBase, IRTS, IEdible
     public void GotShatOut(IPredator shatOutBy)
     {
 	    transform.DOPunchScale(new Vector3(2f, 2f, 2f), 0.5f);
+	    ChangeActiveClientRpc(true);
     }
 }

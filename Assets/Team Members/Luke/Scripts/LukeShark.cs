@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class LukeShark : FishBase, IControllable, IPredator, IEdible, IReactsToWater
 {
 	public Vector3 startingPosition;
+	public Collider mainCollider;
 	
 	public AudioSource audioSource;
 	public AudioClip boost;
@@ -318,21 +319,10 @@ public class LukeShark : FishBase, IControllable, IPredator, IEdible, IReactsToW
 				    ChangeSize();
 				    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
 
-				    if (fishFood != null)
-				    {
-					    stomach.AddToStomach(fishFood);
-				    }
-			    }
-			    else
-			    {
-				    if (other.transform.localScale.x < transform.localScale.x)
-				    {
-					    Debug.Log(foodLevel);
-					    food.GetEaten(this);
-					    foodLevel += other.GetComponent<FishContainer>().totalFoodAmount;
-					    ChangeSize();
-				    }
-			    }
+		    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
+		    if (fishFood != null && fishFood.GetComponent<IPredator>() == null)
+		    {
+			    stomach.AddToStomach(fishFood);
 		    }
 		    
 	    }
@@ -351,20 +341,28 @@ public class LukeShark : FishBase, IControllable, IPredator, IEdible, IReactsToW
 
     public void GetEaten(IPredator eatenBy)
     {
-	    stomach.ReenableEatenFish();
+	    mainCollider.enabled = false;
+	    // stomach.ReenableEatenFish();
 	    // HACK
 	    foodLevel = 10;
 	    transform.position = startingPosition;
+	    StartCoroutine(RespawnedInvincible());
     }
 
-	public EdibleInfo GetInfo()
+    private IEnumerator RespawnedInvincible()
+    {
+	    yield return new WaitForSeconds(1f);
+	    mainCollider.enabled = true;
+    }
+
+    public EdibleInfo GetInfo()
 	{
 		return new EdibleInfo();
 	}
 
 	public void GotShatOut(IPredator shatOutBy)
 	{
-		throw new NotImplementedException();
+		
 	}
 
 	public Vector3 GetBumPosition()

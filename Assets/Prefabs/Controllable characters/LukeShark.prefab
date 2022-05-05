@@ -879,6 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPosition: {x: 0, y: 0, z: 0}
+  mainCollider: {fileID: 2471790443286211959}
   audioSource: {fileID: 0}
   boost: {fileID: 8300000, guid: e95065c07fbb55d48be7e024587b0543, type: 3}
   oneEighty: {fileID: 8300000, guid: 8dd0f4baf66179940a3a8f075470f8a9, type: 3}

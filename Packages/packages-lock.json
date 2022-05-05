@@ -31,7 +31,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.5.6",
+      "version": "1.6.3",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -100,7 +100,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {
-      "version": "1.2.1",
+      "version": "1.2.5",
       "depth": 3,
       "source": "registry",
       "dependencies": {},
