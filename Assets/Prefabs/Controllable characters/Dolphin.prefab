@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishContainer: {fileID: 5252093879479658486}
   dolphin: {fileID: 949625894}
+  canEat: 0
 --- !u!1 &2100940192
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +265,7 @@ MonoBehaviour:
   originalAngularDrag: 0
   bumPoint: {fileID: 576131677}
   stomach: {fileID: 1797277316}
+  canEat: 0
   splash: {fileID: 5515541012610773562}
   boost: {fileID: -4473858619368634171}
 --- !u!54 &6147007065618439631

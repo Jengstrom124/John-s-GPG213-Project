@@ -16,9 +16,9 @@ namespace Ollie
             capsuleCollider = GetComponentInChildren<CapsuleCollider>();
             // bumPoint = GetComponentInChildren<Transform>();
             // stomach = GetComponentInChildren<Stomach>();
-            groundSpeed = 22.5f;
-            forwardSpeed = 35;
-            turnSpeed = 10;
+            groundSpeed = 10f;
+            forwardSpeed = 15;
+            turnSpeed = 5f;
             car = this.gameObject;
             jumping = false;
             jumpHeight = 20;
@@ -70,7 +70,10 @@ namespace Ollie
         {
             if (IsServer)
             {
-                SpeedBoost();
+                if (stomach.fishContainer.totalFoodAmount >= 1)
+                {
+                    SpeedBoost();
+                }
             }
 
             if (IsClient)
@@ -85,7 +88,7 @@ namespace Ollie
         {
             if (IsServer && IsOwner)
             {
-                stomach.fishContainer.PopFishFromGuts(1); //change this from 1 to edibleInfo.amount at some point
+                //stomach.fishContainer.PopFishFromGuts(1); //change this from 1 to edibleInfo.amount at some point
                 //print("after shitting, count equals " +stomach.fishContainer.totalFoodAmount);
             }
         }
@@ -153,6 +156,7 @@ namespace Ollie
             //prevents reapplication for 3 seconds after deactivation
             //print("shark go zoom");
             boosting = true;
+            stomach.fishContainer.PopFishFromGuts(1);
             forwardSpeed = forwardSpeed * 2;
             yield return new WaitForSeconds(1.5f);
             forwardSpeed = forwardSpeed / 2;
