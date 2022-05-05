@@ -110,11 +110,12 @@ public class LukeTerrain : MonoBehaviour
 
 	void Awake()
 	{
-		Random.InitState(seed);
 	}
 	
 	void Start()
 	{
+		Random.InitState(seed);
+		
 		offsetX = Random.Range(-1000f,1000f);
 		offsetY = Random.Range(-1000f,1000f);
 		GetComponentInChildren<SubmersedSpawner>().fringe = fringe;

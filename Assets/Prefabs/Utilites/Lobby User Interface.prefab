@@ -293,7 +293,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 821783532}
   m_HandleRect: {fileID: 821783531}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -496,8 +496,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1345553415}
   m_HandleRect: {fileID: 1345553414}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -662,8 +662,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 44921865}
-  m_Father: {fileID: 7688179865695734824}
-  m_RootOrder: 1
+  m_Father: {fileID: 3045476347846877604}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2749,6 +2749,7 @@ Transform:
   - {fileID: 7688179865361111781}
   - {fileID: 1852752728}
   - {fileID: 943836967504718837}
+  - {fileID: 1283154026}
   m_Father: {fileID: 7688179865695734824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3011,7 +3012,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3045476347846877604}
-  - {fileID: 1283154026}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3366,7 +3366,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7688179865768339465}
   m_HandleRect: {fileID: 7688179865768339470}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3494,7 +3494,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7688179866640590127}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4240,7 +4240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 943836968542790509, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_Size
-      value: 0.9999999
+      value: 0.9999998
       objectReference: {fileID: 0}
     - target: {fileID: 943836968542790509, guid: 2458fbe1866c50e4782dfcb3867626af, type: 3}
       propertyPath: m_Value

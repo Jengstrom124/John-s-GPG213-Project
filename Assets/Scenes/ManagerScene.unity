@@ -434,7 +434,7 @@ MonoBehaviour:
   spawnCount: 200
   fudgeScale: 1
   objectsToSpawn:
-  - {fileID: 2219981257583123356, guid: 8a1553c088d6be9419d1fb9c41bd277b, type: 3}
+  - {fileID: 5439196097263353496, guid: 9f272a7d145dfd24aaa3c28fd51ad639, type: 3}
   xyzMin: {x: 0, y: 0, z: 0}
   xyzMax: {x: 50, y: 50, z: 50}
   xMax: 50
