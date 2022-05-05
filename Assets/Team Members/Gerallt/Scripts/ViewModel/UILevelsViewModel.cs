@@ -31,9 +31,10 @@ namespace Gerallt
             NetworkManager.Singleton.SceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
 
             //unloads the level; keeps the manager scene active
-            if (SceneManager.sceneCount > 1)
+            if (IsServer && SceneManager.sceneCount > 1)
             {
-	            UnLoadLevel(SceneManager.GetSceneAt(1).name);
+	            //NetworkManager.Singleton.SceneManager.UnloadScene(SceneManager.GetSceneAt(1));
+                UnloadSceneClientRpc(SceneManager.GetSceneAt(1).name);
             }
             
             NetworkManager.Singleton.SceneManager.LoadScene(levelName, LoadSceneMode.Additive); // Wouldn't synchronise the correct LoadSceneMode well for players that joined late
