@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Kevin
 {
-    public class Seal : NetworkBehaviour, IControllable, IReactsToWater, IReactsToInk, IPredator
+    public class Seal : NetworkBehaviour, IControllable, IReactsToWater, IReactsToInk, IPredator, IEdible
 {
     #region Variables
 
@@ -17,6 +17,8 @@ namespace Kevin
     public GameObject sealPrefab;
 
     public GameObject mouthPrefab;
+    public GameObject bumPosition;
+    
     public FishContainer mouthFishContainer;
     //Vectors
     public Vector3 localVelocity;
@@ -117,7 +119,7 @@ namespace Kevin
         yield return new WaitForSeconds(5f);
         if (foodLevel > 1)
         {
-            
+            mouthFishContainer.totalFoodAmount--;
             foodLevel--;
         }
         StartCoroutine(Shrink());
@@ -266,6 +268,7 @@ namespace Kevin
             if (IsWet && foodLevel > 0)
             {
                 accelerationForce = 10f * accelerationSpeed * transform.TransformDirection(Vector3.forward);
+                mouthFishContainer.PopFishFromGuts(1);
             }
         }
         
@@ -292,7 +295,22 @@ namespace Kevin
 
     public Vector3 GetBumPosition()
     {
+        return bumPosition.transform.position;
+    }
+
+    public void GetEaten(IPredator eatenBy)
+    {
         throw new System.NotImplementedException();
+    }
+
+    public EdibleInfo GetInfo()
+    {
+        return new EdibleInfo();
+    }
+
+    public void GotShatOut(IPredator shatOutBy)
+    {
+        // 
     }
 }
 }

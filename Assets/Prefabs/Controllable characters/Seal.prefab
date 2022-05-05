@@ -1791,6 +1791,7 @@ MonoBehaviour:
   sealRigidbody: {fileID: 3049122826345489953}
   sealPrefab: {fileID: 2055310735626418041}
   mouthPrefab: {fileID: 2055310734427170053}
+  bumPosition: {fileID: 8890914890398143519}
   mouthFishContainer: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   tailLocalVelocity: {x: 0, y: 0, z: 0}
@@ -1820,7 +1821,7 @@ MonoBehaviour:
   capsuleCollider: {fileID: 1970519610861360289}
   colliderCenter: {x: 0, y: 0, z: 0}
   spawnPoint: {fileID: 0}
-  foodLevel: 10
+  foodLevel: 1
 --- !u!54 &3049122826345489953
 Rigidbody:
   m_ObjectHideFlags: 0
