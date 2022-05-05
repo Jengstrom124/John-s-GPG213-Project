@@ -7,7 +7,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater, IStateBase, IPredator, IReactsToInk
+public class OllieVehicleBase : FishBase, IControllable, IReactsToWater, IStateBase, IPredator, IReactsToInk, IEdible
 {
     public Rigidbody rb;
     public CapsuleCollider capsuleCollider;
@@ -29,6 +29,7 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
     public IPredator iPredator;
     public Transform bumPoint;
     public Stomach stomach;
+    public bool canEat;
 
     //left overs ported from Vehicles project - maybe needed later for changing sharks
     //although I think this is unlikely
@@ -201,4 +202,36 @@ public class OllieVehicleBase : NetworkBehaviour, IControllable, IReactsToWater,
         throw new NotImplementedException();
     }
     #endregion
+
+    #region IEdible Interface
+    public void GetEaten(IPredator eatenBy)
+    {
+        
+    }
+
+    public EdibleInfo GetInfo()
+    {
+        EdibleInfo edibleInfo = new EdibleInfo();
+        edibleInfo.edibleType = EdibleType.Food;
+        edibleInfo.amount = 5;
+        
+        return edibleInfo;
+    }
+
+
+    public void GotShatOut(IPredator shatOutBy)
+    {
+        
+        // idea is to put eating on CD so you don't immediately get eaten if you shit out a player
+        // but this will be obsolete if Cam's respawn works
+        //StartCoroutine(EatCooldownCoroutine());
+    }
+    #endregion
+
+    public IEnumerator EatCooldownCoroutine()
+    {
+        stomach.canEat = false;
+        yield return new WaitForSeconds(1f);
+        stomach.canEat = true;
+    }
 }

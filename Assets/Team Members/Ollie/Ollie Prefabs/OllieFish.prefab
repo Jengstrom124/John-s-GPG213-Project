@@ -232,6 +232,7 @@ MonoBehaviour:
   usePathSmoothing: 1
   finalDestinationPos: {x: 0, y: 0}
   currentTargetPos: {x: 0, y: 0}
+  pathGenerated: 0
 --- !u!114 &1086095141021230379
 MonoBehaviour:
   m_ObjectHideFlags: 0

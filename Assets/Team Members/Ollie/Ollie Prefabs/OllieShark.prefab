@@ -51,15 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edc0a1bc8855fb4b81217d3377e6732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
   rb: {fileID: 0}
   capsuleCollider: {fileID: 0}
   forwardSpeed: 0
@@ -70,6 +61,16 @@ MonoBehaviour:
   playerInVehicle: 0
   tailTurnPoint: {fileID: 7620515820011956456}
   car: {fileID: 0}
+  boosting: 0
+  jumping: 0
+  jumpHeight: 0
+  jumpDistance: 0
+  model: {fileID: 0}
+  originalConstraints: 0
+  originalDrag: 0
+  originalAngularDrag: 0
+  bumPoint: {fileID: 0}
+  stomach: {fileID: 0}
 --- !u!54 &1502603088
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -84,7 +85,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &1061338841
 MonoBehaviour:
@@ -151,10 +152,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: cba076aa5654a2b4a8917697628e0f01, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.23772907
+  m_Height: 6.1416473
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.4838104, z: -0.74694824}
 --- !u!114 &1859301126
 MonoBehaviour:
   m_ObjectHideFlags: 0
