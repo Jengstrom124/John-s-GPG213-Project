@@ -26,7 +26,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8305161447525605678}
   m_Father: {fileID: 5106164139609085650}
@@ -42,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056802333179727258}
   - component: {fileID: 1638451467793178979}
+  - component: {fileID: 253049803}
   m_Layer: 0
   m_Name: EatPosition
   m_TagString: Untagged
@@ -59,7 +59,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5106164139609085650}
   m_RootOrder: 2
@@ -77,6 +76,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &253049803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662218189419129698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6671f59f03623954fba6768621add4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  squid: {fileID: 2065292948}
 --- !u!1 &4062054636040585304
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +116,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5106164139609085650}
   m_RootOrder: 1
@@ -154,7 +165,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.95, y: 14.528998, z: 18.578783}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 443523128}
   - {fileID: 1786835761344827122}
@@ -224,11 +234,11 @@ MonoBehaviour:
   canInk: 0
   inkSplatterPrefab: {fileID: 105312665972366714, guid: 5a3dc164230c42843a165fefb31021ac, type: 3}
   squidForce: {fileID: 2065292951}
-  rotateSpeed: 25
-  speed: 60
+  rotateSpeed: 50
+  speed: 30
   hackyNonsense: 0
   charge: 0
-  chargeRate: 30
+  chargeRate: 15
   squidAnim: {fileID: 5832129482877874880}
 --- !u!114 &2065292949
 MonoBehaviour:
@@ -359,13 +369,13 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7720376482644702130, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
---- !u!95 &5832129482877874880 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3472371851607811341, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
-  m_PrefabInstance: {fileID: 6980497029518759885}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8305161447525605678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1413683078419379939, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
+  m_PrefabInstance: {fileID: 6980497029518759885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5832129482877874880 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3472371851607811341, guid: 44f80145417a78c46b9c0daf473b6437, type: 3}
   m_PrefabInstance: {fileID: 6980497029518759885}
   m_PrefabAsset: {fileID: 0}
