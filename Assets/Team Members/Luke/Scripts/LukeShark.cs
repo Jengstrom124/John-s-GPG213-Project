@@ -329,10 +329,9 @@ public class LukeShark : FishBase, IControllable, IPredator, IEdible, IReactsToW
 				    {
 					    Debug.Log(foodLevel);
 					    food.GetEaten(this);
+					    foodLevel += other.GetComponent<FishContainer>().totalFoodAmount;
+					    ChangeSize();
 				    }
-				    
-				    foodLevel += other.GetComponent<FishContainer>().totalFoodAmount;
-				    ChangeSize();
 			    }
 		    }
 		    
