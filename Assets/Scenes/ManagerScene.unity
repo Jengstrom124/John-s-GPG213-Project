@@ -648,12 +648,20 @@ PrefabInstance:
       objectReference: {fileID: 809562603}
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: characterPrefabs.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
+      propertyPath: characterPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 1664143151071907964, guid: f07aa8e8a475ed9458098827bffe5beb, type: 3}
+    - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
+      propertyPath: characterPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2356257054200989224, guid: e1f1cb1546b3c2f4cb5f28dc818406c1, type: 3}
     - target: {fileID: 8060951119784412946, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: characterPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 2356257054200989224, guid: e1f1cb1546b3c2f4cb5f28dc818406c1, type: 3}
+      objectReference: {fileID: 1454179093142423601, guid: 1101bc0df40b9c74382e681b0fc27944, type: 3}
     - target: {fileID: 8060951119784412947, guid: 56c1adff85e1af842b48afcd8a212c36, type: 3}
       propertyPath: m_Name
       value: Game Manager
