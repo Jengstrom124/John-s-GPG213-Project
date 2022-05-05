@@ -18,6 +18,9 @@ namespace AnGelloStuff
         float SteerInput;
         float ReverseInput;
 
+        float Hungertimer;
+        public float SetStarvationTime = 5;
+
         public KeyCode FirstAction;
         public KeyCode SecondAction;
 
@@ -77,11 +80,21 @@ namespace AnGelloStuff
                         GetComponentInChildren<SkinnedMeshRenderer>().material = actioningMat;
                     
                 }
-            }          
+            }
+
+            Hungertimer += Time.deltaTime;
+
+            if (Hungertimer >= SetStarvationTime & foodCounter > -5)
+            {
+                Hungertimer = 0;
+                foodCounter -= 1;
+                ScaleShark();
+            }
         }
 
         private void FixedUpdate()
         {
+            ScaleShark();
             
                 switch (curState)
                 {
@@ -167,12 +180,12 @@ namespace AnGelloStuff
             if(edible != null)
             {
                 fishCounter.AddToStomach(fish);
-                Debug.Log("Eart");
             }
 
             if(fish != null)
             {
-                foodCounter = fishCounter.totalFoodAmount;   
+                foodCounter = fishCounter.totalFoodAmount;
+                ScaleShark();
             }
         }
 
@@ -189,6 +202,11 @@ namespace AnGelloStuff
         public EdibleInfo GetInfo()
         {
             return new EdibleInfo();
+        }
+
+        private void ScaleShark()
+        {
+            transform.localScale = new Vector3(1, 1, 1) * ((0.1f * foodCounter) + 1);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishTestScript : MonoBehaviour, IEdible
+public class FishTestScript : FishBase, IEdible
 {
     public void GetEaten(IPredator eatenBy)
     {
@@ -11,7 +11,7 @@ public class FishTestScript : MonoBehaviour, IEdible
 
     public EdibleInfo GetInfo()
     {
-        throw new System.NotImplementedException();
+        return new EdibleInfo();
     }
 
     public void GotShatOut(IPredator shatOutBy)
