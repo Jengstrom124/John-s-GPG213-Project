@@ -5,8 +5,10 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible, IReactsToWater
+public class LukeShark : FishBase, IControllable, IPredator, IEdible, IReactsToWater
 {
+	public Vector3 startingPosition;
+	
 	public AudioSource audioSource;
 	public AudioClip boost;
 	public AudioClip oneEighty;
@@ -251,6 +253,10 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible, IR
 	    stomach = GetComponent<FishContainer>();
 	    defaultFinY = finBase.position.y;
 	    StartCoroutine(DepleteFood());
+
+	    // HACK
+	    startingPosition = transform.position;
+	    
     }
 
     // Update is called once per frame
@@ -295,7 +301,8 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible, IR
 
     private void OnTriggerEnter(Collider other)
     {
-	    if (!other.isTrigger)
+	    // Server only
+	    if (!other.isTrigger && IsServer)
 	    {
 		    //should check for size difference here
 
@@ -328,7 +335,10 @@ public class LukeShark : NetworkBehaviour, IControllable, IPredator, IEdible, IR
 
     public void GetEaten(IPredator eatenBy)
     {
-	    
+	    stomach.ReenableEatenFish();
+	    // HACK
+	    foodLevel = 10;
+	    transform.position = startingPosition;
     }
 
 	public EdibleInfo GetInfo()

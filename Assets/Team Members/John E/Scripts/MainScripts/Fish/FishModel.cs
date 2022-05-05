@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DG.Tweening;
 
 public class FishModel : FishBase, IRTS, IEdible
 {
@@ -81,13 +82,13 @@ public class FishModel : FishBase, IRTS, IEdible
     {
         EdibleInfo edibleInfo = new EdibleInfo();
         edibleInfo.edibleType = EdibleType.Food;
-        edibleInfo.amount = 1;
+        edibleInfo.amount = 5;
 
         return edibleInfo;
     }
 
     public void GotShatOut(IPredator shatOutBy)
     {
-	    
+	    transform.DOPunchScale(new Vector3(2f, 2f, 2f), 0.5f);
     }
 }
