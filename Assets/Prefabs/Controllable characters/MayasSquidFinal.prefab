@@ -238,7 +238,7 @@ MonoBehaviour:
   speed: 30
   hackyNonsense: 0
   charge: 0
-  chargeRate: 15
+  chargeRate: 25
   squidAnim: {fileID: 5832129482877874880}
 --- !u!114 &2065292949
 MonoBehaviour:

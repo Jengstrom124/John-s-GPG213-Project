@@ -13,12 +13,12 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
     public bool canInk = false;
     public GameObject inkSplatterPrefab;
     public Rigidbody squidForce;
-    public float rotateSpeed = 2f;
-    public float speed = 30;
+    public float rotateSpeed;
+    public float speed;
 
     public bool hackyNonsense;
     public float charge;
-    public float chargeRate = 100;
+    public float chargeRate;
 
     public Animator squidAnim;
 
@@ -37,7 +37,8 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
     {
         //localVelocity = transform.InverseTransformDirection(sharkForce.velocity);
         Steer(Input.GetAxis("Horizontal"));
-        charge += chargeRate * Time.fixedDeltaTime;
+        if (charge <= 100)
+            charge += chargeRate * Time.fixedDeltaTime;
         //Accelerate(Input.GetAxis("Vertical"));
 
         //hackyNonsense = false;
@@ -108,7 +109,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
             squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
             if (charge >= 1)
             {
-                squidAnim.speed = charge /3;
+                squidAnim.speed = charge /10;
                 squidAnim.SetTrigger("Swimming");
             }
 
