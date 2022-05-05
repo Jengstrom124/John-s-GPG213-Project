@@ -306,19 +306,36 @@ public class LukeShark : FishBase, IControllable, IPredator, IEdible, IReactsToW
 	    {
 		    //should check for size difference here
 
+		    IPredator pred = other.GetComponent<IPredator>();
 		    IEdible food = other.gameObject.GetComponent<IEdible>();
+
 		    if (food != null)
 		    {
-			    food.GetEaten(this);
-			    foodLevel += food.GetInfo().amount;
-			    ChangeSize();
-		    }
+			    if (pred == null)
+			    {
+				    food.GetEaten(this);
+				    foodLevel += food.GetInfo().amount;
+				    ChangeSize();
+				    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
 
-		    FishBase fishFood = other.gameObject.GetComponent<FishBase>();
-		    if (fishFood != null)
-		    {
-			    stomach.AddToStomach(fishFood);
+				    if (fishFood != null)
+				    {
+					    stomach.AddToStomach(fishFood);
+				    }
+			    }
+			    else
+			    {
+				    if (other.transform.localScale.x < transform.localScale.x)
+				    {
+					    Debug.Log(foodLevel);
+					    food.GetEaten(this);
+				    }
+				    
+				    foodLevel += other.GetComponent<FishContainer>().totalFoodAmount;
+				    ChangeSize();
+			    }
 		    }
+		    
 	    }
     }
 

@@ -16,7 +16,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
     public float rotateSpeed;
     public float speed;
 
-    public bool hackyNonsense;
+    //public bool hackyNonsense;
     public float charge;
     public float chargeRate;
 
@@ -105,7 +105,7 @@ public class mayaSquid : MonoBehaviour, IControllable, IPredator
             Debug.Log("NYOOOW");
             
             //squidAnim.speed = charge/4;
-            hackyNonsense = false;
+           // hackyNonsense = false;
             squidForce.AddForceAtPosition((charge*speed)*transform.TransformDirection(new Vector3(0,0,1)), squidForce.transform.position);
             if (charge >= 1)
             {
