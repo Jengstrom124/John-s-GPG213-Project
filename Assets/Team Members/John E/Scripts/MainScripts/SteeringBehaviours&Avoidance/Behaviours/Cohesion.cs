@@ -18,12 +18,16 @@ public class Cohesion : SteeringBase
 
 	void FixedUpdate()
 	{		
-		rb.AddRelativeForce(CalculateMove(neighbours.neighboursList) * force);
+		// rb.AddRelativeForce(CalculateMove(neighbours.neighboursList) * force);
+		rb.AddRelativeForce(CalculateMove() * force);
 	}
 
-	public override Vector3 CalculateMove(List<GameObject> neighbours)
+	// public override Vector3 CalculateMove(List<GameObject> neighbours)
+	public override Vector3 CalculateMove()
 	{
-		if (neighbours.Count == 0)
+		int neighboursListCount = neighbours.neighboursList.Count;
+		
+		if (neighboursListCount == 0)
         {
 			return Vector3.zero;
         }
@@ -31,12 +35,13 @@ public class Cohesion : SteeringBase
 		Vector3 cohesionMove = Vector3.zero;
 
 		// Average of all neighbours positions
-		foreach (GameObject neighbour in neighbours)
+		for (var index = 0; index < neighboursListCount; index++)
 		{
-			cohesionMove += transform.InverseTransformPoint(neighbour.transform.position);
+			// GameObject neighbour = neighbours.neighboursList[index];
+			cohesionMove += transform.InverseTransformPoint(neighbours.neighboursList[index].position);
 		}
 
-		cohesionMove /= neighbours.Count;
+		cohesionMove /= neighbours.neighboursList.Count;
 
 		return cohesionMove;
 	}

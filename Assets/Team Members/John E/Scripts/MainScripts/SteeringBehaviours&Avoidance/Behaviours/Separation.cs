@@ -23,13 +23,16 @@ public class Separation : SteeringBase
 
 	void FixedUpdate()
 	{
-		rb.AddRelativeForce(CalculateMove(neighbours.neighboursList) * force);
+		// rb.AddRelativeForce(CalculateMove(neighbours.neighboursList) * force);
+		rb.AddRelativeForce(CalculateMove() * force);
 	}
 
-	public override Vector3 CalculateMove(List<GameObject> neighbours)
+	// public override Vector3 CalculateMove(List<GameObject> neighbours)
+	public override Vector3 CalculateMove()
 	{
-
-		if (neighbours.Count == 0)
+		int neighboursListCount = neighbours.neighboursList.Count;
+		
+		if (neighboursListCount == 0)
 		{
 			return Vector3.zero;
 		}
@@ -38,22 +41,22 @@ public class Separation : SteeringBase
 		Vector3 myPos = transform.position;
 		Vector3 neighbourPos;
 
-		foreach (GameObject neighbour in neighbours)
+		for (var index = 0; index < neighboursListCount; index++)
 		{
-			neighbourPos = neighbour.transform.position;
+			// GameObject neighbour = neighbours.neighboursList[index];
+			neighbourPos = neighbours.neighboursList[index].position;
 
 			//Check my Distance from each neighbour
 			myDistance = Vector3.Distance(myPos, neighbourPos);
 
 			//if we are too close
-			if(myDistance < minDistance)
-            {
+			if (myDistance < minDistance)
+			{
 				separationMove += transform.InverseTransformPoint(neighbourPos);
-            }
-
+			}
 		}
 
-		separationMove /= neighbours.Count;
+		separationMove /= neighbours.neighboursList.Count;
 
 		//note seperation move is negative to move away from neighbours
 		return -separationMove;

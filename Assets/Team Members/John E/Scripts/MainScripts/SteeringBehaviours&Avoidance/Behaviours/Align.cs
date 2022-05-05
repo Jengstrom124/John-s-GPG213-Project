@@ -14,7 +14,7 @@ public class Align : SteeringBase
 	public bool alignWithPlayer = true;
 	
 	[Header("Reference Only/Ignore: ")]
-	public GameObject currentPlayerFish;
+	public Transform currentPlayerFish;
 
     private void Awake()
     {
@@ -37,12 +37,16 @@ public class Align : SteeringBase
 
     void FixedUpdate()
 	{
-		rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove(neighbours.neighboursList)) * force);
+		// rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove(neighbours.neighboursList)) * force);
+		rb.AddTorque(Vector3.Cross(transform.forward, CalculateMove()) * force);
 	}
 
-	public override Vector3 CalculateMove(List<GameObject> neighbours)
+	// public override Vector3 CalculateMove(List<GameObject> neighbours)
+	public override Vector3 CalculateMove()
 	{
-		if (neighbours.Count == 0)
+		int neighboursListCount = neighbours.neighboursList.Count;
+		
+		if (neighboursListCount == 0)
         {
 			return transform.forward;
         }
@@ -51,20 +55,21 @@ public class Align : SteeringBase
 
 		if(currentPlayerFish != null)
         {
-			if (neighbours.Contains(currentPlayerFish) && alignWithPlayer)
+			if (neighbours.neighboursList.Contains(currentPlayerFish) && alignWithPlayer)
 			{
-				alignmentMove = currentPlayerFish.transform.forward;
+				alignmentMove = currentPlayerFish.forward;
 			}
 		}
 		else
-        {
+		{
 			// Average of all neighbours directions
-			foreach (GameObject neighbour in neighbours)
+			for (var index = 0; index < neighboursListCount; index++)
 			{
-				alignmentMove += neighbour.transform.forward;
+				// GameObject neighbour = neighbours.neighboursList[index];
+				alignmentMove += neighbours.neighboursList[index].forward;
 			}
 
-			alignmentMove /= neighbours.Count;
+			alignmentMove /= neighbours.neighboursList.Count;
 		}
 
 		return alignmentMove;
@@ -72,6 +77,6 @@ public class Align : SteeringBase
 
 	void UpdatePlayerFish(GameObject playerFish)
     {
-		currentPlayerFish = playerFish;
+		currentPlayerFish = playerFish.transform;
     }
 }

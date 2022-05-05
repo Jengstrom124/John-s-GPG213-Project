@@ -8,7 +8,7 @@ public class Neighbours : MonoBehaviour
     public Transform centreOfVisionPosition;
     public float visionRadius = 27f;
 
-    public List<GameObject> neighboursList = new List<GameObject>();
+    public List<Transform> neighboursList = new List<Transform>();
     public Collider[] colliders;
     
     public event Action<GameObject> seePredatorEvent;
@@ -29,9 +29,9 @@ public class Neighbours : MonoBehaviour
         foreach(Collider collider in colliders)
         {
             //Only add a neighbour if they are a fish and not us
-            if (collider.GetComponent<FishBase>() != null && collider.gameObject != gameObject)
+            if (collider.GetComponent<FishBase>() != null && collider.transform != transform)
             {
-                neighboursList.Add(collider.gameObject);
+                neighboursList.Add(collider.transform);
             }
 
             if(collider.GetComponent<IPredator>() != null)

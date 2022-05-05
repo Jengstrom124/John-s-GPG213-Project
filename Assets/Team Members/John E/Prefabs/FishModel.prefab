@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 6844581979469349891}
   - component: {fileID: 5782324754834491190}
   - component: {fileID: 7435328888860800600}
-  - component: {fileID: 7803384113620637917}
   - component: {fileID: -7430627336242286335}
   - component: {fileID: -1422218037190890246}
   - component: {fileID: 5162793547566278969}
@@ -158,7 +157,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 5
+  m_AngularDrag: 7
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -176,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00881bd51312af4a9b3f98d7e6875d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alignForceTimer: 2
+  reduceForcesTimer: 2
 --- !u!114 &2219981257583123346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +218,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centreOfVisionPosition: {fileID: 6849605136325016091}
-  visionRadius: 27
+  visionRadius: 6
   neighboursList: []
-  Colliders: []
+  colliders: []
 --- !u!114 &3166194528815824960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,25 +276,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942c051bcd811704883cdc2c60a8d036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feeler: {fileID: 8743433351232840262, guid: 184d989d7a7af2e4381489c949b7b32f, type: 3}
+  feeler: {fileID: 8743433351232840262, guid: 9c48a16fbd18a5e439daea294dd9379d, type: 3}
   emergencyFeeler: {fileID: 8743433351232840262, guid: e7d25ba19f31f0045a9657f037e1a0b2, type: 3}
   standardFeelerCount: 5
   emergencyFeelerCount: 3
   fov: 20
---- !u!136 &7803384113620637917
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219981257583123356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 27
-  m_Height: 27.18
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 21.23}
 --- !u!114 &-7430627336242286335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,14 +379,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1
-  SyncPositionY: 1
+  SyncPositionY: 0
   SyncPositionZ: 1
-  SyncRotAngleX: 1
+  SyncRotAngleX: 0
   SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -444,7 +429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8048203333455612490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 21.23}
+  m_LocalPosition: {x: 0, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
