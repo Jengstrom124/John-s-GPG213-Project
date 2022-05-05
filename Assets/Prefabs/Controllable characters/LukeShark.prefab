@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 887061758960150927}
   - component: {fileID: 3726469031803898318}
   - component: {fileID: -5105351812121981957}
-  - component: {fileID: 4884837710720020151}
+  - component: {fileID: 8457644184953805792}
   m_Layer: 0
   m_Name: LukeShark
   m_TagString: Untagged
@@ -878,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209904fe2c73d24489d3773c1a60746d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
   boost: {fileID: 8300000, guid: e95065c07fbb55d48be7e024587b0543, type: 3}
   oneEighty: {fileID: 8300000, guid: 8dd0f4baf66179940a3a8f075470f8a9, type: 3}
@@ -1088,8 +1089,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalFoodAmount: 0
---- !u!135 &4884837710720020151
-SphereCollider:
+--- !u!136 &8457644184953805792
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1098,9 +1099,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 1.13
-  m_Center: {x: 0, y: 0, z: 1.47}
+  m_Height: 4.48
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.48, z: 1.45}
 --- !u!1 &7823118384569480985
 GameObject:
   m_ObjectHideFlags: 0
